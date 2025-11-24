@@ -219,7 +219,7 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
       <div className='relative w-full h-[330px] lg:h-[877px] max-w-full lg:max-w-[1440px] mx-auto pb-[120px] lg:pb-[156px]'>
         {/* content section */}
         <div
-          className="max-w-full lg:max-w-7xl mx-auto absolute left-0 lg:left-[5.6%] w-full lg:w-[547px] px-[5%] lg:px-0 z-[99999]"
+          className="max-w-full lg:max-w-7xl mx-auto absolute left-0 lg:left-[80px] w-full lg:w-[547px] px-[5%] lg:px-0 z-[99999]"
           dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
         >
           <motion.div
@@ -255,61 +255,6 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            {/* Previous Button */}
-            <motion.button
-              onClick={() => {
-                const currentIndex = locations.findIndex(
-                  loc => loc.id === selectedLocation
-                );
-                if (currentIndex > 0) {
-                  setSelectedLocation(locations[currentIndex - 1].id);
-                }
-              }}
-              disabled={
-                locations.findIndex(loc => loc.id === selectedLocation) === 0
-              }
-              className='w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center transition-all duration-200'
-              style={{
-                border: '1px solid rgba(255, 255, 255, 0.16)',
-                background: 'rgba(255, 255, 255, 0.04)',
-                backdropFilter: 'blur(10px)',
-                opacity:
-                  locations.findIndex(loc => loc.id === selectedLocation) === 0
-                    ? 0.4
-                    : 1,
-                cursor:
-                  locations.findIndex(loc => loc.id === selectedLocation) === 0
-                    ? 'not-allowed'
-                    : 'pointer',
-              }}
-              whileHover={
-                locations.findIndex(loc => loc.id === selectedLocation) !== 0
-                  ? { scale: 1.05 }
-                  : {}
-              }
-              whileTap={
-                locations.findIndex(loc => loc.id === selectedLocation) !== 0
-                  ? { scale: 0.95 }
-                  : {}
-              }
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='16'
-                height='14'
-                viewBox='0 0 16 14'
-                fill='none'
-              >
-                <path
-                  d='M15 7H1M1 7L7 13M1 7L7 1'
-                  stroke='white'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-              </svg>
-            </motion.button>
-
             {/* Next Button */}
             <motion.button
               onClick={() => {
@@ -362,6 +307,61 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
               >
                 <path
                   d='M5 12H19M19 12L13 18M19 12L13 6'
+                  stroke='white'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                />
+              </svg>
+            </motion.button>
+
+            {/* Previous Button */}
+            <motion.button
+              onClick={() => {
+                const currentIndex = locations.findIndex(
+                  loc => loc.id === selectedLocation
+                );
+                if (currentIndex > 0) {
+                  setSelectedLocation(locations[currentIndex - 1].id);
+                }
+              }}
+              disabled={
+                locations.findIndex(loc => loc.id === selectedLocation) === 0
+              }
+              className='w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center transition-all duration-200'
+              style={{
+                border: '1px solid rgba(255, 255, 255, 0.16)',
+                background: 'rgba(255, 255, 255, 0.04)',
+                backdropFilter: 'blur(10px)',
+                opacity:
+                  locations.findIndex(loc => loc.id === selectedLocation) === 0
+                    ? 0.4
+                    : 1,
+                cursor:
+                  locations.findIndex(loc => loc.id === selectedLocation) === 0
+                    ? 'not-allowed'
+                    : 'pointer',
+              }}
+              whileHover={
+                locations.findIndex(loc => loc.id === selectedLocation) !== 0
+                  ? { scale: 1.05 }
+                  : {}
+              }
+              whileTap={
+                locations.findIndex(loc => loc.id === selectedLocation) !== 0
+                  ? { scale: 0.95 }
+                  : {}
+              }
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='14'
+                viewBox='0 0 16 14'
+                fill='none'
+              >
+                <path
+                  d='M15 7H1M1 7L7 13M1 7L7 1'
                   stroke='white'
                   strokeWidth='2'
                   strokeLinecap='round'
