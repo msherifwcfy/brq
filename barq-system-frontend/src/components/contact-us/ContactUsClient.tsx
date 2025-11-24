@@ -264,14 +264,15 @@ const ContactUsClient = ({
                     className={`space-y-4 lg:space-y-6 max-w-full lg:max-w-[547px] ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}
                     variants={leftContentVariants}
                 >
-                    <div>
+                    <div style={{ textAlign: i18n.language === 'ar' ? 'right' : 'left' }}>
                         <motion.div
                             className="text-[18px] lg:text-[24px] frutiger-lt-std-bold leading-[22px] lg:leading-[28.8px] h-auto lg:h-[29px] mb-4 lg:mb-6"
                             style={{
                                 background: "linear-gradient(90deg, #60C1CA 0.01%, #25B8E4 21.58%)",
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text'
+                                backgroundClip: 'text',
+                                textAlign: i18n.language === 'ar' ? 'right' : 'left'
                             }}
                             variants={titleVariants}
                         >
@@ -283,7 +284,8 @@ const ContactUsClient = ({
                                 background: "linear-gradient(89deg, #FFF 5.74%, #A8E3F4 37.73%, #12BAF6 86.76%)",
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text'
+                                backgroundClip: 'text',
+                                textAlign: i18n.language === 'ar' ? 'right' : 'left'
                             }}
                             variants={headingVariants}
                         >
@@ -292,6 +294,7 @@ const ContactUsClient = ({
                     </div>
                     <motion.p
                         className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] frutiger-lt-std-roman tracking-[0.0205em]'
+                        style={{ textAlign: i18n.language === 'ar' ? 'right' : 'left' }}
                         variants={paragraphVariants}
                     >
                         {heroData?.sub_title || "We'd love to hear from you. Whether you're requesting a demo, scheduling a meeting, or simply reaching out, fill out the form below and our team will get back to you shortly."}
