@@ -362,6 +362,18 @@ const CareerDetailsClient = ({ job }: CareerDetailsClientProps) => {
         </div>
       </div>
 
+      {/* Job Details Section */}
+      {description && (
+        <div className='mt-6 lg:mt-8'>
+          <h3 className='text-white text-[28px] lg:text-[32px] frutiger-lt-std-bold leading-[34px] lg:leading-[38.4px] mb-4 lg:mb-6'>
+            {t('careers.jobDetails') || 'Job Details'}
+          </h3>
+          <div className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] tracking-[0.0205em] mb-6 lg:mb-8'>
+            <p>{description}</p>
+          </div>
+        </div>
+      )}
+
       {/* Key Responsibilities Section */}
       {keyResponsibilities.length > 0 && (
         <div className='mt-6 lg:mt-8'>

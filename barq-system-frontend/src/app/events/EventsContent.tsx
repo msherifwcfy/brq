@@ -146,10 +146,30 @@ const EventsContent = ({ eventData, speakersData, partnersData }: EventsContentP
                             </h3>
                         </RevealOnScroll>
                         <RevealOnScroll>
-                            <h1 className='text-white text-[32px] lg:text-[48px] leading-[43.2px] lg:leading-[57.6px] frutiger-lt-std-bold mb-4 break-words  '>
+                            <h1 className='text-white text-[32px] lg:text-[48px] leading-[38px] lg:leading-[52.8px] frutiger-lt-std-bold mb-4 break-words  '>
                                 {event.name}
                             </h1>
                         </RevealOnScroll>
+
+                        <RevealOnScroll>
+                            <p className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] mb-4 tracking-[0.0205em] frutiger-lt-std-roman'>
+                                {event.description || 'Join us for an exclusive event...'}
+                            </p>
+                        </RevealOnScroll>
+
+                        {event.quote && (
+                            <RevealOnScroll>
+                                <div className='mb-6 p-4 rounded-lg' style={{
+                                    border: '1px solid rgba(255, 255, 255, 0.16)',
+                                    background: 'rgba(255, 255, 255, 0.04)',
+                                    backdropFilter: 'blur(10px)'
+                                }}>
+                                    <p className='text-[#ECEEEE] text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] italic'>
+                                        "{event.quote}"
+                                    </p>
+                                </div>
+                            </RevealOnScroll>
+                        )}
 
                         <RevealOnScroll>
                             <div className='flex flex-col gap-4 mb-8'>
