@@ -256,11 +256,12 @@ const ContactUsClient = ({
             variants={containerVariants}
             initial="initial"
             animate="animate"
+            dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
         >
             <div className='flex flex-col lg:flex-row gap-8 lg:gap-10 items-start'>
                 {/* Left side - Content */}
                 <motion.div
-                    className='space-y-4 lg:space-y-6 max-w-full lg:max-w-[547px]'
+                    className={`space-y-4 lg:space-y-6 max-w-full lg:max-w-[547px] ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}
                     variants={leftContentVariants}
                 >
                     <div>
@@ -299,7 +300,7 @@ const ContactUsClient = ({
 
                 {/* Right side - Form */}
                 <motion.div
-                    className='px-6 lg:px-10 py-8 lg:py-12 w-full lg:w-[693px] h-auto lg:min-h-[728px]'
+                    className={`px-6 lg:px-10 py-8 lg:py-12 w-full lg:w-[693px] h-auto lg:min-h-[728px] ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}
                     style={{
                         borderRadius: "24px",
                         border: "1px solid rgba(255, 255, 255, 0.16)",
@@ -356,6 +357,7 @@ const ContactUsClient = ({
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
+                                        textAlign: i18n.language === 'ar' ? 'right' : 'left',
                                     }}
                                     className="focus:outline-none transition-colors cursor-pointer"
                                 >
@@ -495,6 +497,7 @@ const ContactUsClient = ({
                                     onChange={handleChange}
                                     style={{
                                         borderRadius: i18n.language === "en" ? "0 8px 8px 0" : "8px 0 0 8px",
+                                        textAlign: i18n.language === 'ar' ? 'right' : 'left',
                                     }}
                                     className="py-3 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[64px] w-full lg:w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors"
                                     placeholder={`${formData.countryCode === 'KSA' ? '+966' : formData.countryCode === 'UAE' ? '+971' : '+20'} ${t("contactUs.mobileNumber")}`}
@@ -527,6 +530,7 @@ const ContactUsClient = ({
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
+                                        textAlign: i18n.language === 'ar' ? 'right' : 'left',
                                     }}
                                     className="focus:outline-none transition-colors cursor-pointer"
                                 >

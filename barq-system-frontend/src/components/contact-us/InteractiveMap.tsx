@@ -209,8 +209,8 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
         {/* content section */}
         <div
           className={`max-w-full lg:max-w-7xl mx-auto absolute
-                    ${i18n.language === 'ar' ? 'left-0' : ''}
-                    w-full lg:w-[547px] px-[5%] lg:px-[5.6%] z-[99999]`}
+                    ${i18n.language === 'ar' ? 'right-0 lg:right-[5.6%]' : 'left-0 lg:left-[5.6%]'}
+                    w-full lg:w-[547px] px-[5%] lg:px-0 z-[99999]`}
         >
           <motion.div
             className='w-full lg:w-[547px] flex flex-col items-start justify-start'
@@ -284,7 +284,9 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
               }
             >
               <svg
-                className={`${i18n.language === 'ar' ? 'rotate-180' : ''}`}
+                style={{
+                  transform: i18n.language === 'ar' ? 'rotate(180deg)' : 'none'
+                }}
                 xmlns='http://www.w3.org/2000/svg'
                 width='16'
                 height='14'
@@ -345,7 +347,9 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
               }
             >
               <svg
-                className={`${i18n.language === 'ar' ? 'rotate-180' : ''}`}
+                style={{
+                  transform: i18n.language === 'ar' ? 'rotate(180deg)' : 'none'
+                }}
                 xmlns='http://www.w3.org/2000/svg'
                 width='24'
                 height='24'
