@@ -68,13 +68,12 @@ const InsightsNewsSection = ({
     setIsMounted(true);
   }, []);
 
-  // Use isInView for desktop, isMounted for mobile to ensure visibility
   const shouldAnimate = typeof window !== 'undefined' && window.innerWidth < 1024 ? isMounted : isInView;
 
   const formatDate = (value: string | null | undefined) => {
     if (!value) return '';
     try {
-      return new Intl.DateTimeFormat(i18n.language === 'ar' ? 'ar-SA' : 'en-US', {
+      return new Intl.DateTimeFormat(i18n.language === 'ar' ? 'ar-EG' : 'en-US', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
@@ -85,13 +84,14 @@ const InsightsNewsSection = ({
   };
 
   const formattedCards: InsightCard[] = newsroomCards.slice(0, 3).map((card, index) => {
-    const fallbackImage = fallbackInsightsData[index]?.image ?? fallbackInsightsData[0].image;
+    const translatedCard = card.newsroom_cards_id_newsroom_cards_translations.find(translation => translation.language === i18n.language);
     return {
       id: card.id,
       date: formatDate(card.date_time) || fallbackInsightsData[index]?.date || '',
-      title: card.title,
-      description: card.description,
-      image: getImageUrl(card.image) || fallbackImage,
+      title: translatedCard?.title || card.title,
+      description: translatedCard?.description || card.description,
+      long_description: translatedCard?.long_description || card.long_description,
+      image: getImageUrl(card.image),
       home_image: card.home_image ? getImageUrl(card.home_image) : undefined,
     };
   });

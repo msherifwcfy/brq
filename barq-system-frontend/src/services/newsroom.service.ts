@@ -118,7 +118,10 @@ export const newsroomService = {
             },
           },
         },
-        headers: await getLanguageHeaders(),
+        headers: {
+          // ...await getLanguageHeaders(),
+          "x-skip-translations": "true",
+        },
       });
       return response.data ?? null;
     } catch (error) {

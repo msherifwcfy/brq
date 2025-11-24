@@ -16,7 +16,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
     const containerRef = useRef<HTMLElement>(null);
     const isInView = useInView(containerRef, { once: true, margin: '-100px' });
     const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
-    console.log({ newsItemData })
+
     // Transform CMS data
     const articleContent = useMemo(() => {
         if (!newsItemData?.data) return null;
@@ -24,7 +24,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
         const item = newsItemData.data;
         const translation = item.newsroom_cards_id_newsroom_cards_translations?.find(
             (t) => t.language === language
-        ) || item.newsroom_cards_id_newsroom_cards_translations?.[0];
+        );
 
         const categoryTranslation = language === 'ar'
             ? item.newsroom_category.name
@@ -59,6 +59,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
 
     if (!articleContent) return null;
 
+    console.log({ articleContent })
 
     // Render different layouts based on media type
     const renderMediaSection = () => {
@@ -74,6 +75,8 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                         transition={{ duration: 1.2, delay: 0.2 }}
                     >
+                        <h1>Dev</h1>
+
                         <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-[64px]" >
                             {/* Video Side - Left */}
                             <motion.div
@@ -111,7 +114,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                                     Your browser does not support the video tag.
                                                 </video>
                                                 {/* Dimming overlay when not playing */}
-                                                {!isVideoPlaying && (
+                                                {isVideo && !isVideoPlaying && (
                                                     <div className="absolute inset-0 bg-black/50 bg-opacity-40 rounded-[16px] transition-opacity duration-300 pointer-events-none"></div>
                                                 )}
                                             </div>
@@ -124,7 +127,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                             />
                                         )}
                                         {/* Play button overlay - only show when not playing */}
-                                        {!isVideoPlaying && (
+                                        {isVideo && !isVideoPlaying && (
                                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                                                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-[#25B8E4] rounded-full flex items-center justify-center hover:bg-[#1e9bb8] transition-colors shadow-lg">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 80 80" fill="none" className="lg:w-[80px] lg:h-[80px]">
@@ -198,7 +201,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                 transition={{ duration: 1.2, delay: 0.8 }}
                             >
-                                At F5 APPWorld, BARQ CEO Mahmoud Soliman Showcases How AI Safeguards Partner Infrastructure
+                                {articleContent.title}
                             </motion.h1>
                             <motion.p
                                 className='text-[#D9DDDD] text-[14px] lg:text-[16px] opacity-60 leading-[20px] lg:leading-[24px]'
@@ -392,7 +395,6 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                 );
         }
     };
-    console.log({ articleContent })
     return (
         <div className="bg-black min-h-screen">
             <section

@@ -151,21 +151,22 @@ const EventsContent = ({ eventData, speakersData, partnersData }: EventsContentP
                         </RevealOnScroll>
 
                         <RevealOnScroll>
-                            <p className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] mb-4 tracking-[0.0205em] frutiger-lt-std-roman'>
-                                {event.description || 'Join us for an exclusive event...'}
-                            </p>
+                            <div className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] mb-4 tracking-[0.0205em] frutiger-lt-std-roman'
+                                dangerouslySetInnerHTML={{ __html: event.description || '' }}>
+
+                            </div>
                         </RevealOnScroll>
 
                         {
-                            event.description && (
+                            event.shortDescription && (
                                 <RevealOnScroll>
                                     <div className='mb-6 p-4 rounded-lg' style={{
                                         border: '1px solid rgba(255, 255, 255, 0.16)',
                                         background: 'rgba(255, 255, 255, 0.04)',
                                         backdropFilter: 'blur(10px)'
                                     }}>
-                                        <p className='text-[#ECEEEE] text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] italic'>
-                                            {event.description}
+                                        <p className='text-[#ECEEEE] text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] italic' dangerouslySetInnerHTML={{ __html: event.shortDescription || '' }}>
+
                                         </p>
                                     </div>
                                 </RevealOnScroll>

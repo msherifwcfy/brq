@@ -103,7 +103,7 @@ export default function WhatWeDoSection({ successStories }: WhatWeDoSectionProps
     }, []);
 
     // Use isInView for desktop, isMounted for mobile to ensure visibility
-    const shouldAnimate = window?.innerWidth < 1024 ? isMounted : isInView;
+    const shouldAnimate = (typeof window !== 'undefined' && window?.innerWidth < 1024) ? isMounted : isInView;
 
     useEffect(() => {
         const carousel = carouselRef.current;

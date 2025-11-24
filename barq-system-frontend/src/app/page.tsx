@@ -17,13 +17,16 @@ export default async function Home() {
     homeData,
     academyHeroResponse,
     newsroomCardsResponse,
+    ssResponse,
     successStories,
     homeAwardsData,
     leadershipTeamResponse,
+
   ] = await Promise.all([
     homeService.getAllHomeData(),
     academyService.getHeroData(),
     newsroomService.getLatestFeaturedCards(3),
+    newsroomService.getLatestCards(),
     successStoriesService.getHomepageSuccessStories(3),
     homeAwardsService.getHomeAwardsData(),
     leadershipService.getLeadershipTeam(),
@@ -32,7 +35,7 @@ export default async function Home() {
   const academyHeroData = academyHeroResponse?.data?.[0] ?? null;
   const newsroomCards: NewsroomCardsEntity[] = newsroomCardsResponse?.data ?? [];
   const leadershipTeamData = leadershipTeamResponse?.data ?? [];
-
+  // console.log({ newsroomCards, ssResponse });
   return (
     <div>
       <HeroSection
