@@ -294,9 +294,6 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
               }
             >
               <svg
-                style={{
-                  transform: i18n.language === 'ar' ? 'rotate(180deg)' : 'none'
-                }}
                 xmlns='http://www.w3.org/2000/svg'
                 width='16'
                 height='14'
@@ -357,9 +354,6 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
               }
             >
               <svg
-                style={{
-                  transform: i18n.language === 'ar' ? 'rotate(180deg)' : 'none'
-                }}
                 xmlns='http://www.w3.org/2000/svg'
                 width='24'
                 height='24'
