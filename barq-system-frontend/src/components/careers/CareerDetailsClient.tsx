@@ -70,6 +70,16 @@ const CareerDetailsClient = ({ job }: CareerDetailsClientProps) => {
                 </div>
             </div>
 
+            {/* Job Details Section */}
+            <div className='mt-6 lg:mt-8'>
+                <h3 className='text-white text-[28px] lg:text-[32px] frutiger-lt-std-bold leading-[34px] lg:leading-[38.4px] mb-4 lg:mb-6'>
+                    Job Details
+                </h3>
+                <div className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] tracking-[0.0205em] mb-6 lg:mb-8'>
+                    <p>{job.description}</p>
+                </div>
+            </div>
+
             {/* Key Responsibilities Section */}
             <div className='mt-6 lg:mt-8'>
                 <h3 className='text-white text-[20px] lg:text-[24px] frutiger-lt-std-bold leading-[26px] lg:leading-[33.6px] mb-3 lg:mb-4'>
@@ -215,7 +225,7 @@ const CareerDetailsClient = ({ job }: CareerDetailsClientProps) => {
                                         <option value='uae' className='bg-black'>UAE</option>
                                         <option value='ksa' className='bg-black'>KSA</option>
                                     </select>
-                                    <div className='absolute right-[20px] lg:right-[24px] top-[30%] lg:top-[27%] h-5 w-5 lg:h-6 lg:w-6 flex justify-center items-center'>
+                                    <div className='absolute ltr:right-[20px] ltr:lg:right-[24px] rtl:left-[20px] rtl:lg:left-[24px] top-[30%] lg:top-[27%] h-5 w-5 lg:h-6 lg:w-6 flex justify-center items-center'>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" viewBox="0 0 14 8" fill="none" className="lg:w-[14px] lg:h-[8px]">
                                             <path d="M1 1L7 7L13 1" stroke="#313B49" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>

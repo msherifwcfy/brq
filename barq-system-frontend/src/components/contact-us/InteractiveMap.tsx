@@ -175,7 +175,7 @@ const InteractiveMap = () => {
             {/* Map Container - Full Width */}
             <div className='relative w-full h-[330px] lg:h-[877px] max-w-full lg:max-w-[1440px] mx-auto pb-[120px] lg:pb-[156px]'>
                 {/* content section */}
-                <div className='max-w-full lg:max-w-7xl mx-auto absolute w-full lg:w-[547px] px-[5%] lg:px-[5.6%] z-[99999]'>
+                <div className='max-w-full lg:max-w-7xl mx-auto absolute w-full lg:w-[547px] px-[5%] lg:px-[5.6%] z-[99999] ltr:left-0 rtl:left-auto rtl:right-0'>
                     <motion.div
                         className='w-full lg:w-[547px] flex flex-col items-start justify-start'
                         initial={{ opacity: 0, y: 20 }}
@@ -198,7 +198,7 @@ const InteractiveMap = () => {
                     </motion.div>
                     {/* Navigation Arrows - Bottom Left */}
                     <motion.div
-                        className='flex gap-4 lg:gap-5 z-[99999] mt-[200px] lg:mt-[102px]'
+                        className='flex gap-4 lg:gap-5 z-[99999] mt-[200px] lg:mt-[102px] rtl:flex-row-reverse'
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 }}
@@ -223,7 +223,7 @@ const InteractiveMap = () => {
                             whileHover={locations.findIndex(loc => loc.id === selectedLocation) !== 0 ? { scale: 1.05 } : {}}
                             whileTap={locations.findIndex(loc => loc.id === selectedLocation) !== 0 ? { scale: 0.95 } : {}}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none" className="rtl:rotate-180">
                                 <path d="M15 7H1M1 7L7 13M1 7L7 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </motion.button>
@@ -248,7 +248,7 @@ const InteractiveMap = () => {
                             whileHover={locations.findIndex(loc => loc.id === selectedLocation) !== locations.length - 1 ? { scale: 1.05 } : {}}
                             whileTap={locations.findIndex(loc => loc.id === selectedLocation) !== locations.length - 1 ? { scale: 0.95 } : {}}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="rtl:rotate-180">
                                 <path d="M5 12H19M19 12L13 18M19 12L13 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </motion.button>

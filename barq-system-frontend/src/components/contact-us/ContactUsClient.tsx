@@ -331,7 +331,7 @@ const ContactUsClient = () => {
 
                         {/* Mobile Number with Country Code */}
                         <motion.div
-                            className="flex gap-0"
+                            className="flex gap-0 rtl:flex-row-reverse"
                             variants={formFieldVariants}
                         >
                             <div className="relative">
@@ -346,7 +346,7 @@ const ContactUsClient = () => {
                                         background: "#ECEEEE",
                                         fontSize: "16px",
                                     }}
-                                    className="appearance-none py-3 lg:py-5 px-3 lg:px-6 border-r-[1px] placeholder:text-[14px] lg:placeholder:text-[16px] border-none h-[48px] lg:h-[64px] border text-[14px] lg:text-[16px] bg-white text-[#333] focus:outline-none transition-colors cursor-pointer lg:min-w-[131px]"
+                                    className="appearance-none py-3 lg:py-5 px-3 lg:px-6 border-r-[1px] rtl:border-r-0 rtl:border-l-[1px] placeholder:text-[14px] lg:placeholder:text-[16px] border-none h-[48px] lg:h-[64px] border text-[14px] lg:text-[16px] bg-white text-[#333] focus:outline-none transition-colors cursor-pointer lg:min-w-[131px] rtl:rounded-r-[8px] rtl:rounded-l-[0px] ltr:rounded-l-[8px] ltr:rounded-r-[0px]"
                                 >
                                     {countries.map((country) => (
                                         <option key={country.code} value={country.code} >
@@ -354,7 +354,7 @@ const ContactUsClient = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <div className="absolute right-4 lg:right-6 top-[55%] lg:top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <div className="absolute ltr:right-4 ltr:lg:right-6 rtl:left-4 rtl:lg:left-6 top-[55%] lg:top-1/2 transform -translate-y-1/2 pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" viewBox="0 0 15 8" fill="none" className="lg:w-[15px] lg:h-[8px]">
                                         <path d="M1.5 1L7.5 7L13.5 1" stroke="#313B49" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
@@ -370,7 +370,7 @@ const ContactUsClient = () => {
                                     style={{
                                         borderRadius: "0 8px 8px 0",
                                     }}
-                                    className="py-3 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[64px] w-full lg:w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors"
+                                    className="py-3 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[64px] w-full lg:w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors rtl:rounded-l-[8px] rtl:rounded-r-[0px] ltr:rounded-r-[8px] ltr:rounded-l-[0px] rtl:text-right ltr:text-left"
                                     placeholder={`${formData.countryCode === 'KSA' ? '+966' : formData.countryCode === 'UAE' ? '+971' : '+20'} Mobile Number`}
                                 />
                             </div>
