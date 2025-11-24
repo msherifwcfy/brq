@@ -404,6 +404,7 @@ const ContactUsClient = ({
                                 onChange={handleChange}
                                 style={{
                                     borderRadius: "8px",
+                                    textAlign: i18n.language === 'ar' ? 'right' : 'left',
                                 }}
                                 className="w-full py-3 lg:py-4 px-4 lg:px-6 h-[48px] lg:h-[56px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
                                 placeholder={t("contactUs.fullName")}
@@ -420,6 +421,7 @@ const ContactUsClient = ({
                                 onChange={handleChange}
                                 style={{
                                     borderRadius: "8px",
+                                    textAlign: i18n.language === 'ar' ? 'right' : 'left',
                                 }}
                                 className="w-full py-3 lg:py-4 px-4 lg:px-6 h-[48px] lg:h-[56px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
                                 placeholder={t("contactUs.email")}
@@ -577,6 +579,7 @@ const ContactUsClient = ({
                                 onChange={handleChange}
                                 style={{
                                     borderRadius: "8px",
+                                    textAlign: i18n.language === 'ar' ? 'right' : 'left',
                                 }}
                                 className="w-full py-3 lg:py-4 px-4 lg:px-6 h-[48px] lg:h-[56px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
                                 placeholder={t("contactUs.requestDescription")}
