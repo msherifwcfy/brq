@@ -47,30 +47,41 @@ const PIN_POSITIONS_MAP: Record<
 
 // Helper function to determine the pin position key based on country and office name
 const getPinPositionKey = (countryName: string, officeName: string): string => {
-  const country = countryName.toLowerCase();
-  const office = officeName.toLowerCase();
+  const country = countryName.toLowerCase().trim();
+  const office = officeName.toLowerCase().trim();
 
-  if (country.includes('egypt')) {
-    if (office.includes('headquarters') || office.includes('maadi')) {
+  // Debug logging
+  console.log('getPinPositionKey - Country:', countryName, '| Office:', officeName);
+  console.log('Normalized - Country:', country, '| Office:', office);
+
+  if (country.includes('egypt') || country.includes('مصر')) {
+    if (office.includes('headquarters') || office.includes('maadi') || office.includes('المقر') || office.includes('معادي')) {
+      console.log('Matched: egypt-headquarters');
       return 'egypt-headquarters';
-    } else if (office.includes('smart village') || office.includes('smart')) {
+    } else if (office.includes('smart village') || office.includes('smart') || office.includes('القرية الذكية')) {
+      console.log('Matched: egypt-smart-village');
       return 'egypt-smart-village';
     }
-  } else if (country.includes('saudi') || country.includes('ksa')) {
-    if (office.includes('jeddah')) {
+  } else if (country.includes('saudi') || country.includes('ksa') || country.includes('السعودية')) {
+    if (office.includes('jeddah') || office.includes('جدة')) {
+      console.log('Matched: ksa-jeddah');
       return 'ksa-jeddah';
-    } else if (office.includes('riyadh')) {
+    } else if (office.includes('riyadh') || office.includes('الرياض')) {
+      console.log('Matched: ksa-riyadh');
       return 'ksa-riyadh';
     }
-  } else if (country.includes('emirates') || country.includes('uae')) {
-    if (office.includes('abu dhabi') || office.includes('abu-dhabi')) {
+  } else if (country.includes('emirates') || country.includes('uae') || country.includes('الإمارات')) {
+    if (office.includes('abu dhabi') || office.includes('abu-dhabi') || office.includes('أبوظبي') || office.includes('ابوظبي')) {
+      console.log('Matched: uae-abu-dhabi');
       return 'uae-abu-dhabi';
-    } else if (office.includes('dubai')) {
+    } else if (office.includes('dubai') || office.includes('دبي')) {
+      console.log('Matched: uae-dubai');
       return 'uae-dubai';
     }
   }
 
   // Fallback to first position
+  console.log('No match found, using fallback: egypt-headquarters');
   return 'egypt-headquarters';
 };
 

@@ -312,6 +312,7 @@ const ContactUsClient = ({
                     <motion.div
                         className='mb-8 lg:mb-10'
                         variants={containerVariants}
+                        style={{ textAlign: i18n.language === 'ar' ? 'right' : 'left' }}
                     >
                         <motion.h2
                             className='text-white text-[28px] lg:text-[36px] frutiger-lt-std-bold leading-[34px] lg:leading-[43.2px] mb-3 lg:mb-4'
@@ -433,6 +434,7 @@ const ContactUsClient = ({
                         <motion.div
                             className="flex gap-0"
                             variants={formFieldVariants}
+                            style={{ direction: i18n.language === 'ar' ? 'rtl' : 'ltr' }}
                         >
                             <div className="relative">
                                 <Select
