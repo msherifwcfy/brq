@@ -220,6 +220,7 @@ const resources = {
         submit: 'Submit',
         submitting: 'submitting',
         ourOffices: 'Our Offices',
+        loadingOffices: 'Loading office locations...',
       },
       newsroom: {
         title: 'Newsroom',
@@ -602,6 +603,7 @@ const resources = {
         submit: 'إرسال',
         submitting: 'جاري الإرسال',
         ourOffices: 'المواقع الخاصة بنا',
+        loadingOffices: 'جاري تحميل المواقع...',
       },
       newsroom: {
         title: 'غرفة الأخبار',
