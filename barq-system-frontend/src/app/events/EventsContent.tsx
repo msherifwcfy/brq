@@ -221,16 +221,7 @@ const EventsContent = ({ eventData, speakersData, partnersData }: EventsContentP
                                         padding: '16px 24px',
                                     }}
                                 >
-                                    <span className='h-[24px]'>
-                                        Register Now
-                                    </span>
-                                    <Image
-                                        src='/assets/chevron-right.svg'
-                                        alt='arrow-right'
-                                        width={24}
-                                        height={24}
-                                        className='w-[24px] h-[24px] object-contain'
-                                    />
+                                    Register now &gt;
                                 </Button>
                                 <Button
                                     onClick={handleAddToGoogleCalendar}
