@@ -202,7 +202,7 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
   }
 
   return (
-    <div className='relative w-full mt-[60px] lg:mt-[87px] overflow-hidden pb-[440px] lg:pb-[156px]' dir='ltr'>
+    <div className='relative w-full mt-[60px] lg:mt-[87px] overflow-hidden pb-[440px] lg:pb-[156px]'>
       {/* Header Section */}
       {/* Map Container - Full Width */}
       <div className='relative w-full h-[330px] lg:h-[877px] max-w-full lg:max-w-[1440px] mx-auto pb-[120px] lg:pb-[156px]'>
@@ -597,7 +597,7 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
         <div
           ref={pinsRef}
           className='relative max-w-full lg:max-w-[1440px] mx-auto h-full'
-          dir='ltr'
+          style={{ direction: 'ltr' }}
         >
           {/* Location Pins */}
           {isClient &&

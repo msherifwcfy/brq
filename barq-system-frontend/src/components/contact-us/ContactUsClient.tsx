@@ -358,6 +358,7 @@ const ContactUsClient = ({
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
                                         textAlign: i18n.language === 'ar' ? 'right' : 'left',
+                                        direction: i18n.language === 'ar' ? 'rtl' : 'ltr',
                                     }}
                                     className="focus:outline-none transition-colors cursor-pointer"
                                 >
@@ -533,6 +534,7 @@ const ContactUsClient = ({
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
                                         textAlign: i18n.language === 'ar' ? 'right' : 'left',
+                                        direction: i18n.language === 'ar' ? 'rtl' : 'ltr',
                                     }}
                                     className="focus:outline-none transition-colors cursor-pointer"
                                 >
