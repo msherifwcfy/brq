@@ -20,11 +20,15 @@ export function UpdateCareerCategoryModal() {
       await updateMutation.mutateAsync({
         path: { id: String(category.id) },
         body: {
-          name: values.name.ar,
+          name: values.name.en,
           career_category_id_career_category_translations: [
             {
               name: values.name.en,
               language: "en",
+            },
+            {
+              name: values.name.ar,
+              language: "ar",
             },
           ],
         },

@@ -16,7 +16,7 @@ export function CreateCareerCategoryModal() {
     try {
       await createMutation.mutateAsync({
         body: {
-          name: values.name.ar,
+          name: values.name.en,
           career_category_id_career_category_translations: [
             {
               name: values.name.en,

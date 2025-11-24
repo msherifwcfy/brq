@@ -60,12 +60,15 @@ export default function CareerOpenPositionHeroForm() {
       existing?.career_open_position_hero_id_career_open_position_hero_translations?.find(
         (t) => t.language === "en"
       );
-
+    const arTranslation =
+      existing?.career_open_position_hero_id_career_open_position_hero_translations?.find(
+        (t) => t.language === "ar"
+      );
 
     form.reset({
       title: {
-        en: enTranslation?.title || "",
-        ar: existing?.title || "",
+        en: enTranslation?.title || existing?.title || "",
+        ar: arTranslation?.title || "",
       },
     });
   }, [existing, form]);
@@ -76,11 +79,15 @@ export default function CareerOpenPositionHeroForm() {
         await updateMutation.mutateAsync({
           path: { id: String(existing.id) },
           body: {
-            title: values.title.ar,
+            title: values.title.en,
             career_open_position_hero_id_career_open_position_hero_translations: [
               {
                 language: "en",
                 title: values.title.en,
+              },
+              {
+                language: "ar",
+                title: values.title.ar,
               },
             ],
           },
@@ -89,11 +96,15 @@ export default function CareerOpenPositionHeroForm() {
       } else {
         await createMutation.mutateAsync({
           body: {
-            title: values.title.ar,
+            title: values.title.en,
             career_open_position_hero_id_career_open_position_hero_translations: [
               {
                 language: "en",
                 title: values.title.en,
+              },
+              {
+                language: "ar",
+                title: values.title.ar,
               },
             ],
           },

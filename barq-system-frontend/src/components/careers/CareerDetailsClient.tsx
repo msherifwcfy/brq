@@ -78,6 +78,7 @@ const CareerDetailsClient = ({ job }: CareerDetailsClientProps) => {
 
   const translation = getTranslation();
   const jobTitle = translation?.job_title || job.job_title;
+  const description = translation?.job_description || job?.job_description || '';
 
   // Get city translation
   const cityTranslation =
@@ -96,8 +97,6 @@ const CareerDetailsClient = ({ job }: CareerDetailsClientProps) => {
     categoryTranslation?.name ||
     job.career_category?.name ||
     t('careers.general');
-
-  const description = job?.job_description || '';
 
   // Get job detail cards (responsibilities, qualifications, certifications)
   const cards =
@@ -579,6 +578,8 @@ const CareerDetailsClient = ({ job }: CareerDetailsClientProps) => {
                         borderRadius: '8px',
                         border: '1px solid #D6D6D6',
                         boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                        textAlign: isRTL ? 'right' : 'left',
+                        direction: isRTL ? 'rtl' : 'ltr',
                       }}
                     >
                       {countries.map(country => (
@@ -595,6 +596,7 @@ const CareerDetailsClient = ({ job }: CareerDetailsClientProps) => {
                             padding: '8px 24px',
                             cursor: 'pointer',
                             borderRadius: '4px',
+                            textAlign: isRTL ? 'right' : 'left',
                           }}
                         >
                           {getCountryTranslation(country)}
