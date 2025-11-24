@@ -53,11 +53,7 @@ export default function AboutUsHeroSectionForm() {
   });
 
   const existingHero = data?.data?.[0];
-  const currentTranslation = useMemo(
-    () =>
-      existingHero?.about_barq_hero_id_about_barq_hero_translations?.find((t) => t.language === lang),
-    [existingHero, lang]
-  );
+ 
 
   const isUpdate = !!existingHero;
 

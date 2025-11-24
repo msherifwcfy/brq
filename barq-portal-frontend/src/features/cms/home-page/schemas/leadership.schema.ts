@@ -3,18 +3,13 @@ import { createI18nFieldSchema } from "@/shared/schemas/i18n.schema";
 
 export const createLeadershipSchema = z.object({
   quote: createI18nFieldSchema(
-    z
-      .string()
-      .refine(
-        (v) => v.length >= 100 && v.length <= 250,
-        "cms.homePage.leadership.validation.quoteLength"
-      )
+    z.string().min(100, "Quote must be at least 100 characters").max(250, "Quote must not exceed 250 characters")
   ),
   name: createI18nFieldSchema(
-    z.string().min(1, "cms.homePage.leadership.validation.nameRequired")
+    z.string().min(5, "Name must be at least 5 characters").max(30, "Name must not exceed 30 characters")
   ),
   position: createI18nFieldSchema(
-    z.string().min(1, "cms.homePage.leadership.validation.positionRequired")
+    z.string().min(10, "Role must be at least 10 characters").max(50, "Role must not exceed 50 characters")
   ),
   media: z
     .array(
@@ -33,18 +28,13 @@ export const createLeadershipSchema = z.object({
 
 export const updateLeadershipSchema = z.object({
   quote: createI18nFieldSchema(
-    z
-      .string()
-      .refine(
-        (v) => v.length >= 100 && v.length <= 250,
-        "cms.homePage.leadership.validation.quoteLength"
-      )
+    z.string().min(100, "Quote must be at least 100 characters").max(250, "Quote must not exceed 250 characters")
   ).optional(),
   name: createI18nFieldSchema(
-    z.string().min(1, "cms.homePage.leadership.validation.nameRequired")
+    z.string().min(5, "Name must be at least 5 characters").max(30, "Name must not exceed 30 characters")
   ).optional(),
   position: createI18nFieldSchema(
-    z.string().min(1, "cms.homePage.leadership.validation.positionRequired")
+    z.string().min(10, "Role must be at least 10 characters").max(50, "Role must not exceed 50 characters")
   ).optional(),
   media: z
     .array(

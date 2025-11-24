@@ -11,9 +11,15 @@ COPY . .
 FROM node:20-alpine AS build-env
 WORKDIR /app
 
+# Install pnpm
+RUN npm i -g pnpm
+
 # Copy node_modules and source from previous stage
 COPY --from=development-dependencies-env /app/node_modules ./node_modules
 COPY --from=development-dependencies-env /app ./
+
+
+COPY api.config.ts ./api.config.ts
 
 # Run the build
 RUN pnpm build
@@ -38,7 +44,7 @@ COPY --from=build-env /app/dist ./dist
 COPY package.json ./
 
 # Expose default Vite preview port
-EXPOSE 4173
+EXPOSE 5000
 
 # Start command (for Vite preview)
-CMD ["pnpm", "preview", "--host"]
+CMD ["pnpm", "preview", "--host", "0.0.0.0", "--port", "5000"]

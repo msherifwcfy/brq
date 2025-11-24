@@ -16,20 +16,26 @@ const cardSchema = z.object({
     z
       .string()
       .min(5, "Text must be at least 5 characters")
-      .max(50, "Text must not exceed 50 characters")
+      .max(150, "Text must not exceed 150 characters")
   ),
-  icon: z.array(mediaSchema).min(1, "Icon is required").optional(),
+  icon: z
+    .array(mediaSchema)
+    .min(1, "Icon is required")
+    .max(1, "Only one icon per bullet is allowed"),
 });
 
 export const createOperationIntelligenceSchema = z.object({
   text: createI18nFieldSchema(
     z
       .string()
-      .min(90, "Subtext must be at least 90 characters")
+      .min(30, "Subtext must be at least 30 characters")
       .max(150, "Subtext must not exceed 150 characters")
   ),
   logo: z.array(mediaSchema).min(1, "Logo is required"),
-  cards: z.array(cardSchema).optional(),
+  cards: z
+    .array(cardSchema)
+    .min(4, "At least 4 bullet points are required")
+    .max(8, "At most 8 bullet points are allowed"),
 });
 
 export type CreateOperationIntelligenceFormData = z.infer<

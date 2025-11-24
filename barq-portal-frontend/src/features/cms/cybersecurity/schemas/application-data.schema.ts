@@ -30,7 +30,10 @@ export const createApplicationDataSchema = z.object({
   ),
   logo: z.array(mediaSchema).min(1, "Logo is required"),
   image: z.array(mediaSchema).min(1, "Image is required"),
-  cards: z.array(cardSchema),
+  cards: z
+    .array(cardSchema)
+    .min(4, "At least 4 bullet points are required")
+    .max(16, "At most 16 bullet points are allowed"),
 });
 
 export type CreateApplicationDataFormData = z.infer<

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
-import { PlusIcon, Pencil, Trash2 } from "lucide-react";
+import { PlusIcon, Pencil } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -20,6 +20,7 @@ import {
 import AcademyHighlightCardForm from "./AcademyHighlightCardForm";
 import { toast } from "sonner";
 import type { CreateAcademyHighlightCardFormData } from "../schemas/academy-highlight-card.schema";
+import { useLang } from "@/shared/hooks/use-lang";
 
 interface HighlightCard {
   id: string;
@@ -30,12 +31,20 @@ interface HighlightCard {
 }
 
 export default function AcademyHighlightCardsSection() {
+  const { t } = useLang();
   const [cards, setCards] = useState<HighlightCard[]>([]);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<HighlightCard | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const cardTypeLabels: Record<string, string> = {
+    internships: t("cms.academy.highlightCards.cardTypes.internships"),
+    trainings: t("cms.academy.highlightCards.cardTypes.trainings"),
+    seminars: t("cms.academy.highlightCards.cardTypes.seminars"),
+    graduates: t("cms.academy.highlightCards.cardTypes.graduates"),
+  };
 
   useEffect(() => {
     loadCards();
@@ -49,11 +58,13 @@ export default function AcademyHighlightCardsSection() {
     setIsLoading(true);
     try {
       console.log("Creating card:", values);
-      toast.success("Highlight card created successfully");
+      toast.success(t("cms.academy.highlightCards.messages.created"));
       setIsCreateOpen(false);
       loadCards();
     } catch (error: any) {
-      toast.error(error.message || "Failed to create highlight card");
+      toast.error(
+        error.message || t("cms.academy.highlightCards.messages.createError")
+      );
     } finally {
       setIsLoading(false);
     }
@@ -63,12 +74,14 @@ export default function AcademyHighlightCardsSection() {
     setIsLoading(true);
     try {
       console.log("Updating card:", values);
-      toast.success("Highlight card updated successfully");
+      toast.success(t("cms.academy.highlightCards.messages.updated"));
       setIsEditOpen(false);
       setSelectedCard(null);
       loadCards();
     } catch (error: any) {
-      toast.error(error.message || "Failed to update highlight card");
+      toast.error(
+        error.message || t("cms.academy.highlightCards.messages.updateError")
+      );
     } finally {
       setIsLoading(false);
     }
@@ -79,12 +92,14 @@ export default function AcademyHighlightCardsSection() {
     setIsLoading(true);
     try {
       console.log("Deleting card:", selectedCard.id);
-      toast.success("Highlight card deleted successfully");
+      toast.success(t("cms.academy.highlightCards.messages.deleted"));
       setIsDeleteOpen(false);
       setSelectedCard(null);
       loadCards();
     } catch (error: any) {
-      toast.error(error.message || "Failed to delete highlight card");
+      toast.error(
+        error.message || t("cms.academy.highlightCards.messages.deleteError")
+      );
     } finally {
       setIsLoading(false);
     }
@@ -94,17 +109,17 @@ export default function AcademyHighlightCardsSection() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <p className="text-sm text-gray-600">
-          Manage highlight cards with statistics for different programs
+          {t("cms.academy.highlightCards.description")}
         </p>
         <Button size="sm" onClick={() => setIsCreateOpen(true)}>
           <PlusIcon className="h-4 w-4 mr-2" />
-          Add Card
+          {t("cms.academy.highlightCards.add")}
         </Button>
       </div>
 
       {cards.length === 0 ? (
         <div className="text-center py-12 text-gray-500">
-          <p>No highlight cards yet. Click "Add Card" to create one.</p>
+          <p>{t("cms.academy.highlightCards.empty")}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -116,8 +131,14 @@ export default function AcademyHighlightCardsSection() {
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <h4 className="font-semibold text-lg">{card.title_en}</h4>
-                  <p className="text-sm text-gray-500 capitalize">{card.card_type}</p>
-                  <p className="text-xs text-gray-400 mt-1">Order: {card.display_order}</p>
+                  <p className="text-sm text-gray-500 capitalize">
+                    {cardTypeLabels[card.card_type] || card.card_type}
+                  </p>
+                  <p className="text-xs text-gray-400 mt-1">
+                    {t("cms.academy.highlightCards.cards.order", {
+                      order: card.display_order,
+                    })}
+                  </p>
                 </div>
                 <div className="flex gap-2">
                   <Button
@@ -131,14 +152,14 @@ export default function AcademyHighlightCardsSection() {
                     <Pencil className="h-4 w-4" />
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="destructive"
                     size="sm"
                     onClick={() => {
                       setSelectedCard(card);
                       setIsDeleteOpen(true);
                     }}
                   >
-                    <Trash2 className="h-4 w-4" />
+                    {t('common.delete')}
                   </Button>
                 </div>
               </div>
@@ -148,24 +169,28 @@ export default function AcademyHighlightCardsSection() {
       )}
 
       <div className="text-sm text-gray-500 mt-4 p-4 bg-blue-50 rounded-lg">
-        <p className="font-semibold mb-2">Highlight Card Types:</p>
+        <p className="font-semibold mb-2">
+          {t("cms.academy.highlightCards.types.title")}
+        </p>
         <ul className="list-disc list-inside space-y-1">
-          <li><strong>Internships:</strong> Programs, Graduates, Hiring Rate</li>
-          <li><strong>Trainings:</strong> Hours Avg/Staff, Hours in 2023</li>
-          <li><strong>Seminars:</strong> Programs, Graduates, Hiring Rate</li>
-          <li><strong>Graduates:</strong> Graduates Since Inception</li>
+          <li>{t("cms.academy.highlightCards.types.internships")}</li>
+          <li>{t("cms.academy.highlightCards.types.trainings")}</li>
+          <li>{t("cms.academy.highlightCards.types.seminars")}</li>
+          <li>{t("cms.academy.highlightCards.types.graduates")}</li>
         </ul>
       </div>
 
       <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Create Highlight Card</DialogTitle>
+            <DialogTitle>
+              {t("cms.academy.highlightCards.dialog.createTitle")}
+            </DialogTitle>
           </DialogHeader>
           <AcademyHighlightCardForm
             onSubmit={handleCreate}
             isLoading={isLoading}
-            submitLabel="Create"
+            submitLabel={t("common.create")}
           />
         </DialogContent>
       </Dialog>
@@ -173,12 +198,14 @@ export default function AcademyHighlightCardsSection() {
       <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Edit Highlight Card</DialogTitle>
+            <DialogTitle>
+              {t("cms.academy.highlightCards.dialog.editTitle")}
+            </DialogTitle>
           </DialogHeader>
           <AcademyHighlightCardForm
             onSubmit={handleEdit}
             isLoading={isLoading}
-            submitLabel="Update"
+            submitLabel={t("common.update")}
           />
         </DialogContent>
       </Dialog>
@@ -186,15 +213,19 @@ export default function AcademyHighlightCardsSection() {
       <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>
+              {t("cms.academy.highlightCards.confirm.title")}
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the highlight card.
+              {t("cms.academy.highlightCards.confirm.description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} disabled={isLoading}>
-              {isLoading ? "Deleting..." : "Delete"}
+              {isLoading
+                ? t("cms.academy.highlightCards.confirm.deleting")
+                : t("common.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

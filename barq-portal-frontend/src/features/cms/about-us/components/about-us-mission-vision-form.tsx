@@ -6,19 +6,24 @@ import {
   Form,
 } from "@/shared/components/ui/form";
 import {
-  I18nFormTextField,
   I18nFormTextareaField,
   I18nTabs,
   I18nTabContent,
   I18nFormProvider,
 } from "@/shared/components/custom/i18n";
+import { DocumentUploader } from "@/shared/components/custom/DocumentUploader";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormControl,
+} from "@/shared/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import {
   createAboutUsMissionVisionSchema,
-  updateAboutUsMissionVisionSchema,
   type CreateAboutUsMissionVisionFormData,
-  type UpdateAboutUsMissionVisionFormData,
 } from "../schemas/about-us-mission-vision.schema";
 import { toast } from "sonner";
 import {
@@ -26,18 +31,22 @@ import {
   useAboutBarqMissionVisionControllerCreate,
   useAboutBarqMissionVisionControllerUpdate,
 } from "@/sdk/modules/aboutbarqmissionvision.gen";
+import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
+import { Badge } from "@/shared/components/ui/badge";
 
 export default function AboutUsMissionVisionSectionForm() {
   const { lang, t } = useLang();
   const [currentLanguage, setCurrentLanguage] = useState<LanguageCode>("en");
+  const [submittingCardIndex, setSubmittingCardIndex] = useState<number | null>(null);
 
   const { data, isLoading } = useAboutBarqMissionVisionControllerReadQuery({
     query: {
       query: {
         relations: {
           about_barq_mission_vision_id_about_barq_mission_vision_translations: true,
+          icon: true,
         },
-        pagination: { take: 1, skip: 0 },
+        pagination: { take: 100, skip: 0 },
       },
     },
     headers: {
@@ -45,119 +54,175 @@ export default function AboutUsMissionVisionSectionForm() {
     },
   });
 
-  const existingMissionVision = data?.data?.[0];
-  const currentTranslation = useMemo(
-    () =>
-      existingMissionVision?.about_barq_mission_vision_id_about_barq_mission_vision_translations?.find((t) => t.language === lang),
-    [existingMissionVision, lang]
+  const missionVisionRecords = useMemo(
+    () => data?.data || [],
+    [data?.data]
+  );
+  
+  const missionRecord = useMemo(
+    () => missionVisionRecords.find((record) => record.title === "المهمة"),
+    [missionVisionRecords]
+  );
+  
+  const visionRecord = useMemo(
+    () => missionVisionRecords.find((record) => record.title === "الرؤية"),
+    [missionVisionRecords]
   );
 
-  const isUpdate = !!existingMissionVision;
-
-  type FormData = CreateAboutUsMissionVisionFormData | UpdateAboutUsMissionVisionFormData;
-  const form = useForm<FormData>({
-    resolver: zodResolver(
-      isUpdate ? updateAboutUsMissionVisionSchema : createAboutUsMissionVisionSchema
-    ),
+  const form = useForm<CreateAboutUsMissionVisionFormData>({
+    resolver: zodResolver(createAboutUsMissionVisionSchema),
     defaultValues: {
-      section_title: { en: "", ar: "" },
-      mission_title: { en: "Mission", ar: "المهمة" },
-      mission_description: { en: "", ar: "" },
-      vision_title: { en: "Vision", ar: "الرؤية" },
-      vision_description: { en: "", ar: "" },
-    } as unknown as FormData,
+      cards: [
+        {
+          title: { en: "Mission", ar: "المهمة" },
+          description: { en: "", ar: "" },
+          icon_media: [],
+        },
+        {
+          title: { en: "Vision", ar: "الرؤية" },
+          description: { en: "", ar: "" },
+          icon_media: [],
+        },
+      ],
+    },
     mode: "onChange",
   });
 
-  useEffect(() => {
-    if (!existingMissionVision) return;
+  const { fields } = useFieldArray({
+    control: form.control,
+    name: "cards",
+  });
 
-    // Transform API data to i18n format
-    const enTranslation = existingMissionVision.about_barq_mission_vision_id_about_barq_mission_vision_translations?.find(
+  useEffect(() => {
+    form.setValue("cards.0.title", { en: "Mission", ar: "المهمة" });
+    form.setValue("cards.1.title", { en: "Vision", ar: "الرؤية" });
+  }, [form]);
+
+  useEffect(() => {
+    const missionEnTranslation = missionRecord?.about_barq_mission_vision_id_about_barq_mission_vision_translations?.find(
       (t) => t.language === "en"
     );
-    const arTranslation = existingMissionVision.about_barq_mission_vision_id_about_barq_mission_vision_translations?.find(
+    const missionArTranslation = missionRecord?.about_barq_mission_vision_id_about_barq_mission_vision_translations?.find(
+      (t) => t.language === "ar"
+    );
+
+    const visionEnTranslation = visionRecord?.about_barq_mission_vision_id_about_barq_mission_vision_translations?.find(
+      (t) => t.language === "en"
+    );
+    const visionArTranslation = visionRecord?.about_barq_mission_vision_id_about_barq_mission_vision_translations?.find(
       (t) => t.language === "ar"
     );
 
     form.reset({
-      section_title: {
-        en: enTranslation?.title || "",
-        ar: existingMissionVision.title || arTranslation?.title || "",
-      },
-      mission_title: {
-        en: "Mission",
-        ar: "المهمة",
-      },
-      mission_description: {
-        en: enTranslation?.description || "",
-        ar: existingMissionVision.description || arTranslation?.description || "",
-      },
-      vision_title: {
-        en: "Vision",
-        ar: "الرؤية",
-      },
-      vision_description: {
-        en: "",
-        ar: "",
-      },
-    } as unknown as FormData);
-  }, [existingMissionVision, form]);
+      cards: [
+        {
+          title: { en: "Mission", ar: "المهمة" },
+          description: {
+            en: missionEnTranslation?.description || "",
+            ar: missionRecord?.description || missionArTranslation?.description || "",
+          },
+          icon_media: missionRecord?.icon ? [{
+            id: missionRecord.icon.id,
+            url: missionRecord.icon.url,
+            key: missionRecord.icon.key || "",
+            format: missionRecord.icon.format,
+            mime_type: missionRecord.icon.mime_type,
+            size: missionRecord.icon.size,
+          }] : [],
+        },
+        {
+          title: { en: "Vision", ar: "الرؤية" },
+          description: {
+            en: visionEnTranslation?.description || "",
+            ar: visionRecord?.description || visionArTranslation?.description || "",
+          },
+          icon_media: visionRecord?.icon ? [{
+            id: visionRecord.icon.id,
+            url: visionRecord.icon.url,
+            key: visionRecord.icon.key || "",
+            format: visionRecord.icon.format,
+            mime_type: visionRecord.icon.mime_type,
+            size: visionRecord.icon.size,
+          }] : [],
+        },
+      ],
+    });
+    
+    form.setValue("cards.0.title", { en: "Mission", ar: "المهمة" });
+    form.setValue("cards.1.title", { en: "Vision", ar: "الرؤية" });
+  }, [missionRecord, visionRecord, form]);
 
   const createMutation = useAboutBarqMissionVisionControllerCreate();
   const updateMutation = useAboutBarqMissionVisionControllerUpdate();
 
-  const onSubmit = async (values: FormData) => {
-    if (!existingMissionVision) {
-      await createMutation.mutateAsync(
-        {
-          body: {
-            title: values.section_title?.ar || "",
-            description: values.mission_description?.ar || "",
-            icon_id: 1, // Default icon ID - should be handled by media upload
-            about_barq_mission_vision_id_about_barq_mission_vision_translations: [
-              {
-                title: values.section_title?.en || "",
-                description: values.mission_description?.en || "",
-                language: "en",
-              },
-            ],
+  const handleCardSubmit = async (cardIndex: number) => {
+    const res = await form.trigger([`cards.${cardIndex}.title`, `cards.${cardIndex}.description`, `cards.${cardIndex}.icon_media`]);
+    if (!res) return;
+    setSubmittingCardIndex(cardIndex);
+    
+    const card = form.getValues(`cards.${cardIndex}` as any);
+    const cardTitles = [
+      { en: "Mission", ar: "المهمة" },
+      { en: "Vision", ar: "الرؤية" },
+    ];
+    const currentTitle = cardTitles[cardIndex];
+    const existingRecord = cardIndex === 0 ? missionRecord : visionRecord;
+
+    try {
+      if (!existingRecord) {
+        await createMutation.mutateAsync(
+          {
+            body: {
+              title: currentTitle.ar,
+              description: card.description?.ar || "",
+              icon_id: card.icon_media?.[0]?.id || 1,
+              about_barq_mission_vision_id_about_barq_mission_vision_translations: [
+                {
+                  title: currentTitle.en,
+                  description: card.description?.en || "",
+                  language: "en",
+                },
+              ],
+            },
           },
-        },
-        {
-          onSuccess: () => {
-            toast.success(t("aboutUs.missionVisionSection.messages.created"));
+          {
+            onSuccess: () => {
+              toast.success(t("aboutUs.missionVisionSection.messages.created"));
+            },
+            onError: (error) => {
+              toast.error(error.message || t("aboutUs.missionVisionSection.messages.errorCreating"));
+            },
+          }
+        );
+      } else {
+        await updateMutation.mutateAsync(
+          {
+            path: { id: String(existingRecord.id) },
+            body: {
+              title: currentTitle.ar,
+              description: card.description?.ar || "",
+              icon_id: card.icon_media?.[0]?.id,
+              about_barq_mission_vision_id_about_barq_mission_vision_translations: [
+                {
+                  title: currentTitle.en,
+                  description: card.description?.en || "",
+                  language: "en",
+                },
+              ],
+            },
           },
-          onError: (error) => {
-            toast.error(error.message || t("aboutUs.missionVisionSection.messages.errorCreating"));
-          },
-        }
-      );
-    } else {
-      await updateMutation.mutateAsync(
-        {
-          path: { id: String(existingMissionVision.id) },
-          body: {
-            title: values.section_title?.ar || "",
-            description: values.mission_description?.ar || "",
-            about_barq_mission_vision_id_about_barq_mission_vision_translations: [
-              {
-                title: values.section_title?.en || "",
-                description: values.mission_description?.en || "",
-                language: "en",
-              },
-            ],
-          },
-        },
-        {
-          onSuccess: () => {
-            toast.success(t("aboutUs.missionVisionSection.messages.updated"));
-          },
-          onError: (error) => {
-            toast.error(error.message || t("aboutUs.missionVisionSection.messages.errorUpdating"));
-          },
-        }
-      );
+          {
+            onSuccess: () => {
+              toast.success(t("aboutUs.missionVisionSection.messages.updated"));
+            },
+            onError: (error) => {
+              toast.error(error.message || t("aboutUs.missionVisionSection.messages.errorUpdating"));
+            },
+          }
+        );
+      }
+    } finally {
+      setSubmittingCardIndex(null);
     }
   };
 
@@ -166,119 +231,184 @@ export default function AboutUsMissionVisionSectionForm() {
   return (
     <div>
       <Form {...form}>
-        <form className="grid gap-6" onSubmit={form.handleSubmit(onSubmit)}>
-          <I18nTabs
-            value={currentLanguage}
-            onValueChange={setCurrentLanguage}
-            className="w-full"
-          >
-            <I18nFormProvider currentLanguage={currentLanguage}>
-              <I18nTabContent language="en">
-                <div className="grid gap-6">
-                  <I18nFormTextField
-                    name="section_title"
-                    control={form.control}
-                    label={t("aboutUs.missionVisionSection.form.sectionTitle")}
-                    required
-                  />
-                  
-                  <div className="border-t pt-4">
-                    <h3 className="text-lg font-semibold mb-4">{t("aboutUs.missionVisionSection.form.missionCard")}</h3>
-                    <div className="grid gap-4">
-                      <div className="bg-muted/50 p-3 rounded-lg">
-                        <label className="text-sm font-medium text-muted-foreground">{t("aboutUs.missionVisionSection.form.missionTitle")}</label>
-                        <p className="text-sm">Mission</p>
-                      </div>
-                      <I18nFormTextareaField
-                        name="mission_description"
-                        control={form.control}
-                        label={t("aboutUs.missionVisionSection.form.missionDescription")}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <h3 className="text-lg font-semibold mb-4">{t("aboutUs.missionVisionSection.form.visionCard")}</h3>
-                    <div className="grid gap-4">
-                      <div className="bg-muted/50 p-3 rounded-lg">
-                        <label className="text-sm font-medium text-muted-foreground">{t("aboutUs.missionVisionSection.form.visionTitle")}</label>
-                        <p className="text-sm">Vision</p>
-                      </div>
-                      <I18nFormTextareaField
-                        name="vision_description"
-                        control={form.control}
-                        label={t("aboutUs.missionVisionSection.form.visionDescription")}
-                        required
-                      />
-                    </div>
-                  </div>
+        <I18nTabs
+          value={currentLanguage}
+          onValueChange={setCurrentLanguage}
+          className="w-full"
+        >
+          <I18nFormProvider currentLanguage={currentLanguage}>
+            <I18nTabContent language="en">
+              <div className="grid gap-6">
+                <div className="grid gap-4">
+                  {fields.map((field, index) => {
+                    const cardTitles = [
+                      { en: "Mission", ar: "المهمة" },
+                      { en: "Vision", ar: "الرؤية" },
+                    ];
+                    const currentTitle = cardTitles[index];
+                    const existingRecord = index === 0 ? missionRecord : visionRecord;
+                    
+                    return (
+                      <Card key={field.id} className="relative">
+                        <CardHeader className="pb-3">
+                          <div className="flex items-center justify-between">
+                            <Badge variant="secondary">
+                              {currentTitle.en}
+                            </Badge>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="space-y-2">
+                            <label className="text-sm font-medium">
+                              {t("aboutUs.missionVisionSection.form.cardTitle")}
+                            </label>
+                            <div className="p-3 bg-muted rounded-md">
+                              <p className="text-sm font-medium">{currentTitle.en}</p>
+                            </div>
+                          </div>
+                          <I18nFormTextareaField
+                            name={`cards.${index}.description`}
+                            control={form.control}
+                            label={t("aboutUs.missionVisionSection.form.cardDescription")}
+                            required
+                          />
+                          <FormField
+                            control={form.control}
+                            name={`cards.${index}.icon_media` as any}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>{t("common.icon")}</FormLabel>
+                                <FormControl>
+                                  <DocumentUploader
+                                    value={field.value?.map((item: any) => ({
+                                      ...item,
+                                      key: item.key || "",
+                                      size: item.size || 0,
+                                      mime_type: item.mime_type || "",
+                                      format: item.format || "",
+                                    })) || []}
+                                    onChange={(val) => {
+                                      field.onChange(val?.map((item: any) => ({
+                                        ...item,
+                                        key: item.key || "",
+                                        size: item.size || 0,
+                                        mime_type: item.mime_type || "",
+                                        format: item.format || "",
+                                      })) || []);
+                                    }}
+                                    multiple={false}
+                                    maxDocuments={1}
+                                    maxSize={5 * 1024 * 1024}
+                                    acceptedFileTypes={["image/*"]}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <div className="flex justify-end">
+                            <Button
+                              type="button"
+                              onClick={() => handleCardSubmit(index)}
+                              loading={submittingCardIndex === index}
+                            >
+                              {existingRecord ? t("aboutUs.missionVisionSection.form.update") : t("aboutUs.missionVisionSection.form.create")}
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
-              </I18nTabContent>
-              <I18nTabContent language="ar">
-                <div className="grid gap-6">
-                  <I18nFormTextField
-                    name="section_title"
-                    control={form.control}
-                    label={t("aboutUs.missionVisionSection.form.sectionTitle")}
-                    required
-                  />
-                  
-                  <div className="border-t pt-4">
-                    <h3 className="text-lg font-semibold mb-4">{t("aboutUs.missionVisionSection.form.missionCard")}</h3>
-                    <div className="grid gap-4">
-                      <div className="bg-muted/50 p-3 rounded-lg">
-                        <label className="text-sm font-medium text-muted-foreground">{t("aboutUs.missionVisionSection.form.missionTitle")}</label>
-                        <p className="text-sm">المهمة</p>
-                      </div>
-                      <I18nFormTextareaField
-                        name="mission_description"
-                        control={form.control}
-                        label={t("aboutUs.missionVisionSection.form.missionDescription")}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <h3 className="text-lg font-semibold mb-4">{t("aboutUs.missionVisionSection.form.visionCard")}</h3>
-                    <div className="grid gap-4">
-                      <div className="bg-muted/50 p-3 rounded-lg">
-                        <label className="text-sm font-medium text-muted-foreground">{t("aboutUs.missionVisionSection.form.visionTitle")}</label>
-                        <p className="text-sm">الرؤية</p>
-                      </div>
-                      <I18nFormTextareaField
-                        name="vision_description"
-                        control={form.control}
-                        label={t("aboutUs.missionVisionSection.form.visionDescription")}
-                        required
-                      />
-                    </div>
-                  </div>
+              </div>
+            </I18nTabContent>
+            <I18nTabContent language="ar">
+              <div className="grid gap-6">
+                <div className="grid gap-4">
+                  {fields.map((field, index) => {
+                    const cardTitles = [
+                      { en: "Mission", ar: "المهمة" },
+                      { en: "Vision", ar: "الرؤية" },
+                    ];
+                    const currentTitle = cardTitles[index];
+                    const existingRecord = index === 0 ? missionRecord : visionRecord;
+                    
+                    return (
+                      <Card key={field.id} className="relative">
+                        <CardHeader className="pb-3">
+                          <div className="flex items-center justify-between">
+                            <Badge variant="secondary">
+                              {currentTitle.ar}
+                            </Badge>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="space-y-2">
+                            <label className="text-sm font-medium">
+                              {t("aboutUs.missionVisionSection.form.cardTitle")}
+                            </label>
+                            <div className="p-3 bg-muted rounded-md">
+                              <p className="text-sm font-medium">{currentTitle.ar}</p>
+                            </div>
+                          </div>
+                          <I18nFormTextareaField
+                            name={`cards.${index}.description`}
+                            control={form.control}
+                            label={t("aboutUs.missionVisionSection.form.cardDescription")}
+                            required
+                          />
+                          <FormField
+                            control={form.control}
+                            name={`cards.${index}.icon_media` as any}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>{t("common.icon")}</FormLabel>
+                                <FormControl>
+                                  <DocumentUploader
+                                    value={field.value?.map((item: any) => ({
+                                      ...item,
+                                      key: item.key || "",
+                                      size: item.size || 0,
+                                      mime_type: item.mime_type || "",
+                                      format: item.format || "",
+                                    })) || []}
+                                    onChange={(val) => {
+                                      field.onChange(val?.map((item: any) => ({
+                                        ...item,
+                                        key: item.key || "",
+                                        size: item.size || 0,
+                                        mime_type: item.mime_type || "",
+                                        format: item.format || "",
+                                      })) || []);
+                                    }}
+                                    multiple={false}
+                                    maxDocuments={1}
+                                    maxSize={5 * 1024 * 1024}
+                                    acceptedFileTypes={["image/*"]}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <div className="flex justify-end">
+                            <Button
+                              type="button"
+                              onClick={() => handleCardSubmit(index)}
+                              loading={submittingCardIndex === index}
+                            >
+                              {existingRecord ? t("aboutUs.missionVisionSection.form.update") : t("aboutUs.missionVisionSection.form.create")}
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
-              </I18nTabContent>
-            </I18nFormProvider>
-          </I18nTabs>
-
-          <div className="border-t pt-4">
-            <div className="bg-muted/50 p-4 rounded-lg">
-              <p className="text-sm text-muted-foreground">
-                <strong>{t("aboutUs.missionVisionSection.requirements.title")}</strong><br/>
-                • {t("aboutUs.missionVisionSection.requirements.sectionTitle")}<br/>
-                • {t("aboutUs.missionVisionSection.requirements.cards")}<br/>
-                • {t("aboutUs.missionVisionSection.requirements.cardTitles")}<br/>
-                • {t("aboutUs.missionVisionSection.requirements.cardIcons")}<br/>
-                • {t("aboutUs.missionVisionSection.requirements.descriptions")}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex justify-end items-center gap-3">
-            <Button type="submit" loading={form.formState.isSubmitting}>
-              {existingMissionVision ? t("aboutUs.missionVisionSection.form.update") : t("aboutUs.missionVisionSection.form.create")}
-            </Button>
-          </div>
-        </form>
+              </div>
+            </I18nTabContent>
+          </I18nFormProvider>
+        </I18nTabs>
       </Form>
     </div>
   );

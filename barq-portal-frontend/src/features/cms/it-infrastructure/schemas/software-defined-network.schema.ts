@@ -16,25 +16,29 @@ const cardSchema = z.object({
   text: createI18nFieldSchema(
     z
       .string()
-      .min(3, "Card text must be at least 3 characters")
-      .max(200, "Card text must be at most 200 characters")
+      .min(10, "Card text must be at least 10 characters")
+      .max(50, "Card text must be at most 50 characters")
   ),
   icon: z
     .array(mediaSchema)
     .min(1, "Icon is required")
-    .max(1, "Only one icon is allowed"),
+    .max(1, "Only one icon is allowed")
 });
 
 export const createSoftwareDefinedNetworkSchema = z.object({
   text: createI18nFieldSchema(
     z
       .string()
-      .min(10, "Text must be at least 10 characters")
-      .max(500, "Text must be at most 500 characters")
+      .min(90, "Text must be at least 90 characters")
+      .max(150, "Text must be at most 150 characters")
   ),
-  logo: z.array(mediaSchema).max(1, "Only one logo is allowed").optional(),
-  image: z.array(mediaSchema).max(1, "Only one image is allowed").optional(),
-  cards: z.array(cardSchema).optional(),
+  logo: z.array(mediaSchema).min(1, "Only one logo is allowed").max(1, "Logo is required"),
+  image: z
+    .array(mediaSchema)
+    .min(1, "Image is required")
+    .max(1, "Only one image is allowed")
+    ,
+  cards: z.array(cardSchema).min(2, "At least 2 cards are required").max(6, "At most 6 cards are allowed"),
 });
 
 export type CreateSoftwareDefinedNetworkFormData = z.infer<

@@ -15,7 +15,10 @@ export const identityManagementCardItemSchema = z.object({
       .min(50, "Description must be at least 50 characters")
       .max(150, "Description must not exceed 150 characters")
   ),
-  icon: z.array(documentSchema).min(1, "Icon is required").optional(),
+  icon: z
+    .array(documentSchema)
+    .min(1, "Icon is required")
+    .max(1, "Only one icon per card is allowed"),
 });
 
 export const createIdentityManagementSchema = z.object({
@@ -26,7 +29,10 @@ export const createIdentityManagementSchema = z.object({
       .max(150, "Text must not exceed 150 characters")
   ),
   logo: z.array(documentSchema).min(1, "Logo is required"),
-  cards: z.array(identityManagementCardItemSchema),
+  cards: z
+    .array(identityManagementCardItemSchema)
+    .min(2, "At least 2 cards are required")
+    .max(8, "At most 8 cards are allowed"),
 });
 
 export type CreateIdentityManagementFormData = z.infer<

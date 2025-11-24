@@ -5,8 +5,8 @@ const bulletSchema = z.object({
   text: createI18nFieldSchema(
     z
       .string()
-      .min(5, "Bullet text must be at least 5 characters")
-      .max(50, "Bullet text must be at most 50 characters")
+      .min(10, "Bullet text must be at least 10 characters")
+      .max(120, "Bullet text must be at most 120 characters")
   ),
   icon: z
     .array(
@@ -27,8 +27,8 @@ export const createAutomationBusinessSchema = z.object({
   subHeadline: createI18nFieldSchema(
     z
       .string()
-      .min(90, "Subheading must be at least 90 characters")
-      .max(150, "Subheading must be at most 150 characters")
+      .min(50, "Description must be at least 50 characters")
+      .max(400, "Description must be at most 400 characters")
   ),
   image: z
     .array(
@@ -66,8 +66,8 @@ export const updateAutomationBusinessSchema = z.object({
   subHeadline: createI18nFieldSchema(
     z
       .string()
-      .min(90, "Subheading must be at least 90 characters")
-      .max(150, "Subheading must be at most 150 characters")
+      .min(50, "Description must be at least 50 characters")
+      .max(400, "Description must be at most 400 characters")
   ).optional(),
   image: z
     .array(

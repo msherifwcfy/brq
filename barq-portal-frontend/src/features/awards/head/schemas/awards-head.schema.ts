@@ -5,13 +5,13 @@ export const createAwardsHeadSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(10, "awardsHead.validation.titleMin")
-      .max(60, "awardsHead.validation.titleMax")
+      .min(3, "awardsHead.validation.titleMin")
+      .max(100, "awardsHead.validation.titleMax")
   ),
   sub_title: createI18nFieldSchema(
     z
       .string()
-      .min(100, "awardsHead.validation.subTitleMin")
+      .min(10, "awardsHead.validation.subTitleMin")
       .max(250, "awardsHead.validation.subTitleMax")
   ),
 });
@@ -20,13 +20,13 @@ export const updateAwardsHeadSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(10, "awardsHead.validation.titleMin")
-      .max(60, "awardsHead.validation.titleMax")
+      .min(3, "awardsHead.validation.titleMin")
+      .max(100, "awardsHead.validation.titleMax")
   ).optional(),
   sub_title: createI18nFieldSchema(
     z
       .string()
-      .min(100, "awardsHead.validation.subTitleMin")
+      .min(10, "awardsHead.validation.subTitleMin")
       .max(250, "awardsHead.validation.subTitleMax")
   ).optional(),
 });

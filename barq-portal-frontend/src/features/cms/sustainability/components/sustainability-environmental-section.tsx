@@ -87,7 +87,8 @@ export default function SustainabilityEnvironmentalSection() {
   });
 
   useEffect(() => {
-    // Transform API data to i18n format
+    if (!existing) return;
+    
     const enTranslation =
       existing?.environmental_sustainability_id_environmental_sustainability_translations?.find(
         (t) => t.language === "en"
@@ -96,6 +97,28 @@ export default function SustainabilityEnvironmentalSection() {
       existing?.environmental_sustainability_id_environmental_sustainability_translations?.find(
         (t) => t.language === "ar"
       );
+
+    const bulletPoints =
+      existing?.environmental_sustainability_points_id_environmental_sustainability_points?.map(
+        (p) => {
+          const enPointTranslation =
+            p.environmental_sustainability_points_id_environmental_sustainability_points_translations?.find(
+              (t: any) => t.language === "en"
+            );
+          const arPointTranslation =
+            p.environmental_sustainability_points_id_environmental_sustainability_points_translations?.find(
+              (t: any) => t.language === "ar"
+            );
+
+          return {
+            title: {
+              en: enPointTranslation?.title ?? p.title ?? "",
+              ar: arPointTranslation?.title ?? p.title ?? "",
+            },
+            icon: p.icon ? [p.icon] : undefined,
+          };
+        }
+      ) || [];
 
     form.reset({
       title: {
@@ -106,27 +129,19 @@ export default function SustainabilityEnvironmentalSection() {
         en: enTranslation?.description || "",
         ar: existing?.description || arTranslation?.description || "",
       },
-      bulletPoints:
-        existing?.environmental_sustainability_points_id_environmental_sustainability_points?.map(
-          (p) => ({
-            title: {
-              en: p.title ?? "",
-              ar: p.title ?? "",
-            },
-            icon: p.icon ? [p.icon] : undefined,
-          })
-        ) || [],
+      bulletPoints,
     });
-  }, [existing, currentTranslation, form]);
+  }, [existing, form]);
 
   const onSubmit = async (values: FormData) => {
     try {
       const bulletPoints = values.bulletPoints.map((p) => ({
         icon_id: p.icon?.[0]?.id,
-        title: p.title.en,
+        title: p.title.ar,
         environmental_sustainability_points_id_environmental_sustainability_points_translations:
           [{ language: "en" as const, title: p.title.en }],
       }));
+      console.log(values.bulletPoints, "bulletPoints");
       if (existing) {
         await updateMutation.mutateAsync({
           path: { id: String(existing.id) },
@@ -197,6 +212,75 @@ export default function SustainabilityEnvironmentalSection() {
                   placeholder={t("common.description")}
                   required
                 />
+                <FormField
+                  control={form.control}
+                  name="bulletPoints"
+                  render={() => (
+                    <FormItem className="space-y-4">
+                      <FormLabel>{t("common.icons")}</FormLabel>
+                      {form.watch("bulletPoints")?.map((point, idx) => (
+                        <div
+                          key={idx}
+                          className="grid grid-cols-1 gap-2 border p-3 rounded-md"
+                        >
+                          <I18nFormTextField
+                            name={`bulletPoints.${idx}.title`}
+                            control={form.control}
+                            label={t("common.title")}
+                            placeholder={t("common.title")}
+                            required
+                          />
+                          <DocumentUploader
+                            value={point.icon}
+                            onChange={(val) => {
+                              form.setValue(`bulletPoints.${idx}.icon`, val);
+                            }}
+                            multiple={false}
+                            maxDocuments={1}
+                          />
+                          <div className="flex justify-end gap-2">
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              onClick={() => {
+                                const currentPoints = form.getValues("bulletPoints");
+                                form.setValue(
+                                  "bulletPoints",
+                                  currentPoints.filter((_, i) => i !== idx)
+                                );
+                              }}
+                            >
+                              {t("common.remove")}
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        className="w-fit"
+                        onClick={() => {
+                          const currentPoints = form.getValues("bulletPoints") || [];
+                          if (currentPoints.length >= 3) {
+                            form.setError("bulletPoints", {
+                              type: "manual",
+                              message: "At most 3 bullet points are allowed",
+                            });
+                            return;
+                          }
+                          form.setValue("bulletPoints", [
+                            ...currentPoints,
+                            { title: { en: "", ar: "" }, icon: undefined },
+                          ]);
+                          form.clearErrors("bulletPoints");
+                        }}
+                      >
+                        {t("common.add")}
+                      </Button>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </I18nTabContent>
             <I18nTabContent language="ar">
@@ -215,60 +299,80 @@ export default function SustainabilityEnvironmentalSection() {
                   placeholder={t("common.description")}
                   required
                 />
+                <FormField
+                  control={form.control}
+                  name="bulletPoints"
+                  render={() => (
+                    <FormItem className="space-y-4">
+                      <FormLabel>{t("common.icons")}</FormLabel>
+                      {form.watch("bulletPoints")?.map((point, idx) => (
+                        <div
+                          key={idx}
+                          className="grid grid-cols-1 gap-2 border p-3 rounded-md"
+                        >
+                          <I18nFormTextField
+                            name={`bulletPoints.${idx}.title`}
+                            control={form.control}
+                            label={t("common.title")}
+                            placeholder={t("common.title")}
+                            required
+                          />
+                          <DocumentUploader
+                            value={point.icon}
+                            onChange={(val) => {
+                              form.setValue(`bulletPoints.${idx}.icon`, val);
+                            }}
+                            multiple={false}
+                            maxDocuments={1}
+                          />
+                          <div className="flex justify-end gap-2">
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              onClick={() => {
+                                const currentPoints = form.getValues("bulletPoints");
+                                form.setValue(
+                                  "bulletPoints",
+                                  currentPoints.filter((_, i) => i !== idx)
+                                );
+                              }}
+                            >
+                              {t("common.remove")}
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        className="w-fit"
+                        onClick={() => {
+                          const currentPoints = form.getValues("bulletPoints") || [];
+                          if (currentPoints.length >= 3) {
+                            form.setError("bulletPoints", {
+                              type: "manual",
+                              message: "At most 3 bullet points are allowed",
+                            });
+                            return;
+                          }
+                          form.setValue("bulletPoints", [
+                            ...currentPoints,
+                            { title: { en: "", ar: "" }, icon: undefined },
+                          ]);
+                          form.clearErrors("bulletPoints");
+                        }}
+                      >
+                        {t("common.add")}
+                      </Button>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </I18nTabContent>
           </I18nTabs>
 
-          <div className="space-y-4">
-            <FormLabel>{t("common.icons")}</FormLabel>
-            {form.watch("bulletPoints")?.map((point, idx) => (
-              <div
-                key={idx}
-                className="grid grid-cols-1 gap-2 border p-3 rounded-md"
-              >
-                <I18nFormTextField
-                  name={`bulletPoints.${idx}.title`}
-                  control={form.control}
-                  label={t("common.title")}
-                  placeholder={t("common.title")}
-                  required
-                />
-                <DocumentUploader
-                  value={point.icon}
-                  onChange={(val) => {
-                    form.setValue(`bulletPoints.${idx}.icon`, val);
-                  }}
-                  multiple={false}
-                  maxDocuments={1}
-                />
-                <div className="flex justify-end gap-2">
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    onClick={() => {
-                      form.setValue(`bulletPoints.${idx}.icon`, undefined);
-                    }}
-                  >
-                    {t("common.remove")}
-                  </Button>
-                </div>
-              </div>
-            ))}
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() =>
-                form.setValue(`bulletPoints`, [
-                  ...form.watch("bulletPoints"),
-                  { title: { en: "", ar: "" }, icon: undefined },
-                ])
-              }
-            >
-              {t("common.add")}
-            </Button>
-          </div>
-
-          <div className="flex gap-2">
+          <div className="flex justify-end gap-2">
             <Button
               type="submit"
               loading={createMutation.isPending || updateMutation.isPending}

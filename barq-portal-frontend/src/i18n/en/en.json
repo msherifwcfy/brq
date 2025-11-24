@@ -1,5 +1,7 @@
 {
   "common": {
+    "subText": "Sub Text",
+    "year": "Year",
     "title": "Title",
     "description": "Description",
     "create": "Create",
@@ -11,6 +13,7 @@
     "cancel": "Cancel",
     "actions": "Actions",
     "loading": "Loading...",
+    "more": "More",
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
@@ -45,6 +48,9 @@
     "language": {
       "en": "English",
       "ar": "Arabic"
+    },
+    "formValidation": {
+      "completeLanguageForm": "Please complete the {language} form"
     }
   },
   "auth": {
@@ -122,7 +128,16 @@
       "roles": "Roles",
       "employees": "Employees",
       "manageItems": "Manage Items",
-      "contactUs":{
+      "hearAboutOptions": {
+        "title": "Hear About Options"
+      },
+      "requestTypes": {
+        "title": "Request Types"
+      },
+      "hearAboutUsOptions": {
+        "title": "Heard About Us Options"
+      },
+      "contactUs": {
         "title": "Contact Us"
       },
       "cybersecurity": {
@@ -139,6 +154,9 @@
       },
       "countries": {
         "title": "Countries"
+      },
+      "cities": {
+        "title": "Cities"
       },
       "industries": {
         "title": "Industries"
@@ -182,8 +200,13 @@
         "managedServices": {
           "title": "Managed Services"
         },
+        "solutionsAndServices": {
+          "title": "Solutions & Services"
+        },
         "newsroom": {
-          "title": "Newsroom"
+          "title": "Newsroom",
+          "content": "Content",
+          "categories": "Categories"
         },
         "events": {
           "title": "Events"
@@ -193,6 +216,18 @@
         },
         "resources": {
           "title": "Resources"
+        },
+        "caseStudies": {
+          "title": "Case Studies & Success Stories",
+          "caseStudies": {
+            "title": "Case Studies"
+          }
+        },
+        "careers": {
+          "title": "Careers"
+        },
+        "leadership": {
+          "title": "Leadership"
         }
       },
       "alliances": {
@@ -219,6 +254,538 @@
     }
   },
   "cms": {
+    "academy": {
+      "title": "Academy Content Management",
+      "contentTitle": "Academy Content",
+      "hero": {
+        "title": "Hero Section",
+        "form": {
+          "title": "Title",
+          "titlePlaceholder": "Enter hero title (20-80 characters)",
+          "subtext": "Subtext",
+          "subtextPlaceholder": "Enter hero subtext (80-350 characters)",
+          "heroImage": "Hero Image"
+        },
+        "messages": {
+          "created": "Hero section created successfully",
+          "updated": "Hero section updated successfully",
+          "error": "Failed to save hero section"
+        }
+      },
+      "highlights": {
+        "title": "Highlights Section",
+        "form": {
+          "title": "Section Title",
+          "titlePlaceholder": "Enter section title (5-40 characters)",
+          "subtext": "Subtext",
+          "subtextPlaceholder": "Enter section subtext (50-250 characters)",
+          "submitCreate": "Create Section",
+          "submitUpdate": "Update Section"
+        },
+        "cards": {
+          "title": "Highlight Cards",
+          "description": "Manage highlight cards with statistics (Maximum 4 cards)",
+          "add": "Add Card",
+          "empty": "No highlight cards yet. Click \"Add Card\" to create one.",
+          "cardNumber": "Card {index}",
+          "cardTitle": "Card Title",
+          "statistics": "Statistics",
+          "cardTitlePlaceholder": "Enter card title (5-40 characters)",
+          "statLabel": "Stat {number} Label",
+          "statLabelPlaceholder": "Enter stat label (4-25 characters)",
+          "statNumber": "Stat {number} Number",
+          "statNumberOptional": "Stat {number} Number (Optional)",
+          "statNumberPlaceholder": "Enter stat number"
+        },
+        "messages": {
+          "created": "Highlights section created successfully",
+          "updated": "Highlights section updated successfully",
+          "error": "Failed to save highlights section",
+          "maxCards": "Maximum 4 cards allowed"
+        }
+      },
+      "highlightCards": {
+        "description": "Manage highlight cards with statistics for different programs",
+        "add": "Add Card",
+        "empty": "No highlight cards yet. Click \"Add Card\" to create one.",
+        "cards": {
+          "order": "Order: {order}"
+        },
+        "types": {
+          "title": "Highlight Card Types:",
+          "internships": "Internships: Programs, Graduates, Hiring Rate",
+          "trainings": "Trainings: Hours Avg/Staff, Hours in 2023",
+          "seminars": "Seminars: Programs, Graduates, Hiring Rate",
+          "graduates": "Graduates: Graduates Since Inception"
+        },
+        "dialog": {
+          "createTitle": "Create Highlight Card",
+          "editTitle": "Edit Highlight Card"
+        },
+        "messages": {
+          "created": "Highlight card created successfully",
+          "updated": "Highlight card updated successfully",
+          "deleted": "Highlight card deleted successfully",
+          "createError": "Failed to create highlight card",
+          "updateError": "Failed to update highlight card",
+          "deleteError": "Failed to delete highlight card"
+        },
+        "confirm": {
+          "title": "Are you sure?",
+          "description": "This action cannot be undone. This will permanently delete the highlight card.",
+          "deleting": "Deleting..."
+        },
+        "cardTypes": {
+          "placeholder": "Select card type",
+          "internships": "Internships",
+          "trainings": "Trainings",
+          "seminars": "Seminars",
+          "graduates": "Graduates"
+        },
+        "form": {
+          "cardTitle": "Card Title",
+          "cardType": "Card Type",
+          "statisticRequired": "Statistic 1 (Required)",
+          "statisticOptional": "Statistic {number} (Optional)",
+          "statValueExample": "Value (e.g., 11)",
+          "statValuePlaceholder": "Value",
+          "statLabelPlaceholder": "Label",
+          "displayOrder": "Display Order",
+          "saving": "Saving..."
+        }
+      },
+      "foundationTracks": {
+        "title": "Foundation Tracks",
+        "form": {
+          "title": "Section Title",
+          "titlePlaceholder": "Enter section title (5-40 characters)",
+          "submitCreate": "Create Section",
+          "submitUpdate": "Update Section"
+        },
+        "cards": {
+          "title": "Foundation Track Cards",
+          "description": "Manage foundation track cards (Minimum 3, Maximum 12 cards)",
+          "add": "Add Card",
+          "empty": "No cards yet. Click \"Add Card\" to create one.",
+          "cardNumber": "Card {index}",
+          "image": "Image",
+          "titleEn": "Card Title",
+          "titleEnPlaceholder": "Enter card title (5-35 characters)",
+          "descriptionEn": "Card Description",
+          "descriptionEnPlaceholder": "Enter card description (50-150 characters)",
+          "titleAr": "Card Title",
+          "titleArPlaceholder": "Enter card title (5-35 characters)",
+          "descriptionAr": "Card Description",
+          "descriptionArPlaceholder": "Enter card description (50-150 characters)"
+        },
+        "messages": {
+          "created": "Foundation tracks section created successfully",
+          "updated": "Foundation tracks section updated successfully",
+          "error": "Failed to save foundation tracks section",
+          "minCards": "At least 3 cards are required",
+          "maxCards": "Maximum 12 cards allowed"
+        }
+      },
+      "foundationTrackSubmissions": {
+        "title": "Foundation Track Form Submissions",
+        "columns": {
+          "id": "ID",
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "email": "Email",
+          "phone": "Phone",
+          "university": "University",
+          "currentAcademicYear": "Academic Year",
+          "linkedinUrl": "LinkedIn URL",
+          "resume": "Resume",
+          "viewResume": "View Resume",
+          "track": "Track",
+          "createdAt": "Created At"
+        },
+        "messages": {
+          "noSubmissionsFound": "No foundation track submissions found"
+        }
+      },
+      "internshipSubmissions": {
+        "title": "Internship Form Submissions",
+        "columns": {
+          "id": "ID",
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "email": "Email",
+          "phone": "Phone",
+          "university": "University",
+          "currentAcademicYear": "Academic Year",
+          "linkedinUrl": "LinkedIn URL",
+          "resume": "Resume",
+          "viewResume": "View Resume",
+          "program": "Program",
+          "createdAt": "Created At"
+        },
+        "messages": {
+          "noSubmissionsFound": "No internship submissions found"
+        }
+      },
+      "internshipPrograms": {
+        "title": "Internship Programs",
+        "form": {
+          "title": "Section Title",
+          "titlePlaceholder": "Enter section title (5-40 characters)",
+          "submitCreate": "Create Section",
+          "submitUpdate": "Update Section"
+        },
+        "cards": {
+          "title": "Internship Program Cards",
+          "description": "Manage internship program cards (Minimum 3, Maximum 12 cards)",
+          "add": "Add Card",
+          "empty": "No cards yet. Click \"Add Card\" to create one.",
+          "cardNumber": "Card {index}",
+          "image": "Image",
+          "titleEn": "Card Title",
+          "titleEnPlaceholder": "Enter card title (5-35 characters)",
+          "descriptionEn": "Description",
+          "descriptionEnPlaceholder": "Enter description (50-150 characters)",
+          "ctaEn": "CTA Label",
+          "ctaEnPlaceholder": "Enter CTA label (2-30 characters)",
+          "titleAr": "Card Title",
+          "titleArPlaceholder": "Enter card title (5-35 characters)",
+          "descriptionAr": "Description",
+          "descriptionArPlaceholder": "Enter description (50-150 characters)",
+          "ctaAr": "CTA Label",
+          "ctaArPlaceholder": "Enter CTA label (2-30 characters)"
+        },
+        "messages": {
+          "created": "Internship programs section created successfully",
+          "updated": "Internship programs section updated successfully",
+          "error": "Failed to save internship programs section",
+          "maxCards": "Maximum 12 cards allowed"
+        }
+      }
+    },
+    "caseStudies": {
+      "title": "Case Studies & Success Stories",
+      "form": {
+        "showOnHomepage": "Show on Homepage",
+        "featured": "Featured"
+      },
+      "hero": {
+        "title": "Hero Section",
+        "fields": {
+          "title": "Hero Title",
+          "subTitle": "Hero Subtitle"
+        },
+        "messages": {
+          "created": "Hero saved successfully",
+          "updated": "Hero updated successfully",
+          "errorSavingHero": "Failed to save hero section"
+        }
+      },
+      "caseStudies": {
+        "title": "Case Studies"
+      }
+    },
+    "careers": {
+      "title": "Careers",
+      "hero": {
+        "title": "Hero Section",
+        "form": {
+          "title": "Title",
+          "titlePlaceholder": "Title (15-80 characters)",
+          "description": "Subtext",
+          "descriptionPlaceholder": "Subtext (50-300 characters)",
+          "media": "Background Image",
+          "create": "Create",
+          "update": "Update"
+        },
+        "messages": {
+          "created": "Hero section created successfully",
+          "updated": "Hero section updated successfully",
+          "error": "Failed to save hero section"
+        }
+      },
+      "openPositionHero": {
+        "title": "Open Position Details Hero Section",
+        "form": {
+          "title": "Title",
+          "titlePlaceholder": "Title (5-50 characters)",
+          "description": "Subtext",
+          "descriptionPlaceholder": "Subtext (50-250 characters)",
+          "create": "Create",
+          "update": "Update"
+        },
+        "messages": {
+          "created": "Open Position Details Hero section created successfully",
+          "updated": "Open Position Details Hero section updated successfully",
+          "error": "Failed to save open position details hero section"
+        }
+      },
+      "workingAtBarq": {
+        "title": "Working at Barq Section",
+        "hero": {
+          "title": "Hero Section",
+          "form": {
+            "title": "Title",
+            "subTitle": "Sub Title"
+          }
+        },
+        "cards": {
+          "title": "Cards",
+          "addCard": "Add Card",
+          "cardNumber": "Card {index}",
+          "form": {
+            "title": "Title",
+            "subTitle": "Sub Title",
+            "icon": "Icon"
+          },
+          "validation": {
+            "minCards": "At least 1 card is required"
+          }
+        },
+        "messages": {
+          "loading": "Loading...",
+          "created": "Working at Barq section created successfully",
+          "updated": "Working at Barq section updated successfully",
+          "error": "Failed to save working at Barq section"
+        },
+        "buttons": {
+          "create": "Create",
+          "update": "Update"
+        }
+      },
+      "jobDetail": {
+        "title": "Job Detail Section",
+        "columns": {
+          "id": "ID",
+          "jobTitle": "Job Title",
+          "category": "Category",
+          "introSentence": "Introduction Sentence",
+          "cardsCount": "Cards Count",
+          "createdAt": "Created At"
+        },
+        "messages": {
+          "noJobDetailsFound": "No job details found"
+        }
+      },
+      "manageItems": {
+        "title": "Manage Items",
+        "opportunitiesLabel": "Career Opportunities",
+        "categoriesLabel": "Career Categories",
+        "opportunities": {
+          "create": "Create Opportunity",
+          "columns": {
+            "id": "ID",
+            "nameEn": "Name (EN)",
+            "nameAr": "Name (AR)",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "actions": "Actions"
+          },
+          "form": {
+            "name": "Name",
+            "namePlaceholder": "Name",
+            "create": "Create",
+            "update": "Update"
+          },
+          "modals": {
+            "createTitle": "Create Career Opportunity",
+            "updateTitle": "Update Career Opportunity",
+            "deleteTitle": "Delete Career Opportunity",
+            "deleteConfirmation": "Are you sure you want to delete \"{name}\"? This action cannot be undone."
+          },
+          "messages": {
+            "created": "Career opportunity created successfully",
+            "updated": "Career opportunity updated successfully",
+            "deleted": "Career opportunity deleted successfully",
+            "error": "Failed to {action} career opportunity"
+          }
+        },
+        "categories": {
+          "create": "Create Category",
+          "columns": {
+            "id": "ID",
+            "nameEn": "Name (EN)",
+            "nameAr": "Name (AR)",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "actions": "Actions"
+          },
+          "form": {
+            "name": "Name",
+            "namePlaceholder": "Name",
+            "create": "Create",
+            "update": "Update"
+          },
+          "modals": {
+            "createTitle": "Create Career Category",
+            "updateTitle": "Update Career Category",
+            "deleteTitle": "Delete Career Category",
+            "deleteConfirmation": "Are you sure you want to delete \"{name}\"? This action cannot be undone."
+          },
+          "messages": {
+            "created": "Career category created successfully",
+            "updated": "Career category updated successfully",
+            "deleted": "Career category deleted successfully",
+            "error": "Failed to {action} career category"
+          }
+        }
+      },
+      "openPositions": {
+        "title": "Open Positions",
+        "create": "Create Open Position",
+        "columns": {
+          "id": "ID",
+          "jobTitleEn": "Job Title (EN)",
+          "jobTitleAr": "Job Title (AR)",
+          "jobDescriptionEn": "Job Description (EN)",
+          "jobDescriptionAr": "Job Description (AR)",
+          "status": "Status",
+          "category": "Category",
+          "opportunity": "Opportunity",
+          "openingDate": "Opening Date",
+          "closingDate": "Closing Date",
+          "createdAt": "Created At",
+          "actions": "Actions"
+        },
+        "form": {
+          "jobTitle": "Job Title",
+          "jobTitlePlaceholder": "Job Title (5-50 characters)",
+          "jobDescription": "Job Description",
+          "jobDescriptionPlaceholder": "Enter job description (minimum 10 characters)",
+          "openingDate": "Opening Date",
+          "closingDate": "Closing Date",
+          "status": "Status",
+          "statusPlaceholder": "Select status",
+          "careerOpportunity": "Career Opportunity",
+          "careerOpportunityPlaceholder": "Select opportunity",
+          "careerCategory": "Career Category",
+          "careerCategoryPlaceholder": "Select category",
+          "country": "Country",
+          "countryPlaceholder": "Select country",
+          "city": "City",
+          "cityPlaceholder": "Select city",
+          "create": "Create",
+          "update": "Update"
+        },
+        "modals": {
+          "createTitle": "Create Open Position",
+          "updateTitle": "Update Open Position",
+          "deleteTitle": "Delete Open Position",
+          "deleteConfirmation": "Are you sure you want to delete \"{jobTitle}\"? This action cannot be undone."
+        },
+        "messages": {
+          "created": "Open position created successfully",
+          "updated": "Open position updated successfully",
+          "deleted": "Open position deleted successfully",
+          "error": "Failed to {action} open position"
+        }
+      },
+      "formSubmissions": {
+        "title": "Form Submissions",
+        "columns": {
+          "id": "ID",
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "email": "Email",
+          "phoneNumber": "Phone Number",
+          "jobTitle": "Job Title",
+          "linkedInUrl": "LinkedIn URL",
+          "position": "Position",
+          "resume": "Resume",
+          "createdAt": "Created At",
+          "viewResume": "View Resume"
+        },
+        "messages": {
+          "noSubmissionsFound": "No form submissions found"
+        }
+      }
+    },
+    "leadership": {
+      "title": "Leadership",
+      "leadershipTeam": {
+        "title": "Leadership Team Section",
+        "hero": {
+          "title": "Hero Section",
+          "form": {
+            "title": "Title (15-50 characters)",
+            "description": "Description (70-200 characters)"
+          }
+        },
+        "cards": {
+          "title": "Cards",
+          "addCard": "Add Card",
+          "cardNumber": "Card {index}",
+          "form": {
+            "name": "Name (5-30 characters)",
+            "role": "Role (10-50 characters)",
+            "bio": "Bio (400-1000 characters)",
+            "image": "Image (Required)"
+          },
+          "columns": {
+            "name": "Name",
+            "role": "Role",
+            "image": "Image",
+            "actions": "Actions"
+          },
+          "validation": {
+            "maxCards": "Maximum 18 cards allowed (3 rows × 6 cards)",
+            "minCards": "At least 1 card is required",
+            "noImage": "No image"
+          }
+        },
+        "messages": {
+          "created": "Leadership Team created successfully",
+          "updated": "Leadership Team updated successfully",
+          "error": "Failed to save Leadership Team",
+          "loading": "Loading..."
+        },
+        "buttons": {
+          "create": "Create",
+          "update": "Update"
+        }
+      },
+      "executiveTeam": {
+        "title": "Executive Team Section",
+        "hero": {
+          "title": "Hero Section",
+          "form": {
+            "title": "Title (15-50 characters)",
+            "description": "Description (70-200 characters)"
+          }
+        },
+        "cards": {
+          "title": "Cards",
+          "addCard": "Add Card",
+          "cardNumber": "Card {index}",
+          "form": {
+            "name": "Name (5-30 characters)",
+            "role": "Role (10-50 characters)",
+            "bio": "Bio (400-1000 characters)",
+            "image": "Image (Required)"
+          },
+          "columns": {
+            "name": "Name",
+            "role": "Role",
+            "image": "Image",
+            "actions": "Actions"
+          },
+          "validation": {
+            "maxCards": "Maximum 18 cards allowed (3 rows × 6 cards)",
+            "minCards": "At least 1 card is required",
+            "noImage": "No image"
+          }
+        },
+        "messages": {
+          "created": "Executive Team created successfully",
+          "updated": "Executive Team updated successfully",
+          "error": "Failed to save Executive Team",
+          "loading": "Loading..."
+        },
+        "buttons": {
+          "create": "Create",
+          "update": "Update"
+        }
+      }
+    },
     "alliances": {
       "title": "Alliances Management",
       "head": {
@@ -247,16 +814,32 @@
       },
       "locations": {
         "title": "Footer Locations"
+      },
+      "terms": {
+        "title": "Footer Terms"
       }
     },
-
     "sustainability": {
       "title": "Sustainability",
-      "economic": { "title": "Economic Sustainability" },
-      "ecosystem": { "title": "Ecosystem Sustainability" },
-      "environmental": { "title": "Environmental Sustainability" },
-      "globalCommitment": { "title": "Global Commitment" },
-      "mainSocial": { "title": "Main Social" },
+      "economic": {
+        "title": "Economic Sustainability"
+      },
+      "ecosystem": {
+        "title": "Ecosystem Sustainability"
+      },
+      "environmental": {
+        "title": "Environmental Sustainability"
+      },
+      "globalCommitment": {
+        "title": "Global Commitment",
+        "messages": {
+          "created": "Global commitment created successfully",
+          "updated": "Global commitment updated successfully"
+        }
+      },
+      "mainSocial": {
+        "title": "Main Social"
+      },
       "cardSocial": {
         "title": "Card Social",
         "createCardSocial": "Create Card Social",
@@ -298,6 +881,7 @@
         "messages": {
           "cardSocialCreated": "Card Social created successfully",
           "cardSocialUpdated": "Card Social updated successfully",
+          "cardSocialDeleted": "Card Social deleted successfully",
           "errorCreatingCardSocial": "Error creating Card Social",
           "errorUpdatingCardSocial": "Error updating Card Social",
           "errorDeletingCardSocial": "Error deleting Card Social",
@@ -306,7 +890,6 @@
         }
       }
     },
-
     "automation": {
       "title": "Automation",
       "hero": {
@@ -381,7 +964,208 @@
         }
       }
     },
-
+    "events": {
+      "title": "Events Management",
+      "hero": {
+        "title": "Hero Section",
+        "fields": {
+          "title": "Hero Title",
+          "subTitle": "Hero Subtitle",
+          "quote": "Quote"
+        },
+        "messages": {
+          "created": "Hero saved successfully",
+          "updated": "Hero updated successfully",
+          "errorSavingHero": "Failed to save hero section"
+        }
+      },
+      "list": {
+        "title": "Events Catalogue",
+        "columns": {
+          "id": "ID",
+          "name": "Name",
+          "crmId": "CRM ID",
+          "registrationWindow": "Registration Window",
+          "eventWindow": "Event Window",
+          "location": "Location",
+          "solution": "Solution",
+          "service": "Service",
+          "agendaItems": "Agenda Items",
+          "registrations": "Registrations",
+          "createdAt": "Created At",
+          "updatedAt": "Updated At"
+        },
+        "filters": {
+          "crmId": "CRM ID",
+          "name": "Event Name",
+          "country": "Country",
+          "city": "City",
+          "eventStart": "Event Start Date",
+          "eventEnd": "Event End Date"
+        },
+        "sort": {
+          "eventStart": "Event Start",
+          "eventEnd": "Event End",
+          "name": "Name",
+          "createdAt": "Created At",
+          "updatedAt": "Updated At"
+        }
+      },
+      "partners": {
+        "title": "Partners",
+        "actions": {
+          "new": "New Partner",
+          "create": "Create Partner",
+          "update": "Update Partner"
+        },
+        "createTitle": "Create Event Partner",
+        "updateTitle": "Update Event Partner",
+        "columns": {
+          "id": "ID",
+          "title": "Title",
+          "subTitle": "Subtitle",
+          "logos": "Logos",
+          "createdAt": "Created At",
+          "updatedAt": "Updated At",
+          "actions": "Actions"
+        },
+        "filters": {
+          "title": "Title",
+          "subTitle": "Subtitle"
+        },
+        "sort": {
+          "createdAt": "Created At",
+          "updatedAt": "Updated At",
+          "title": "Title"
+        },
+        "hero": {
+          "title": "Partners Section",
+          "form": {
+            "title": "Title",
+            "subTitle": "Subtitle"
+          }
+        },
+        "logos": {
+          "title": "Partner Logos",
+          "form": {
+            "logos": "Partner Logos"
+          }
+        },
+        "form": {
+          "title": "Title",
+          "titlePlaceholder": "Enter partner title",
+          "subTitle": "Subtitle",
+          "subTitlePlaceholder": "Enter partner subtitle",
+          "logos": "Partner Logos"
+        },
+        "messages": {
+          "loading": "Loading partners...",
+          "created": "Partner created successfully",
+          "errorCreating": "Failed to create partner",
+          "updated": "Partner updated successfully",
+          "errorUpdating": "Failed to update partner",
+          "error": "Failed to save partner"
+        },
+        "buttons": {
+          "create": "Create Partner",
+          "update": "Update Partner"
+        }
+      },
+      "speakers": {
+        "title": "Speakers",
+        "actions": {
+          "new": "New Speaker Set",
+          "create": "Create Speaker Set",
+          "update": "Update Speaker Set",
+          "addSpeaker": "Add Speaker"
+        },
+        "createTitle": "Create Speakers Section",
+        "updateTitle": "Update Speakers Section",
+        "columns": {
+          "id": "ID",
+          "title": "Title",
+          "count": "Speakers",
+          "createdAt": "Created At",
+          "updatedAt": "Updated At",
+          "actions": "Actions"
+        },
+        "filters": {
+          "title": "Title"
+        },
+        "sort": {
+          "createdAt": "Created At",
+          "updatedAt": "Updated At",
+          "title": "Title"
+        },
+        "hero": {
+          "title": "Speakers Section",
+          "form": {
+            "title": "Section Title"
+          }
+        },
+        "cards": {
+          "title": "Speaker Cards",
+          "addCard": "Add Speaker",
+          "cardNumber": "Speaker {index}",
+          "form": {
+            "name": "Name",
+            "role": "Role",
+            "image": "Speaker Image"
+          },
+          "validation": {
+            "maxCards": "Maximum eight speakers allowed",
+            "minCards": "At least one speaker is required"
+          }
+        },
+        "form": {
+          "title": "Section Title",
+          "titlePlaceholder": "Enter section title",
+          "speakerLabel": "Speaker {index}",
+          "name": "Name",
+          "namePlaceholder": "Enter speaker name",
+          "role": "Role",
+          "rolePlaceholder": "Enter speaker role",
+          "image": "Speaker Image"
+        },
+        "messages": {
+          "loading": "Loading speakers...",
+          "created": "Speakers saved successfully",
+          "errorCreating": "Failed to create speakers",
+          "updated": "Speakers updated successfully",
+          "errorUpdating": "Failed to update speakers",
+          "error": "Failed to save speakers",
+          "maxCards": "Maximum eight speakers allowed",
+          "minCards": "At least one speaker is required"
+        },
+        "buttons": {
+          "create": "Create Speakers",
+          "update": "Update Speakers"
+        }
+      },
+      "registrations": {
+        "title": "Registrations",
+        "columns": {
+          "id": "ID",
+          "createdAt": "Submitted At",
+          "event": "Event",
+          "fullName": "Full Name",
+          "email": "Email",
+          "phone": "Phone",
+          "company": "Company",
+          "position": "Job Title"
+        },
+        "filters": {
+          "email": "Email",
+          "company": "Company",
+          "eventId": "Event ID"
+        },
+        "sort": {
+          "createdAt": "Submitted At",
+          "updatedAt": "Updated At",
+          "email": "Email"
+        }
+      }
+    },
     "cybersecurity": {
       "title": "Cybersecurity",
       "hero": {
@@ -557,7 +1341,6 @@
         }
       }
     },
-
     "itInfrastructure": {
       "title": "IT Infrastructure",
       "hero": {
@@ -608,12 +1391,50 @@
           "created": "Software defined network section created successfully",
           "updated": "Software defined network section updated successfully"
         }
+      },
+      "policyControl": {
+        "title": "Policy & Control",
+        "form": {
+          "logo": "Logo",
+          "image": "Image",
+          "cards": "Cards",
+          "card": "Card",
+          "icon": "Icon"
+        },
+        "messages": {
+          "created": "Policy & Control section created successfully",
+          "updated": "Policy & Control section updated successfully"
+        }
+      },
+      "network": {
+        "title": "Network",
+        "form": {
+          "logo": "Logo",
+          "image": "Image",
+          "cards": "Network Cards",
+          "card": "Card",
+          "icon": "Icon"
+        },
+        "messages": {
+          "created": "Network section created successfully",
+          "updated": "Network section updated successfully"
+        }
       }
     },
-
- 
     "homePage": {
       "title": "Home Page",
+      "success_stories_images": {
+        "title": "Success Stories Images",
+        "image1": "Image 1",
+        "image2": "Image 2",
+        "image3": "Image 3"
+      },
+      "insights_and_news_images": {
+        "title": "Insights and News Images",
+        "image1": "Image 1",
+        "image2": "Image 2",
+        "image3": "Image 3"
+      },
       "hero": {
         "title": "Hero Section",
         "form": {
@@ -630,13 +1451,16 @@
           "subHeadlineRequired": "Sub headline is required",
           "subHeadlineLength": "Sub headline must be 80–200 characters.",
           "ctaLabelRequired": "CTA label is required",
-          "ctaLabelLength": "CTA label must be 15–25 characters."
+          "ctaLabelLength": "CTA label must be 15–25 characters.",
+          "mediaSize": "File must be ≤ 70MB."
         },
         "messages": {
           "heroCreated": "Created successfully",
           "heroUpdated": "Updated successfully",
           "errorCreatingHero": "Error creating hero",
-          "errorUpdatingHero": "Error updating hero"
+          "errorUpdatingHero": "Error updating hero",
+          "imagesUpdated": "Images updated successfully",
+          "errorUpdatingImages": "Error updating images"
         }
       },
       "whoWeAre": {
@@ -649,7 +1473,7 @@
         },
         "validation": {
           "subHeadlineRequired": "Description is required",
-          "descriptionLength": "Description must be 50–400 characters."
+          "descriptionLength": "Description must be 200–400 characters."
         },
         "messages": {
           "whoWeAreCreated": "Who we are created successfully",
@@ -676,14 +1500,16 @@
           "numberInvalid": "Number must be an integer.",
           "numberDigits": "Number must be between 0 and 9999.",
           "labelRequired": "Label is required",
-          "labelMax": "Label must be at most 100 characters.",
-          "labelWords": "Label must be 1 to 3 words."
+          "labelMin": "Label must be at least 4 characters.",
+          "labelMax": "Label must be at most 80 characters."
         },
         "messages": {
           "created": "Stat created successfully",
           "updated": "Stat updated successfully",
+          "deleted": "Stat deleted successfully",
           "errorCreating": "Error creating stat",
           "errorUpdating": "Error updating stat",
+          "errorDeleting": "Error deleting stat",
           "deleteNotAvailable": "Delete endpoint not available yet",
           "deleteTitle": "Delete Stat",
           "deleteDescription": "Are you sure you want to delete this stat?",
@@ -702,8 +1528,8 @@
           "update": "Update"
         },
         "validation": {
-          "nameRequired": "Name is required",
-          "positionRequired": "Position is required",
+          "nameRequired": "Name must be at least 2 characters",
+          "positionRequired": "Position must be at least 2 characters",
           "quoteRequired": "Quote is required",
           "quoteLength": "Quote must be 100–250 characters."
         },
@@ -725,23 +1551,309 @@
         "validation": {
           "numberRequired": "Number is required",
           "numberInvalid": "Number must be an integer.",
-          "numberDigits": "Number must be between 0 and 9999.",
+          "numberDigits": "Number must be between 1 and 9999.",
           "labelRequired": "Label is required",
           "labelMax": "Label must be at most 100 characters.",
           "labelWords": "Label must be 1 to 3 words."
         }
+      },
+      "homeAwards": {
+        "title": "Home Awards",
+        "form": {
+          "description": "Description",
+          "create": "Create",
+          "update": "Update"
+        },
+        "validation": {
+          "descriptionRequired": "Description is required",
+          "descriptionLength": "Description must be 80–600 characters."
+        },
+        "messages": {
+          "homeAwardsCreated": "Home awards created successfully",
+          "homeAwardsUpdated": "Home awards updated successfully",
+          "errorCreatingHomeAwards": "Error creating home awards",
+          "errorUpdatingHomeAwards": "Error updating home awards"
+        },
+        "cards": {
+          "create": "Create Card",
+          "update": "Update Card",
+          "delete": "Delete Card",
+          "deleteTitle": "Delete Card",
+          "deleteDescription": "Are you sure you want to delete this card?",
+          "form": {
+            "title": "Title",
+            "date": "Date",
+            "icon": "Icon",
+            "iconPlaceholder": "Upload icon",
+            "save": "Save",
+            "loading": "Loading..."
+          },
+          "validation": {
+            "titleMin": "Title must be at least 2 characters",
+            "titleMax": "Title must be at most 100 characters",
+            "dateRequired": "Date is required",
+            "iconRequired": "Icon is required"
+          },
+          "messages": {
+            "created": "Card created successfully",
+            "updated": "Card updated successfully",
+            "deleted": "Card deleted successfully",
+            "errorCreating": "Error creating card",
+            "errorUpdating": "Error updating card",
+            "errorDeleting": "Error deleting card",
+            "homeAwardsNotFound": "Home awards section must be created first"
+          },
+          "columns": {
+            "id": "ID",
+            "title": "Title",
+            "date": "Date",
+            "icon": "Icon",
+            "createdAt": "Created At",
+            "actions": "Actions",
+            "edit": "Edit",
+            "delete": "Delete"
+          }
+        }
       }
-    }
-  },
-   "aboutUs": {
-      "title": "About Us Content Management",
-      "contentTitle": "About Us Content",
-      "heroSection": {
+    },
+    "contactUs": {
+      "title": "Contact Us",
+      "form": {
+        "heroTitle": "Hero Title",
+        "heroSubtext": "Hero Subtext",
+        "formTitle": "Form Title",
+        "formSubtext": "Form Subtext",
+        "backgroundImage": "Background Image",
+        "requestTypes": "Request Types",
+        "hearAboutOptions": "Hear About Options",
+        "selectRequestType": "Select a request type",
+        "selectHearAboutOption": "Select a hear about option"
+      },
+      "validation": {
+        "backgroundImageRequired": "Background image is required",
+        "heroTitleMin": "Hero title must be at least 10 characters",
+        "heroTitleMax": "Hero title must not exceed 60 characters",
+        "heroSubtextMin": "Hero subtext must be at least 100 characters",
+        "heroSubtextMax": "Hero subtext must not exceed 250 characters",
+        "formTitleMin": "Form title must be at least 10 characters",
+        "formTitleMax": "Form title must not exceed 50 characters",
+        "formSubtextMin": "Form subtext must be at least 50 characters",
+        "formSubtextMax": "Form subtext must not exceed 150 characters",
+        "requestTypesRequired": "At least one request type is required",
+        "hearAboutOptionsRequired": "At least one hear about option is required"
+      },
+      "messages": {
+        "created": "Contact form created successfully",
+        "updated": "Contact form updated successfully",
+        "errorCreating": "Error creating contact form",
+        "errorUpdating": "Error updating contact form"
+      },
+      "submissions": {
+        "columns": {
+          "id": "ID",
+          "name": "Name",
+          "email": "Email",
+          "phone": "Phone",
+          "message": "Message",
+          "requestType": "Request Type",
+          "hearAboutDrop": "Hear About Drop",
+          "createdAt": "Created At",
+          "updatedAt": "Updated At"
+        },
+        "messages": {
+          "noSubmissionsFound": "No submissions found."
+        }
+      },
+      "offices": {
+        "title": "Offices",
+        "createOffice": "Create Office",
+        "updateOffice": "Update Office",
+        "deleteOffice": "Delete Office",
+        "form": {
+          "country": "Country",
+          "officeTitle": "Office Title",
+          "location": "Location",
+          "phone": "Phone",
+          "fax": "Fax",
+          "email": "Email",
+          "create": "Create",
+          "update": "Update",
+          "save": "Save"
+        },
+        "officeTitle": "Office Title",
+        "officeTitlePlaceholder": "Enter office title",
+        "submit": "Submit",
+        "columns": {
+          "country": "Country",
+          "officeTitle": "Office Title",
+          "location": "Location",
+          "phone": "Phone",
+          "fax": "Fax",
+          "email": "Email",
+          "actions": "Actions"
+        },
+        "messages": {
+          "officeSaved": "Office saved successfully",
+          "officeCreated": "Office created successfully",
+          "officeUpdated": "Office updated successfully",
+          "officeDeleted": "Office deleted successfully",
+          "errorSaving": "Error saving office",
+          "errorCreating": "Error creating office",
+          "errorUpdating": "Error updating office",
+          "errorDeleting": "Error deleting office"
+        },
+        "deleteConfirmation": "Are you sure you want to delete this office?"
+      }
+    },
+    "managedServices": {
+      "title": "Managed Services",
+      "hero": {
+        "title": "Hero Section"
+      },
+      "coreCards": {
+        "title": "Core Managed Services (SOC, Cybersecurity, GRC)",
+        "list": {
+          "columns": {
+            "type": "Type",
+            "description": "Description",
+            "bulletOne": "Bullet 1",
+            "bulletTwo": "Bullet 2",
+            "actions": "Actions"
+          },
+          "actions": {
+            "addCard": "Add Card",
+            "edit": "Edit",
+            "delete": "Delete"
+          },
+          "emptyState": "No cards yet. Click \"Add Card\" to create one. (Maximum 3 cards)",
+          "maxReached": "Maximum of 3 cards reached (SOC, Cybersecurity, GRC)"
+        },
+        "form": {
+          "serviceType": "Service Type",
+          "serviceTypePlaceholder": "Select service type",
+          "serviceTypes": {
+            "soc": "SOC",
+            "cybersecurity": "Cybersecurity",
+            "grc": "GRC"
+          },
+          "description": "Description",
+          "descriptionPlaceholder": "Description (90-150 characters)",
+          "bulletOne": "Bullet Point 1",
+          "bulletOnePlaceholder": "Bullet point 1 (5-100 characters)",
+          "bulletTwo": "Bullet Point 2",
+          "bulletTwoPlaceholder": "Bullet point 2 (5-100 characters)",
+          "logo": "Logo",
+          "image": "Image",
+          "cancel": "Cancel",
+          "create": "Create",
+          "update": "Update"
+        },
+        "messages": {
+          "created": "Card created successfully",
+          "updated": "Card updated successfully",
+          "error": "Failed to save card"
+        },
+        "modals": {
+          "createTitle": "Create Managed Service Card",
+          "updateTitle": "Update Managed Service Card"
+        }
+      },
+      "additionalOne": {
+        "title": "Additional Services (NOC/SLA)",
+        "list": {
+          "title": "Additional Managed Services (NOC, SLA)",
+          "addService": "Add Service",
+          "noServices": "No services yet. Click \"Add Service\" to create one.",
+          "columns": {
+            "description": "Description",
+            "ctaLabel": "CTA Label",
+            "actions": "Actions"
+          },
+          "actions": {
+            "edit": "Edit",
+            "delete": "Delete"
+          }
+        },
+        "form": {
+          "description": "Description",
+          "descriptionPlaceholder": "Description (150-400 characters)",
+          "ctaLabel": "CTA Label",
+          "ctaLabelPlaceholder": "CTA Button Text",
+          "logo": "Logo",
+          "file": "File",
+          "cancel": "Cancel",
+          "create": "Create",
+          "update": "Update"
+        },
+        "messages": {
+          "created": "Service created successfully",
+          "updated": "Service updated successfully",
+          "error": "Failed to save service"
+        }
+      },
+      "additionalTwo": {
+        "title": "Additional Managed Services (Other Cards)",
+        "list": {
+          "columns": {
+            "description": "Description",
+            "images": "Images",
+            "imageCount": "image(s)",
+            "actions": "Actions"
+          },
+          "actions": {
+            "addService": "Add Service",
+            "edit": "Edit",
+            "delete": "Delete"
+          },
+          "emptyState": "No services yet. Click \"Add Service\" to create one."
+        },
+        "form": {
+          "description": "Description",
+          "descriptionPlaceholder": "Description (150-400 characters)",
+          "logo": "Logo",
+          "image": "Image",
+          "cancel": "Cancel",
+          "create": "Create",
+          "update": "Update"
+        },
+        "messages": {
+          "created": "Service created successfully",
+          "updated": "Service updated successfully",
+          "errorCreating": "Error creating service",
+          "errorUpdating": "Error updating service",
+          "errorDeleting": "Error deleting service"
+        }
+      },
+      "details": {
+        "title": "Services Details"
+      },
+      "formSubmissions": {
+        "title": "Form Submissions",
+        "columns": {
+          "id": "ID",
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "email": "Email",
+          "phoneNumber": "Phone Number",
+          "position": "Position",
+          "service": "Service",
+          "createdAt": "Created At"
+        },
+        "messages": {
+          "noSubmissionsFound": "No form submissions found"
+        }
+      }
+    },
+    "solutionsAndServices": {
+      "title": "Solutions & Services",
+      "hero": {
         "title": "Hero Section",
         "form": {
           "title": "Title",
-          "description": "Description",
-          "backgroundImage": "Background Image/Video",
+          "titlePlaceholder": "Title (30-80 characters)",
+          "subtitle": "Subtitle",
+          "subtitlePlaceholder": "Subtitle (100-250 characters)",
+          "backgroundMedia": "Background Media (Image or Video)",
           "create": "Create",
           "update": "Update"
         },
@@ -751,102 +1863,246 @@
           "errorCreating": "Failed to create hero section",
           "errorUpdating": "Failed to update hero section"
         }
-      },
-      "groupSection": {
-        "title": "Group Statistics Section",
+      }
+    },
+    "newsroom": {
+      "title": "Newsroom Content Management",
+      "contentTitle": "Newsroom Content",
+      "hero": {
+        "title": "Hero Section",
         "form": {
           "title": "Title",
+          "titlePlaceholder": "Enter hero title (20-90 characters)",
+          "subtitle": "Subtitle",
+          "subtitlePlaceholder": "Enter hero subtitle (80-180 characters)"
+        },
+        "messages": {
+          "created": "Newsroom hero created successfully",
+          "updated": "Newsroom hero updated successfully",
+          "error": "Failed to save newsroom hero"
+        }
+      },
+      "articles": {
+        "title": "Articles",
+        "actions": {
+          "add": "Add Article"
+        },
+        "emptyState": "No articles yet. Click \"Add Article\" to create one.",
+        "dialog": {
+          "createTitle": "Create Article",
+          "editTitle": "Edit Article",
+          "deleteTitle": "Delete Article",
+          "deleteDescription": "Are you sure you want to delete \"{title}\"? This action cannot be undone."
+        },
+        "form": {
+          "thumbnailImage": "Thumbnail Image",
+          "thumbnailImagePlaceholder": "Select thumbnail image",
+          "date": "Publication Date",
+          "category": "Category",
+          "categoryPlaceholder": "Select category",
+          "image": "Card Image",
+          "title": "Title",
+          "titlePlaceholder": "Enter article title (50-110 characters)",
           "description": "Description",
-          "groupLogo": "Group Logo",
-          "stat1Label": "Stat 1 Label",
-          "stat2Label": "Stat 2 Label",
-          "stat3Label": "Stat 3 Label",
-          "stat1Value": "Stat 1 Value",
-          "stat2Value": "Stat 2 Value",
-          "stat3Value": "Stat 3 Value",
-          "stat1Placeholder": "e.g., 1985",
-          "stat2Placeholder": "e.g., 39+",
-          "stat3Placeholder": "e.g., 600+",
-          "statisticsValues": "Statistics Values",
-          "create": "Create",
-          "update": "Update"
+          "descriptionPlaceholder": "Enter description (80-140 characters)",
+          "longDescription": "Long Description",
+          "longDescriptionPlaceholder": "Enter long description (100-400 characters)",
+          "layout": "Layout",
+          "layoutPlaceholder": "Select layout",
+          "vertical": "Vertical",
+          "horizontal": "Horizontal"
+        },
+        "categories": {
+          "news": "News",
+          "pressReleases": "Press Releases",
+          "interviews": "Interviews"
         },
         "messages": {
-          "created": "Group Affiliation section created successfully",
-          "updated": "Group Affiliation section updated successfully",
-          "errorCreating": "Failed to create group affiliation section",
-          "errorUpdating": "Failed to update group affiliation section"
+          "created": "Article created successfully",
+          "updated": "Article updated successfully",
+          "deleted": "Article deleted successfully",
+          "error": "Failed to save article",
+          "errorDeleting": "Failed to delete article"
+        },
+        "table": {
+          "title": "Title",
+          "category": "Category",
+          "date": "Date",
+          "updatedAt": "Updated At",
+          "actions": "Actions",
+          "edit": "Edit",
+          "delete": "Delete"
         }
       },
-      "missionVisionSection": {
-        "title": "Mission & Vision Section",
-        "form": {
-          "sectionTitle": "Section Title",
-          "missionCard": "Mission Card",
-          "missionTitle": "Mission Title (Static)",
-          "missionDescription": "Mission Description",
-          "visionCard": "Vision Card",
-          "visionTitle": "Vision Title (Static)",
-          "visionDescription": "Vision Description",
-          "create": "Create",
-          "update": "Update"
-        },
-        "messages": {
-          "created": "Mission & Vision section created successfully",
-          "updated": "Mission & Vision section updated successfully",
-          "errorCreating": "Failed to create mission & vision section",
-          "errorUpdating": "Failed to update mission & vision section"
-        },
-        "requirements": {
-          "title": "Epic Requirements:",
-          "sectionTitle": "Section Title: 5-35 characters",
-          "cards": "Exactly 2 cards (Mission and Vision)",
-          "cardTitles": "Card Titles: Static (\"Mission\" and \"Vision\")",
-          "cardIcons": "Card Icons: Static (cannot be edited)",
-          "descriptions": "Descriptions: 150-350 characters each"
+      "manageItems": {
+        "title": "Manage Items",
+        "categories": {
+          "title": "Newsroom Categories",
+          "create": "Create Category",
+          "columns": {
+            "id": "ID",
+            "nameEn": "Name (EN)",
+            "nameAr": "Name (AR)",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "actions": "Actions"
+          },
+          "form": {
+            "name": "Name",
+            "namePlaceholder": "Name",
+            "create": "Create",
+            "update": "Update"
+          },
+          "modals": {
+            "createTitle": "Create Newsroom Category",
+            "updateTitle": "Update Newsroom Category"
+          },
+          "messages": {
+            "created": "Newsroom category created successfully",
+            "updated": "Newsroom category updated successfully",
+            "error": "Failed to {action} newsroom category"
+          }
         }
+      }
+    }
+  },
+  "aboutUs": {
+    "title": "About Us Content Management",
+    "contentTitle": "About Us Content",
+    "heroSection": {
+      "title": "Hero Section",
+      "form": {
+        "title": "Title",
+        "description": "Description",
+        "backgroundImage": "Background Image/Video",
+        "create": "Create",
+        "update": "Update"
       },
-      "coreValuesSection": {
-        "title": "Core Values Section",
+      "messages": {
+        "created": "Hero section created successfully",
+        "updated": "Hero section updated successfully",
+        "errorCreating": "Failed to create hero section",
+        "errorUpdating": "Failed to update hero section"
+      }
+    },
+    "groupSection": {
+      "title": "Group Statistics Section",
+      "form": {
+        "title": "Title",
+        "description": "Description",
+        "groupLogo": "Group Logo",
+        "statisticsCards": "Statistics Cards",
+        "addCard": "Add Card",
+        "card": "Card",
+        "cardLabel": "Card Label",
+        "cardValue": "Card Value",
+        "cardValuePlaceholder": "e.g., 1985",
+        "create": "Create",
+        "update": "Update"
+      },
+      "messages": {
+        "created": "Group Affiliation section created successfully",
+        "updated": "Group Affiliation section updated successfully",
+        "errorCreating": "Failed to create group affiliation section",
+        "errorUpdating": "Failed to update group affiliation section"
+      }
+    },
+    "missionVisionSection": {
+      "title": "Mission & Vision Section",
+      "form": {
+        "sectionTitle": "Section Title",
+        "cards": "Cards",
+        "card": "Card",
+        "cardTitle": "Card Title",
+        "cardDescription": "Card Description",
+        "create": "Create",
+        "update": "Update"
+      },
+      "messages": {
+        "created": "Mission & Vision section created successfully",
+        "updated": "Mission & Vision section updated successfully",
+        "errorCreating": "Failed to create mission & vision section",
+        "errorUpdating": "Failed to update mission & vision section"
+      },
+      "requirements": {
+        "title": "Epic Requirements:",
+        "sectionTitle": "Section Title: 5-35 characters",
+        "cards": "Dynamic cards (1-6 cards)",
+        "cardTitles": "Card Titles: 5-30 characters each",
+        "cardIcons": "Card Icons: Optional (can be added later)",
+        "descriptions": "Descriptions: 150-350 characters each"
+      }
+    },
+    "coreValuesSection": {
+      "title": "Core Values Section",
+      "form": {
+        "sectionTitle": "Section Title",
+        "sectionDescription": "Section Description",
+        "supportingImage": "Supporting Image (Right Side Graphic)",
+        "coreValuesCards": "Core Values Cards",
+        "coreValuesDescription": "Core value cards (1-6 items) can be managed separately in their own section below. Each card requires a title (5-30 characters) and an icon.",
+        "create": "Create",
+        "update": "Update"
+      },
+      "messages": {
+        "created": "Core Values section created successfully",
+        "updated": "Core Values section updated successfully",
+        "errorCreating": "Failed to create core values section",
+        "errorUpdating": "Failed to update core values section"
+      },
+      "requirements": {
+        "title": "Epic Requirements:",
+        "minMax": "Minimum 1, maximum 6 core value cards",
+        "cardTitles": "Card titles: 5-30 characters each",
+        "cardIcons": "Card icons: Editable (image or vector)",
+        "layout": "Minimum 1 row, maximum 2 rows layout"
+      },
+      "cards": {
+        "title": "Core Values Cards",
+        "description": "Manage core value cards ({current}/{max} used)",
+        "add": "Add Card",
+        "create": "Create Card",
+        "edit": "Edit Card",
+        "update": "Update Card",
+        "delete": "Delete Card",
+        "deleteTitle": "Delete Core Value Card",
+        "deleteDescription": "Are you sure you want to delete \"{title}\"? This action cannot be undone.",
+        "noCards": "No core value cards added yet. Click 'Add Card' to create your first card.",
+        "maxCardsReached": "Maximum number of cards reached ({max} cards)",
         "form": {
-          "sectionTitle": "Section Title",
-          "sectionDescription": "Section Description",
-          "supportingImage": "Supporting Image (Right Side Graphic)",
-          "coreValuesCards": "Core Values Cards",
-          "coreValuesDescription": "Core value cards (1-6 items) can be managed separately in their own section below. Each card requires a title (5-30 characters) and an icon.",
-          "create": "Create",
-          "update": "Update"
+          "title": "Card Title",
+          "icon": "Card Icon"
+        },
+        "table": {
+          "icon": "Icon",
+          "title": "Title"
         },
         "messages": {
-          "created": "Core Values section created successfully",
-          "updated": "Core Values section updated successfully",
-          "errorCreating": "Failed to create core values section",
-          "errorUpdating": "Failed to update core values section"
-        },
-        "requirements": {
-          "title": "Epic Requirements:",
-          "minMax": "Minimum 1, maximum 6 core value cards",
-          "cardTitles": "Card titles: 5-30 characters each",
-          "cardIcons": "Card icons: Editable (image or vector)",
-          "layout": "Minimum 1 row, maximum 2 rows layout"
-        }
-      },
-      "journeySection": {
-        "title": "Journey Section",
-        "form": {
-          "sectionTitle": "Section Title",
-          "milestonesDescription": "Individual journey milestones can be managed separately in their own section below.",
-          "create": "Create",
-          "update": "Update"
-        },
-        "messages": {
-          "created": "Journey section created successfully",
-          "updated": "Journey section updated successfully",
-          "errorCreating": "Failed to create journey section",
-          "errorUpdating": "Failed to update journey section"
+          "created": "Core value card created successfully",
+          "updated": "Core value card updated successfully",
+          "deleted": "Core value card deleted successfully",
+          "errorCreating": "Error creating core value card",
+          "errorUpdating": "Error updating core value card",
+          "errorDeleting": "Error deleting core value card"
         }
       }
     },
+    "journeySection": {
+      "title": "Journey Section",
+      "form": {
+        "sectionTitle": "Section Title",
+        "milestonesDescription": "Individual journey milestones can be managed separately in their own section below.",
+        "create": "Create",
+        "update": "Update"
+      },
+      "messages": {
+        "created": "Journey section created successfully",
+        "updated": "Journey section updated successfully",
+        "errorCreating": "Failed to create journey section",
+        "errorUpdating": "Failed to update journey section"
+      }
+    }
+  },
   "footerContacts": {
     "title": "Footer Contacts",
     "form": {
@@ -897,6 +2153,43 @@
     "sort": {
       "id": "ID",
       "name": "Name",
+      "createdAt": "Created At"
+    }
+  },
+  "footerTerms": {
+    "title": "Footer Terms",
+    "createFooterTerm": "Create Footer Term",
+    "updateFooterTerm": "Update Footer Term",
+    "deleteFooterTerm": "Delete Footer Term",
+    "deleteDescription": "Are you sure you want to delete this footer term? This action cannot be undone.",
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "Enter footer term title",
+      "file": "File",
+      "filePlaceholder": "Upload a file",
+      "fileSupportingText": "Upload PDF or Word document"
+    },
+    "messages": {
+      "footerTermCreated": "Footer term created successfully",
+      "footerTermUpdated": "Footer term updated successfully",
+      "footerTermDeleted": "Footer term deleted successfully",
+      "errorCreatingFooterTerm": "Error creating footer term",
+      "errorUpdatingFooterTerm": "Error updating footer term",
+      "errorDeletingFooterTerm": "Error deleting footer term"
+    },
+    "table": {
+      "id": "ID",
+      "title": "Title",
+      "file": "File",
+      "createdAt": "Created At"
+    },
+    "filters": {
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "sort": {
+      "id": "ID",
+      "title": "Title",
       "createdAt": "Created At"
     }
   },
@@ -1078,6 +2371,114 @@
       "industriesIdRequired": "Industries  is required"
     }
   },
+  "caseStudies": {
+    "title": "Case Studies & Success Stories",
+    "hero": {
+      "title": "Success Story Hero"
+    },
+    "list": {
+      "title": "Case Studies"
+    },
+    "createCaseStudy": "Create Case Study",
+    "updateCaseStudy": "Update Case Study",
+    "deleteCaseStudy": "Delete Case Study",
+    "createNewCaseStudy": "Create New Case Study",
+    "updateCaseStudyTitle": "Update Case Study: {id}",
+    "deleteCaseStudyTitle": "Delete Case Study",
+    "deleteCaseStudyDescription": "Are you sure you want to delete this case study? This action cannot be undone.",
+    "form": {
+      "showOnHomepage": "Show on Homepage",
+      "title": "Title",
+      "thumbnailImage": "Thumbnail Image",
+      "thumbnailImagePlaceholder": "Select thumbnail image",
+      "titlePlaceholder": "Enter title",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter description",
+      "longDescription": "Long Description",
+      "longDescriptionPlaceholder": "Enter long description",
+      "ctaButtonText": "CTA Button Text",
+      "ctaButtonTextPlaceholder": "Enter CTA button text",
+      "featured": "Featured",
+      "date": "Date",
+      "datePlaceholder": "Select date",
+      "readTime": "Read Time (minutes)",
+      "readTimePlaceholder": "Enter read time",
+      "image": "Image",
+      "imagePlaceholder": "Select image",
+      "countryId": "Country",
+      "countryIdPlaceholder": "Select country",
+      "industriesId": "Industries",
+      "industriesIdPlaceholder": "Select industry",
+      "loading": "Loading...",
+      "save": "Save"
+    },
+    "columns": {
+      "id": "ID",
+      "title": "Title",
+      "image": "Image",
+      "featured": "Featured",
+      "date": "Date",
+      "readTime": "Read Time",
+      "minutes": "min",
+      "country": "Country",
+      "industries": "Industries",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "title": "Title",
+      "featured": "Featured",
+      "imageId": "Image",
+      "industriesId": "Industries",
+      "countryId": "Country",
+      "readTime": "Read Time",
+      "date": "Date",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "sort": {
+      "id": "ID",
+      "title": "Title",
+      "featured": "Featured",
+      "date": "Date",
+      "readTime": "Read Time",
+      "createdAt": "Created At"
+    },
+    "messages": {
+      "caseStudyCreated": "Case study created successfully",
+      "caseStudyUpdated": "Case study updated successfully",
+      "caseStudyDeleted": "Case study deleted successfully",
+      "errorCreatingCaseStudy": "Error creating case study",
+      "errorUpdatingCaseStudy": "Error updating case study",
+      "errorDeletingCaseStudy": "Error deleting case study",
+      "deleted": "Case study deleted successfully",
+      "deleteNotAvailable": "Delete functionality is not available in the API"
+    },
+    "validation": {
+      "titleMinLength": "Title must be at least 10 characters",
+      "titleMaxLength": "Title must not exceed 120 characters",
+      "titleRequired": "Title is required",
+      "descriptionMinLength": "Description must be at least 30 characters",
+      "thumbnailImageRequired": "Thumbnail image is required",
+      "descriptionMaxLength": "Description must not exceed 400 characters",
+      "longDescriptionMinLength": "Long Description must be at least 1 characters",
+      "longDescriptionMaxLength": "Long Description must not exceed 400 characters",
+      "descriptionRequired": "Description is required",
+      "longDescriptionRequired": "Long Description is required",
+      "ctaButtonTextRequired": "CTA button text is required",
+      "dateRequired": "Date is required",
+      "imageRequired": "Image is required",
+      "readTimeRequired": "Read time must be greater than 0",
+      "industriesIdRequired": "Industries is required",
+      "countryIdRequired": "Country is required",
+      "translationTitleRequired": "Translation title is required",
+      "translationDescriptionRequired": "Translation description is required",
+      "translationCtaButtonTextRequired": "Translation CTA button text is required"
+    }
+  },
   "alliancesHead": {
     "title": "Alliances Head",
     "createAlliancesHead": "Create Alliances Head",
@@ -1128,14 +2529,14 @@
       "errorDeletingAlliancesHead": "Error deleting alliances head"
     },
     "validation": {
-      "titleMin": "Title must be at least 10 characters",
-      "titleMax": "Title must not exceed 60 characters",
-      "subTitleMin": "Subtitle must be at least 100 characters",
-      "subTitleMax": "Subtitle must not exceed 250 characters",
-      "translationTitleMin": "Translation title must be at least 10 characters",
-      "translationTitleMax": "Translation title must not exceed 60 characters",
-      "translationSubTitleMin": "Translation subtitle must be at least 100 characters",
-      "translationSubTitleMax": "Translation subtitle must not exceed 250 characters"
+      "titleMin": "Title must be at least 3 characters",
+      "titleMax": "Title must not exceed 100 characters",
+      "subTitleMin": "Subtitle must be at least 10 characters",
+      "subTitleMax": "Subtitle must not exceed 200 characters",
+      "translationTitleMin": "Translation title must be at least 3 characters",
+      "translationTitleMax": "Translation title must not exceed 100 characters",
+      "translationSubTitleMin": "Translation subtitle must be at least 10 characters",
+      "translationSubTitleMax": "Translation subtitle must not exceed 200 characters"
     }
   },
   "alliancesVendors": {
@@ -1161,6 +2562,8 @@
       "id": "ID",
       "media": "Media",
       "country": "Country",
+      "countries": "Countries",
+      "solution": "Solution",
       "solutions": "Solutions",
       "createdAt": "Created At",
       "updatedAt": "Updated At",
@@ -1242,6 +2645,59 @@
     },
     "validation": {
       "countryNameRequired": "Country name is required",
+      "translationNameRequired": "Translation name is required"
+    }
+  },
+  "cities": {
+    "title": "Cities",
+    "createCity": "Create City",
+    "updateCity": "Update City",
+    "deleteCity": "Delete City",
+    "createNewCity": "Create New City",
+    "updateCityTitle": "Update City: {name}",
+    "deleteCityTitle": "Delete City",
+    "deleteCityDescription": "Are you sure you want to delete the city \"{name}\"? This action cannot be undone.",
+    "form": {
+      "country": "Country",
+      "countryPlaceholder": "Select country",
+      "cityName": "City Name (Ar)",
+      "cityNamePlaceholder": "Enter city name",
+      "translations": "Translations",
+      "englishName": "English Name",
+      "englishNamePlaceholder": "Enter English name",
+      "arabicName": "Arabic Name",
+      "arabicNamePlaceholder": "Enter Arabic name",
+      "loading": "Loading...",
+      "save": "Save"
+    },
+    "columns": {
+      "cityName": "City Name",
+      "country": "Country",
+      "translations": "Translations",
+      "createdAt": "Created At",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "sort": {
+      "name": "Name",
+      "createdAt": "Created At"
+    },
+    "messages": {
+      "cityCreated": "City created successfully",
+      "cityUpdated": "City updated successfully",
+      "cityDeleted": "City deleted successfully",
+      "errorCreatingCity": "Error creating city",
+      "errorUpdatingCity": "Error updating city",
+      "errorDeletingCity": "Error deleting city"
+    },
+    "validation": {
+      "cityNameRequired": "City name is required",
+      "countryRequired": "Country is required",
       "translationNameRequired": "Translation name is required"
     }
   },
@@ -1343,6 +2799,98 @@
       "translationNameRequired": "Translation name is required"
     }
   },
+  "requestTypes": {
+    "title": "Request Types",
+    "createRequestType": "Create Request Type",
+    "updateRequestType": "Update Request Type",
+    "deleteRequestType": "Delete Request Type",
+    "createNewRequestType": "Create New Request Type",
+    "updateRequestTypeTitle": "Update Request Type: {title}",
+    "deleteRequestTypeTitle": "Delete Request Type",
+    "deleteRequestTypeDescription": "Are you sure you want to delete the request type \"{title}\"? This action cannot be undone.",
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "Enter title",
+      "translations": "Translations",
+      "englishTitle": "English Title",
+      "englishTitlePlaceholder": "Enter English title",
+      "loading": "Loading...",
+      "save": "Save"
+    },
+    "columns": {
+      "title": "Title",
+      "createdAt": "Created At",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "sort": {
+      "title": "Title",
+      "createdAt": "Created At"
+    },
+    "messages": {
+      "requestTypeCreated": "Request type created successfully",
+      "requestTypeUpdated": "Request type updated successfully",
+      "requestTypeDeleted": "Request type deleted successfully",
+      "errorCreatingRequestType": "Error creating request type",
+      "errorUpdatingRequestType": "Error updating request type",
+      "errorDeletingRequestType": "Error deleting request type"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "translationTitleRequired": "Translation title is required"
+    }
+  },
+  "hearAboutUsOptions": {
+    "title": "Heard About Us Options",
+    "createOption": "Create Option",
+    "updateOption": "Update Option",
+    "deleteOption": "Delete Option",
+    "createNewOption": "Create New Option",
+    "updateOptionTitle": "Update Option: {title}",
+    "deleteOptionTitle": "Delete Option",
+    "deleteOptionDescription": "Are you sure you want to delete the option \"{title}\"? This action cannot be undone.",
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "Enter title",
+      "translations": "Translations",
+      "englishTitle": "English Title",
+      "englishTitlePlaceholder": "Enter English title",
+      "loading": "Loading...",
+      "save": "Save"
+    },
+    "columns": {
+      "title": "Title",
+      "createdAt": "Created At",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "sort": {
+      "title": "Title",
+      "createdAt": "Created At"
+    },
+    "messages": {
+      "optionCreated": "Option created successfully",
+      "optionUpdated": "Option updated successfully",
+      "optionDeleted": "Option deleted successfully",
+      "errorCreatingOption": "Error creating option",
+      "errorUpdatingOption": "Error updating option",
+      "errorDeletingOption": "Error deleting option"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "translationTitleRequired": "Translation title is required"
+    }
+  },
   "awardsHead": {
     "title": "Awards Head",
     "createAwardsHead": "Create Awards Head",
@@ -1393,13 +2941,13 @@
       "errorDeletingAwardsHead": "Error deleting awards head"
     },
     "validation": {
-      "titleMin": "Title must be at least 10 characters",
-      "titleMax": "Title must not exceed 60 characters",
-      "subTitleMin": "Subtitle must be at least 100 characters",
+      "titleMin": "Title must be at least 3 characters",
+      "titleMax": "Title must not exceed 100 characters",
+      "subTitleMin": "Subtitle must be at least 10 characters",
       "subTitleMax": "Subtitle must not exceed 250 characters",
-      "translationTitleMin": "Translation title must be at least 10 characters",
-      "translationTitleMax": "Translation title must not exceed 60 characters",
-      "translationSubTitleMin": "Translation subtitle must be at least 100 characters",
+      "translationTitleMin": "Translation title must be at least 3 characters",
+      "translationTitleMax": "Translation title must not exceed 100 characters",
+      "translationSubTitleMin": "Translation subtitle must be at least 10 characters",
       "translationSubTitleMax": "Translation subtitle must not exceed 250 characters"
     }
   },
@@ -1458,17 +3006,16 @@
     },
     "validation": {
       "mediaIdRequired": "Media is required",
-      "nameMin": "Name must be at least 3 characters",
-      "nameMax": "Name must not exceed 100 characters",
-      "descriptionMin": "Description must be at least 10 characters",
-      "descriptionMax": "Description must not exceed 500 characters",
-      "translationNameMin": "Translation name must be at least 3 characters",
-      "translationNameMax": "Translation name must not exceed 100 characters",
-      "translationDescriptionMin": "Translation description must be at least 10 characters",
-      "translationDescriptionMax": "Translation description must not exceed 500 characters"
+      "nameMin": "Name must be at least 30 characters",
+      "nameMax": "Name must not exceed 80 characters",
+      "descriptionMin": "Description must be at least 80 characters",
+      "descriptionMax": "Description must not exceed 180 characters",
+      "translationNameMin": "Translation name must be at least 30 characters",
+      "translationNameMax": "Translation name must not exceed 80 characters",
+      "translationDescriptionMin": "Translation description must be at least 80 characters",
+      "translationDescriptionMax": "Translation description must not exceed 180 characters"
     }
   },
-
   "components": {
     "documentUploader": {
       "placeholder": "Drop an image here or click to browse",
@@ -1487,7 +3034,7 @@
       "columns": {
         "id": "ID",
         "title": "Title",
-        "media": "Media",
+        "media": "Icon",
         "description": "Description",
         "createdAt": "Created At",
         "updatedAt": "Updated At",
@@ -1498,7 +3045,7 @@
       "form": {
         "title": "Title",
         "titlePlaceholder": "Enter title",
-        "media": "Media",
+        "media": "Icon",
         "description": "Description",
         "descriptionPlaceholder": "Enter description",
         "save": "Save",

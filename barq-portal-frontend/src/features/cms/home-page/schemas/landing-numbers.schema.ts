@@ -3,42 +3,34 @@ import { createI18nFieldSchema } from "@/shared/schemas/i18n.schema";
 
 export const createLandingNumbersSchema = z.object({
   number: z
-    .number({ message: "cms.homePage.landingNumbers.validation.numberInvalid" })
-    .int("cms.homePage.landingNumbers.validation.numberInvalid")
+    .number({ message: "cms.homePage.whoWeAreStats.validation.numberInvalid" })
+    .int("cms.homePage.whoWeAreStats.validation.numberInvalid")
     .refine(
       (v) => v > 0 && v <= 9999,
-      "cms.homePage.landingNumbers.validation.numberDigits"
+      "cms.homePage.whoWeAreStats.validation.numberDigits"
     ),
   label: createI18nFieldSchema(
     z
       .string()
-      .min(1, "cms.homePage.landingNumbers.validation.labelRequired")
-      .max(100, "cms.homePage.landingNumbers.validation.labelMax")
-      .refine((val) => {
-        const words = val.trim().split(/\s+/);
-        return words.length >= 1 && words.length <= 3;
-      }, "cms.homePage.landingNumbers.validation.labelWords")
+      .min(4, "cms.homePage.whoWeAreStats.validation.labelMin")
+      .max(80, "cms.homePage.whoWeAreStats.validation.labelMax")
   ),
 });
 
 export const updateLandingNumbersSchema = z.object({
   number: z
-    .number({ message: "cms.homePage.landingNumbers.validation.numberInvalid" })
-    .int("cms.homePage.landingNumbers.validation.numberInvalid")
+    .number({ message: "cms.homePage.whoWeAreStats.validation.numberInvalid" })
+    .int("cms.homePage.whoWeAreStats.validation.numberInvalid")
     .refine(
-      (v) => v >= 0 && v <= 9999,
-      "cms.homePage.landingNumbers.validation.numberDigits"
+      (v) => v > 0 && v <= 9999,
+      "cms.homePage.whoWeAreStats.validation.numberDigits"
     )
     .optional(),
   label: createI18nFieldSchema(
     z
       .string()
-      .min(1, "cms.homePage.landingNumbers.validation.labelRequired")
-      .max(100, "cms.homePage.landingNumbers.validation.labelMax")
-      .refine((val) => {
-        const words = val.trim().split(/\s+/);
-        return words.length >= 1 && words.length <= 3;
-      }, "cms.homePage.landingNumbers.validation.labelWords")
+      .min(4, "cms.homePage.whoWeAreStats.validation.labelMin")
+      .max(80, "cms.homePage.whoWeAreStats.validation.labelMax")
   ).optional(),
 });
 

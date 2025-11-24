@@ -46,7 +46,7 @@ export const createNetworkSectionCardSchema = z.object({
   text: createI18nFieldSchema(
     z
       .string()
-      .min(10, "Text must be at least 10 characters")
+      .min(1, "Text must be at least 1 characters")
       .max(50, "Text must not exceed 50 characters")
   ),
   icon: z.array(mediaSchema).min(1, "Icon is required"),

@@ -37,14 +37,14 @@ export const useAlliancesVendorsColumns = (
       ),
     },
     {
-      accessorKey: "country",
-      header: t("alliancesVendors.columns.country"),
-      cell: ({ row }) => row.original?.country?.name || "-",
+      accessorKey: "countries",
+      header: t("alliancesVendors.columns.countries"),
+      cell: ({ row }) => row.original?.countries?.map((country) => country.name).join(" - ") || "-",
     },
     {
       accessorKey: "solutions",
       header: t("alliancesVendors.columns.solutions"),
-      cell: ({ row }) => row.original?.solutions?.name || "-",
+      cell: ({ row }) => row.original?.solutions?.map((solution) => solution.name).join(" - ") || "-",
     },
     {
       accessorKey: "created_at",

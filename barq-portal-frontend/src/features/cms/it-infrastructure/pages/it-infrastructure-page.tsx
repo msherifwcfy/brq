@@ -10,6 +10,8 @@ import ItInfrastructureHeroSection from "../components/it-infrastructure-hero-se
 import DataCenterSection from "../components/data-center-section";
 import MobilitySection from "../components/mobility-section";
 import SoftwareDefinedNetworkSection from "../components/software-defined-network-section";
+import ControlSection from "../components/control-section";
+import NetworkSection from "../components/network-section";
 
 export default function ItInfrastructurePage() {
   const { t } = useLang();
@@ -55,6 +57,18 @@ export default function ItInfrastructurePage() {
             title={t("cms.itInfrastructure.softwareDefinedNetwork.title")}
           >
             <SoftwareDefinedNetworkSection />
+          </CollapsibleCard>
+        </ProtectedComponent>
+
+        <ProtectedComponent permissionKey={PERMISSION_KEYS.CONTROL_SECTION?.VIEW || "view_control_section"}>
+          <CollapsibleCard className="relative" title={t("cms.itInfrastructure.policyControl.title")}>
+            <ControlSection />
+          </CollapsibleCard>
+        </ProtectedComponent>
+
+        <ProtectedComponent permissionKey={PERMISSION_KEYS.NETWORK_SECTION.VIEW}>
+          <CollapsibleCard className="relative" title={t("cms.itInfrastructure.network.title")}>
+            <NetworkSection />
           </CollapsibleCard>
         </ProtectedComponent>
       </CollapsibleGroup>

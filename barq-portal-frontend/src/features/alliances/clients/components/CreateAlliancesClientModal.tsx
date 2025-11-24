@@ -23,8 +23,8 @@ export const CreateAlliancesClientModal = () => {
       await createAlliancesClientMutation.mutateAsync({
         body: {
           media_id: (data as any)?.media_id,
-          country_id: data.country_id,
-          industries_id: data.industries_id,
+          countries_ids: data.countries_ids,
+          industries_ids: data.industries_ids,
         },
       });
       toast.success(t("alliancesClients.messages.alliancesClientCreated"));
@@ -33,7 +33,7 @@ export const CreateAlliancesClientModal = () => {
     } catch (error: any) {
       toast.error(
         error?.message ||
-          t("alliancesClients.messages.errorCreatingAlliancesClient")
+        t("alliancesClients.messages.errorCreatingAlliancesClient")
       );
       console.error("Error creating alliances client:", error);
     }

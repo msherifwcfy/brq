@@ -11,8 +11,8 @@ export const createAutomationHeroSchema = z.object({
   description: createI18nFieldSchema(
     z
       .string()
-      .min(150, "Subheading must be at least 150 characters")
-      .max(350, "Subheading must be at most 350 characters")
+      .min(50, "Description must be at least 50 characters")
+      .max(450, "Description must be at most 450 characters")
   ),
   hero: z
     .array(
@@ -52,8 +52,8 @@ export const updateAutomationHeroSchema = z.object({
   description: createI18nFieldSchema(
     z
       .string()
-      .min(150, "Subheading must be at least 150 characters")
-      .max(350, "Subheading must be at most 350 characters")
+      .min(50, "Description must be at least 50 characters")
+      .max(450, "Description must be at most 450 characters")
   ).optional(),
   hero: z
     .array(

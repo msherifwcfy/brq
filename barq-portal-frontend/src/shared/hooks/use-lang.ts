@@ -27,7 +27,6 @@ export function useLang() {
   const translations = useRouteLoaderData("lang")?.t || {
     error: "No translation file found",
   };
-  console.log(translations, "translations");
   const lang = SUPPORTED_LANGUAGES.includes(url.lang as SupportedLanguagesType)
     ? (url.lang as SupportedLanguagesType)
     : DEFAULT_LANG;

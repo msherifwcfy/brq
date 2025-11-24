@@ -10,6 +10,25 @@ export type _1 = {
     about_barq_group_affiliation_cards_id_about_barq_group_affiliation_cards_translations?: (boolean | string);
 };
 
+export type _2 = {
+    career_job_detail_cards_id_career_job_detail_cards_translations?: (boolean | string);
+};
+
+export type _3 = {
+    career_working_at_barq_cards_id_career_working_at_barq_cards_translations?: (boolean | string);
+    icon?: (boolean | string);
+};
+
+export type _4 = {
+    leadership_executive_team_cards_id_leadership_executive_team_cards_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+};
+
+export type _5 = {
+    leadership_team_cards_id_leadership_team_cards_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+};
+
 export type AboutBarqCoreValuesCardsEntity = {
     id: number;
     title: string;
@@ -122,6 +141,7 @@ export type AboutBarqMilestonesEntity = {
     about_barq_milestones_id_about_barq_milestones_translations: Array<AboutBarqMilestonesTranslationsEntity>;
     created_at: string;
     updated_at: string;
+    deleted_at: string;
 };
 
 export type AboutBarqMilestonesTranslationsEntity = {
@@ -153,14 +173,57 @@ export type AboutBarqMissionVisionTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
+export type AdditionalManagedServicesOneEntity = {
+    id: number;
+    description: string;
+    cta_label: string;
+    logo_id: number;
+    file_id: number;
+    logo: MediaEntity;
+    file: MediaEntity;
+    additional_managed_services_one_id_additional_managed_services_one_translations: Array<AdditionalManagedServicesOneTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type AdditionalManagedServicesOneTranslationsEntity = {
+    id: number;
+    additional_managed_services_one_id: number;
+    additional_managed_services_one_translation_additional_managed_services_one?: ((AdditionalManagedServicesOneEntity) | null);
+    description: string;
+    cta_label: string;
+    language: 'ar' | 'en';
+};
+
+export type AdditionalManagedServicesTwoEntity = {
+    id: number;
+    description: string;
+    logo_id: number;
+    images: number;
+    logo: MediaEntity;
+    additional_managed_services_two_images: Array<MediaEntity>;
+    additional_managed_services_two_id_additional_managed_services_two_translations: Array<AdditionalManagedServicesTwoTranslationsEntity>;
+    additional_managed_services_two_id_managed_service_download_form: Array<ManagedServiceDownloadFormEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type AdditionalManagedServicesTwoTranslationsEntity = {
+    id: number;
+    additional_managed_services_two_id: number;
+    additional_managed_services_two_translation_additional_managed_services_two?: ((AdditionalManagedServicesTwoEntity) | null);
+    description: string;
+    language: 'ar' | 'en';
+};
+
 export type AlliancesClientsEntity = {
     id: number;
     media_id: number;
-    country_id: number;
-    industries_id: number;
     media: MediaEntity;
-    country: CountryEntity;
-    industries: IndustriesEntity;
+    countries: Array<CountryEntity>;
+    industries: Array<IndustriesEntity>;
     created_at: string;
     updated_at: string;
     deleted_at: string;
@@ -187,11 +250,9 @@ export type AlliancesHeadTranslationsEntity = {
 export type AlliancesVendorsEntity = {
     id: number;
     media_id: number;
-    country_id: number;
-    solutions_id: number;
     media: MediaEntity;
-    country: CountryEntity;
-    solutions: SolutionsEntity;
+    countries: Array<CountryEntity>;
+    solutions: Array<SolutionsEntity>;
     created_at: string;
     updated_at: string;
     deleted_at: string;
@@ -339,6 +400,251 @@ export type AwardsHeadTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
+export type BarqAcademyFoundationInternshipFormDataEntity = {
+    id: number;
+    form_title: string;
+    sub_text: string;
+    track_title: string;
+    track_description: string;
+    skill_section_header: string;
+    skill_bullet_points: string;
+    barq_academy_foundation_internship_form_data_id_barq_academy_foundation_internship_form_data_translations: Array<BarqAcademyFoundationInternshipFormDataTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyFoundationInternshipFormDataTranslationsEntity = {
+    id: number;
+    barq_academy_foundation_internship_form_data_id: number;
+    barq_academy_foundation_internship_form_data_translation_barq_academy_foundation_internship_form_data?: ((BarqAcademyFoundationInternshipFormDataEntity) | null);
+    form_title: string;
+    sub_text: string;
+    track_title: string;
+    track_description: string;
+    skill_section_header: string;
+    skill_bullet_points: string;
+    language: 'ar' | 'en';
+};
+
+export type BarqAcademyFoundationInternshipFormEntity = {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    university_name: string;
+    current_academic_year: string;
+    linkedin_url: string;
+    resume_id: number;
+    resume: MediaEntity;
+    barq_academy_programs_opportunities_internship_id: number;
+    barq_academy_programs_opportunities_internship: BarqAcademyProgramsOpportunitiesInternshipEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyFoundationTracksFormDataEntity = {
+    id: number;
+    form_title: string;
+    sub_text: string;
+    track_title: string;
+    track_description: string;
+    track_long_description: string;
+    skill_section_header: string;
+    skill_bullet_points: string;
+    barq_academy_foundation_tracks_form_data_id_barq_academy_foundation_tracks_form_data_translations: Array<BarqAcademyFoundationTracksFormDataTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyFoundationTracksFormDataTranslationsEntity = {
+    id: number;
+    barq_academy_foundation_tracks_form_data_id: number;
+    barq_academy_foundation_tracks_form_data_translation_barq_academy_foundation_tracks_form_data?: ((BarqAcademyFoundationTracksFormDataEntity) | null);
+    form_title: string;
+    sub_text: string;
+    track_title: string;
+    track_description: string;
+    skill_section_header: string;
+    skill_bullet_points: string;
+    track_long_description: string;
+    language: 'ar' | 'en';
+};
+
+export type BarqAcademyFoundationTracksFormEntity = {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    university_name: string;
+    current_academic_year: string;
+    linkedin_url: string;
+    resume_id: number;
+    resume: MediaEntity;
+    barq_academy_programs_opportunities_id: number;
+    barq_academy_programs_opportunities: BarqAcademyProgramsOpportunitiesEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyHeroEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    image_id: number;
+    logo_id: number;
+    image: MediaEntity;
+    logo: MediaEntity;
+    logos: Array<MediaEntity>;
+    barq_academy_hero_id_barq_academy_hero_translations: Array<BarqAcademyHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyHeroTranslationsEntity = {
+    id: number;
+    barq_academy_hero_id: number;
+    barq_academy_hero_translation_barq_academy_hero?: ((BarqAcademyHeroEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type BarqAcademyHighlightsCardsEntity = {
+    id: number;
+    title: string;
+    state_title_one: string;
+    state_number_one: number;
+    state_title_two: string;
+    state_number_two: number;
+    state_title_three: string;
+    state_number_three: number;
+    icon_id: number;
+    barq_academy_highlights_id: number;
+    icon: MediaEntity;
+    barq_academy_highlights_cards_id_barq_academy_highlights_cards_translations: Array<BarqAcademyHighlightsCardsTranslationsEntity>;
+    barq_academy_highlights_cards_parent: BarqAcademyHighlightsEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyHighlightsCardsTranslationsEntity = {
+    id: number;
+    barq_academy_highlights_cards_id: number;
+    barq_academy_highlights_cards_translation_barq_academy_highlights_cards?: ((BarqAcademyHighlightsCardsEntity) | null);
+    title: string;
+    state_title_one: string;
+    state_title_two: string;
+    state_title_three: string;
+    language: 'ar' | 'en';
+};
+
+export type BarqAcademyHighlightsEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    barq_academy_highlights_id_barq_academy_highlights_translations: Array<BarqAcademyHighlightsTranslationsEntity>;
+    barq_academy_highlights_cards_id_barq_academy_highlights_cards: Array<BarqAcademyHighlightsCardsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyHighlightsTranslationsEntity = {
+    id: number;
+    barq_academy_highlights_id: number;
+    barq_academy_highlights_translation_barq_academy_highlights?: ((BarqAcademyHighlightsEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type BarqAcademyProgramsOpportunitiesCardsEntity = {
+    id: number;
+    title: string;
+    description: string;
+    long_description: string;
+    cta_label: string;
+    image_id: number;
+    barq_academy_programs_opportunities_id: number;
+    image: MediaEntity;
+    barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards_translations: Array<BarqAcademyProgramsOpportunitiesCardsTranslationsEntity>;
+    barq_academy_programs_opportunities_cards_parent: BarqAcademyProgramsOpportunitiesEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyProgramsOpportunitiesCardsTranslationsEntity = {
+    id: number;
+    barq_academy_programs_opportunities_cards_id: number;
+    barq_academy_programs_opportunities_cards_translation_barq_academy_programs_opportunities_cards?: ((BarqAcademyProgramsOpportunitiesCardsEntity) | null);
+    title: string;
+    description: string;
+    long_description: string;
+    cta_label: string;
+    language: 'ar' | 'en';
+};
+
+export type BarqAcademyProgramsOpportunitiesEntity = {
+    id: number;
+    title: string;
+    barq_academy_programs_opportunities_id_barq_academy_programs_opportunities_translations: Array<BarqAcademyProgramsOpportunitiesTranslationsEntity>;
+    barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards: Array<BarqAcademyProgramsOpportunitiesCardsEntity>;
+    barq_academy_foundation_tracks_form_id_barq_academy_foundation_tracks_form: Array<BarqAcademyFoundationTracksFormEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyProgramsOpportunitiesInternshipCardsEntity = {
+    id: number;
+    title: string;
+    description: string;
+    cta_label: string;
+    image_id: number;
+    barq_academy_programs_opportunities_internship_id: number;
+    image: MediaEntity;
+    barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards_translations: Array<BarqAcademyProgramsOpportunitiesInternshipCardsTranslationsEntity>;
+    barq_academy_programs_opportunities_internship_cards_parent: BarqAcademyProgramsOpportunitiesInternshipEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyProgramsOpportunitiesInternshipCardsTranslationsEntity = {
+    id: number;
+    barq_academy_programs_opportunities_internship_cards_id: number;
+    barq_academy_programs_opportunities_internship_cards_translation_barq_academy_programs_opportunities_internship_cards?: ((BarqAcademyProgramsOpportunitiesInternshipCardsEntity) | null);
+    title: string;
+    description: string;
+    cta_label: string;
+    language: 'ar' | 'en';
+};
+
+export type BarqAcademyProgramsOpportunitiesInternshipEntity = {
+    id: number;
+    title: string;
+    barq_academy_programs_opportunities_internship_id_barq_academy_programs_opportunities_internship_translations: Array<BarqAcademyProgramsOpportunitiesInternshipTranslationsEntity>;
+    barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards: Array<BarqAcademyProgramsOpportunitiesInternshipCardsEntity>;
+    barq_academy_foundation_internship_form_id_barq_academy_foundation_internship_form: Array<BarqAcademyFoundationInternshipFormEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type BarqAcademyProgramsOpportunitiesInternshipTranslationsEntity = {
+    id: number;
+    barq_academy_programs_opportunities_internship_id: number;
+    barq_academy_programs_opportunities_internship_translation_barq_academy_programs_opportunities_internship?: ((BarqAcademyProgramsOpportunitiesInternshipEntity) | null);
+    title: string;
+    language: 'ar' | 'en';
+};
+
+export type BarqAcademyProgramsOpportunitiesTranslationsEntity = {
+    id: number;
+    barq_academy_programs_opportunities_id: number;
+    barq_academy_programs_opportunities_translation_barq_academy_programs_opportunities?: ((BarqAcademyProgramsOpportunitiesEntity) | null);
+    title: string;
+    language: 'ar' | 'en';
+};
+
 export type BusinessAutomationBulletsEntity = {
     id: number;
     text: string;
@@ -380,6 +686,245 @@ export type BusinessAutomationTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
+export type CampaignEntity = {
+    id: number;
+    crmId: string;
+    name: string;
+    CampaignType: string;
+    description: string;
+    layout_type: 'ONE' | 'TWO' | 'THREE';
+    shortDescription: string;
+    minutes_to_read: string;
+    date: string;
+    image_id: number;
+    image: MediaEntity;
+    campaign_forms: Array<CampaignFormEntity>;
+    campaign_layout_one: CampaignLayoutOneEntity;
+    campaign_layout_two: CampaignLayoutTwoEntity;
+    campaign_layout_three_hero: CampaignLayoutThreeHeroEntity;
+    campaign_layout_three_section_two: CampaignLayoutThreeSectionTwoEntity;
+    campaign_layout_three_section_three: CampaignLayoutThreeSectionThreeEntity;
+    campaign_layout_three_section_four: CampaignLayoutThreeSectionFourEntity;
+    campaign_layout_three_section_five: CampaignLayoutThreeSectionFiveEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type layout_type = 'ONE' | 'TWO' | 'THREE';
+
+export type CampaignFormEntity = {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    position: string;
+    phone_number: string;
+    phone_number_key: string;
+    organization_name: string;
+    campaign_id: number;
+    campaign: CampaignEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CampaignLayoutOneEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    cta_label: string;
+    cta_label_action: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    image_id: number;
+    file_id: number;
+    form_title: string;
+    form_sub_title: string;
+    campaign_id: string;
+    campaign_layout_one_campaign: CampaignEntity;
+    image: MediaEntity;
+    file?: ((MediaEntity) | null);
+    campaign_layout_one_id_campaign_layout_one_translations: Array<CampaignLayoutOneTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type cta_label_action = 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+
+export type CampaignLayoutOneTranslationsEntity = {
+    id: number;
+    campaign_layout_one_id: number;
+    campaign_layout_one_translation_campaign_layout_one?: ((CampaignLayoutOneEntity) | null);
+    title: string;
+    sub_title: string;
+    cta_label: string;
+    form_title: string;
+    form_sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type CampaignLayoutThreeHeroEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    background_image_id: number;
+    campaign_id: string;
+    campaign_layout_three_hero_campaign: CampaignEntity;
+    background_image: MediaEntity;
+    campaign_layout_three_hero_id_campaign_layout_three_hero_translations: Array<CampaignLayoutThreeHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CampaignLayoutThreeHeroTranslationsEntity = {
+    id: number;
+    campaign_layout_three_hero_id: number;
+    campaign_layout_three_hero_translation_campaign_layout_three_hero?: ((CampaignLayoutThreeHeroEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type CampaignLayoutThreeSectionFiveEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    cta_label: string;
+    cta_label_action: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    file_id: number;
+    campaign_id: string;
+    campaign_layout_three_section_five_campaign: CampaignEntity;
+    file?: ((MediaEntity) | null);
+    campaign_layout_three_section_five_id_campaign_layout_three_section_five_translations: Array<CampaignLayoutThreeSectionFiveTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CampaignLayoutThreeSectionFiveTranslationsEntity = {
+    id: number;
+    campaign_layout_three_section_five_id: number;
+    campaign_layout_three_section_five_translation_campaign_layout_three_section_five?: ((CampaignLayoutThreeSectionFiveEntity) | null);
+    title: string;
+    sub_title: string;
+    cta_label: string;
+    language: 'ar' | 'en';
+};
+
+export type CampaignLayoutThreeSectionFourEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    description: string;
+    image_id: number;
+    campaign_id: string;
+    campaign_layout_three_section_four_campaign: CampaignEntity;
+    image: MediaEntity;
+    campaign_layout_three_section_four_id_campaign_layout_three_section_four_translations: Array<CampaignLayoutThreeSectionFourTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CampaignLayoutThreeSectionFourTranslationsEntity = {
+    id: number;
+    campaign_layout_three_section_four_id: number;
+    campaign_layout_three_section_four_translation_campaign_layout_three_section_four?: ((CampaignLayoutThreeSectionFourEntity) | null);
+    title: string;
+    sub_title: string;
+    description: string;
+    language: 'ar' | 'en';
+};
+
+export type CampaignLayoutThreeSectionThreeEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    image_id: number;
+    campaign_id: string;
+    campaign_layout_three_section_three_campaign: CampaignEntity;
+    image: MediaEntity;
+    campaign_layout_three_section_three_id_campaign_layout_three_section_three_translations: Array<CampaignLayoutThreeSectionThreeTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CampaignLayoutThreeSectionThreeTranslationsEntity = {
+    id: number;
+    campaign_layout_three_section_three_id: number;
+    campaign_layout_three_section_three_translation_campaign_layout_three_section_three?: ((CampaignLayoutThreeSectionThreeEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type CampaignLayoutThreeSectionTwoCardsEntity = {
+    id: number;
+    title: string;
+    icon_id: number;
+    campaign_layout_three_section_two_id: number;
+    icon: MediaEntity;
+    campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards_translations: Array<CampaignLayoutThreeSectionTwoCardsTranslationsEntity>;
+    campaign_layout_three_section_two_cards_parent: CampaignLayoutThreeSectionTwoEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CampaignLayoutThreeSectionTwoCardsTranslationsEntity = {
+    id: number;
+    campaign_layout_three_section_two_cards_id: number;
+    campaign_layout_three_section_two_cards_translation_campaign_layout_three_section_two_cards?: ((CampaignLayoutThreeSectionTwoCardsEntity) | null);
+    title: string;
+    language: 'ar' | 'en';
+};
+
+export type CampaignLayoutThreeSectionTwoEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    image_id: number;
+    image: MediaEntity;
+    campaign_id: string;
+    campaign_layout_three_section_two_campaign: CampaignEntity;
+    campaign_layout_three_section_two_id_campaign_layout_three_section_two_translations: Array<CampaignLayoutThreeSectionTwoTranslationsEntity>;
+    campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards: Array<CampaignLayoutThreeSectionTwoCardsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CampaignLayoutThreeSectionTwoTranslationsEntity = {
+    id: number;
+    campaign_layout_three_section_two_id: number;
+    campaign_layout_three_section_two_translation_campaign_layout_three_section_two?: ((CampaignLayoutThreeSectionTwoEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type CampaignLayoutTwoEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    cta_label_action: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    image_id: number;
+    file_id: number;
+    form_title: string;
+    form_sub_title: string;
+    campaign_id: string;
+    campaign_layout_two_campaign: CampaignEntity;
+    image: MediaEntity;
+    file?: ((MediaEntity) | null);
+    campaign_layout_two_id_campaign_layout_two_translations: Array<CampaignLayoutTwoTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CampaignLayoutTwoTranslationsEntity = {
+    id: number;
+    campaign_layout_two_id: number;
+    campaign_layout_two_translation_campaign_layout_two?: ((CampaignLayoutTwoEntity) | null);
+    title: string;
+    sub_title: string;
+    form_title: string;
+    form_sub_title: string;
+    language: 'ar' | 'en';
+};
+
 export type CardSocialEntity = {
     id: number;
     title: string;
@@ -389,6 +934,7 @@ export type CardSocialEntity = {
     media: MediaEntity;
     created_at: string;
     updated_at: string;
+    deleted_at: string;
 };
 
 export type CardSocialTranslationsEntity = {
@@ -397,6 +943,235 @@ export type CardSocialTranslationsEntity = {
     card_social_translation_card_social?: ((CardSocialEntity) | null);
     title: string;
     description: string;
+    language: 'ar' | 'en';
+};
+
+export type CareerApplicationFormEntity = {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+    job_title: string;
+    linkedin_url: string;
+    resume_id: number;
+    resume: MediaEntity;
+    career_job_detail_id: number;
+    career_job_detail: CareerJobDetailEntity;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type CareerCategoryEntity = {
+    id: number;
+    name: string;
+    career_category_id_career_category_translations: Array<CareerCategoryTranslationsEntity>;
+    career_open_position_career_category: Array<CareerOpenPositionEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type CareerCategoryTranslationsEntity = {
+    id: number;
+    career_category_id: number;
+    career_category_translation_career_category?: ((CareerCategoryEntity) | null);
+    name: string;
+    language: 'ar' | 'en';
+};
+
+export type CareerHeroEntity = {
+    id: number;
+    title: string;
+    description: string;
+    media_id: number;
+    media: MediaEntity;
+    career_hero_id_career_hero_translations: Array<CareerHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CareerHeroTranslationsEntity = {
+    id: number;
+    career_hero_id: number;
+    career_hero_translation_career_hero?: ((CareerHeroEntity) | null);
+    title: string;
+    description: string;
+    language: 'ar' | 'en';
+};
+
+export type CareerJobDetailCardsEntity = {
+    id: number;
+    title: string;
+    career_job_detail_id: number;
+    career_job_detail_cards_id_career_job_detail_cards_translations: Array<CareerJobDetailCardsTranslationsEntity>;
+    career_job_detail_cards_parent: CareerJobDetailEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CareerJobDetailCardsTranslationsEntity = {
+    id: number;
+    career_job_detail_cards_id: number;
+    career_job_detail_cards_translation_career_job_detail_cards?: ((CareerJobDetailCardsEntity) | null);
+    title: string;
+    language: 'ar' | 'en';
+};
+
+export type CareerJobDetailEntity = {
+    id: number;
+    intr_sentence: string;
+    career_open_position: CareerOpenPositionEntity;
+    career_job_detail_id_career_job_detail_translations: Array<CareerJobDetailTranslationsEntity>;
+    career_job_detail_cards_id_career_job_detail_cards: Array<CareerJobDetailCardsEntity>;
+    career_job_detail_career_application_form: Array<CareerApplicationFormEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CareerJobDetailTranslationsEntity = {
+    id: number;
+    career_job_detail_id: number;
+    career_job_detail_translation_career_job_detail?: ((CareerJobDetailEntity) | null);
+    intr_sentence: string;
+    language: 'ar' | 'en';
+};
+
+export type CareerOpenPositionEntity = {
+    id: number;
+    job_title: string;
+    opening_date: string;
+    closing_date: string;
+    job_description: string;
+    status: 'OPEN' | 'CLOSED';
+    responsibilities: Array<(string)>;
+    required_qualification: Array<(string)>;
+    certification_prefered: Array<(string)>;
+    city_id: number;
+    city: CityEntity;
+    career_opportunity_id: number;
+    career_opportunity: CareerOpportunityEntity;
+    career_category_id: number;
+    career_category: CareerCategoryEntity;
+    career_job_detail: CareerJobDetailEntity;
+    career_open_position_id_career_open_position_translations: Array<CareerOpenPositionTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type status = 'OPEN' | 'CLOSED';
+
+export type CareerOpenPositionHeroEntity = {
+    id: number;
+    title: string;
+    description: string;
+    career_open_position_hero_id_career_open_position_hero_translations: Array<CareerOpenPositionHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type CareerOpenPositionHeroTranslationsEntity = {
+    id: number;
+    career_open_position_hero_id: number;
+    career_open_position_hero_translation_career_open_position_hero?: ((CareerOpenPositionHeroEntity) | null);
+    title: string;
+    description: string;
+    language: 'ar' | 'en';
+};
+
+export type CareerOpenPositionTranslationsEntity = {
+    id: number;
+    career_open_position_id: number;
+    career_open_position_translation_career_open_position?: ((CareerOpenPositionEntity) | null);
+    job_title: string;
+    job_description: string;
+    responsibilities: Array<(string)>;
+    required_qualification: Array<(string)>;
+    certification_prefered: Array<(string)>;
+    language: 'ar' | 'en';
+};
+
+export type CareerOpportunityEntity = {
+    id: number;
+    name: string;
+    description: string;
+    career_opportunity_id_career_opportunity_translations: Array<CareerOpportunityTranslationsEntity>;
+    career_open_position_career_opportunity: Array<CareerOpenPositionEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type CareerOpportunityTranslationsEntity = {
+    id: number;
+    career_opportunity_id: number;
+    career_opportunity_translation_career_opportunity?: ((CareerOpportunityEntity) | null);
+    name: string;
+    description: string;
+    language: 'ar' | 'en';
+};
+
+export type CareerWorkingAtBarqCardsEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    icon_id: number;
+    career_working_at_barq_id: number;
+    icon: MediaEntity;
+    career_working_at_barq_cards_id_career_working_at_barq_cards_translations: Array<CareerWorkingAtBarqCardsTranslationsEntity>;
+    career_working_at_barq_cards_parent: CareerWorkingAtBarqEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CareerWorkingAtBarqCardsTranslationsEntity = {
+    id: number;
+    career_working_at_barq_cards_id: number;
+    career_working_at_barq_cards_translation_career_working_at_barq_cards?: ((CareerWorkingAtBarqCardsEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type CareerWorkingAtBarqEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    career_working_at_barq_id_career_working_at_barq_translations: Array<CareerWorkingAtBarqTranslationsEntity>;
+    career_working_at_barq_cards_id_career_working_at_barq_cards: Array<CareerWorkingAtBarqCardsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CareerWorkingAtBarqTranslationsEntity = {
+    id: number;
+    career_working_at_barq_id: number;
+    career_working_at_barq_translation_career_working_at_barq?: ((CareerWorkingAtBarqEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type CityEntity = {
+    id: number;
+    name: string;
+    city_id_city_translations: Array<CityTranslationsEntity>;
+    country_id: number;
+    country: CountryEntity;
+    career_open_position_city: Array<CareerOpenPositionEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type CityTranslationsEntity = {
+    id: number;
+    city_id: number;
+    city_translation_city?: ((CityEntity) | null);
+    name: string;
     language: 'ar' | 'en';
 };
 
@@ -425,7 +1200,6 @@ export type CloudEntity = {
     sub_headline: string;
     image_id: number;
     logo_id: number;
-    image: MediaEntity;
     logo: MediaEntity;
     cloud_id_cloud_translations: Array<CloudTranslationsEntity>;
     cloud_bullets_id_cloud_bullets: Array<CloudBulletsEntity>;
@@ -505,6 +1279,50 @@ export type ContactUsHeroTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
+export type ContactUsOfficesBulletsEntity = {
+    id: number;
+    country_name: string;
+    office_name: string;
+    location: string;
+    phone: string;
+    email: string;
+    fax: string;
+    icon_id: number;
+    contact_us_offices_id: number;
+    icon: MediaEntity;
+    contact_us_offices_bullets_id_contact_us_offices_bullets_translations: Array<ContactUsOfficesBulletsTranslationsEntity>;
+    contact_us_offices_bullets_parent: ContactUsOfficesEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ContactUsOfficesBulletsTranslationsEntity = {
+    id: number;
+    contact_us_offices_bullets_id: number;
+    contact_us_offices_bullets_translation_contact_us_offices_bullets?: ((ContactUsOfficesBulletsEntity) | null);
+    country_name: string;
+    office_name: string;
+    location: string;
+    language: 'ar' | 'en';
+};
+
+export type ContactUsOfficesEntity = {
+    id: number;
+    title: string;
+    contact_us_offices_id_contact_us_offices_translations: Array<ContactUsOfficesTranslationsEntity>;
+    contact_us_offices_bullets_id_contact_us_offices_bullets: Array<ContactUsOfficesBulletsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ContactUsOfficesTranslationsEntity = {
+    id: number;
+    contact_us_offices_id: number;
+    contact_us_offices_translation_contact_us_offices?: ((ContactUsOfficesEntity) | null);
+    title: string;
+    language: 'ar' | 'en';
+};
+
 export type ContactUsRequestTypeEntity = {
     id: number;
     title: string;
@@ -564,12 +1382,32 @@ export type ControlSectionTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
+export type CoreManagedServicesEntity = {
+    id: number;
+    title: string;
+    logo_id: number;
+    logo: MediaEntity;
+    core_managed_services_id_core_managed_services_translations: Array<CoreManagedServicesTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type CoreManagedServicesTranslationsEntity = {
+    id: number;
+    core_managed_services_id: number;
+    core_managed_services_translation_core_managed_services?: ((CoreManagedServicesEntity) | null);
+    title: string;
+    language: 'ar' | 'en';
+};
+
 export type CountryEntity = {
     id: number;
     name: string;
     country_id_country_translations: Array<CountryTranslationsEntity>;
     country_id_alliances_vendors: Array<AlliancesVendorsEntity>;
     country_id_alliances_clients: Array<AlliancesClientsEntity>;
+    country_id_cities: Array<CityEntity>;
+    country_id_success_story_case_studies: Array<SuccessStoryCaseStudiesEntity>;
     created_at: string;
     updated_at: string;
     deleted_at: string;
@@ -655,10 +1493,32 @@ export type CreateAboutBarqMissionVision = {
 }>);
 };
 
+export type CreateAdditionalManagedServicesOne = {
+    description?: string;
+    cta_label?: string;
+    logo_id?: number;
+    file_id?: number;
+    additional_managed_services_one_id_additional_managed_services_one_translations?: Array<{
+        description?: string;
+        cta_label?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateAdditionalManagedServicesTwo = {
+    description?: string;
+    logo_id?: number;
+    images?: number;
+    additional_managed_services_two_id_additional_managed_services_two_translations?: Array<{
+        description?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
 export type CreateAlliancesClients = {
     media_id?: number;
-    country_id?: number;
-    industries_id?: number;
+    countries_ids?: Array<(number)>;
+    industries_ids?: Array<(number)>;
 };
 
 export type CreateAlliancesHead = {
@@ -673,8 +1533,8 @@ export type CreateAlliancesHead = {
 
 export type CreateAlliancesVendors = {
     media_id?: number;
-    country_id?: number;
-    solutions_id?: number;
+    countries_ids?: Array<(number)>;
+    solutions_ids?: Array<(number)>;
 };
 
 export type CreateApplicationData = {
@@ -748,6 +1608,149 @@ export type CreateAwardsHead = {
 }>);
 };
 
+export type CreateBarqAcademyFoundationInternshipForm = {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    university_name: string;
+    current_academic_year: string;
+    linkedin_url?: string;
+    resume_id?: number;
+    barq_academy_programs_opportunities_internship_id?: number;
+};
+
+export type CreateBarqAcademyFoundationInternshipFormData = {
+    form_title?: string;
+    sub_text?: string;
+    track_title?: string;
+    track_description?: string;
+    skill_section_header?: string;
+    skill_bullet_points?: string;
+    barq_academy_foundation_internship_form_data_id_barq_academy_foundation_internship_form_data_translations?: Array<{
+        form_title?: string;
+        sub_text?: string;
+        track_title?: string;
+        track_description?: string;
+        skill_section_header?: string;
+        skill_bullet_points?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateBarqAcademyFoundationTracksForm = {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    university_name: string;
+    current_academic_year: string;
+    linkedin_url?: string;
+    resume_id?: number;
+    barq_academy_programs_opportunities_id?: number;
+};
+
+export type CreateBarqAcademyFoundationTracksFormData = {
+    form_title?: string;
+    sub_text?: string;
+    track_title?: string;
+    track_description?: string;
+    track_long_description?: string;
+    skill_section_header?: string;
+    skill_bullet_points?: string;
+    barq_academy_foundation_tracks_form_data_id_barq_academy_foundation_tracks_form_data_translations?: Array<{
+        form_title?: string;
+        sub_text?: string;
+        track_title?: string;
+        track_description?: string;
+        skill_section_header?: string;
+        skill_bullet_points?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateBarqAcademyHero = {
+    title?: string;
+    sub_title?: string;
+    image_id?: number;
+    logo_id?: number;
+    logos_ids?: Array<(number)>;
+    barq_academy_hero_id_barq_academy_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateBarqAcademyHighlights = {
+    title: string;
+    sub_title: string;
+    barq_academy_highlights_id_barq_academy_highlights_translations: (Array<{
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+}>);
+    barq_academy_highlights_cards_id_barq_academy_highlights_cards?: Array<{
+        title: string;
+        state_title_one?: string;
+        state_number_one?: number;
+        state_title_two?: string;
+        state_number_two?: number;
+        state_title_three?: string;
+        state_number_three?: number;
+        icon_id: number;
+        barq_academy_highlights_cards_id_barq_academy_highlights_cards_translations?: Array<{
+            title: string;
+            state_title_one: string;
+            state_title_two: string;
+            state_title_three: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type CreateBarqAcademyProgramsOpportunities = {
+    title: string;
+    barq_academy_programs_opportunities_id_barq_academy_programs_opportunities_translations: (Array<{
+    title: string;
+    language: 'ar' | 'en';
+}>);
+    barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards?: Array<{
+        title: string;
+        description: string;
+        long_description: string;
+        cta_label: string;
+        image_id: number;
+        barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards_translations?: Array<{
+            title: string;
+            description: string;
+            long_description: string;
+            cta_label: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type CreateBarqAcademyProgramsOpportunitiesInternship = {
+    title: string;
+    barq_academy_programs_opportunities_internship_id_barq_academy_programs_opportunities_internship_translations: (Array<{
+    title: string;
+    language: 'ar' | 'en';
+}>);
+    barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards?: Array<{
+        title: string;
+        description: string;
+        cta_label: string;
+        image_id: number;
+        barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards_translations?: Array<{
+            title: string;
+            description: string;
+            cta_label: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
 export type CreateBusinessAutomation = {
     sub_headline: string;
     image_id?: number;
@@ -766,6 +1769,129 @@ export type CreateBusinessAutomation = {
     }>;
 };
 
+export type CreateCampaignForm = {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+    phone_number_key: string;
+    position: string;
+    organization_name: string;
+    campaign_id: number;
+};
+
+export type CreateCampaignLayoutOne = {
+    title?: string;
+    sub_title?: string;
+    cta_label?: string;
+    cta_label_action?: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    image_id?: number;
+    file_id?: number;
+    form_title?: string;
+    form_sub_title?: string;
+    campaign_id?: string;
+    campaign_layout_one_id_campaign_layout_one_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        cta_label?: string;
+        form_title?: string;
+        form_sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateCampaignLayoutThreeHero = {
+    title?: string;
+    sub_title?: string;
+    background_image_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_hero_id_campaign_layout_three_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateCampaignLayoutThreeSectionFive = {
+    title?: string;
+    sub_title?: string;
+    cta_label?: string;
+    cta_label_action?: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    file_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_section_five_id_campaign_layout_three_section_five_translations?: Array<{
+        title: string;
+        sub_title: string;
+        cta_label: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateCampaignLayoutThreeSectionFour = {
+    title?: string;
+    sub_title?: string;
+    description?: string;
+    image_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_section_four_id_campaign_layout_three_section_four_translations?: Array<{
+        title: string;
+        sub_title: string;
+        description: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateCampaignLayoutThreeSectionThree = {
+    title?: string;
+    sub_title?: string;
+    image_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_section_three_id_campaign_layout_three_section_three_translations?: Array<{
+        title: string;
+        sub_title: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateCampaignLayoutThreeSectionTwo = {
+    title?: string;
+    sub_title?: string;
+    image_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_section_two_id_campaign_layout_three_section_two_translations?: Array<{
+        title: string;
+        sub_title: string;
+        language: 'ar' | 'en';
+    }>;
+    campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards?: Array<{
+        title: string;
+        icon_id: number;
+        campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards_translations?: Array<{
+            title: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type CreateCampaignLayoutTwo = {
+    title?: string;
+    sub_title?: string;
+    cta_label_action?: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    image_id?: number;
+    file_id?: number;
+    form_title?: string;
+    form_sub_title?: string;
+    campaign_id?: string;
+    campaign_layout_two_id_campaign_layout_two_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        cta_label?: string;
+        form_title?: string;
+        form_sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
 export type CreateCardSocial = {
     title: string;
     description: string;
@@ -777,9 +1903,125 @@ export type CreateCardSocial = {
 }>);
 };
 
+export type CreateCareerApplicationForm = {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+    job_title: string;
+    linkedin_url?: string;
+    resume_id?: number;
+    career_job_detail_id?: number;
+};
+
+export type CreateCareerCategory = {
+    name: string;
+    career_category_id_career_category_translations: (Array<{
+    name: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type CreateCareerHero = {
+    title: string;
+    description?: string;
+    media_id: number;
+    career_hero_id_career_hero_translations: (Array<{
+    title: string;
+    description?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type CreateCareerJobDetail = {
+    intr_sentence?: string;
+    career_open_position_id: number;
+    career_job_detail_id_career_job_detail_translations: (Array<{
+    intr_sentence?: string;
+    language: 'ar' | 'en';
+}>);
+    career_job_detail_cards_id_career_job_detail_cards?: Array<{
+        title: string;
+        career_job_detail_cards_id_career_job_detail_cards_translations?: Array<{
+            title: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type CreateCareerOpenPosition = {
+    job_title: string;
+    opening_date?: string;
+    closing_date?: string;
+    job_description?: string;
+    status?: 'OPEN' | 'CLOSED';
+    city_id?: number;
+    career_opportunity_id?: number;
+    career_category_id?: number;
+    responsibilities?: Array<(string)>;
+    required_qualification?: Array<(string)>;
+    certification_prefered?: Array<(string)>;
+    career_open_position_id_career_open_position_translations: (Array<{
+    job_title: string;
+    job_description?: string;
+    responsibilities?: Array<(string)>;
+    required_qualification?: Array<(string)>;
+    certification_prefered?: Array<(string)>;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type CreateCareerOpenPositionHero = {
+    title: string;
+    description?: string;
+    career_open_position_hero_id_career_open_position_hero_translations: (Array<{
+    title: string;
+    description?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type CreateCareerOpportunity = {
+    name: string;
+    description?: string;
+    career_opportunity_id_career_opportunity_translations: (Array<{
+    name: string;
+    description?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type CreateCareerWorkingAtBarq = {
+    title: string;
+    sub_title: string;
+    career_working_at_barq_id_career_working_at_barq_translations: (Array<{
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+}>);
+    career_working_at_barq_cards_id_career_working_at_barq_cards?: Array<{
+        title: string;
+        sub_title: string;
+        icon_id: number;
+        career_working_at_barq_cards_id_career_working_at_barq_cards_translations?: Array<{
+            title: string;
+            sub_title: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type CreateCity = {
+    name: string;
+    country_id: number;
+    city_id_city_translations: (Array<{
+    name: string;
+    language: 'ar' | 'en';
+}>);
+};
+
 export type CreateCloudSection = {
     sub_headline: string;
-    image_id?: number;
     logo_id?: number;
     cloud_id_cloud_translations: (Array<{
     sub_headline: string;
@@ -824,6 +2066,29 @@ export type CreateContactUsHero = {
 }>);
 };
 
+export type CreateContactUsOffices = {
+    title?: string;
+    contact_us_offices_id_contact_us_offices_translations?: Array<{
+        title?: string;
+        language: 'ar' | 'en';
+    }>;
+    contact_us_offices_bullets_id_contact_us_offices_bullets?: Array<{
+        country_name?: string;
+        office_name?: string;
+        location: string;
+        phone: string;
+        icon_id?: number;
+        email?: string;
+        fax?: string;
+        contact_us_offices_bullets_id_contact_us_offices_bullets_translations?: Array<{
+            country_name: string;
+            office_name: string;
+            location: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
 export type CreateContactUsRequestType = {
     title: string;
     contact_us_request_type_id_contact_us_request_type_translations: (Array<{
@@ -849,6 +2114,15 @@ export type CreateControlSection = {
             language: 'ar' | 'en';
         }>;
     }>;
+};
+
+export type CreateCoreManagedServices = {
+    title: string;
+    logo_id?: number;
+    core_managed_services_id_core_managed_services_translations: (Array<{
+    title: string;
+    language: 'ar' | 'en';
+}>);
 };
 
 export type CreateCountry = {
@@ -964,6 +2238,58 @@ export type CreateEnvironmentalSustainability = {
     }>;
 };
 
+export type CreateEventJoinusForm = {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+    phone_number_key: string;
+    position: string;
+    company_name: string;
+    event_id: number;
+};
+
+export type CreateEventJoinUsHero = {
+    title: string;
+    sub_title: string;
+    quote: string;
+    event_join_us_hero_id_event_join_us_hero_translations: Array<{
+        title: string;
+        sub_title: string;
+        quote: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateEventsPartner = {
+    title?: string;
+    sub_title?: string;
+    logos_ids?: Array<(number)>;
+    events_partner_id_events_partner_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateEventsSpeakers = {
+    title?: string;
+    events_speakers_id_events_speakers_translations?: Array<{
+        title?: string;
+        language: 'ar' | 'en';
+    }>;
+    events_speakers_cards_id_events_speakers_cards?: Array<{
+        name: string;
+        role: string;
+        image_id: number;
+        events_speakers_cards_id_events_speakers_cards_translations?: Array<{
+            name: string;
+            role: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
 export type CreateFooterContacts = {
     phone_number_key?: string;
     phone_number?: string;
@@ -976,6 +2302,15 @@ export type CreateFooterLocations = {
     name?: string;
     language: 'ar' | 'en';
 }>);
+};
+
+export type CreateFooterTerms = {
+    terms?: string;
+    file_id?: number;
+    footer_terms_id_footer_terms_translations?: Array<{
+        terms?: string;
+        language: 'ar' | 'en';
+    }>;
 };
 
 export type CreateGlobalCommitment = {
@@ -1002,6 +2337,23 @@ export type CreateHero = {
     cta_label: string;
     language: 'ar' | 'en';
 }>);
+};
+
+export type CreateHomeAwards = {
+    description: string;
+    home_awards_id_home_awards_translations: (Array<{
+    description: string;
+    language: 'ar' | 'en';
+}>);
+    home_awards_id_home_awards_cards?: Array<{
+        title: string;
+        date: string;
+        icon_id: number;
+        home_awards_cards_id_home_awards_cards_translations?: Array<{
+            title: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
 };
 
 export type CreateIdentityManagement = {
@@ -1052,17 +2404,48 @@ export type CreateLandingNumbers = {
 }>);
 };
 
-export type CreateLeadership = {
-    quote: string;
-    name?: string;
-    position?: string;
-    media_id: number;
-    leadership_id_leadership_translations: (Array<{
-    quote: string;
-    name?: string;
-    position?: string;
-    language: 'ar' | 'en';
-}>);
+export type CreateLeadershipExecutiveTeam = {
+    title?: string;
+    description?: string;
+    leadership_executive_team_id_leadership_executive_team_translations?: Array<{
+        title?: string;
+        description?: string;
+        language: 'ar' | 'en';
+    }>;
+    leadership_executive_team_cards_id_leadership_executive_team_cards?: Array<{
+        name: string;
+        role: string;
+        bio?: string;
+        image_id?: number;
+        leadership_executive_team_cards_id_leadership_executive_team_cards_translations?: Array<{
+            name: string;
+            role: string;
+            bio?: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type CreateLeadershipTeam = {
+    title?: string;
+    description?: string;
+    leadership_team_id_leadership_team_translations?: Array<{
+        title?: string;
+        description?: string;
+        language: 'ar' | 'en';
+    }>;
+    leadership_team_cards_id_leadership_team_cards?: Array<{
+        name: string;
+        role: string;
+        bio?: string;
+        image_id?: number;
+        leadership_team_cards_id_leadership_team_cards_translations?: Array<{
+            name: string;
+            role: string;
+            bio?: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
 };
 
 export type CreateMainSocial = {
@@ -1071,6 +2454,78 @@ export type CreateMainSocial = {
     main_social_id_main_social_translations: (Array<{
     title: string;
     description: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type CreateManagedCybersecurityServicesDetails = {
+    description: string;
+    cta_button_text: string;
+    logo_id?: number;
+    managed_cybersecurity_services_details_id_managed_cybersecurity_services_details_translations: (Array<{
+    description: string;
+    cta_button_text: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type CreateManagedGrcServicesDetails = {
+    description?: string;
+    title?: string;
+    managed_grc_services_details_id_managed_grc_services_details_translations?: (Array<{
+    description?: string;
+    title?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type CreateManagedServiceCards = {
+    description?: string;
+    bullet_one?: string;
+    bullet_two?: string;
+    type?: 'soc' | 'cybersecurity' | 'grc';
+    image_id?: number;
+    logo_id?: number;
+    managed_service_cards_id_managed_service_cards_translations?: (Array<{
+    description?: string;
+    bullet_one?: string;
+    bullet_two?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type type = 'soc' | 'cybersecurity' | 'grc';
+
+export type CreateManagedServiceDownloadForm = {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone_number?: string;
+    phone_number_key?: string;
+    position?: string;
+    managed_soc_services_details_id?: number;
+};
+
+export type CreateManagedServiceHero = {
+    title?: string;
+    sub_title?: string;
+    image_id?: number;
+    logos_ids?: Array<(number)>;
+    managed_service_hero_id_managed_service_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateManagedSocServicesDetails = {
+    description: string;
+    cta_button_text: string;
+    logo_id?: number;
+    file_id?: number;
+    managed_soc_services_details_id_managed_soc_services_details_translations: (Array<{
+    description: string;
+    cta_button_text: string;
     language: 'ar' | 'en';
 }>);
 };
@@ -1119,6 +2574,42 @@ export type CreateNetworkSection = {
     }>;
 };
 
+export type CreateNewsroomCards = {
+    title?: string;
+    description?: string;
+    is_vertical?: boolean;
+    is_featured?: boolean;
+    long_description?: string;
+    date_time?: string;
+    image_id?: number;
+    home_image_id?: number;
+    newsroom_category_id?: number;
+    newsroom_cards_id_newsroom_cards_translations?: Array<{
+        title?: string;
+        description?: string;
+        long_description?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateNewsroomCategory = {
+    name?: string;
+    newsroom_category_id_newsroom_category_translations?: Array<{
+        name?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateNewsroomHero = {
+    title?: string;
+    sub_title?: string;
+    newsroom_hero_id_newsroom_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
 export type CreateOperationIntelligence = {
     text: string;
     logo_id?: number;
@@ -1154,6 +2645,31 @@ export type CreatePermissions = {
     role_id?: (number) | null;
     permission_id?: (number) | null;
 }>) | null);
+};
+
+export type CreateResourceCards = {
+    title?: string;
+    description?: string;
+    cta_label?: string;
+    date_time?: string;
+    views_number?: number;
+    image_id?: number;
+    resource_cards_id_resource_cards_translations?: Array<{
+        title?: string;
+        description?: string;
+        cta_label?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateResourceHero = {
+    title?: string;
+    sub_title?: string;
+    resource_hero_id_resource_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
 };
 
 export type CreateRolePermissions = Array<{
@@ -1196,6 +2712,49 @@ export type CreateSolutions = {
     name?: string;
     language: 'ar' | 'en';
 }>);
+};
+
+export type CreateSolutionsAndServicesHero = {
+    title?: string;
+    sub_title?: string;
+    media_id?: number;
+    solutions_and_services_hero_id_solutions_and_services_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateSuccessStoryCaseStudies = {
+    title?: string;
+    description?: string;
+    cta_button_text?: string;
+    is_featured?: boolean;
+    long_description?: string;
+    featured?: boolean;
+    date?: string;
+    image_id?: number;
+    home_image_id?: number;
+    read_time?: number;
+    industries_id?: number;
+    country_id?: number;
+    success_story_case_studies_id_success_story_case_studies_translations?: Array<{
+        title?: string;
+        description?: string;
+        long_description?: string;
+        cta_button_text?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type CreateSuccessStoryHero = {
+    title?: string;
+    sub_title?: string;
+    success_story_hero_id_success_story_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
 };
 
 export type CreateUser = {
@@ -1433,6 +2992,135 @@ export type EnvironmentalSustainabilityTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
+export type EventAgendaItemEntity = {
+    id: number;
+    event_id: number;
+    From: string;
+    To: string;
+    subject: string;
+    description: string;
+    event: EventEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type EventEntity = {
+    id: number;
+    crmId: string;
+    name: string;
+    registration_StartDate: string;
+    registration_EndDate: string;
+    event_StartDate: string;
+    event_EndDate: string;
+    country: string;
+    city: string;
+    location: string;
+    shortDescription: string;
+    Latitude: string;
+    Longitude: string;
+    Solution: string;
+    Service: string;
+    description: string;
+    CampaignType: string;
+    agendaItems: Array<EventAgendaItemEntity>;
+    event_joinus_form: Array<EventJoinusFormEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type EventJoinusFormEntity = {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+    phone_number_key: string;
+    position: string;
+    company_name: string;
+    event_id: number;
+    event: EventEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type EventJoinUsHeroEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    quote: string;
+    event_join_us_hero_id_event_join_us_hero_translations: Array<EventJoinUsHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type EventJoinUsHeroTranslationsEntity = {
+    id: number;
+    event_join_us_hero_id: number;
+    event_join_us_hero_translation_event_join_us_hero?: ((EventJoinUsHeroEntity) | null);
+    title: string;
+    sub_title: string;
+    quote: string;
+    language: 'ar' | 'en';
+};
+
+export type EventsPartnerEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    logos: Array<MediaEntity>;
+    events_partner_id_events_partner_translations: Array<EventsPartnerTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type EventsPartnerTranslationsEntity = {
+    id: number;
+    events_partner_id: number;
+    events_partner_translation_events_partner?: ((EventsPartnerEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type EventsSpeakersCardsEntity = {
+    id: number;
+    name: string;
+    role: string;
+    image_id: number;
+    events_speakers_id: number;
+    image: MediaEntity;
+    events_speakers_cards_id_events_speakers_cards_translations: Array<EventsSpeakersCardsTranslationsEntity>;
+    events_speakers_cards_parent: EventsSpeakersEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type EventsSpeakersCardsTranslationsEntity = {
+    id: number;
+    events_speakers_cards_id: number;
+    events_speakers_cards_translation_events_speakers_cards?: ((EventsSpeakersCardsEntity) | null);
+    name: string;
+    role: string;
+    language: 'ar' | 'en';
+};
+
+export type EventsSpeakersEntity = {
+    id: number;
+    title: string;
+    events_speakers_id_events_speakers_translations: Array<EventsSpeakersTranslationsEntity>;
+    events_speakers_cards_id_events_speakers_cards: Array<EventsSpeakersCardsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type EventsSpeakersTranslationsEntity = {
+    id: number;
+    events_speakers_id: number;
+    events_speakers_translation_events_speakers?: ((EventsSpeakersEntity) | null);
+    title: string;
+    language: 'ar' | 'en';
+};
+
 export type FooterContactsEntity = {
     id: number;
     phone_number_key: string;
@@ -1456,6 +3144,25 @@ export type FooterLocationsTranslationsEntity = {
     footer_locations_id: number;
     footer_locations_id_footer_locations_translations?: ((FooterLocationsEntity) | null);
     name: string;
+    language: 'ar' | 'en';
+};
+
+export type FooterTermsEntity = {
+    id: number;
+    terms: string;
+    file_id: number;
+    file: MediaEntity;
+    footer_terms_id_footer_terms_translations: Array<FooterTermsTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type FooterTermsTranslationsEntity = {
+    id: number;
+    footer_terms_id: number;
+    footer_terms_id_footer_terms_translations?: ((FooterTermsEntity) | null);
+    terms: string;
     language: 'ar' | 'en';
 };
 
@@ -1501,6 +3208,44 @@ export type HeroTranslationsEntity = {
     headline: string;
     sub_headline: string;
     cta_label: string;
+    language: 'ar' | 'en';
+};
+
+export type HomeAwardsCardsEntity = {
+    id: number;
+    title: string;
+    date: string;
+    icon_id: number;
+    home_awards_id: number;
+    icon: MediaEntity;
+    home_awards_cards_id_home_awards_cards_translations: Array<HomeAwardsCardsTranslationsEntity>;
+    home_awards_id_home_awards_cards: HomeAwardsEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type HomeAwardsCardsTranslationsEntity = {
+    id: number;
+    home_awards_cards_id: number;
+    home_awards_cards_translation_home_awards_cards?: ((HomeAwardsCardsEntity) | null);
+    title: string;
+    language: 'ar' | 'en';
+};
+
+export type HomeAwardsEntity = {
+    id: number;
+    description: string;
+    home_awards_id_home_awards_translations: Array<HomeAwardsTranslationsEntity>;
+    home_awards_id_home_awards_cards: Array<HomeAwardsCardsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type HomeAwardsTranslationsEntity = {
+    id: number;
+    home_awards_id: number;
+    home_awards_translation_home_awards?: ((HomeAwardsEntity) | null);
+    description: string;
     language: 'ar' | 'en';
 };
 
@@ -1550,6 +3295,7 @@ export type IndustriesEntity = {
     name: string;
     industries_id_industries_translations: Array<IndustriesTranslationsEntity>;
     industries_id_alliances_clients: Array<AlliancesClientsEntity>;
+    industries_id_success_story_case_studies: Array<SuccessStoryCaseStudiesEntity>;
     created_at: string;
     updated_at: string;
     deleted_at: string;
@@ -1591,6 +3337,7 @@ export type LandingNumbersEntity = {
     landing_numbers_id_landing_numbers_translations: Array<LandingNumbersTranslationsEntity>;
     created_at: string;
     updated_at: string;
+    deleted_at: string;
 };
 
 export type LandingNumbersTranslationsEntity = {
@@ -1601,25 +3348,89 @@ export type LandingNumbersTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
-export type LeadershipEntity = {
+export type LeadershipExecutiveTeamCardsEntity = {
     id: number;
-    quote: string;
     name: string;
-    position: string;
-    media_id: number;
-    media: MediaEntity;
-    leadership_id_leadership_translations: Array<LeadershipTranslationsEntity>;
+    role: string;
+    bio: string;
+    image_id: number;
+    leadership_executive_team_id: number;
+    image: MediaEntity;
+    leadership_executive_team_cards_id_leadership_executive_team_cards_translations: Array<LeadershipExecutiveTeamCardsTranslationsEntity>;
+    leadership_executive_team_cards_parent: LeadershipExecutiveTeamEntity;
     created_at: string;
     updated_at: string;
 };
 
-export type LeadershipTranslationsEntity = {
+export type LeadershipExecutiveTeamCardsTranslationsEntity = {
     id: number;
-    leadership_id: number;
-    leadership_translation_leadership?: ((LeadershipEntity) | null);
-    quote: string;
+    leadership_executive_team_cards_id: number;
+    leadership_executive_team_cards_translation_leadership_executive_team_cards?: ((LeadershipExecutiveTeamCardsEntity) | null);
     name: string;
-    position: string;
+    role: string;
+    bio: string;
+    language: 'ar' | 'en';
+};
+
+export type LeadershipExecutiveTeamEntity = {
+    id: number;
+    title: string;
+    description: string;
+    leadership_executive_team_id_leadership_executive_team_translations: Array<LeadershipExecutiveTeamTranslationsEntity>;
+    leadership_executive_team_cards_id_leadership_executive_team_cards: Array<LeadershipExecutiveTeamCardsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type LeadershipExecutiveTeamTranslationsEntity = {
+    id: number;
+    leadership_executive_team_id: number;
+    leadership_executive_team_translation_leadership_executive_team?: ((LeadershipExecutiveTeamEntity) | null);
+    title: string;
+    description: string;
+    language: 'ar' | 'en';
+};
+
+export type LeadershipTeamCardsEntity = {
+    id: number;
+    name: string;
+    role: string;
+    bio: string;
+    image_id: number;
+    leadership_team_id: number;
+    image: MediaEntity;
+    leadership_team_cards_id_leadership_team_cards_translations: Array<LeadershipTeamCardsTranslationsEntity>;
+    leadership_team_cards_parent: LeadershipTeamEntity;
+    created_at: string;
+    updated_at: string;
+};
+
+export type LeadershipTeamCardsTranslationsEntity = {
+    id: number;
+    leadership_team_cards_id: number;
+    leadership_team_cards_translation_leadership_team_cards?: ((LeadershipTeamCardsEntity) | null);
+    name: string;
+    role: string;
+    bio: string;
+    language: 'ar' | 'en';
+};
+
+export type LeadershipTeamEntity = {
+    id: number;
+    title: string;
+    description: string;
+    leadership_team_id_leadership_team_translations: Array<LeadershipTeamTranslationsEntity>;
+    leadership_team_cards_id_leadership_team_cards: Array<LeadershipTeamCardsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type LeadershipTeamTranslationsEntity = {
+    id: number;
+    leadership_team_id: number;
+    leadership_team_translation_leadership_team?: ((LeadershipTeamEntity) | null);
+    title: string;
+    description: string;
     language: 'ar' | 'en';
 };
 
@@ -1641,6 +3452,130 @@ export type MainSocialTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
+export type ManagedCybersecurityServicesDetailsEntity = {
+    id: number;
+    description: string;
+    cta_button_text: string;
+    logo_id: number;
+    logo: MediaEntity;
+    managed_cybersecurity_services_details_id_managed_cybersecurity_services_details_translations: Array<ManagedCybersecurityServicesDetailsTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ManagedCybersecurityServicesDetailsTranslationsEntity = {
+    id: number;
+    managed_cybersecurity_services_details_id: number;
+    managed_cybersecurity_services_details_translation_managed_cybersecurity_services_details?: ((ManagedCybersecurityServicesDetailsEntity) | null);
+    description: string;
+    cta_button_text: string;
+    language: 'ar' | 'en';
+};
+
+export type ManagedGrcServicesDetailsEntity = {
+    id: number;
+    description: string;
+    title: string;
+    managed_grc_services_details_id_managed_grc_services_details_translations: Array<ManagedGrcServicesDetailsTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ManagedGrcServicesDetailsTranslationsEntity = {
+    id: number;
+    managed_grc_services_details_id: number;
+    managed_grc_services_details_translation_managed_grc_services_details?: ((ManagedGrcServicesDetailsEntity) | null);
+    description: string;
+    title: string;
+    language: 'ar' | 'en';
+};
+
+export type ManagedServiceCardsEntity = {
+    id: number;
+    description: string;
+    bullet_one: string;
+    bullet_two: string;
+    type: string;
+    image_id: number;
+    logo_id: number;
+    image: MediaEntity;
+    logo: MediaEntity;
+    managed_service_cards_id_managed_service_cards_translations: Array<ManagedServiceCardsTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ManagedServiceCardsTranslationsEntity = {
+    id: number;
+    managed_service_cards_id: number;
+    managed_service_cards_translation_managed_service_cards?: ((ManagedServiceCardsEntity) | null);
+    description: string;
+    bullet_one: string;
+    bullet_two: string;
+    language: 'ar' | 'en';
+};
+
+export type ManagedServiceDownloadFormEntity = {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+    phone_number_key: string;
+    position: string;
+    managed_soc_services_details_id: number;
+    managed_soc_services_details: ManagedSocServicesDetailsEntity;
+    additional_managed_services_two_id: number;
+    additional_managed_services_two: AdditionalManagedServicesTwoEntity;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type ManagedServiceHeroEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    image_id: number;
+    image: MediaEntity;
+    logos: Array<MediaEntity>;
+    managed_service_hero_id_managed_service_hero_translations: Array<ManagedServiceHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ManagedServiceHeroTranslationsEntity = {
+    id: number;
+    managed_service_hero_id: number;
+    managed_service_hero_translation_managed_service_hero?: ((ManagedServiceHeroEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
+export type ManagedSocServicesDetailsEntity = {
+    id: number;
+    description: string;
+    cta_button_text: string;
+    logo_id: number;
+    file_id: number;
+    logo: MediaEntity;
+    file: MediaEntity;
+    managed_soc_services_details_id_managed_soc_services_details_translations: Array<ManagedSocServicesDetailsTranslationsEntity>;
+    managed_soc_services_details_id_managed_service_download_form: Array<ManagedServiceDownloadFormEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ManagedSocServicesDetailsTranslationsEntity = {
+    id: number;
+    managed_soc_services_details_id: number;
+    managed_soc_services_details_translation_managed_soc_services_details?: ((ManagedSocServicesDetailsEntity) | null);
+    description: string;
+    cta_button_text: string;
+    language: 'ar' | 'en';
+};
+
 export type MediaEntity = {
     id: number;
     url: string;
@@ -1651,7 +3586,7 @@ export type MediaEntity = {
     created_at: string;
     updated_at: string;
     hero: HeroEntity;
-    leadership: LeadershipEntity;
+    leadership_team_cards_image: LeadershipTeamCardsEntity;
     ecosystem_sustainability: EcosystemSustainabilityEntity;
     global_commitment_id: number;
     global_commitment: GlobalCommitmentEntity;
@@ -1676,7 +3611,6 @@ export type MediaEntity = {
     data_management_image: DataManagementEntity;
     data_management_logo: DataManagementEntity;
     data_management_bullets_icon: DataManagementBulletsEntity;
-    cloud_image: CloudEntity;
     cloud_logo: CloudEntity;
     cloud_bullets_icon: CloudBulletsEntity;
     it_infrastructure_hero_image: ItInfrastructureHeroEntity;
@@ -1715,6 +3649,55 @@ export type MediaEntity = {
     about_barq_core_values_cards_icon: AboutBarqCoreValuesCardsEntity;
     about_barq_milestones_image: AboutBarqMilestonesEntity;
     contact_us_hero_image: ContactUsHeroEntity;
+    contact_us_offices_bullets_icon: ContactUsOfficesBulletsEntity;
+    managed_service_hero_image: ManagedServiceHeroEntity;
+    managed_service_hero_logos_id: number;
+    managed_service_hero_logos: ManagedServiceHeroEntity;
+    core_managed_services_logo: CoreManagedServicesEntity;
+    managed_soc_services_details_logo: ManagedSocServicesDetailsEntity;
+    managed_soc_services_details_file: ManagedSocServicesDetailsEntity;
+    managed_cybersecurity_services_details_logo: ManagedCybersecurityServicesDetailsEntity;
+    managed_service_cards_image: ManagedServiceCardsEntity;
+    managed_service_cards_logo: ManagedServiceCardsEntity;
+    career_hero_media: CareerHeroEntity;
+    career_working_at_barq_cards_icon: CareerWorkingAtBarqCardsEntity;
+    career_application_form_resume: CareerApplicationFormEntity;
+    resource_cards_image: ResourceCardsEntity;
+    additional_managed_services_one_logo: AdditionalManagedServicesOneEntity;
+    additional_managed_services_two_logo: AdditionalManagedServicesTwoEntity;
+    additional_managed_services_two_images: AdditionalManagedServicesTwoEntity;
+    leadership_executive_team_cards_image: LeadershipExecutiveTeamCardsEntity;
+    additional_managed_services_one_file: AdditionalManagedServicesOneEntity;
+    home_awards_cards_icon: HomeAwardsCardsEntity;
+    barq_academy_hero_logo: BarqAcademyHeroEntity;
+    barq_academy_hero_image: BarqAcademyHeroEntity;
+    barq_academy_hero_logos_id: number;
+    barq_academy_hero_logos: BarqAcademyHeroEntity;
+    barq_academy_highlights_cards_icon: BarqAcademyHighlightsCardsEntity;
+    barq_academy_programs_opportunities_cards_image: BarqAcademyProgramsOpportunitiesCardsEntity;
+    barq_academy_foundation_tracks_form_resume: BarqAcademyFoundationTracksFormEntity;
+    barq_academy_programs_opportunities_internship_cards_image: BarqAcademyProgramsOpportunitiesInternshipCardsEntity;
+    barq_academy_foundation_internship_form_resume: BarqAcademyFoundationInternshipFormEntity;
+    solutions_and_services_hero_media: SolutionsAndServicesHeroEntity;
+    success_story_case_studies_image: SuccessStoryCaseStudiesEntity;
+    newsroom_cards_image: NewsroomCardsEntity;
+    events_speakers_cards_image: EventsSpeakersCardsEntity;
+    events_partner_logos_id: number;
+    events_partner_logos: EventsPartnerEntity;
+    footer_terms_file: FooterTermsEntity;
+    campaign_image: CampaignEntity;
+    campaign_layout_one_image: CampaignLayoutOneEntity;
+    campaign_layout_one_file: CampaignLayoutOneEntity;
+    campaign_layout_two_image: CampaignLayoutTwoEntity;
+    campaign_layout_two_file: CampaignLayoutTwoEntity;
+    campaign_layout_three_section_two_image: CampaignLayoutThreeSectionTwoEntity;
+    campaign_layout_three_section_two_cards_icon: CampaignLayoutThreeSectionTwoCardsEntity;
+    campaign_layout_three_section_three_image: CampaignLayoutThreeSectionThreeEntity;
+    campaign_layout_three_section_four_image: CampaignLayoutThreeSectionFourEntity;
+    campaign_layout_three_section_five_file: CampaignLayoutThreeSectionFiveEntity;
+    campaign_layout_three_hero_background_image: CampaignLayoutThreeHeroEntity;
+    success_story_case_studies_home_image: SuccessStoryCaseStudiesEntity;
+    newsroom_cards_home_image: NewsroomCardsEntity;
 };
 
 export type MobilityCardsEntity = {
@@ -1794,6 +3777,72 @@ export type NetworkSectionTranslationsEntity = {
     network_section_id: number;
     network_section_translation_network_section?: ((NetworkSectionEntity) | null);
     text: string;
+    language: 'ar' | 'en';
+};
+
+export type NewsroomCardsEntity = {
+    id: number;
+    title: string;
+    description: string;
+    long_description: string;
+    date_time: string;
+    is_vertical: boolean;
+    is_featured: boolean;
+    image_id: number;
+    home_image_id: number;
+    newsroom_category_id: number;
+    image: MediaEntity;
+    home_image: MediaEntity;
+    newsroom_category: NewsroomCategoryEntity;
+    newsroom_cards_id_newsroom_cards_translations: Array<NewsroomCardsTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type NewsroomCardsTranslationsEntity = {
+    id: number;
+    newsroom_cards_id: number;
+    newsroom_cards_translation_newsroom_cards?: ((NewsroomCardsEntity) | null);
+    title: string;
+    long_description: string;
+    description: string;
+    language: 'ar' | 'en';
+};
+
+export type NewsroomCategoryEntity = {
+    id: number;
+    name: string;
+    newsroom_cards: Array<NewsroomCardsEntity>;
+    newsroom_category_id_newsroom_category_translations: Array<NewsroomCategoryTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type NewsroomCategoryTranslationsEntity = {
+    id: number;
+    newsroom_category_id: number;
+    newsroom_category_translation_newsroom_category?: ((NewsroomCategoryEntity) | null);
+    name: string;
+    language: 'ar' | 'en';
+};
+
+export type NewsroomHeroEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    newsroom_hero_id_newsroom_hero_translations: Array<NewsroomHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type NewsroomHeroTranslationsEntity = {
+    id: number;
+    newsroom_hero_id: number;
+    newsroom_hero_translation_newsroom_hero?: ((NewsroomHeroEntity) | null);
+    title: string;
+    sub_title: string;
     language: 'ar' | 'en';
 };
 
@@ -2062,6 +4111,86 @@ export type ReadAboutBarqMissionVisionRelations = {
     icon?: ((string | boolean) | ReadMediaRelations);
 };
 
+export type ReadAdditionalManagedServicesOneFilters = {
+    id?: number;
+    description?: string;
+    cta_label?: string;
+    logo_id?: number;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type ReadAdditionalManagedServicesOneOrders = {
+    id?: ("ASC" | "DESC");
+    description?: ("ASC" | "DESC");
+    cta_label?: ("ASC" | "DESC");
+    logo_id?: ("ASC" | "DESC");
+    created_at?: ("ASC" | "DESC");
+    updated_at?: ("ASC" | "DESC");
+};
+
+export type ReadAdditionalManagedServicesOneQuery = {
+    filters?: ReadAdditionalManagedServicesOneFilters;
+    orders?: ReadAdditionalManagedServicesOneOrders;
+    relations?: {
+        additional_managed_services_one_id_additional_managed_services_one_translations?: (boolean | string);
+        logo?: ((string | boolean) | ReadMediaRelations);
+        file?: ((string | boolean) | ReadMediaRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadAdditionalManagedServicesOneRelations = {
+    additional_managed_services_one_id_additional_managed_services_one_translations?: (boolean | string);
+    logo?: ((string | boolean) | ReadMediaRelations);
+    file?: ((string | boolean) | ReadMediaRelations);
+};
+
+export type ReadAdditionalManagedServicesTwoFilters = {
+    id?: number;
+    description?: string;
+    logo_id?: number;
+    images?: number;
+    created_at?: string;
+    updated_at?: string;
+    deleted_at?: string;
+};
+
+export type ReadAdditionalManagedServicesTwoOrders = {
+    id?: ("ASC" | "DESC");
+    description?: ("ASC" | "DESC");
+    logo_id?: ("ASC" | "DESC");
+    images?: ("ASC" | "DESC");
+    created_at?: ("ASC" | "DESC");
+    updated_at?: ("ASC" | "DESC");
+    deleted_at?: ("ASC" | "DESC");
+};
+
+export type ReadAdditionalManagedServicesTwoQuery = {
+    filters?: ReadAdditionalManagedServicesTwoFilters;
+    orders?: ReadAdditionalManagedServicesTwoOrders;
+    relations?: {
+        additional_managed_services_two_id_additional_managed_services_two_translations?: (boolean | string);
+        logo?: ((string | boolean) | ReadMediaRelations);
+        additional_managed_services_two_images?: (boolean | string);
+        additional_managed_services_two_id_managed_service_download_form?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadAdditionalManagedServicesTwoRelations = {
+    additional_managed_services_two_id_additional_managed_services_two_translations?: (boolean | string);
+    logo?: ((string | boolean) | ReadMediaRelations);
+    additional_managed_services_two_images?: (boolean | string);
+    additional_managed_services_two_id_managed_service_download_form?: (boolean | string);
+};
+
 export type ReadAlliancesClientsFilters = {
     id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -2071,11 +4200,11 @@ export type ReadAlliancesClientsFilters = {
         $val?: ((string | number) | Array<(string | number)>);
         $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
     } | null;
-    country_id?: {
+    countries_ids?: {
         $val?: ((string | number) | Array<(string | number)>);
         $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
     } | null;
-    industries_id?: {
+    industries_ids?: {
         $val?: ((string | number) | Array<(string | number)>);
         $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
     } | null;
@@ -2117,7 +4246,7 @@ export type ReadAlliancesClientsQuery = {
     orders?: ReadAlliancesClientsOrders;
     relations?: {
         media?: ((string | boolean) | ReadMediaRelations);
-        country?: ((string | boolean) | ReadCountryRelations);
+        countries?: ((string | boolean) | ReadCountryRelations);
         industries?: ((string | boolean) | ReadIndustriesRelations);
     };
     pagination?: {
@@ -2128,7 +4257,7 @@ export type ReadAlliancesClientsQuery = {
 
 export type ReadAlliancesClientsRelations = {
     media?: ((string | boolean) | ReadMediaRelations);
-    country?: ((string | boolean) | ReadCountryRelations);
+    countries?: ((string | boolean) | ReadCountryRelations);
     industries?: ((string | boolean) | ReadIndustriesRelations);
 };
 
@@ -2192,11 +4321,11 @@ export type ReadAlliancesVendorsFilters = {
         $val?: ((string | number) | Array<(string | number)>);
         $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
     } | null;
-    country_id?: {
+    countries_ids?: {
         $val?: ((string | number) | Array<(string | number)>);
         $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
     } | null;
-    solutions_id?: {
+    solutions_ids?: {
         $val?: ((string | number) | Array<(string | number)>);
         $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
     } | null;
@@ -2213,20 +4342,22 @@ export type ReadAlliancesVendorsFilters = {
 export type ReadAlliancesVendorsOrders = {
     id?: 'asc' | 'desc';
     media_id?: 'asc' | 'desc';
-    country_id?: 'asc' | 'desc';
-    solutions_id?: 'asc' | 'desc';
+    countries_ids?: 'asc' | 'desc';
+    solutions_ids?: 'asc' | 'desc';
     created_at?: 'asc' | 'desc';
     updated_at?: 'asc' | 'desc';
 };
 
-export type solutions_id = 'asc' | 'desc';
+export type countries_ids = 'asc' | 'desc';
+
+export type solutions_ids = 'asc' | 'desc';
 
 export type ReadAlliancesVendorsQuery = {
     filters?: ReadAlliancesVendorsFilters;
     orders?: ReadAlliancesVendorsOrders;
     relations?: {
         media?: ((string | boolean) | ReadMediaRelations);
-        country?: ((string | boolean) | ReadCountryRelations);
+        countries?: ((string | boolean) | ReadCountryRelations);
         solutions?: ((string | boolean) | ReadSolutionsRelations);
     };
     pagination?: {
@@ -2237,7 +4368,7 @@ export type ReadAlliancesVendorsQuery = {
 
 export type ReadAlliancesVendorsRelations = {
     media?: ((string | boolean) | ReadMediaRelations);
-    country?: ((string | boolean) | ReadCountryRelations);
+    countries?: ((string | boolean) | ReadCountryRelations);
     solutions?: ((string | boolean) | ReadSolutionsRelations);
 };
 
@@ -2537,6 +4668,533 @@ export type ReadAwardsHeadRelations = {
     awards_head_id_awards_head_translations?: (boolean | string);
 };
 
+export type ReadBarqAcademyFoundationInternshipFormDataFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    form_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_text?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    track_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    track_description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    skill_section_header?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    skill_bullet_points?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadBarqAcademyFoundationInternshipFormDataOrders = {
+    id?: 'asc' | 'desc';
+    form_title?: 'asc' | 'desc';
+    sub_text?: 'asc' | 'desc';
+    track_title?: 'asc' | 'desc';
+    track_description?: 'asc' | 'desc';
+    skill_section_header?: 'asc' | 'desc';
+    skill_bullet_points?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type form_title = 'asc' | 'desc';
+
+export type sub_text = 'asc' | 'desc';
+
+export type track_title = 'asc' | 'desc';
+
+export type track_description = 'asc' | 'desc';
+
+export type skill_section_header = 'asc' | 'desc';
+
+export type skill_bullet_points = 'asc' | 'desc';
+
+export type ReadBarqAcademyFoundationInternshipFormDataQuery = {
+    filters?: ReadBarqAcademyFoundationInternshipFormDataFilters;
+    orders?: ReadBarqAcademyFoundationInternshipFormDataOrders;
+    relations?: {
+        barq_academy_foundation_internship_form_data_id_barq_academy_foundation_internship_form_data_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadBarqAcademyFoundationInternshipFormDataRelations = {
+    barq_academy_foundation_internship_form_data_id_barq_academy_foundation_internship_form_data_translations?: (boolean | string);
+};
+
+export type ReadBarqAcademyFoundationInternshipFormFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    first_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    last_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    email?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    university_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    current_academic_year?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    linkedin_url?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    resume_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    barq_academy_programs_opportunities_internship_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadBarqAcademyFoundationInternshipFormOrders = {
+    id?: 'asc' | 'desc';
+    first_name?: 'asc' | 'desc';
+    last_name?: 'asc' | 'desc';
+    email?: 'asc' | 'desc';
+    phone?: 'asc' | 'desc';
+    university_name?: 'asc' | 'desc';
+    current_academic_year?: 'asc' | 'desc';
+    linkedin_url?: 'asc' | 'desc';
+    resume_id?: 'asc' | 'desc';
+    barq_academy_programs_opportunities_internship_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type first_name = 'asc' | 'desc';
+
+export type last_name = 'asc' | 'desc';
+
+export type email = 'asc' | 'desc';
+
+export type phone = 'asc' | 'desc';
+
+export type university_name = 'asc' | 'desc';
+
+export type current_academic_year = 'asc' | 'desc';
+
+export type linkedin_url = 'asc' | 'desc';
+
+export type resume_id = 'asc' | 'desc';
+
+export type barq_academy_programs_opportunities_internship_id = 'asc' | 'desc';
+
+export type ReadBarqAcademyFoundationInternshipFormQuery = {
+    filters?: ReadBarqAcademyFoundationInternshipFormFilters;
+    orders?: ReadBarqAcademyFoundationInternshipFormOrders;
+    relations?: {
+        resume?: (boolean | string);
+        barq_academy_programs_opportunities_internship?: ((string | boolean) | ReadBarqAcademyProgramsOpportunitiesInternshipRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadBarqAcademyFoundationInternshipFormRelations = {
+    resume?: (boolean | string);
+    barq_academy_programs_opportunities_internship?: ((string | boolean) | ReadBarqAcademyProgramsOpportunitiesInternshipRelations);
+};
+
+export type ReadBarqAcademyFoundationTracksFormDataFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    form_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_text?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    track_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    track_description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    skill_section_header?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    skill_bullet_points?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadBarqAcademyFoundationTracksFormDataOrders = {
+    id?: 'asc' | 'desc';
+    form_title?: 'asc' | 'desc';
+    sub_text?: 'asc' | 'desc';
+    track_title?: 'asc' | 'desc';
+    track_description?: 'asc' | 'desc';
+    skill_section_header?: 'asc' | 'desc';
+    skill_bullet_points?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadBarqAcademyFoundationTracksFormDataQuery = {
+    filters?: ReadBarqAcademyFoundationTracksFormDataFilters;
+    orders?: ReadBarqAcademyFoundationTracksFormDataOrders;
+    relations?: {
+        barq_academy_foundation_tracks_form_data_id_barq_academy_foundation_tracks_form_data_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadBarqAcademyFoundationTracksFormDataRelations = {
+    barq_academy_foundation_tracks_form_data_id_barq_academy_foundation_tracks_form_data_translations?: (boolean | string);
+};
+
+export type ReadBarqAcademyFoundationTracksFormFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    first_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    last_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    email?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    university_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    current_academic_year?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    linkedin_url?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    resume_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    barq_academy_programs_opportunities_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadBarqAcademyFoundationTracksFormOrders = {
+    id?: 'asc' | 'desc';
+    first_name?: 'asc' | 'desc';
+    last_name?: 'asc' | 'desc';
+    email?: 'asc' | 'desc';
+    phone?: 'asc' | 'desc';
+    university_name?: 'asc' | 'desc';
+    current_academic_year?: 'asc' | 'desc';
+    linkedin_url?: 'asc' | 'desc';
+    resume_id?: 'asc' | 'desc';
+    barq_academy_programs_opportunities_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type barq_academy_programs_opportunities_id = 'asc' | 'desc';
+
+export type ReadBarqAcademyFoundationTracksFormQuery = {
+    filters?: ReadBarqAcademyFoundationTracksFormFilters;
+    orders?: ReadBarqAcademyFoundationTracksFormOrders;
+    relations?: {
+        resume?: (boolean | string);
+        barq_academy_programs_opportunities?: ((string | boolean) | ReadBarqAcademyProgramsOpportunitiesRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadBarqAcademyFoundationTracksFormRelations = {
+    resume?: (boolean | string);
+    barq_academy_programs_opportunities?: ((string | boolean) | ReadBarqAcademyProgramsOpportunitiesRelations);
+};
+
+export type ReadBarqAcademyHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    logo_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadBarqAcademyHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    logo_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadBarqAcademyHeroQuery = {
+    filters?: ReadBarqAcademyHeroFilters;
+    orders?: ReadBarqAcademyHeroOrders;
+    relations?: {
+        barq_academy_hero_id_barq_academy_hero_translations?: (boolean | string);
+        image?: ((string | boolean) | ReadMediaRelations);
+        logo?: ((string | boolean) | ReadMediaRelations);
+        logos?: ((string | boolean) | ReadMediaRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadBarqAcademyHeroRelations = {
+    barq_academy_hero_id_barq_academy_hero_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+    logo?: ((string | boolean) | ReadMediaRelations);
+    logos?: ((string | boolean) | ReadMediaRelations);
+};
+
+export type ReadBarqAcademyHighlightsFilters = {
+    id?: (number);
+    title?: string;
+    sub_title?: string;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type ReadBarqAcademyHighlightsOrders = {
+    id?: 'ASC' | 'DESC';
+    title?: 'ASC' | 'DESC';
+    sub_title?: 'ASC' | 'DESC';
+    created_at?: 'ASC' | 'DESC';
+    updated_at?: 'ASC' | 'DESC';
+};
+
+export type ReadBarqAcademyHighlightsQuery = {
+    filters?: ReadBarqAcademyHighlightsFilters;
+    orders?: ReadBarqAcademyHighlightsOrders;
+    relations?: {
+        barq_academy_highlights_id_barq_academy_highlights_translations?: (boolean | string);
+        barq_academy_highlights_cards_id_barq_academy_highlights_cards?: ((string | boolean) | {
+    barq_academy_highlights_cards_id_barq_academy_highlights_cards_translations?: (boolean | string);
+    icon?: (boolean | string);
+});
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadBarqAcademyHighlightsRelations = {
+    barq_academy_highlights_id_barq_academy_highlights_translations?: (boolean | string);
+    barq_academy_highlights_cards_id_barq_academy_highlights_cards?: ((string | boolean) | {
+    barq_academy_highlights_cards_id_barq_academy_highlights_cards_translations?: (boolean | string);
+    icon?: (boolean | string);
+});
+};
+
+export type ReadBarqAcademyProgramsOpportunitiesFilters = {
+    id?: (number);
+    title?: string;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type ReadBarqAcademyProgramsOpportunitiesInternshipFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadBarqAcademyProgramsOpportunitiesInternshipOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadBarqAcademyProgramsOpportunitiesInternshipQuery = {
+    filters?: ReadBarqAcademyProgramsOpportunitiesInternshipFilters;
+    orders?: ReadBarqAcademyProgramsOpportunitiesInternshipOrders;
+    relations?: {
+        barq_academy_programs_opportunities_internship_id_barq_academy_programs_opportunities_internship_translations?: (boolean | string);
+        barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards?: ((string | boolean) | {
+    barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+});
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadBarqAcademyProgramsOpportunitiesInternshipRelations = {
+    barq_academy_programs_opportunities_internship_id_barq_academy_programs_opportunities_internship_translations?: (boolean | string);
+    barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards?: ((string | boolean) | {
+    barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+});
+};
+
+export type ReadBarqAcademyProgramsOpportunitiesOrders = {
+    id?: 'ASC' | 'DESC';
+    title?: 'ASC' | 'DESC';
+    created_at?: 'ASC' | 'DESC';
+    updated_at?: 'ASC' | 'DESC';
+};
+
+export type ReadBarqAcademyProgramsOpportunitiesQuery = {
+    filters?: ReadBarqAcademyProgramsOpportunitiesFilters;
+    orders?: ReadBarqAcademyProgramsOpportunitiesOrders;
+    relations?: {
+        barq_academy_programs_opportunities_id_barq_academy_programs_opportunities_translations?: (boolean | string);
+        barq_academy_foundation_tracks_form_id_barq_academy_foundation_tracks_form?: (boolean | string);
+        barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards?: ((string | boolean) | {
+    barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards_translations?: (boolean | string);
+    image?: (boolean | string);
+});
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadBarqAcademyProgramsOpportunitiesRelations = {
+    barq_academy_programs_opportunities_id_barq_academy_programs_opportunities_translations?: (boolean | string);
+    barq_academy_foundation_tracks_form_id_barq_academy_foundation_tracks_form?: (boolean | string);
+    barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards?: ((string | boolean) | {
+    barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards_translations?: (boolean | string);
+    image?: (boolean | string);
+});
+};
+
 export type ReadBusinessAutomationFilters = {
     id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -2601,6 +5259,712 @@ export type ReadBusinessAutomationRelations = {
 });
 };
 
+export type ReadCampaignFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    crmId?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    CampaignType?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    shortDescription?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    minutes_to_read?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    date?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    layout_type?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+};
+
+export type ReadCampaignFormFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    first_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    last_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    email?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone_number?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone_number_key?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    position?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    organization_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    campaign_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCampaignFormOrders = {
+    id?: 'asc' | 'desc';
+    first_name?: 'asc' | 'desc';
+    last_name?: 'asc' | 'desc';
+    email?: 'asc' | 'desc';
+    phone_number?: 'asc' | 'desc';
+    phone_number_key?: 'asc' | 'desc';
+    position?: 'asc' | 'desc';
+    organization_name?: 'asc' | 'desc';
+    campaign_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type phone_number = 'asc' | 'desc';
+
+export type phone_number_key = 'asc' | 'desc';
+
+export type position = 'asc' | 'desc';
+
+export type organization_name = 'asc' | 'desc';
+
+export type campaign_id = 'asc' | 'desc';
+
+export type ReadCampaignFormQuery = {
+    filters?: ReadCampaignFormFilters;
+    orders?: ReadCampaignFormOrders;
+    relations?: {
+        campaign?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignFormRelations = {
+    campaign?: (boolean | string);
+};
+
+export type ReadCampaignLayoutOneFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    cta_label?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    cta_label_action?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    form_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    form_sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    file_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    campaign_id?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCampaignLayoutOneOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    cta_label?: 'asc' | 'desc';
+    cta_label_action?: 'asc' | 'desc';
+    form_title?: 'asc' | 'desc';
+    form_sub_title?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    file_id?: 'asc' | 'desc';
+    campaign_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type cta_label = 'asc' | 'desc';
+
+export type cta_label_action2 = 'asc' | 'desc';
+
+export type form_sub_title = 'asc' | 'desc';
+
+export type file_id = 'asc' | 'desc';
+
+export type ReadCampaignLayoutOneQuery = {
+    filters?: ReadCampaignLayoutOneFilters;
+    orders?: ReadCampaignLayoutOneOrders;
+    relations?: {
+        campaign_layout_one_id_campaign_layout_one_translations?: (boolean | string);
+        image?: (boolean | string);
+        file?: (boolean | string);
+        campaign_layout_one_campaign?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignLayoutOneRelations = {
+    campaign_layout_one_id_campaign_layout_one_translations?: (boolean | string);
+    image?: (boolean | string);
+    file?: (boolean | string);
+    campaign_layout_one_campaign?: (boolean | string);
+};
+
+export type ReadCampaignLayoutThreeHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    background_image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    campaign_id?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCampaignLayoutThreeHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    background_image_id?: 'asc' | 'desc';
+    campaign_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type background_image_id = 'asc' | 'desc';
+
+export type ReadCampaignLayoutThreeHeroQuery = {
+    filters?: ReadCampaignLayoutThreeHeroFilters;
+    orders?: ReadCampaignLayoutThreeHeroOrders;
+    relations?: {
+        campaign_layout_three_hero_id_campaign_layout_three_hero_translations?: (boolean | string);
+        background_image?: ((string | boolean) | ReadMediaRelations);
+        campaign_layout_three_hero_campaign?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignLayoutThreeHeroRelations = {
+    campaign_layout_three_hero_id_campaign_layout_three_hero_translations?: (boolean | string);
+    background_image?: ((string | boolean) | ReadMediaRelations);
+    campaign_layout_three_hero_campaign?: (boolean | string);
+};
+
+export type ReadCampaignLayoutThreeSectionFiveFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    cta_label?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    cta_label_action?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    file_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    campaign_id?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCampaignLayoutThreeSectionFiveOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    cta_label?: 'asc' | 'desc';
+    cta_label_action?: 'asc' | 'desc';
+    file_id?: 'asc' | 'desc';
+    campaign_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCampaignLayoutThreeSectionFiveQuery = {
+    filters?: ReadCampaignLayoutThreeSectionFiveFilters;
+    orders?: ReadCampaignLayoutThreeSectionFiveOrders;
+    relations?: {
+        campaign_layout_three_section_five_id_campaign_layout_three_section_five_translations?: (boolean | string);
+        file?: ((string | boolean) | ReadMediaRelations);
+        campaign_layout_three_section_five_campaign?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignLayoutThreeSectionFiveRelations = {
+    campaign_layout_three_section_five_id_campaign_layout_three_section_five_translations?: (boolean | string);
+    file?: ((string | boolean) | ReadMediaRelations);
+    campaign_layout_three_section_five_campaign?: (boolean | string);
+};
+
+export type ReadCampaignLayoutThreeSectionFourFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    campaign_id?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCampaignLayoutThreeSectionFourOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    campaign_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCampaignLayoutThreeSectionFourQuery = {
+    filters?: ReadCampaignLayoutThreeSectionFourFilters;
+    orders?: ReadCampaignLayoutThreeSectionFourOrders;
+    relations?: {
+        campaign_layout_three_section_four_id_campaign_layout_three_section_four_translations?: (boolean | string);
+        image?: ((string | boolean) | ReadMediaRelations);
+        campaign_layout_three_section_four_campaign?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignLayoutThreeSectionFourRelations = {
+    campaign_layout_three_section_four_id_campaign_layout_three_section_four_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+    campaign_layout_three_section_four_campaign?: (boolean | string);
+};
+
+export type ReadCampaignLayoutThreeSectionThreeFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    campaign_id?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCampaignLayoutThreeSectionThreeOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    campaign_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCampaignLayoutThreeSectionThreeQuery = {
+    filters?: ReadCampaignLayoutThreeSectionThreeFilters;
+    orders?: ReadCampaignLayoutThreeSectionThreeOrders;
+    relations?: {
+        campaign_layout_three_section_three_id_campaign_layout_three_section_three_translations?: (boolean | string);
+        image?: ((string | boolean) | ReadMediaRelations);
+        campaign_layout_three_section_three_campaign?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignLayoutThreeSectionThreeRelations = {
+    campaign_layout_three_section_three_id_campaign_layout_three_section_three_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+    campaign_layout_three_section_three_campaign?: (boolean | string);
+};
+
+export type ReadCampaignLayoutThreeSectionTwoFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    campaign_id?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCampaignLayoutThreeSectionTwoOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    campaign_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCampaignLayoutThreeSectionTwoQuery = {
+    filters?: ReadCampaignLayoutThreeSectionTwoFilters;
+    orders?: ReadCampaignLayoutThreeSectionTwoOrders;
+    relations?: {
+        campaign_layout_three_section_two_id_campaign_layout_three_section_two_translations?: (boolean | string);
+        image?: ((string | boolean) | ReadMediaRelations);
+        campaign_layout_three_section_two_campaign?: (boolean | string);
+        campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards?: ((string | boolean) | {
+    campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards_translations?: (boolean | string);
+    icon?: (boolean | string);
+});
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignLayoutThreeSectionTwoRelations = {
+    campaign_layout_three_section_two_id_campaign_layout_three_section_two_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+    campaign_layout_three_section_two_campaign?: (boolean | string);
+    campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards?: ((string | boolean) | {
+    campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards_translations?: (boolean | string);
+    icon?: (boolean | string);
+});
+};
+
+export type ReadCampaignLayoutTwoFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    cta_label_action?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    form_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    form_sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    file_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    campaign_id?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCampaignLayoutTwoOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    cta_label_action?: 'asc' | 'desc';
+    form_title?: 'asc' | 'desc';
+    form_sub_title?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    file_id?: 'asc' | 'desc';
+    campaign_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCampaignLayoutTwoQuery = {
+    filters?: ReadCampaignLayoutTwoFilters;
+    orders?: ReadCampaignLayoutTwoOrders;
+    relations?: {
+        campaign_layout_two_id_campaign_layout_two_translations?: (boolean | string);
+        image?: (boolean | string);
+        file?: (boolean | string);
+        campaign_layout_two_campaign?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignLayoutTwoRelations = {
+    campaign_layout_two_id_campaign_layout_two_translations?: (boolean | string);
+    image?: (boolean | string);
+    file?: (boolean | string);
+    campaign_layout_two_campaign?: (boolean | string);
+};
+
+export type ReadCampaignOrders = {
+    id?: 'asc' | 'desc';
+    crmId?: 'asc' | 'desc';
+    name?: 'asc' | 'desc';
+    CampaignType?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    shortDescription?: 'asc' | 'desc';
+    minutes_to_read?: 'asc' | 'desc';
+    date?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type crmId = 'asc' | 'desc';
+
+export type CampaignType = 'asc' | 'desc';
+
+export type shortDescription = 'asc' | 'desc';
+
+export type minutes_to_read = 'asc' | 'desc';
+
+export type date = 'asc' | 'desc';
+
+export type ReadCampaignQuery = {
+    filters?: ReadCampaignFilters;
+    orders?: ReadCampaignOrders;
+    relations?: {
+        image?: (boolean | string);
+        campaign_layout_one?: ((string | boolean) | ReadCampaignLayoutOneRelations);
+        campaign_layout_two?: (boolean | string);
+        campaign_layout_three_hero?: ((string | boolean) | ReadCampaignLayoutThreeHeroRelations);
+        campaign_layout_three_section_two?: ((string | boolean) | ReadCampaignLayoutThreeSectionTwoRelations);
+        campaign_layout_three_section_three?: ((string | boolean) | ReadCampaignLayoutThreeSectionThreeRelations);
+        campaign_layout_three_section_four?: ((string | boolean) | ReadCampaignLayoutThreeSectionFourRelations);
+        campaign_layout_three_section_five?: ((string | boolean) | ReadCampaignLayoutThreeSectionFiveRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCampaignRelations = {
+    image?: (boolean | string);
+    campaign_layout_one?: ((string | boolean) | ReadCampaignLayoutOneRelations);
+    campaign_layout_two?: (boolean | string);
+    campaign_layout_three_hero?: ((string | boolean) | ReadCampaignLayoutThreeHeroRelations);
+    campaign_layout_three_section_two?: ((string | boolean) | ReadCampaignLayoutThreeSectionTwoRelations);
+    campaign_layout_three_section_three?: ((string | boolean) | ReadCampaignLayoutThreeSectionThreeRelations);
+    campaign_layout_three_section_four?: ((string | boolean) | ReadCampaignLayoutThreeSectionFourRelations);
+    campaign_layout_three_section_five?: ((string | boolean) | ReadCampaignLayoutThreeSectionFiveRelations);
+};
+
 export type ReadCardSocialFilters = {
     id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -2652,6 +6016,505 @@ export type ReadCardSocialRelations = {
     card_social_id_card_social_translations?: (boolean | string);
 };
 
+export type ReadCareerApplicationFormFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    first_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    last_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    email?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone_number?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    job_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    linkedin_url?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    resume_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    career_job_detail_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    deleted_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCareerApplicationFormOrders = {
+    id?: 'asc' | 'desc';
+    first_name?: 'asc' | 'desc';
+    last_name?: 'asc' | 'desc';
+    email?: 'asc' | 'desc';
+    phone_number?: 'asc' | 'desc';
+    job_title?: 'asc' | 'desc';
+    linkedin_url?: 'asc' | 'desc';
+    resume_id?: 'asc' | 'desc';
+    career_job_detail_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+    deleted_at?: 'asc' | 'desc';
+};
+
+export type job_title = 'asc' | 'desc';
+
+export type career_job_detail_id = 'asc' | 'desc';
+
+export type deleted_at = 'asc' | 'desc';
+
+export type ReadCareerApplicationFormQuery = {
+    filters?: ReadCareerApplicationFormFilters;
+    orders?: ReadCareerApplicationFormOrders;
+    relations?: {
+        resume?: (boolean | string);
+        career_job_detail?: ((string | boolean) | ReadCareerJobDetailRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCareerApplicationFormRelations = {
+    resume?: (boolean | string);
+    career_job_detail?: ((string | boolean) | ReadCareerJobDetailRelations);
+};
+
+export type ReadCareerCategoryFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCareerCategoryOrders = {
+    id?: 'asc' | 'desc';
+    name?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCareerCategoryQuery = {
+    filters?: ReadCareerCategoryFilters;
+    orders?: ReadCareerCategoryOrders;
+    relations?: {
+        career_category_id_career_category_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCareerCategoryRelations = {
+    career_category_id_career_category_translations?: (boolean | string);
+};
+
+export type ReadCareerHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    media?: (ReadMediaFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCareerHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    media?: ('asc' | 'desc' | ReadMediaOrders);
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCareerHeroQuery = {
+    filters?: ReadCareerHeroFilters;
+    orders?: ReadCareerHeroOrders;
+    relations?: {
+        media?: ((string | boolean) | ReadMediaRelations);
+        career_hero_id_career_hero_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCareerHeroRelations = {
+    media?: ((string | boolean) | ReadMediaRelations);
+    career_hero_id_career_hero_translations?: (boolean | string);
+};
+
+export type ReadCareerJobDetailFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    intr_sentence?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    career_open_position?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCareerJobDetailOrders = {
+    id?: 'asc' | 'desc';
+    intr_sentence?: 'asc' | 'desc';
+    career_open_position?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type intr_sentence = 'asc' | 'desc';
+
+export type career_open_position = 'asc' | 'desc';
+
+export type ReadCareerJobDetailQuery = {
+    filters?: ReadCareerJobDetailFilters;
+    orders?: ReadCareerJobDetailOrders;
+    relations?: {
+        career_open_position?: ((string | boolean) | ReadCareerOpenPositionRelations);
+        career_job_detail_id_career_job_detail_translations?: (boolean | string);
+        career_job_detail_cards_id_career_job_detail_cards?: ((string | boolean) | _2);
+        career_job_detail_career_application_form?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCareerJobDetailRelations = {
+    career_open_position?: ((string | boolean) | ReadCareerOpenPositionRelations);
+    career_job_detail_id_career_job_detail_translations?: (boolean | string);
+    career_job_detail_cards_id_career_job_detail_cards?: ((string | boolean) | _2);
+    career_job_detail_career_application_form?: (boolean | string);
+};
+
+export type ReadCareerOpenPositionFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    job_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    opening_date?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    closing_date?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    status?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    city?: (ReadCityFilters) | null;
+    career_opportunity?: (ReadCareerOpportunityFilters) | null;
+    career_category?: (ReadCareerCategoryFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCareerOpenPositionHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCareerOpenPositionHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCareerOpenPositionHeroQuery = {
+    filters?: ReadCareerOpenPositionHeroFilters;
+    orders?: ReadCareerOpenPositionHeroOrders;
+    relations?: {
+        career_open_position_hero_id_career_open_position_hero_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCareerOpenPositionHeroRelations = {
+    career_open_position_hero_id_career_open_position_hero_translations?: (boolean | string);
+};
+
+export type ReadCareerOpenPositionOrders = {
+    id?: 'asc' | 'desc';
+    job_title?: 'asc' | 'desc';
+    opening_date?: 'asc' | 'desc';
+    closing_date?: 'asc' | 'desc';
+    status?: 'asc' | 'desc';
+    city?: ('asc' | 'desc' | ReadCityOrders);
+    career_opportunity?: ('asc' | 'desc' | ReadCareerOpportunityOrders);
+    career_category?: ('asc' | 'desc' | ReadCareerCategoryOrders);
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type opening_date = 'asc' | 'desc';
+
+export type closing_date = 'asc' | 'desc';
+
+export type status2 = 'asc' | 'desc';
+
+export type ReadCareerOpenPositionQuery = {
+    filters?: ReadCareerOpenPositionFilters;
+    orders?: ReadCareerOpenPositionOrders;
+    relations?: {
+        city?: ((string | boolean) | ReadCityRelations);
+        career_opportunity?: ((string | boolean) | ReadCareerOpportunityRelations);
+        career_category?: ((string | boolean) | ReadCareerCategoryRelations);
+        career_open_position_id_career_open_position_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCareerOpenPositionRelations = {
+    city?: ((string | boolean) | ReadCityRelations);
+    career_opportunity?: ((string | boolean) | ReadCareerOpportunityRelations);
+    career_category?: ((string | boolean) | ReadCareerCategoryRelations);
+    career_open_position_id_career_open_position_translations?: (boolean | string);
+};
+
+export type ReadCareerOpportunityFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCareerOpportunityOrders = {
+    id?: 'asc' | 'desc';
+    name?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCareerOpportunityQuery = {
+    filters?: ReadCareerOpportunityFilters;
+    orders?: ReadCareerOpportunityOrders;
+    relations?: {
+        career_opportunity_id_career_opportunity_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCareerOpportunityRelations = {
+    career_opportunity_id_career_opportunity_translations?: (boolean | string);
+};
+
+export type ReadCareerWorkingAtBarqFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCareerWorkingAtBarqOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCareerWorkingAtBarqQuery = {
+    filters?: ReadCareerWorkingAtBarqFilters;
+    orders?: ReadCareerWorkingAtBarqOrders;
+    relations?: {
+        career_working_at_barq_id_career_working_at_barq_translations?: (boolean | string);
+        career_working_at_barq_cards_id_career_working_at_barq_cards?: ((boolean | string) | _3);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCareerWorkingAtBarqRelations = {
+    career_working_at_barq_id_career_working_at_barq_translations?: (boolean | string);
+    career_working_at_barq_cards_id_career_working_at_barq_cards?: ((boolean | string) | _3);
+};
+
+export type ReadCityFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    country?: (ReadCountryFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCityOrders = {
+    id?: 'asc' | 'desc';
+    name?: 'asc' | 'desc';
+    country?: ('asc' | 'desc' | ReadCountryOrders);
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCityQuery = {
+    filters?: ReadCityFilters;
+    orders?: ReadCityOrders;
+    relations?: {
+        country?: ((string | boolean) | ReadCountryRelations);
+        city_id_city_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCityRelations = {
+    country?: ((string | boolean) | ReadCountryRelations);
+    city_id_city_translations?: (boolean | string);
+};
+
 export type ReadCloudSectionFilters = {
     id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -2660,10 +6523,6 @@ export type ReadCloudSectionFilters = {
     sub_headline?: {
         $val?: (string | Array<(string)>);
         $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
-    } | null;
-    image_id?: {
-        $val?: ((string | number) | Array<(string | number)>);
-        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
     } | null;
     logo_id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -2682,7 +6541,6 @@ export type ReadCloudSectionFilters = {
 export type ReadCloudSectionOrders = {
     id?: 'asc' | 'desc';
     sub_headline?: 'asc' | 'desc';
-    image_id?: 'asc' | 'desc';
     logo_id?: 'asc' | 'desc';
     created_at?: 'asc' | 'desc';
     updated_at?: 'asc' | 'desc';
@@ -2693,7 +6551,6 @@ export type ReadCloudSectionQuery = {
     orders?: ReadCloudSectionOrders;
     relations?: {
         cloud_id_cloud_translations?: (boolean | string);
-        image?: ((string | boolean) | ReadMediaRelations);
         logo?: ((string | boolean) | ReadMediaRelations);
         cloud_bullets_id_cloud_bullets?: ((string | boolean) | {
     cloud_bullets_id_cloud_bullets_translations?: (boolean | string);
@@ -2708,7 +6565,6 @@ export type ReadCloudSectionQuery = {
 
 export type ReadCloudSectionRelations = {
     cloud_id_cloud_translations?: (boolean | string);
-    image?: ((string | boolean) | ReadMediaRelations);
     logo?: ((string | boolean) | ReadMediaRelations);
     cloud_bullets_id_cloud_bullets?: ((string | boolean) | {
     cloud_bullets_id_cloud_bullets_translations?: (boolean | string);
@@ -2784,8 +6640,6 @@ export type ReadContactUsHearAboutDropOrders = {
     deleted_at?: 'asc' | 'desc';
 };
 
-export type deleted_at = 'asc' | 'desc';
-
 export type ReadContactUsHearAboutDropQuery = {
     filters?: ReadContactUsHearAboutDropFilters;
     orders?: ReadContactUsHearAboutDropOrders;
@@ -2853,6 +6707,56 @@ export type ReadContactUsHeroRelations = {
     contact_us_hero_id_contact_us_hero_translations?: (boolean | string);
 };
 
+export type ReadContactUsOfficesFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadContactUsOfficesOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadContactUsOfficesQuery = {
+    filters?: ReadContactUsOfficesFilters;
+    orders?: ReadContactUsOfficesOrders;
+    relations?: {
+        contact_us_offices_id_contact_us_offices_translations?: (boolean | string);
+        contact_us_offices_bullets_id_contact_us_offices_bullets?: ((string | boolean) | {
+    contact_us_offices_bullets_id_contact_us_offices_bullets_translations?: (boolean | string);
+    icon?: (boolean | string);
+});
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadContactUsOfficesRelations = {
+    contact_us_offices_id_contact_us_offices_translations?: (boolean | string);
+    contact_us_offices_bullets_id_contact_us_offices_bullets?: ((string | boolean) | {
+    contact_us_offices_bullets_id_contact_us_offices_bullets_translations?: (boolean | string);
+    icon?: (boolean | string);
+});
+};
+
 export type ReadContactUsOrders = {
     id?: 'asc' | 'desc';
     name?: 'asc' | 'desc';
@@ -2865,12 +6769,6 @@ export type ReadContactUsOrders = {
     created_at?: 'asc' | 'desc';
     updated_at?: 'asc' | 'desc';
 };
-
-export type email = 'asc' | 'desc';
-
-export type phone_number = 'asc' | 'desc';
-
-export type phone_number_key = 'asc' | 'desc';
 
 export type message = 'asc' | 'desc';
 
@@ -2980,6 +6878,52 @@ export type ReadControlSectionRelations = {
 });
 };
 
+export type ReadCoreManagedServicesFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    logo?: (ReadMediaFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadCoreManagedServicesOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    logo?: ('asc' | 'desc' | ReadMediaOrders);
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadCoreManagedServicesQuery = {
+    filters?: ReadCoreManagedServicesFilters;
+    orders?: ReadCoreManagedServicesOrders;
+    relations?: {
+        logo?: ((string | boolean) | ReadMediaRelations);
+        core_managed_services_id_core_managed_services_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadCoreManagedServicesRelations = {
+    logo?: ((string | boolean) | ReadMediaRelations);
+    core_managed_services_id_core_managed_services_translations?: (boolean | string);
+};
+
 export type ReadCountryFilters = {
     id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -3011,6 +6955,7 @@ export type ReadCountryQuery = {
     orders?: ReadCountryOrders;
     relations?: {
         country_id_country_translations?: (boolean | string);
+        country_id_cities?: (boolean | string);
     };
     pagination?: {
         skip?: (string | number);
@@ -3020,6 +6965,7 @@ export type ReadCountryQuery = {
 
 export type ReadCountryRelations = {
     country_id_country_translations?: (boolean | string);
+    country_id_cities?: (boolean | string);
 };
 
 export type ReadCybersecurityDataCenterFilters = {
@@ -3441,6 +7387,361 @@ export type ReadEnvironmentalSustainabilityRelations = {
 });
 };
 
+export type ReadEventFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    crmId?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    registration_StartDate?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    registration_EndDate?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    event_StartDate?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    event_EndDate?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    country?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    city?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    location?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    shortDescription?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    Latitude?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    Longitude?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    Solution?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    Service?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    CampaignType?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadEventJoinusFormFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    first_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    last_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    email?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone_number?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone_number_key?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    position?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    company_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    event_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadEventJoinusFormOrders = {
+    id?: 'asc' | 'desc';
+    first_name?: 'asc' | 'desc';
+    last_name?: 'asc' | 'desc';
+    email?: 'asc' | 'desc';
+    phone_number?: 'asc' | 'desc';
+    phone_number_key?: 'asc' | 'desc';
+    position?: 'asc' | 'desc';
+    company_name?: 'asc' | 'desc';
+    event_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type company_name = 'asc' | 'desc';
+
+export type event_id = 'asc' | 'desc';
+
+export type ReadEventJoinusFormQuery = {
+    filters?: ReadEventJoinusFormFilters;
+    orders?: ReadEventJoinusFormOrders;
+    relations?: {
+        event?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadEventJoinusFormRelations = {
+    event?: (boolean | string);
+};
+
+export type ReadEventJoinUsHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadEventJoinUsHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadEventJoinUsHeroQuery = {
+    filters?: ReadEventJoinUsHeroFilters;
+    orders?: ReadEventJoinUsHeroOrders;
+    relations?: {
+        event_join_us_hero_id_event_join_us_hero_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadEventJoinUsHeroRelations = {
+    event_join_us_hero_id_event_join_us_hero_translations?: (boolean | string);
+};
+
+export type ReadEventOrders = {
+    id?: 'asc' | 'desc';
+    crmId?: 'asc' | 'desc';
+    name?: 'asc' | 'desc';
+    registration_StartDate?: 'asc' | 'desc';
+    registration_EndDate?: 'asc' | 'desc';
+    event_StartDate?: 'asc' | 'desc';
+    event_EndDate?: 'asc' | 'desc';
+    country?: 'asc' | 'desc';
+    city?: 'asc' | 'desc';
+    location?: 'asc' | 'desc';
+    shortDescription?: 'asc' | 'desc';
+    Latitude?: 'asc' | 'desc';
+    Longitude?: 'asc' | 'desc';
+    Solution?: 'asc' | 'desc';
+    Service?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type registration_StartDate = 'asc' | 'desc';
+
+export type registration_EndDate = 'asc' | 'desc';
+
+export type event_StartDate = 'asc' | 'desc';
+
+export type event_EndDate = 'asc' | 'desc';
+
+export type country = 'asc' | 'desc';
+
+export type city = 'asc' | 'desc';
+
+export type location = 'asc' | 'desc';
+
+export type Latitude = 'asc' | 'desc';
+
+export type Longitude = 'asc' | 'desc';
+
+export type Solution = 'asc' | 'desc';
+
+export type Service = 'asc' | 'desc';
+
+export type ReadEventQuery = {
+    filters?: ReadEventFilters;
+    orders?: ReadEventOrders;
+    relations?: {
+        agendaItems?: (boolean | string);
+        event_joinus_form?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadEventRelations = {
+    agendaItems?: (boolean | string);
+    event_joinus_form?: (boolean | string);
+};
+
+export type ReadEventsPartnerFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadEventsPartnerOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadEventsPartnerQuery = {
+    filters?: ReadEventsPartnerFilters;
+    orders?: ReadEventsPartnerOrders;
+    relations?: {
+        events_partner_id_events_partner_translations?: (boolean | string);
+        logos?: ((string | boolean) | ReadMediaRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadEventsPartnerRelations = {
+    events_partner_id_events_partner_translations?: (boolean | string);
+    logos?: ((string | boolean) | ReadMediaRelations);
+};
+
+export type ReadEventsSpeakersFilters = {
+    id?: (number);
+    title?: string;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type ReadEventsSpeakersOrders = {
+    id?: 'ASC' | 'DESC';
+    title?: 'ASC' | 'DESC';
+    created_at?: 'ASC' | 'DESC';
+    updated_at?: 'ASC' | 'DESC';
+};
+
+export type ReadEventsSpeakersQuery = {
+    filters?: ReadEventsSpeakersFilters;
+    orders?: ReadEventsSpeakersOrders;
+    relations?: {
+        events_speakers_id_events_speakers_translations?: (boolean | string);
+        events_speakers_cards_id_events_speakers_cards?: ((string | boolean) | {
+    events_speakers_cards_id_events_speakers_cards_translations?: (boolean | string);
+    image?: (boolean | string);
+});
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadEventsSpeakersRelations = {
+    events_speakers_id_events_speakers_translations?: (boolean | string);
+    events_speakers_cards_id_events_speakers_cards?: ((string | boolean) | {
+    events_speakers_cards_id_events_speakers_cards_translations?: (boolean | string);
+    image?: (boolean | string);
+});
+};
+
 export type ReadFooterContactsFilters = {
     id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -3535,6 +7836,57 @@ export type ReadFooterLocationsRelations = {
     footer_locations_id_footer_locations_translations?: (boolean | string);
 };
 
+export type ReadFooterTermsFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    terms?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    file_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadFooterTermsOrders = {
+    id?: 'asc' | 'desc';
+    terms?: 'asc' | 'desc';
+    file_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type terms = 'asc' | 'desc';
+
+export type ReadFooterTermsQuery = {
+    filters?: ReadFooterTermsFilters;
+    orders?: ReadFooterTermsOrders;
+    relations?: {
+        footer_terms_id_footer_terms_translations?: (boolean | string);
+        file?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadFooterTermsRelations = {
+    footer_terms_id_footer_terms_translations?: (boolean | string);
+    file?: (boolean | string);
+};
+
 export type ReadGlobalCommitmentFilters = {
     id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -3626,8 +7978,6 @@ export type ReadHeroOrders = {
 
 export type headline = 'asc' | 'desc';
 
-export type cta_label = 'asc' | 'desc';
-
 export type ReadHeroQuery = {
     filters?: ReadHeroFilters;
     orders?: ReadHeroOrders;
@@ -3644,6 +7994,44 @@ export type ReadHeroQuery = {
 export type ReadHeroRelations = {
     media?: ((string | boolean) | ReadMediaRelations);
     hero_id_hero_translations?: (boolean | string);
+};
+
+export type ReadHomeAwardsFilters = {
+    id?: (number);
+    description?: string;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type ReadHomeAwardsOrders = {
+    id?: 'ASC' | 'DESC';
+    description?: 'ASC' | 'DESC';
+    created_at?: 'ASC' | 'DESC';
+    updated_at?: 'ASC' | 'DESC';
+};
+
+export type ReadHomeAwardsQuery = {
+    filters?: ReadHomeAwardsFilters;
+    orders?: ReadHomeAwardsOrders;
+    relations?: {
+        home_awards_id_home_awards_translations?: (boolean | string);
+        home_awards_id_home_awards_cards?: ((string | boolean) | {
+    home_awards_cards_id_home_awards_cards_translations?: (boolean | string);
+    icon?: (boolean | string);
+});
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadHomeAwardsRelations = {
+    home_awards_id_home_awards_translations?: (boolean | string);
+    home_awards_id_home_awards_cards?: ((string | boolean) | {
+    home_awards_cards_id_home_awards_cards_translations?: (boolean | string);
+    icon?: (boolean | string);
+});
 };
 
 export type ReadIdentityManagementFilters = {
@@ -3852,54 +8240,28 @@ export type ReadLandingNumbersRelations = {
     landing_numbers_id_landing_numbers_translations?: (boolean | string);
 };
 
-export type ReadLeadershipFilters = {
-    id?: {
-        $val?: ((string | number) | Array<(string | number)>);
-        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
-    } | null;
-    quote?: {
-        $val?: (string | Array<(string)>);
-        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
-    } | null;
-    name?: {
-        $val?: (string | Array<(string)>);
-        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
-    } | null;
-    position?: {
-        $val?: (string | Array<(string)>);
-        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
-    } | null;
-    media?: (ReadMediaFilters) | null;
-    created_at?: {
-        $val?: string;
-        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
-    } | null;
-    updated_at?: {
-        $val?: string;
-        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
-    } | null;
+export type ReadLeadershipExecutiveTeamFilters = {
+    id?: number;
+    title?: string;
+    description?: string;
+    created_at?: string;
+    updated_at?: string;
 };
 
-export type ReadLeadershipOrders = {
-    id?: 'asc' | 'desc';
-    quote?: 'asc' | 'desc';
-    name?: 'asc' | 'desc';
-    position?: 'asc' | 'desc';
-    media?: ('asc' | 'desc' | ReadMediaOrders);
-    created_at?: 'asc' | 'desc';
-    updated_at?: 'asc' | 'desc';
+export type ReadLeadershipExecutiveTeamOrders = {
+    id?: ("ASC" | "DESC");
+    title?: ("ASC" | "DESC");
+    description?: ("ASC" | "DESC");
+    created_at?: ("ASC" | "DESC");
+    updated_at?: ("ASC" | "DESC");
 };
 
-export type quote = 'asc' | 'desc';
-
-export type position = 'asc' | 'desc';
-
-export type ReadLeadershipQuery = {
-    filters?: ReadLeadershipFilters;
-    orders?: ReadLeadershipOrders;
+export type ReadLeadershipExecutiveTeamQuery = {
+    filters?: ReadLeadershipExecutiveTeamFilters;
+    orders?: ReadLeadershipExecutiveTeamOrders;
     relations?: {
-        media?: ((string | boolean) | ReadMediaRelations);
-        leadership_id_leadership_translations?: (boolean | string);
+        leadership_executive_team_id_leadership_executive_team_translations?: (boolean | string);
+        leadership_executive_team_cards_id_leadership_executive_team_cards?: ((string | boolean) | _4);
     };
     pagination?: {
         skip?: (string | number);
@@ -3907,9 +8269,43 @@ export type ReadLeadershipQuery = {
     };
 };
 
-export type ReadLeadershipRelations = {
-    media?: ((string | boolean) | ReadMediaRelations);
-    leadership_id_leadership_translations?: (boolean | string);
+export type ReadLeadershipExecutiveTeamRelations = {
+    leadership_executive_team_id_leadership_executive_team_translations?: (boolean | string);
+    leadership_executive_team_cards_id_leadership_executive_team_cards?: ((string | boolean) | _4);
+};
+
+export type ReadLeadershipTeamFilters = {
+    id?: number;
+    title?: string;
+    description?: string;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type ReadLeadershipTeamOrders = {
+    id?: ("ASC" | "DESC");
+    title?: ("ASC" | "DESC");
+    description?: ("ASC" | "DESC");
+    created_at?: ("ASC" | "DESC");
+    updated_at?: ("ASC" | "DESC");
+};
+
+export type ReadLeadershipTeamQuery = {
+    filters?: ReadLeadershipTeamFilters;
+    orders?: ReadLeadershipTeamOrders;
+    relations?: {
+        leadership_team_id_leadership_team_translations?: (boolean | string);
+        leadership_team_cards_id_leadership_team_cards?: ((string | boolean) | _5);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadLeadershipTeamRelations = {
+    leadership_team_id_leadership_team_translations?: (boolean | string);
+    leadership_team_cards_id_leadership_team_cards?: ((string | boolean) | _5);
 };
 
 export type ReadMainSocialFilters = {
@@ -3957,6 +8353,364 @@ export type ReadMainSocialQuery = {
 
 export type ReadMainSocialRelations = {
     main_social_id_main_social_translations?: (boolean | string);
+};
+
+export type ReadManagedCybersecurityServicesDetailsFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    cta_button_text?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    logo?: (ReadMediaFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadManagedCybersecurityServicesDetailsOrders = {
+    id?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    cta_button_text?: 'asc' | 'desc';
+    logo?: ('asc' | 'desc' | ReadMediaOrders);
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type cta_button_text = 'asc' | 'desc';
+
+export type ReadManagedCybersecurityServicesDetailsQuery = {
+    filters?: ReadManagedCybersecurityServicesDetailsFilters;
+    orders?: ReadManagedCybersecurityServicesDetailsOrders;
+    relations?: {
+        logo?: ((string | boolean) | ReadMediaRelations);
+        managed_cybersecurity_services_details_id_managed_cybersecurity_services_details_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadManagedCybersecurityServicesDetailsRelations = {
+    logo?: ((string | boolean) | ReadMediaRelations);
+    managed_cybersecurity_services_details_id_managed_cybersecurity_services_details_translations?: (boolean | string);
+};
+
+export type ReadManagedGrcServicesDetailsFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadManagedGrcServicesDetailsOrders = {
+    id?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadManagedGrcServicesDetailsQuery = {
+    filters?: ReadManagedGrcServicesDetailsFilters;
+    orders?: ReadManagedGrcServicesDetailsOrders;
+    relations?: {
+        managed_grc_services_details_id_managed_grc_services_details_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadManagedGrcServicesDetailsRelations = {
+    managed_grc_services_details_id_managed_grc_services_details_translations?: (boolean | string);
+};
+
+export type ReadManagedServiceCardsFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    bullet_one?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    bullet_two?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    type?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    image?: (ReadMediaFilters) | null;
+    logo?: (ReadMediaFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadManagedServiceCardsOrders = {
+    id?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    bullet_one?: 'asc' | 'desc';
+    bullet_two?: 'asc' | 'desc';
+    type?: 'asc' | 'desc';
+    image?: ('asc' | 'desc' | ReadMediaOrders);
+    logo?: ('asc' | 'desc' | ReadMediaOrders);
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type bullet_one = 'asc' | 'desc';
+
+export type bullet_two = 'asc' | 'desc';
+
+export type type2 = 'asc' | 'desc';
+
+export type ReadManagedServiceCardsQuery = {
+    filters?: ReadManagedServiceCardsFilters;
+    orders?: ReadManagedServiceCardsOrders;
+    relations?: {
+        image?: ((string | boolean) | ReadMediaRelations);
+        logo?: ((string | boolean) | ReadMediaRelations);
+        managed_service_cards_id_managed_service_cards_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadManagedServiceCardsRelations = {
+    image?: ((string | boolean) | ReadMediaRelations);
+    logo?: ((string | boolean) | ReadMediaRelations);
+    managed_service_cards_id_managed_service_cards_translations?: (boolean | string);
+};
+
+export type ReadManagedServiceDownloadFormFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    first_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    last_name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    email?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone_number?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    phone_number_key?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    position?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    managed_soc_services_details?: (ReadManagedSocServicesDetailsFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    deleted_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadManagedServiceDownloadFormOrders = {
+    id?: 'asc' | 'desc';
+    first_name?: 'asc' | 'desc';
+    last_name?: 'asc' | 'desc';
+    email?: 'asc' | 'desc';
+    phone_number?: 'asc' | 'desc';
+    phone_number_key?: 'asc' | 'desc';
+    position?: 'asc' | 'desc';
+    managed_soc_services_details?: ('asc' | 'desc' | ReadManagedSocServicesDetailsOrders);
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+    deleted_at?: 'asc' | 'desc';
+};
+
+export type ReadManagedServiceDownloadFormQuery = {
+    filters?: ReadManagedServiceDownloadFormFilters;
+    orders?: ReadManagedServiceDownloadFormOrders;
+    relations?: {
+        managed_soc_services_details?: ((string | boolean) | ReadManagedSocServicesDetailsRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadManagedServiceDownloadFormRelations = {
+    managed_soc_services_details?: ((string | boolean) | ReadManagedSocServicesDetailsRelations);
+};
+
+export type ReadManagedServiceHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadManagedServiceHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadManagedServiceHeroQuery = {
+    filters?: ReadManagedServiceHeroFilters;
+    orders?: ReadManagedServiceHeroOrders;
+    relations?: {
+        managed_service_hero_id_managed_service_hero_translations?: (boolean | string);
+        image?: ((string | boolean) | ReadMediaRelations);
+        logos?: ((string | boolean) | ReadMediaRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadManagedServiceHeroRelations = {
+    managed_service_hero_id_managed_service_hero_translations?: (boolean | string);
+    image?: ((string | boolean) | ReadMediaRelations);
+    logos?: ((string | boolean) | ReadMediaRelations);
+};
+
+export type ReadManagedSocServicesDetailsFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    cta_button_text?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    logo?: (ReadMediaFilters) | null;
+    file?: (ReadMediaFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadManagedSocServicesDetailsOrders = {
+    id?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    cta_button_text?: 'asc' | 'desc';
+    logo?: ('asc' | 'desc' | ReadMediaOrders);
+    file?: ('asc' | 'desc' | ReadMediaOrders);
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadManagedSocServicesDetailsQuery = {
+    filters?: ReadManagedSocServicesDetailsFilters;
+    orders?: ReadManagedSocServicesDetailsOrders;
+    relations?: {
+        logo?: ((string | boolean) | ReadMediaRelations);
+        file?: ((string | boolean) | ReadMediaRelations);
+        managed_soc_services_details_id_managed_soc_services_details_translations?: (boolean | string);
+        managed_soc_services_details_id_managed_service_download_form?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadManagedSocServicesDetailsRelations = {
+    logo?: ((string | boolean) | ReadMediaRelations);
+    file?: ((string | boolean) | ReadMediaRelations);
+    managed_soc_services_details_id_managed_soc_services_details_translations?: (boolean | string);
+    managed_soc_services_details_id_managed_service_download_form?: (boolean | string);
 };
 
 export type ReadMediaFilters = {
@@ -4115,6 +8869,176 @@ export type ReadNetworkSectionRelations = {
 });
 };
 
+export type ReadNewsroomCardsFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    date_time?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    is_featured?: {
+        $val?: (string | boolean);
+        $op: 'Is' | 'IsNot' | 'IsNull' | 'IsNotNull';
+    } | null;
+    newsroom_category_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadNewsroomCardsOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    date_time?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    is_featured?: 'asc' | 'desc';
+    newsroom_category_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type date_time = 'asc' | 'desc';
+
+export type is_featured = 'asc' | 'desc';
+
+export type newsroom_category_id = 'asc' | 'desc';
+
+export type ReadNewsroomCardsQuery = {
+    filters?: ReadNewsroomCardsFilters;
+    orders?: ReadNewsroomCardsOrders;
+    relations?: {
+        newsroom_cards_id_newsroom_cards_translations?: (boolean | string);
+        image?: (boolean | string);
+        home_image?: (boolean | string);
+        newsroom_category?: ((string | boolean) | ReadNewsroomCategoryRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadNewsroomCardsRelations = {
+    newsroom_cards_id_newsroom_cards_translations?: (boolean | string);
+    image?: (boolean | string);
+    home_image?: (boolean | string);
+    newsroom_category?: ((string | boolean) | ReadNewsroomCategoryRelations);
+};
+
+export type ReadNewsroomCategoryFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    name?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadNewsroomCategoryOrders = {
+    id?: 'asc' | 'desc';
+    name?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadNewsroomCategoryQuery = {
+    filters?: ReadNewsroomCategoryFilters;
+    orders?: ReadNewsroomCategoryOrders;
+    relations?: {
+        newsroom_category_id_newsroom_category_translations?: (boolean | string);
+        newsroom_cards?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadNewsroomCategoryRelations = {
+    newsroom_category_id_newsroom_category_translations?: (boolean | string);
+    newsroom_cards?: (boolean | string);
+};
+
+export type ReadNewsroomHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadNewsroomHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadNewsroomHeroQuery = {
+    filters?: ReadNewsroomHeroFilters;
+    orders?: ReadNewsroomHeroOrders;
+    relations?: {
+        newsroom_hero_id_newsroom_hero_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadNewsroomHeroRelations = {
+    newsroom_hero_id_newsroom_hero_translations?: (boolean | string);
+};
+
 export type ReadOneAboutBarqCoreValuesQuery = {
     relations?: (ReadAboutBarqCoreValuesRelations) | null;
 };
@@ -4133,6 +9057,14 @@ export type ReadOneAboutBarqMilestonesQuery = {
 
 export type ReadOneAboutBarqMissionVisionQuery = {
     relations?: (ReadAboutBarqMissionVisionRelations) | null;
+};
+
+export type ReadOneAdditionalManagedServicesOneQuery = {
+    relations?: ReadAdditionalManagedServicesOneRelations;
+};
+
+export type ReadOneAdditionalManagedServicesTwoQuery = {
+    relations?: ReadAdditionalManagedServicesTwoRelations;
 };
 
 export type ReadOneAlliancesClientsQuery = {
@@ -4167,12 +9099,116 @@ export type ReadOneAwardsHeadQuery = {
     relations?: (ReadAwardsHeadRelations) | null;
 };
 
+export type ReadOneBarqAcademyFoundationInternshipFormDataQuery = {
+    relations?: (ReadBarqAcademyFoundationInternshipFormDataRelations) | null;
+};
+
+export type ReadOneBarqAcademyFoundationInternshipFormQuery = {
+    relations?: (ReadBarqAcademyFoundationInternshipFormRelations) | null;
+};
+
+export type ReadOneBarqAcademyFoundationTracksFormDataQuery = {
+    relations?: (ReadBarqAcademyFoundationTracksFormDataRelations) | null;
+};
+
+export type ReadOneBarqAcademyFoundationTracksFormQuery = {
+    relations?: (ReadBarqAcademyFoundationTracksFormRelations) | null;
+};
+
+export type ReadOneBarqAcademyHeroQuery = {
+    relations?: (ReadBarqAcademyHeroRelations) | null;
+};
+
+export type ReadOneBarqAcademyHighlightsQuery = {
+    relations?: (ReadBarqAcademyHighlightsRelations) | null;
+};
+
+export type ReadOneBarqAcademyProgramsOpportunitiesInternshipQuery = {
+    relations?: (ReadBarqAcademyProgramsOpportunitiesInternshipRelations) | null;
+};
+
+export type ReadOneBarqAcademyProgramsOpportunitiesQuery = {
+    relations?: (ReadBarqAcademyProgramsOpportunitiesRelations) | null;
+};
+
 export type ReadOneBusinessAutomationQuery = {
     relations?: (ReadBusinessAutomationRelations) | null;
 };
 
+export type ReadOneCampaignFormQuery = {
+    relations?: (ReadCampaignFormRelations) | null;
+};
+
+export type ReadOneCampaignLayoutOneQuery = {
+    relations?: (ReadCampaignLayoutOneRelations) | null;
+};
+
+export type ReadOneCampaignLayoutThreeHeroQuery = {
+    relations?: (ReadCampaignLayoutThreeHeroRelations) | null;
+};
+
+export type ReadOneCampaignLayoutThreeSectionFiveQuery = {
+    relations?: (ReadCampaignLayoutThreeSectionFiveRelations) | null;
+};
+
+export type ReadOneCampaignLayoutThreeSectionFourQuery = {
+    relations?: (ReadCampaignLayoutThreeSectionFourRelations) | null;
+};
+
+export type ReadOneCampaignLayoutThreeSectionThreeQuery = {
+    relations?: (ReadCampaignLayoutThreeSectionThreeRelations) | null;
+};
+
+export type ReadOneCampaignLayoutThreeSectionTwoQuery = {
+    relations?: (ReadCampaignLayoutThreeSectionTwoRelations) | null;
+};
+
+export type ReadOneCampaignLayoutTwoQuery = {
+    relations?: (ReadCampaignLayoutTwoRelations) | null;
+};
+
+export type ReadOneCampaignQuery = {
+    relations?: (ReadCampaignRelations) | null;
+};
+
 export type ReadOneCardSocialQuery = {
     relations?: (ReadCardSocialRelations) | null;
+};
+
+export type ReadOneCareerApplicationFormQuery = {
+    relations?: (ReadCareerApplicationFormRelations) | null;
+};
+
+export type ReadOneCareerCategoryQuery = {
+    relations?: (ReadCareerCategoryRelations) | null;
+};
+
+export type ReadOneCareerHeroQuery = {
+    relations?: (ReadCareerHeroRelations) | null;
+};
+
+export type ReadOneCareerJobDetailQuery = {
+    relations?: (ReadCareerJobDetailRelations) | null;
+};
+
+export type ReadOneCareerOpenPositionHeroQuery = {
+    relations?: (ReadCareerOpenPositionHeroRelations) | null;
+};
+
+export type ReadOneCareerOpenPositionQuery = {
+    relations?: (ReadCareerOpenPositionRelations) | null;
+};
+
+export type ReadOneCareerOpportunityQuery = {
+    relations?: (ReadCareerOpportunityRelations) | null;
+};
+
+export type ReadOneCareerWorkingAtBarqQuery = {
+    relations?: ReadCareerWorkingAtBarqRelations;
+};
+
+export type ReadOneCityQuery = {
+    relations?: (ReadCityRelations) | null;
 };
 
 export type ReadOneCloudSectionQuery = {
@@ -4187,6 +9223,10 @@ export type ReadOneContactUsHeroQuery = {
     relations?: (ReadContactUsHeroRelations) | null;
 };
 
+export type ReadOneContactUsOfficesQuery = {
+    relations?: (ReadContactUsOfficesRelations) | null;
+};
+
 export type ReadOneContactUsQuery = {
     relations?: (ReadContactUsRelations) | null;
 };
@@ -4197,6 +9237,10 @@ export type ReadOneContactUsRequestTypeQuery = {
 
 export type ReadOneControlSectionQuery = {
     relations?: (ReadControlSectionRelations) | null;
+};
+
+export type ReadOneCoreManagedServicesQuery = {
+    relations?: (ReadCoreManagedServicesRelations) | null;
 };
 
 export type ReadOneCountryQuery = {
@@ -4231,6 +9275,26 @@ export type ReadOneEnvironmentalSustainabilityQuery = {
     relations?: (ReadEnvironmentalSustainabilityRelations) | null;
 };
 
+export type ReadOneEventJoinusFormQuery = {
+    relations?: (ReadEventJoinusFormRelations) | null;
+};
+
+export type ReadOneEventJoinUsHeroQuery = {
+    relations?: (ReadEventJoinUsHeroRelations) | null;
+};
+
+export type ReadOneEventQuery = {
+    relations?: (ReadEventRelations) | null;
+};
+
+export type ReadOneEventsPartnerQuery = {
+    relations?: (ReadEventsPartnerRelations) | null;
+};
+
+export type ReadOneEventsSpeakersQuery = {
+    relations?: (ReadEventsSpeakersRelations) | null;
+};
+
 export type ReadOneFooterContactsQuery = {
     relations?: (ReadFooterContactsRelations) | null;
 };
@@ -4239,12 +9303,20 @@ export type ReadOneFooterLocationsQuery = {
     relations?: (ReadFooterLocationsRelations) | null;
 };
 
+export type ReadOneFooterTermsQuery = {
+    relations?: (ReadFooterTermsRelations) | null;
+};
+
 export type ReadOneGlobalCommitmentQuery = {
     relations?: (ReadGlobalCommitmentRelations) | null;
 };
 
 export type ReadOneHeroQuery = {
     relations?: (ReadHeroRelations) | null;
+};
+
+export type ReadOneHomeAwardsQuery = {
+    relations?: (ReadHomeAwardsRelations) | null;
 };
 
 export type ReadOneIdentityManagementQuery = {
@@ -4263,12 +9335,40 @@ export type ReadOneLandingNumbersQuery = {
     relations?: (ReadLandingNumbersRelations) | null;
 };
 
-export type ReadOneLeadershipQuery = {
-    relations?: (ReadLeadershipRelations) | null;
+export type ReadOneLeadershipExecutiveTeamQuery = {
+    relations?: ReadLeadershipExecutiveTeamRelations;
+};
+
+export type ReadOneLeadershipTeamQuery = {
+    relations?: ReadLeadershipTeamRelations;
 };
 
 export type ReadOneMainSocialQuery = {
     relations?: (ReadMainSocialRelations) | null;
+};
+
+export type ReadOneManagedCybersecurityServicesDetailsQuery = {
+    relations?: (ReadManagedCybersecurityServicesDetailsRelations) | null;
+};
+
+export type ReadOneManagedGrcServicesDetailsQuery = {
+    relations?: (ReadManagedGrcServicesDetailsRelations) | null;
+};
+
+export type ReadOneManagedServiceCardsQuery = {
+    relations?: (ReadManagedServiceCardsRelations) | null;
+};
+
+export type ReadOneManagedServiceDownloadFormQuery = {
+    relations?: (ReadManagedServiceDownloadFormRelations) | null;
+};
+
+export type ReadOneManagedServiceHeroQuery = {
+    relations?: (ReadManagedServiceHeroRelations) | null;
+};
+
+export type ReadOneManagedSocServicesDetailsQuery = {
+    relations?: (ReadManagedSocServicesDetailsRelations) | null;
 };
 
 export type ReadOneMediaQuery = {
@@ -4281,6 +9381,18 @@ export type ReadOneMobilityQuery = {
 
 export type ReadOneNetworkSectionQuery = {
     relations?: (ReadNetworkSectionRelations) | null;
+};
+
+export type ReadOneNewsroomCardsQuery = {
+    relations?: (ReadNewsroomCardsRelations) | null;
+};
+
+export type ReadOneNewsroomCategoryQuery = {
+    relations?: (ReadNewsroomCategoryRelations) | null;
+};
+
+export type ReadOneNewsroomHeroQuery = {
+    relations?: (ReadNewsroomHeroRelations) | null;
 };
 
 export type ReadOneOperationIntelligenceQuery = {
@@ -4299,6 +9411,19 @@ export type ReadOnePermissionsQuery = {
         permission_permission_translations?: (boolean | string);
         permission_role_permissions?: ((string | boolean) | ReadRolePermissionsRelations);
     };
+};
+
+export type ReadOneResourceCardsQuery = {
+    relations?: {
+        image?: boolean;
+        resource_cards_id_resource_cards_translations?: boolean;
+    };
+};
+
+export type ReadOneResourceHeroQuery = {
+    relations?: {
+        resource_hero_id_resource_hero_translations?: (boolean | string);
+    } | null;
 };
 
 export type ReadOneRolePermissionsQuery = {
@@ -4328,9 +9453,32 @@ export type ReadOneSoftwareDefinedNetworkQuery = {
     } | null;
 };
 
+export type ReadOneSolutionsAndServicesHeroQuery = {
+    relations?: {
+        solutions_and_services_hero_id_solutions_and_services_hero_translations?: (boolean | string);
+        media?: ((string | boolean) | ReadMediaRelations);
+    } | null;
+};
+
 export type ReadOneSolutionsQuery = {
     relations?: {
         solutions_id_solutions_translations?: (boolean | string);
+    } | null;
+};
+
+export type ReadOneSuccessStoryCaseStudiesQuery = {
+    relations?: {
+        success_story_case_studies_id_success_story_case_studies_translations?: (boolean | string);
+        image?: (boolean | string);
+        home_image?: (boolean | string);
+        industries?: (boolean | string);
+        country?: (boolean | string);
+    } | null;
+};
+
+export type ReadOneSuccessStoryHeroQuery = {
+    relations?: {
+        success_story_hero_id_success_story_hero_translations?: (boolean | string);
     } | null;
 };
 
@@ -4456,6 +9604,93 @@ export type ReadPermissionsQuery = {
 export type ReadPermissionsRelations = {
     permission_permission_translations?: (boolean | string);
     permission_role_permissions?: ((string | boolean) | ReadRolePermissionsRelations);
+};
+
+export type ReadResourceCardsFilters = {
+    id?: number;
+    title?: string;
+    description?: string;
+    cta_label?: string;
+    date_time?: string;
+    views_number?: number;
+    image_id?: number;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type ReadResourceCardsOrders = {
+    id?: ("ASC" | "DESC");
+    title?: ("ASC" | "DESC");
+    description?: ("ASC" | "DESC");
+    cta_label?: ("ASC" | "DESC");
+    date_time?: ("ASC" | "DESC");
+    views_number?: ("ASC" | "DESC");
+    image_id?: ("ASC" | "DESC");
+    created_at?: ("ASC" | "DESC");
+    updated_at?: ("ASC" | "DESC");
+};
+
+export type ReadResourceCardsQuery = {
+    filters?: ReadResourceCardsFilters;
+    orders?: ReadResourceCardsOrders;
+    relations?: {
+        image?: boolean;
+        resource_cards_id_resource_cards_translations?: boolean;
+    };
+    page?: number;
+    limit?: number;
+};
+
+export type ReadResourceCardsRelations = {
+    image?: boolean;
+    resource_cards_id_resource_cards_translations?: boolean;
+};
+
+export type ReadResourceHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadResourceHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadResourceHeroQuery = {
+    filters?: ReadResourceHeroFilters;
+    orders?: ReadResourceHeroOrders;
+    relations?: {
+        resource_hero_id_resource_hero_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadResourceHeroRelations = {
+    resource_hero_id_resource_hero_translations?: (boolean | string);
 };
 
 export type ReadRolePermissionsFilters = {
@@ -4605,6 +9840,60 @@ export type ReadSoftwareDefinedNetworkRelations = {
 });
 };
 
+export type ReadSolutionsAndServicesHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    media_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadSolutionsAndServicesHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    media_id?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadSolutionsAndServicesHeroQuery = {
+    filters?: ReadSolutionsAndServicesHeroFilters;
+    orders?: ReadSolutionsAndServicesHeroOrders;
+    relations?: {
+        solutions_and_services_hero_id_solutions_and_services_hero_translations?: (boolean | string);
+        media?: ((string | boolean) | ReadMediaRelations);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadSolutionsAndServicesHeroRelations = {
+    solutions_and_services_hero_id_solutions_and_services_hero_translations?: (boolean | string);
+    media?: ((string | boolean) | ReadMediaRelations);
+};
+
 export type ReadSolutionsFilters = {
     id?: {
         $val?: ((string | number) | Array<(string | number)>);
@@ -4645,6 +9934,152 @@ export type ReadSolutionsQuery = {
 
 export type ReadSolutionsRelations = {
     solutions_id_solutions_translations?: (boolean | string);
+};
+
+export type ReadSuccessStoryCaseStudiesFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    description?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    cta_button_text?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    featured?: {
+        $val?: (string | boolean);
+        $op: 'Is' | 'IsNot' | 'IsNull' | 'IsNotNull';
+    } | null;
+    is_featured?: {
+        $val?: (string | boolean);
+        $op: 'Is' | 'IsNot' | 'IsNull' | 'IsNotNull';
+    } | null;
+    date?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    image_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    read_time?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    industries_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    industries?: (ReadIndustriesFilters) | null;
+    country_id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    country?: (ReadCountryFilters) | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadSuccessStoryCaseStudiesOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    description?: 'asc' | 'desc';
+    cta_button_text?: 'asc' | 'desc';
+    featured?: 'asc' | 'desc';
+    is_featured?: 'asc' | 'desc';
+    date?: 'asc' | 'desc';
+    image_id?: 'asc' | 'desc';
+    read_time?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type featured = 'asc' | 'desc';
+
+export type read_time = 'asc' | 'desc';
+
+export type ReadSuccessStoryCaseStudiesQuery = {
+    filters?: ReadSuccessStoryCaseStudiesFilters;
+    orders?: ReadSuccessStoryCaseStudiesOrders;
+    relations?: {
+        success_story_case_studies_id_success_story_case_studies_translations?: (boolean | string);
+        image?: (boolean | string);
+        home_image?: (boolean | string);
+        industries?: (boolean | string);
+        country?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadSuccessStoryCaseStudiesRelations = {
+    success_story_case_studies_id_success_story_case_studies_translations?: (boolean | string);
+    image?: (boolean | string);
+    home_image?: (boolean | string);
+    industries?: (boolean | string);
+    country?: (boolean | string);
+};
+
+export type ReadSuccessStoryHeroFilters = {
+    id?: {
+        $val?: ((string | number) | Array<(string | number)>);
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    sub_title?: {
+        $val?: (string | Array<(string)>);
+        $op: 'Eq' | 'NotEq' | 'Contains' | 'StartsWith' | 'EndsWith' | 'IsNull' | 'IsNotNull' | 'In' | 'NotIn';
+    } | null;
+    created_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+    updated_at?: {
+        $val?: string;
+        $op: 'Eq' | 'NotEq' | 'GreaterThan' | 'LessThan' | 'GreaterThanOrEq' | 'LessThanOrEq' | 'IsNull' | 'IsNotNull';
+    } | null;
+};
+
+export type ReadSuccessStoryHeroOrders = {
+    id?: 'asc' | 'desc';
+    title?: 'asc' | 'desc';
+    sub_title?: 'asc' | 'desc';
+    created_at?: 'asc' | 'desc';
+    updated_at?: 'asc' | 'desc';
+};
+
+export type ReadSuccessStoryHeroQuery = {
+    filters?: ReadSuccessStoryHeroFilters;
+    orders?: ReadSuccessStoryHeroOrders;
+    relations?: {
+        success_story_hero_id_success_story_hero_translations?: (boolean | string);
+    };
+    pagination?: {
+        skip?: (string | number);
+        take?: (string | number);
+    };
+};
+
+export type ReadSuccessStoryHeroRelations = {
+    success_story_hero_id_success_story_hero_translations?: (boolean | string);
 };
 
 export type ReadUsersFilters = {
@@ -4754,6 +10189,48 @@ export type ResendOtp = {
     email?: string;
 };
 
+export type ResourceCardsEntity = {
+    id: number;
+    title: string;
+    description: string;
+    cta_label: string;
+    date_time: string;
+    views_number: number;
+    image_id: number;
+    image: MediaEntity;
+    resource_cards_id_resource_cards_translations: Array<ResourceCardsTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ResourceCardsTranslationsEntity = {
+    id: number;
+    resource_cards_id: number;
+    resource_cards_translation_resource_cards?: ((ResourceCardsEntity) | null);
+    title: string;
+    description: string;
+    cta_label: string;
+    language: 'ar' | 'en';
+};
+
+export type ResourceHeroEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    resource_hero_id_resource_hero_translations: Array<ResourceHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type ResourceHeroTranslationsEntity = {
+    id: number;
+    resource_hero_id: number;
+    resource_hero_translation_resource_hero?: ((ResourceHeroEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
 export type RolePermissionsEntity = {
     id: number;
     role_id: number;
@@ -4833,6 +10310,26 @@ export type SoftwareDefinedNetworkTranslationsEntity = {
     language: 'ar' | 'en';
 };
 
+export type SolutionsAndServicesHeroEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    media_id: number;
+    media: MediaEntity;
+    solutions_and_services_hero_id_solutions_and_services_hero_translations: Array<SolutionsAndServicesHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type SolutionsAndServicesHeroTranslationsEntity = {
+    id: number;
+    solutions_and_services_hero_id: number;
+    solutions_and_services_hero_translation_solutions_and_services_hero?: ((SolutionsAndServicesHeroEntity) | null);
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+};
+
 export type SolutionsEntity = {
     id: number;
     name: string;
@@ -4848,6 +10345,59 @@ export type SolutionsTranslationsEntity = {
     solutions_id: number;
     solutions_translation_solutions?: ((SolutionsEntity) | null);
     name: string;
+    language: 'ar' | 'en';
+};
+
+export type SuccessStoryCaseStudiesEntity = {
+    id: number;
+    title: string;
+    description: string;
+    long_description: string;
+    cta_button_text: string;
+    featured: boolean;
+    is_featured: boolean;
+    date: string;
+    image_id: number;
+    home_image_id: number;
+    read_time: number;
+    image: MediaEntity;
+    home_image: MediaEntity;
+    industries_id: number;
+    industries: IndustriesEntity;
+    country_id: number;
+    country: CountryEntity;
+    success_story_case_studies_id_success_story_case_studies_translations: Array<SuccessStoryCaseStudiesTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+};
+
+export type SuccessStoryCaseStudiesTranslationsEntity = {
+    id: number;
+    success_story_case_studies_id: number;
+    success_story_case_studies_translation_success_story_case_studies?: ((SuccessStoryCaseStudiesEntity) | null);
+    title: string;
+    description: string;
+    long_description: string;
+    cta_button_text: string;
+    language: 'ar' | 'en';
+};
+
+export type SuccessStoryHeroEntity = {
+    id: number;
+    title: string;
+    sub_title: string;
+    success_story_hero_id_success_story_hero_translations: Array<SuccessStoryHeroTranslationsEntity>;
+    created_at: string;
+    updated_at: string;
+};
+
+export type SuccessStoryHeroTranslationsEntity = {
+    id: number;
+    success_story_hero_id: number;
+    success_story_hero_translation_success_story_hero?: ((SuccessStoryHeroEntity) | null);
+    title: string;
+    sub_title: string;
     language: 'ar' | 'en';
 };
 
@@ -4923,10 +10473,32 @@ export type UpdateAboutBarqMissionVision = {
 }>);
 };
 
+export type UpdateAdditionalManagedServicesOne = {
+    description?: string;
+    cta_label?: string;
+    file_id?: number;
+    logo_id?: number;
+    additional_managed_services_one_id_additional_managed_services_one_translations?: Array<{
+        description?: string;
+        cta_label?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateAdditionalManagedServicesTwo = {
+    description?: string;
+    logo_id?: number;
+    images?: number;
+    additional_managed_services_two_id_additional_managed_services_two_translations?: Array<{
+        description?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
 export type UpdateAlliancesClients = {
     media_id?: number;
-    country_id?: number;
-    industries_id?: number;
+    countries_ids?: Array<(number)>;
+    industries_ids?: Array<(number)>;
 };
 
 export type UpdateAlliancesHead = {
@@ -4941,8 +10513,8 @@ export type UpdateAlliancesHead = {
 
 export type UpdateAlliancesVendors = {
     media_id?: number;
-    country_id?: number;
-    solutions_id?: number;
+    countries_ids?: Array<(number)>;
+    solutions_ids?: Array<(number)>;
 };
 
 export type UpdateApplicationData = {
@@ -5018,6 +10590,152 @@ export type UpdateAwardsHead = {
 }>);
 };
 
+export type UpdateBarqAcademyFoundationInternshipForm = {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone?: string;
+    university_name?: string;
+    current_academic_year?: string;
+    linkedin_url?: string;
+    resume_id?: number;
+    barq_academy_programs_opportunities_internship_id?: number;
+};
+
+export type UpdateBarqAcademyFoundationInternshipFormData = {
+    form_title?: string;
+    sub_text?: string;
+    track_title?: string;
+    track_description?: string;
+    skill_section_header?: string;
+    skill_bullet_points?: string;
+    barq_academy_foundation_internship_form_data_id_barq_academy_foundation_internship_form_data_translations?: Array<{
+        form_title?: string;
+        sub_text?: string;
+        track_title?: string;
+        track_description?: string;
+        skill_section_header?: string;
+        skill_bullet_points?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateBarqAcademyFoundationTracksForm = {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone?: string;
+    university_name?: string;
+    current_academic_year?: string;
+    linkedin_url?: string;
+    resume_id?: number;
+    barq_academy_programs_opportunities_id?: number;
+};
+
+export type UpdateBarqAcademyFoundationTracksFormData = {
+    form_title?: string;
+    sub_text?: string;
+    track_title?: string;
+    track_description?: string;
+    track_long_description?: string;
+    skill_section_header?: string;
+    skill_bullet_points?: string;
+    barq_academy_foundation_tracks_form_data_id_barq_academy_foundation_tracks_form_data_translations?: Array<{
+        form_title?: string;
+        sub_text?: string;
+        track_title?: string;
+        track_description?: string;
+        skill_section_header?: string;
+        skill_bullet_points?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateBarqAcademyHero = {
+    title?: string;
+    sub_title?: string;
+    image_id?: number;
+    logo_id?: number;
+    logos_ids?: Array<(number)>;
+    barq_academy_hero_id_barq_academy_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateBarqAcademyHighlights = {
+    title?: string;
+    sub_title?: string;
+    barq_academy_highlights_id_barq_academy_highlights_translations?: (Array<{
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+}>);
+    barq_academy_highlights_cards_id_barq_academy_highlights_cards?: Array<{
+        id?: number;
+        title: string;
+        state_title_one: string;
+        state_number_one: number;
+        state_title_two: string;
+        state_number_two: number;
+        state_title_three: string;
+        state_number_three: number;
+        icon_id: number;
+        barq_academy_highlights_cards_id_barq_academy_highlights_cards_translations?: Array<{
+            title: string;
+            state_title_one: string;
+            state_title_two: string;
+            state_title_three: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type UpdateBarqAcademyProgramsOpportunities = {
+    title?: string;
+    barq_academy_programs_opportunities_id_barq_academy_programs_opportunities_translations?: (Array<{
+    title: string;
+    language: 'ar' | 'en';
+}>);
+    barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards?: Array<{
+        id?: number;
+        title: string;
+        description: string;
+        long_description: string;
+        cta_label: string;
+        image_id: number;
+        barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards_translations?: Array<{
+            title: string;
+            description: string;
+            long_description: string;
+            cta_label: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type UpdateBarqAcademyProgramsOpportunitiesInternship = {
+    title?: string;
+    barq_academy_programs_opportunities_internship_id_barq_academy_programs_opportunities_internship_translations?: (Array<{
+    title: string;
+    language: 'ar' | 'en';
+}>);
+    barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards?: Array<{
+        id?: number;
+        title: string;
+        description: string;
+        cta_label: string;
+        image_id: number;
+        barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards_translations?: Array<{
+            title: string;
+            description: string;
+            cta_label: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
 export type UpdateBusinessAutomation = {
     sub_headline?: string;
     image_id?: number;
@@ -5037,6 +10755,136 @@ export type UpdateBusinessAutomation = {
     }>;
 };
 
+export type UpdateCampaign = {
+    minutes_to_read?: string;
+    layout_type?: 'ONE' | 'TWO' | 'THREE';
+    date?: string;
+    image_id?: number;
+};
+
+export type UpdateCampaignForm = {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone_number?: string;
+    phone_number_key?: string;
+    position?: string;
+    organization_name?: string;
+    campaign_id?: number;
+};
+
+export type UpdateCampaignLayoutOne = {
+    title?: string;
+    sub_title?: string;
+    cta_label?: string;
+    cta_label_action?: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    image_id?: number;
+    file_id?: number;
+    form_title?: string;
+    form_sub_title?: string;
+    campaign_id?: string;
+    campaign_layout_one_id_campaign_layout_one_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        cta_label?: string;
+        form_title?: string;
+        form_sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateCampaignLayoutThreeHero = {
+    title?: string;
+    sub_title?: string;
+    background_image_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_hero_id_campaign_layout_three_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateCampaignLayoutThreeSectionFive = {
+    title?: string;
+    sub_title?: string;
+    cta_label?: string;
+    cta_label_action?: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    file_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_section_five_id_campaign_layout_three_section_five_translations?: Array<{
+        title: string;
+        sub_title: string;
+        cta_label: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateCampaignLayoutThreeSectionFour = {
+    title?: string;
+    sub_title?: string;
+    description?: string;
+    image_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_section_four_id_campaign_layout_three_section_four_translations?: Array<{
+        title: string;
+        sub_title: string;
+        description: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateCampaignLayoutThreeSectionThree = {
+    title?: string;
+    sub_title?: string;
+    image_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_section_three_id_campaign_layout_three_section_three_translations?: Array<{
+        title: string;
+        sub_title: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateCampaignLayoutThreeSectionTwo = {
+    title?: string;
+    sub_title?: string;
+    image_id?: number;
+    campaign_id?: string;
+    campaign_layout_three_section_two_id_campaign_layout_three_section_two_translations?: Array<{
+        title: string;
+        sub_title: string;
+        language: 'ar' | 'en';
+    }>;
+    campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards?: Array<{
+        id?: number;
+        title: string;
+        icon_id: number;
+        campaign_layout_three_section_two_cards_id_campaign_layout_three_section_two_cards_translations?: Array<{
+            title: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type UpdateCampaignLayoutTwo = {
+    title?: string;
+    sub_title?: string;
+    cta_label_action?: 'Book a Demo' | 'Request a Meeting' | 'Download Brochure' | 'Download Book' | 'Download White Paper' | 'Download Case Study' | 'Download Success Story' | 'Download Report' | 'Request a Quotation';
+    image_id?: number;
+    file_id?: number;
+    form_title?: string;
+    form_sub_title?: string;
+    campaign_id?: string;
+    campaign_layout_two_id_campaign_layout_two_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        form_title?: string;
+        form_sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
 export type UpdateCardSocial = {
     title?: string;
     description?: string;
@@ -5048,9 +10896,126 @@ export type UpdateCardSocial = {
     }>;
 };
 
+export type UpdateCareerApplicationForm = {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone_number?: string;
+    job_title?: string;
+    linkedin_url?: string;
+    resume_id?: number;
+    career_job_detail_id?: number;
+};
+
+export type UpdateCareerCategory = {
+    name?: string;
+    career_category_id_career_category_translations?: (Array<{
+    name: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type UpdateCareerHero = {
+    title?: string;
+    description?: string;
+    media_id?: number;
+    career_hero_id_career_hero_translations?: (Array<{
+    title: string;
+    description?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type UpdateCareerJobDetail = {
+    intr_sentence?: string;
+    career_open_position_id?: number;
+    career_job_detail_id_career_job_detail_translations?: (Array<{
+    intr_sentence?: string;
+    language: 'ar' | 'en';
+}>);
+    career_job_detail_cards_id_career_job_detail_cards?: Array<{
+        title: string;
+        career_job_detail_cards_id_career_job_detail_cards_translations?: Array<{
+            title: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type UpdateCareerOpenPosition = {
+    job_title?: string;
+    opening_date?: string;
+    closing_date?: string;
+    job_description?: string;
+    status?: 'OPEN' | 'CLOSED';
+    city_id?: number;
+    career_opportunity_id?: number;
+    career_category_id?: number;
+    responsibilities?: Array<(string)>;
+    required_qualification?: Array<(string)>;
+    certification_prefered?: Array<(string)>;
+    career_open_position_id_career_open_position_translations?: (Array<{
+    job_title: string;
+    job_description?: string;
+    responsibilities?: Array<(string)>;
+    required_qualification?: Array<(string)>;
+    certification_prefered?: Array<(string)>;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type UpdateCareerOpenPositionHero = {
+    title?: string;
+    description?: string;
+    career_open_position_hero_id_career_open_position_hero_translations?: (Array<{
+    title: string;
+    description?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type UpdateCareerOpportunity = {
+    name?: string;
+    description?: string;
+    career_opportunity_id_career_opportunity_translations?: (Array<{
+    name: string;
+    description?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type UpdateCareerWorkingAtBarq = {
+    title?: string;
+    sub_title?: string;
+    career_working_at_barq_id_career_working_at_barq_translations?: (Array<{
+    title: string;
+    sub_title: string;
+    language: 'ar' | 'en';
+}>);
+    career_working_at_barq_cards_id_career_working_at_barq_cards?: Array<{
+        id?: number;
+        title: string;
+        sub_title: string;
+        icon_id: number;
+        career_working_at_barq_cards_id_career_working_at_barq_cards_translations?: Array<{
+            title: string;
+            sub_title: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type UpdateCity = {
+    name?: string;
+    country_id?: number;
+    city_id_city_translations?: (Array<{
+    name: string;
+    language: 'ar' | 'en';
+}>);
+};
+
 export type UpdateCloudSection = {
     sub_headline?: string;
-    image_id?: number;
     logo_id?: number;
     cloud_id_cloud_translations?: (Array<{
     sub_headline: string;
@@ -5096,6 +11061,30 @@ export type UpdateContactUsHero = {
 }>);
 };
 
+export type UpdateContactUsOffices = {
+    title?: string;
+    contact_us_offices_id_contact_us_offices_translations?: Array<{
+        title?: string;
+        language: 'ar' | 'en';
+    }>;
+    contact_us_offices_bullets_id_contact_us_offices_bullets?: Array<{
+        id?: number;
+        country_name?: string;
+        office_name?: string;
+        location?: string;
+        phone?: string;
+        email?: string;
+        icon_id?: number;
+        fax?: string;
+        contact_us_offices_bullets_id_contact_us_offices_bullets_translations?: Array<{
+            country_name?: string;
+            office_name?: string;
+            location?: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
 export type UpdateContactUsRequestType = {
     title?: string;
     contact_us_request_type_id_contact_us_request_type_translations?: (Array<{
@@ -5122,6 +11111,15 @@ export type UpdateControlSection = {
             language: 'ar' | 'en';
         }>;
     }>;
+};
+
+export type UpdateCoreManagedServices = {
+    title?: string;
+    logo_id?: number;
+    core_managed_services_id_core_managed_services_translations?: (Array<{
+    title: string;
+    language: 'ar' | 'en';
+}>);
 };
 
 export type UpdateCountry = {
@@ -5243,6 +11241,59 @@ export type UpdateEnvironmentalSustainability = {
     }>;
 };
 
+export type UpdateEventJoinusForm = {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone_number?: string;
+    phone_number_key?: string;
+    position?: string;
+    company_name?: string;
+    event_id?: number;
+};
+
+export type UpdateEventJoinUsHero = {
+    title?: string;
+    sub_title?: string;
+    quote?: string;
+    event_join_us_hero_id_event_join_us_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        quote?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateEventsPartner = {
+    title?: string;
+    sub_title?: string;
+    logos_ids?: Array<(number)>;
+    events_partner_id_events_partner_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateEventsSpeakers = {
+    title?: string;
+    events_speakers_id_events_speakers_translations?: Array<{
+        title?: string;
+        language: 'ar' | 'en';
+    }>;
+    events_speakers_cards_id_events_speakers_cards?: Array<{
+        id?: number;
+        name: string;
+        role: string;
+        image_id: number;
+        events_speakers_cards_id_events_speakers_cards_translations?: Array<{
+            name: string;
+            role: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
 export type UpdateFooterContacts = {
     phone_number_key?: string;
     phone_number?: string;
@@ -5255,6 +11306,15 @@ export type UpdateFooterLocations = {
     name?: string;
     language: 'ar' | 'en';
 }>);
+};
+
+export type UpdateFooterTerms = {
+    terms?: string;
+    file_id?: number;
+    footer_terms_id_footer_terms_translations?: Array<{
+        terms?: string;
+        language: 'ar' | 'en';
+    }>;
 };
 
 export type UpdateGlobalCommitment = {
@@ -5282,6 +11342,24 @@ export type UpdateHero = {
     cta_label: string;
     language: 'ar' | 'en';
 }>);
+};
+
+export type UpdateHomeAwards = {
+    description?: string;
+    home_awards_id_home_awards_translations?: (Array<{
+    description: string;
+    language: 'ar' | 'en';
+}>);
+    home_awards_id_home_awards_cards?: Array<{
+        id?: number;
+        title: string;
+        date: string;
+        icon_id: number;
+        home_awards_cards_id_home_awards_cards_translations?: Array<{
+            title: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
 };
 
 export type UpdateIdentityManagement = {
@@ -5333,17 +11411,50 @@ export type UpdateLandingNumbers = {
 }>);
 };
 
-export type UpdateLeadership = {
-    quote?: string;
-    name?: string;
-    position?: string;
-    media_id?: number;
-    leadership_id_leadership_translations?: (Array<{
-    quote: string;
-    name?: string;
-    position?: string;
-    language: 'ar' | 'en';
-}>);
+export type UpdateLeadershipExecutiveTeam = {
+    title?: string;
+    description?: string;
+    leadership_executive_team_id_leadership_executive_team_translations?: Array<{
+        title?: string;
+        description?: string;
+        language: 'ar' | 'en';
+    }>;
+    leadership_executive_team_cards_id_leadership_executive_team_cards?: Array<{
+        id?: number;
+        name?: string;
+        role?: string;
+        bio?: string;
+        image_id?: number;
+        leadership_executive_team_cards_id_leadership_executive_team_cards_translations?: Array<{
+            name?: string;
+            role?: string;
+            bio?: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
+};
+
+export type UpdateLeadershipTeam = {
+    title?: string;
+    description?: string;
+    leadership_team_id_leadership_team_translations?: Array<{
+        title?: string;
+        description?: string;
+        language: 'ar' | 'en';
+    }>;
+    leadership_team_cards_id_leadership_team_cards?: Array<{
+        id?: number;
+        name?: string;
+        role?: string;
+        bio?: string;
+        image_id?: number;
+        leadership_team_cards_id_leadership_team_cards_translations?: Array<{
+            name?: string;
+            role?: string;
+            bio?: string;
+            language: 'ar' | 'en';
+        }>;
+    }>;
 };
 
 export type UpdateMainSocial = {
@@ -5354,6 +11465,80 @@ export type UpdateMainSocial = {
         description: string;
         language: 'ar' | 'en';
     }>;
+};
+
+export type UpdateManagedCybersecurityServicesDetails = {
+    description?: string;
+    cta_button_text?: string;
+    logo_id?: number;
+    managed_cybersecurity_services_details_id_managed_cybersecurity_services_details_translations?: (Array<{
+    id: number;
+}> | Array<{
+    description: string;
+    cta_button_text: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type UpdateManagedGrcServicesDetails = {
+    description?: string;
+    title?: string;
+    managed_grc_services_details_id_managed_grc_services_details_translations?: (Array<{
+    id?: number;
+    description?: string;
+    title?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type UpdateManagedServiceCards = {
+    description?: string;
+    bullet_one?: string;
+    bullet_two?: string;
+    type?: 'soc' | 'cybersecurity' | 'grc';
+    image_id?: number;
+    logo_id?: number;
+    managed_service_cards_id_managed_service_cards_translations?: (Array<{
+    id?: number;
+    description?: string;
+    bullet_one?: string;
+    bullet_two?: string;
+    language: 'ar' | 'en';
+}>);
+};
+
+export type UpdateManagedServiceDownloadForm = {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone_number?: string;
+    phone_number_key?: string;
+    position?: string;
+    managed_soc_services_details_id?: number;
+};
+
+export type UpdateManagedServiceHero = {
+    title?: string;
+    sub_title?: string;
+    image_id?: number;
+    logos_ids?: Array<(number)>;
+    managed_service_hero_id_managed_service_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateManagedSocServicesDetails = {
+    description?: string;
+    cta_button_text?: string;
+    logo_id?: number;
+    file_id?: number;
+    managed_soc_services_details_id_managed_soc_services_details_translations?: (Array<{
+    description: string;
+    cta_button_text: string;
+    language: 'ar' | 'en';
+}>);
 };
 
 export type UpdateMobility = {
@@ -5394,6 +11579,42 @@ export type UpdateNetworkSection = {
     }>;
 };
 
+export type UpdateNewsroomCards = {
+    title?: string;
+    description?: string;
+    is_vertical?: boolean;
+    is_featured?: boolean;
+    long_description?: string;
+    date_time?: string;
+    image_id?: number;
+    home_image_id?: number;
+    newsroom_category_id?: number;
+    newsroom_cards_id_newsroom_cards_translations?: Array<{
+        title?: string;
+        description?: string;
+        long_description?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateNewsroomCategory = {
+    name?: string;
+    newsroom_category_id_newsroom_category_translations?: Array<{
+        name?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateNewsroomHero = {
+    title?: string;
+    sub_title?: string;
+    newsroom_hero_id_newsroom_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
 export type UpdateOperationIntelligence = {
     text?: string;
     logo_id?: number;
@@ -5419,6 +11640,31 @@ export type UpdatePermissions = {
         name: string;
         language: 'ar' | 'en';
     }>;
+};
+
+export type UpdateResourceCards = {
+    title?: string;
+    description?: string;
+    cta_label?: string;
+    date_time?: string;
+    views_number?: number;
+    image_id?: number;
+    resource_cards_id_resource_cards_translations?: Array<{
+        title?: string;
+        description?: string;
+        cta_label?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateResourceHero = {
+    title?: string;
+    sub_title?: string;
+    resource_hero_id_resource_hero_translations?: (Array<{
+    title?: string;
+    sub_title?: string;
+    language: 'ar' | 'en';
+}>);
 };
 
 export type UpdateRolePermissions = {
@@ -5481,6 +11727,48 @@ export type UpdateSolutions = {
     name?: string;
     language: 'ar' | 'en';
 }>);
+};
+
+export type UpdateSolutionsAndServicesHero = {
+    title?: string;
+    sub_title?: string;
+    media_id?: number;
+    solutions_and_services_hero_id_solutions_and_services_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateSuccessStoryCaseStudies = {
+    title?: string;
+    description?: string;
+    long_description?: string;
+    cta_button_text?: string;
+    is_featured?: boolean;
+    date?: string;
+    image_id?: number;
+    home_image_id?: number;
+    read_time?: number;
+    industries_id?: number;
+    country_id?: number;
+    success_story_case_studies_id_success_story_case_studies_translations?: Array<{
+        title?: string;
+        description?: string;
+        long_description?: string;
+        cta_button_text?: string;
+        language: 'ar' | 'en';
+    }>;
+};
+
+export type UpdateSuccessStoryHero = {
+    title?: string;
+    sub_title?: string;
+    success_story_hero_id_success_story_hero_translations?: Array<{
+        title?: string;
+        sub_title?: string;
+        language: 'ar' | 'en';
+    }>;
 };
 
 export type UpdateUserProfile = {
@@ -5557,6 +11845,545 @@ export type WhoAreWeTranslationsEntity = {
 export type AppControllerEntryResponse = (string);
 
 export type AppControllerEntryError = any;
+
+export type BarqExternalApiControllerGetEventsResponse = (any);
+
+export type BarqExternalApiControllerGetEventsError = (any);
+
+export type BarqExternalApiControllerSyncEventsResponse = (any);
+
+export type BarqExternalApiControllerSyncEventsError = (any);
+
+export type BarqExternalApiControllerSyncCampaignsResponse = (any);
+
+export type BarqExternalApiControllerSyncCampaignsError = (any);
+
+export type BarqExternalApiControllerReadOneEventData = {
+    path: {
+        id: string;
+    };
+    query?: {
+        /**
+         * The query to be used to read one event.
+         */
+        query?: any;
+    };
+};
+
+export type BarqExternalApiControllerReadOneEventResponse = ({
+    data?: EventEntity;
+});
+
+export type BarqExternalApiControllerReadOneEventError = any;
+
+export type BarqExternalApiControllerReadEventsData = {
+    query?: {
+        /**
+         * The query to be used to read all events.
+         */
+        query?: any;
+    };
+};
+
+export type BarqExternalApiControllerReadEventsResponse = ({
+    data?: Array<EventEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqExternalApiControllerReadEventsError = any;
+
+export type EventControllerReadData = {
+    query?: {
+        /**
+         * The query to be used to read all events.
+         */
+        query?: any;
+    };
+};
+
+export type EventControllerReadResponse = ({
+    data?: Array<EventEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type EventControllerReadError = any;
+
+export type EventControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query?: {
+        /**
+         * The query to be used to read one event.
+         */
+        query?: any;
+    };
+};
+
+export type EventControllerReadOneResponse = ({
+    data?: EventEntity;
+});
+
+export type EventControllerReadOneError = any;
+
+export type CampaignControllerReadData = {
+    query?: {
+        /**
+         * The query to be used to read all campaigns.
+         */
+        query?: any;
+    };
+};
+
+export type CampaignControllerReadResponse = ({
+    data?: Array<CampaignEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CampaignControllerReadError = any;
+
+export type CampaignControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query?: {
+        /**
+         * The query to be used to read one campaign.
+         */
+        query?: any;
+    };
+};
+
+export type CampaignControllerReadOneResponse = ({
+    data?: CampaignEntity;
+});
+
+export type CampaignControllerReadOneError = any;
+
+export type CampaignControllerUpdateData = {
+    /**
+     * The Campaign to be updated.
+     */
+    body: UpdateCampaign;
+    path: {
+        id: string;
+    };
+};
+
+export type CampaignControllerUpdateResponse = ({
+    data?: CampaignEntity;
+});
+
+export type CampaignControllerUpdateError = any;
+
+export type MediaControllerUploadFileResponse = ({
+    id: number;
+    url: string;
+    key: string;
+    size: number;
+    mime_type: string;
+    format: string;
+    created_at: string;
+    updated_at: string;
+    hero: HeroEntity;
+    leadership_team_cards_image: LeadershipTeamCardsEntity;
+    ecosystem_sustainability: EcosystemSustainabilityEntity;
+    global_commitment_id: number;
+    global_commitment: GlobalCommitmentEntity;
+    card_social_id: number;
+    card_social: CardSocialEntity;
+    economic_sustainability_id: number;
+    economic_sustainability: EconomicSustainabilityEntity;
+    environmental_sustainability_points_id: number;
+    awards_cards_id: number;
+    awards_cards: AwardsCardsEntity;
+    alliances_vendors: AlliancesVendorsEntity;
+    alliances_clients: AlliancesClientsEntity;
+    automation_hero: AutomationHeroEntity;
+    automation_hero_logos_id: number;
+    automation_hero_logos: AutomationHeroEntity;
+    artificial_intelligence_image: ArtificialIntelligenceEntity;
+    artificial_intelligence_logo: ArtificialIntelligenceEntity;
+    artificial_intelligence_bullets_icon: ArtificialIntelligenceBulletsEntity;
+    business_automation_image: BusinessAutomationEntity;
+    business_automation_logo: BusinessAutomationEntity;
+    business_automation_bullets_icon: BusinessAutomationBulletsEntity;
+    data_management_image: DataManagementEntity;
+    data_management_logo: DataManagementEntity;
+    data_management_bullets_icon: DataManagementBulletsEntity;
+    cloud_logo: CloudEntity;
+    cloud_bullets_icon: CloudBulletsEntity;
+    it_infrastructure_hero_image: ItInfrastructureHeroEntity;
+    it_infrastructure_hero_icons_id: number;
+    it_infrastructure_hero_icons: ItInfrastructureHeroEntity;
+    data_center_image: DataCenterEntity;
+    data_center_logo: DataCenterEntity;
+    data_center_bullets_icon: DataCenterBulletsEntity;
+    mobility_logo: MobilityEntity;
+    mobility_cards_icon: MobilityCardsEntity;
+    software_defined_network_image: SoftwareDefinedNetworkEntity;
+    software_defined_network_logo: SoftwareDefinedNetworkEntity;
+    software_defined_network_cards_icon: SoftwareDefinedNetworkCardsEntity;
+    network_section_logo: NetworkSectionEntity;
+    network_section_cards_icon: NetworkSectionCardsEntity;
+    control_section_logo: ControlSectionEntity;
+    control_section_cards_icon: ControlSectionCardsEntity;
+    cybersecurity_hero_image: CybersecurityHeroEntity;
+    cybersecurity_hero_logos_id: number;
+    cybersecurity_hero_logos: CybersecurityHeroEntity;
+    cybersecurity_data_center_logo: CybersecurityDataCenterEntity;
+    cybersecurity_data_center_cards_icon: CybersecurityDataCenterCardsEntity;
+    operation_intelligence_logo: OperationIntelligenceEntity;
+    operation_intelligence_cards_icon: OperationIntelligenceCardsEntity;
+    identity_management_logo: IdentityManagementEntity;
+    identity_management_cards_icon: IdentityManagementCardsEntity;
+    application_data_logo: ApplicationDataEntity;
+    application_data_image: ApplicationDataEntity;
+    application_data_cards_icon: ApplicationDataCardsEntity;
+    about_barq_hero_media_id: number;
+    about_barq_hero_media: AboutBarqHeroEntity;
+    about_barq_group_affiliation_images_id: number;
+    about_barq_group_affiliation_images: AboutBarqGroupAffiliationEntity;
+    about_barq_mission_vision_icon: AboutBarqMissionVisionEntity;
+    about_barq_core_values_image: AboutBarqCoreValuesEntity;
+    about_barq_core_values_cards_icon: AboutBarqCoreValuesCardsEntity;
+    about_barq_milestones_image: AboutBarqMilestonesEntity;
+    contact_us_hero_image: ContactUsHeroEntity;
+    contact_us_offices_bullets_icon: ContactUsOfficesBulletsEntity;
+    managed_service_hero_image: ManagedServiceHeroEntity;
+    managed_service_hero_logos_id: number;
+    managed_service_hero_logos: ManagedServiceHeroEntity;
+    core_managed_services_logo: CoreManagedServicesEntity;
+    managed_soc_services_details_logo: ManagedSocServicesDetailsEntity;
+    managed_soc_services_details_file: ManagedSocServicesDetailsEntity;
+    managed_cybersecurity_services_details_logo: ManagedCybersecurityServicesDetailsEntity;
+    managed_service_cards_image: ManagedServiceCardsEntity;
+    managed_service_cards_logo: ManagedServiceCardsEntity;
+    career_hero_media: CareerHeroEntity;
+    career_working_at_barq_cards_icon: CareerWorkingAtBarqCardsEntity;
+    career_application_form_resume: CareerApplicationFormEntity;
+    resource_cards_image: ResourceCardsEntity;
+    additional_managed_services_one_logo: AdditionalManagedServicesOneEntity;
+    additional_managed_services_two_logo: AdditionalManagedServicesTwoEntity;
+    additional_managed_services_two_images: AdditionalManagedServicesTwoEntity;
+    leadership_executive_team_cards_image: LeadershipExecutiveTeamCardsEntity;
+    additional_managed_services_one_file: AdditionalManagedServicesOneEntity;
+    home_awards_cards_icon: HomeAwardsCardsEntity;
+    barq_academy_hero_logo: BarqAcademyHeroEntity;
+    barq_academy_hero_image: BarqAcademyHeroEntity;
+    barq_academy_hero_logos_id: number;
+    barq_academy_hero_logos: BarqAcademyHeroEntity;
+    barq_academy_highlights_cards_icon: BarqAcademyHighlightsCardsEntity;
+    barq_academy_programs_opportunities_cards_image: BarqAcademyProgramsOpportunitiesCardsEntity;
+    barq_academy_foundation_tracks_form_resume: BarqAcademyFoundationTracksFormEntity;
+    barq_academy_programs_opportunities_internship_cards_image: BarqAcademyProgramsOpportunitiesInternshipCardsEntity;
+    barq_academy_foundation_internship_form_resume: BarqAcademyFoundationInternshipFormEntity;
+    solutions_and_services_hero_media: SolutionsAndServicesHeroEntity;
+    success_story_case_studies_image: SuccessStoryCaseStudiesEntity;
+    newsroom_cards_image: NewsroomCardsEntity;
+    events_speakers_cards_image: EventsSpeakersCardsEntity;
+    events_partner_logos_id: number;
+    events_partner_logos: EventsPartnerEntity;
+    footer_terms_file: FooterTermsEntity;
+    campaign_image: CampaignEntity;
+    campaign_layout_one_image: CampaignLayoutOneEntity;
+    campaign_layout_one_file: CampaignLayoutOneEntity;
+    campaign_layout_two_image: CampaignLayoutTwoEntity;
+    campaign_layout_two_file: CampaignLayoutTwoEntity;
+    campaign_layout_three_section_two_image: CampaignLayoutThreeSectionTwoEntity;
+    campaign_layout_three_section_two_cards_icon: CampaignLayoutThreeSectionTwoCardsEntity;
+    campaign_layout_three_section_three_image: CampaignLayoutThreeSectionThreeEntity;
+    campaign_layout_three_section_four_image: CampaignLayoutThreeSectionFourEntity;
+    campaign_layout_three_section_five_file: CampaignLayoutThreeSectionFiveEntity;
+    campaign_layout_three_hero_background_image: CampaignLayoutThreeHeroEntity;
+    success_story_case_studies_home_image: SuccessStoryCaseStudiesEntity;
+    newsroom_cards_home_image: NewsroomCardsEntity;
+});
+
+export type MediaControllerUploadFileError = any;
+
+export type MediaControllerUpdateFileResponse = ({
+    id: number;
+    url: string;
+    key: string;
+    size: number;
+    mime_type: string;
+    format: string;
+    created_at: string;
+    updated_at: string;
+    hero: HeroEntity;
+    leadership_team_cards_image: LeadershipTeamCardsEntity;
+    ecosystem_sustainability: EcosystemSustainabilityEntity;
+    global_commitment_id: number;
+    global_commitment: GlobalCommitmentEntity;
+    card_social_id: number;
+    card_social: CardSocialEntity;
+    economic_sustainability_id: number;
+    economic_sustainability: EconomicSustainabilityEntity;
+    environmental_sustainability_points_id: number;
+    awards_cards_id: number;
+    awards_cards: AwardsCardsEntity;
+    alliances_vendors: AlliancesVendorsEntity;
+    alliances_clients: AlliancesClientsEntity;
+    automation_hero: AutomationHeroEntity;
+    automation_hero_logos_id: number;
+    automation_hero_logos: AutomationHeroEntity;
+    artificial_intelligence_image: ArtificialIntelligenceEntity;
+    artificial_intelligence_logo: ArtificialIntelligenceEntity;
+    artificial_intelligence_bullets_icon: ArtificialIntelligenceBulletsEntity;
+    business_automation_image: BusinessAutomationEntity;
+    business_automation_logo: BusinessAutomationEntity;
+    business_automation_bullets_icon: BusinessAutomationBulletsEntity;
+    data_management_image: DataManagementEntity;
+    data_management_logo: DataManagementEntity;
+    data_management_bullets_icon: DataManagementBulletsEntity;
+    cloud_logo: CloudEntity;
+    cloud_bullets_icon: CloudBulletsEntity;
+    it_infrastructure_hero_image: ItInfrastructureHeroEntity;
+    it_infrastructure_hero_icons_id: number;
+    it_infrastructure_hero_icons: ItInfrastructureHeroEntity;
+    data_center_image: DataCenterEntity;
+    data_center_logo: DataCenterEntity;
+    data_center_bullets_icon: DataCenterBulletsEntity;
+    mobility_logo: MobilityEntity;
+    mobility_cards_icon: MobilityCardsEntity;
+    software_defined_network_image: SoftwareDefinedNetworkEntity;
+    software_defined_network_logo: SoftwareDefinedNetworkEntity;
+    software_defined_network_cards_icon: SoftwareDefinedNetworkCardsEntity;
+    network_section_logo: NetworkSectionEntity;
+    network_section_cards_icon: NetworkSectionCardsEntity;
+    control_section_logo: ControlSectionEntity;
+    control_section_cards_icon: ControlSectionCardsEntity;
+    cybersecurity_hero_image: CybersecurityHeroEntity;
+    cybersecurity_hero_logos_id: number;
+    cybersecurity_hero_logos: CybersecurityHeroEntity;
+    cybersecurity_data_center_logo: CybersecurityDataCenterEntity;
+    cybersecurity_data_center_cards_icon: CybersecurityDataCenterCardsEntity;
+    operation_intelligence_logo: OperationIntelligenceEntity;
+    operation_intelligence_cards_icon: OperationIntelligenceCardsEntity;
+    identity_management_logo: IdentityManagementEntity;
+    identity_management_cards_icon: IdentityManagementCardsEntity;
+    application_data_logo: ApplicationDataEntity;
+    application_data_image: ApplicationDataEntity;
+    application_data_cards_icon: ApplicationDataCardsEntity;
+    about_barq_hero_media_id: number;
+    about_barq_hero_media: AboutBarqHeroEntity;
+    about_barq_group_affiliation_images_id: number;
+    about_barq_group_affiliation_images: AboutBarqGroupAffiliationEntity;
+    about_barq_mission_vision_icon: AboutBarqMissionVisionEntity;
+    about_barq_core_values_image: AboutBarqCoreValuesEntity;
+    about_barq_core_values_cards_icon: AboutBarqCoreValuesCardsEntity;
+    about_barq_milestones_image: AboutBarqMilestonesEntity;
+    contact_us_hero_image: ContactUsHeroEntity;
+    contact_us_offices_bullets_icon: ContactUsOfficesBulletsEntity;
+    managed_service_hero_image: ManagedServiceHeroEntity;
+    managed_service_hero_logos_id: number;
+    managed_service_hero_logos: ManagedServiceHeroEntity;
+    core_managed_services_logo: CoreManagedServicesEntity;
+    managed_soc_services_details_logo: ManagedSocServicesDetailsEntity;
+    managed_soc_services_details_file: ManagedSocServicesDetailsEntity;
+    managed_cybersecurity_services_details_logo: ManagedCybersecurityServicesDetailsEntity;
+    managed_service_cards_image: ManagedServiceCardsEntity;
+    managed_service_cards_logo: ManagedServiceCardsEntity;
+    career_hero_media: CareerHeroEntity;
+    career_working_at_barq_cards_icon: CareerWorkingAtBarqCardsEntity;
+    career_application_form_resume: CareerApplicationFormEntity;
+    resource_cards_image: ResourceCardsEntity;
+    additional_managed_services_one_logo: AdditionalManagedServicesOneEntity;
+    additional_managed_services_two_logo: AdditionalManagedServicesTwoEntity;
+    additional_managed_services_two_images: AdditionalManagedServicesTwoEntity;
+    leadership_executive_team_cards_image: LeadershipExecutiveTeamCardsEntity;
+    additional_managed_services_one_file: AdditionalManagedServicesOneEntity;
+    home_awards_cards_icon: HomeAwardsCardsEntity;
+    barq_academy_hero_logo: BarqAcademyHeroEntity;
+    barq_academy_hero_image: BarqAcademyHeroEntity;
+    barq_academy_hero_logos_id: number;
+    barq_academy_hero_logos: BarqAcademyHeroEntity;
+    barq_academy_highlights_cards_icon: BarqAcademyHighlightsCardsEntity;
+    barq_academy_programs_opportunities_cards_image: BarqAcademyProgramsOpportunitiesCardsEntity;
+    barq_academy_foundation_tracks_form_resume: BarqAcademyFoundationTracksFormEntity;
+    barq_academy_programs_opportunities_internship_cards_image: BarqAcademyProgramsOpportunitiesInternshipCardsEntity;
+    barq_academy_foundation_internship_form_resume: BarqAcademyFoundationInternshipFormEntity;
+    solutions_and_services_hero_media: SolutionsAndServicesHeroEntity;
+    success_story_case_studies_image: SuccessStoryCaseStudiesEntity;
+    newsroom_cards_image: NewsroomCardsEntity;
+    events_speakers_cards_image: EventsSpeakersCardsEntity;
+    events_partner_logos_id: number;
+    events_partner_logos: EventsPartnerEntity;
+    footer_terms_file: FooterTermsEntity;
+    campaign_image: CampaignEntity;
+    campaign_layout_one_image: CampaignLayoutOneEntity;
+    campaign_layout_one_file: CampaignLayoutOneEntity;
+    campaign_layout_two_image: CampaignLayoutTwoEntity;
+    campaign_layout_two_file: CampaignLayoutTwoEntity;
+    campaign_layout_three_section_two_image: CampaignLayoutThreeSectionTwoEntity;
+    campaign_layout_three_section_two_cards_icon: CampaignLayoutThreeSectionTwoCardsEntity;
+    campaign_layout_three_section_three_image: CampaignLayoutThreeSectionThreeEntity;
+    campaign_layout_three_section_four_image: CampaignLayoutThreeSectionFourEntity;
+    campaign_layout_three_section_five_file: CampaignLayoutThreeSectionFiveEntity;
+    campaign_layout_three_hero_background_image: CampaignLayoutThreeHeroEntity;
+    success_story_case_studies_home_image: SuccessStoryCaseStudiesEntity;
+    newsroom_cards_home_image: NewsroomCardsEntity;
+});
+
+export type MediaControllerUpdateFileError = any;
+
+export type MediaControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Media.
+         */
+        query: ReadOneMediaQuery;
+    };
+};
+
+export type MediaControllerReadOneResponse = ({
+    data?: MediaEntity;
+});
+
+export type MediaControllerReadOneError = any;
+
+export type MediaControllerStreamMediaData = {
+    path: {
+        id: string;
+    };
+};
+
+export type MediaControllerStreamMediaResponse = (string | any);
+
+export type MediaControllerStreamMediaError = (any);
+
+export type CareerOpenPositionControllerCreateData = {
+    /**
+     * The CareerOpenPosition to be created.
+     */
+    body: CreateCareerOpenPosition;
+};
+
+export type CareerOpenPositionControllerCreateResponse = ({
+    data?: CareerOpenPositionEntity;
+});
+
+export type CareerOpenPositionControllerCreateError = any;
+
+export type CareerOpenPositionControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CareerOpenPositions.
+         */
+        query: ReadCareerOpenPositionQuery;
+    };
+};
+
+export type CareerOpenPositionControllerReadResponse = ({
+    data?: Array<CareerOpenPositionEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CareerOpenPositionControllerReadError = any;
+
+export type CareerOpenPositionControllerUpdateData = {
+    /**
+     * The CareerOpenPosition to be updated.
+     */
+    body: UpdateCareerOpenPosition;
+    path: {
+        id: string;
+    };
+};
+
+export type CareerOpenPositionControllerUpdateResponse = ({
+    data?: CareerOpenPositionEntity;
+});
+
+export type CareerOpenPositionControllerUpdateError = any;
+
+export type CareerOpenPositionControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CareerOpenPosition.
+         */
+        query: ReadOneCareerOpenPositionQuery;
+    };
+};
+
+export type CareerOpenPositionControllerReadOneResponse = ({
+    data?: CareerOpenPositionEntity;
+});
+
+export type CareerOpenPositionControllerReadOneError = any;
+
+export type CareerOpenPositionControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type CareerOpenPositionControllerDeleteResponse = (any);
+
+export type CareerOpenPositionControllerDeleteError = any;
+
+export type AuthControllerVerifyOtpResponse = (any);
+
+export type AuthControllerVerifyOtpError = any;
+
+export type AuthControllerResendOtpResponse = (any);
+
+export type AuthControllerResendOtpError = any;
+
+export type AuthControllerSigninResponse = (any);
+
+export type AuthControllerSigninError = any;
+
+export type AuthControllerForgetPasswordResponse = (any);
+
+export type AuthControllerForgetPasswordError = any;
+
+export type AuthControllerCompleteForgetPasswordResponse = (any);
+
+export type AuthControllerCompleteForgetPasswordError = any;
+
+export type AuthControllerLogoutResponse = (any | void);
+
+export type AuthControllerLogoutError = any;
+
+export type AuthControllerRefreshTokenResponse = (any);
+
+export type AuthControllerRefreshTokenError = any;
+
+export type AuthControllerVerifyLinkResponse = (any);
+
+export type AuthControllerVerifyLinkError = any;
+
+export type AuthControllerResendLinkResponse = (any);
+
+export type AuthControllerResendLinkError = any;
+
+export type AuthControllerCompletePasswordResponse = (any);
+
+export type AuthControllerCompletePasswordError = any;
 
 export type UsersControllerCreateData = {
     body: any;
@@ -5657,94 +12484,6 @@ export type UsersControllerSoftDeleteResponse = (boolean);
 
 export type UsersControllerSoftDeleteError = any;
 
-export type AuthControllerVerifyOtpResponse = (any);
-
-export type AuthControllerVerifyOtpError = any;
-
-export type AuthControllerResendOtpResponse = (any);
-
-export type AuthControllerResendOtpError = any;
-
-export type AuthControllerSigninResponse = (any);
-
-export type AuthControllerSigninError = any;
-
-export type AuthControllerForgetPasswordResponse = (any);
-
-export type AuthControllerForgetPasswordError = any;
-
-export type AuthControllerCompleteForgetPasswordResponse = (any);
-
-export type AuthControllerCompleteForgetPasswordError = any;
-
-export type AuthControllerLogoutResponse = (any | void);
-
-export type AuthControllerLogoutError = any;
-
-export type AuthControllerRefreshTokenResponse = (any);
-
-export type AuthControllerRefreshTokenError = any;
-
-export type AuthControllerVerifyLinkResponse = (any);
-
-export type AuthControllerVerifyLinkError = any;
-
-export type AuthControllerResendLinkResponse = (any);
-
-export type AuthControllerResendLinkError = any;
-
-export type AuthControllerCompletePasswordResponse = (any);
-
-export type AuthControllerCompletePasswordError = any;
-
-export type PermissionsControllerUpdateData = {
-    /**
-     * The Permissions to be updated.
-     */
-    body: UpdatePermissions;
-};
-
-export type PermissionsControllerUpdateResponse = ({
-    data?: PermissionsEntity;
-});
-
-export type PermissionsControllerUpdateError = any;
-
-export type PermissionsControllerReadOneData = {
-    query: {
-        /**
-         * The query to be used to read one Permissions.
-         */
-        query: ReadOnePermissionsQuery;
-    };
-};
-
-export type PermissionsControllerReadOneResponse = ({
-    data?: PermissionsEntity;
-});
-
-export type PermissionsControllerReadOneError = any;
-
-export type PermissionsControllerReadData = {
-    query: {
-        /**
-         * The query to be used to read all Permissions.
-         */
-        query: ReadPermissionsQuery;
-    };
-};
-
-export type PermissionsControllerReadResponse = ({
-    data?: Array<PermissionsEntity>;
-    meta?: {
-        total?: number;
-        skip?: number;
-        take?: number;
-    };
-});
-
-export type PermissionsControllerReadError = any;
-
 export type RolesControllerCreateData = {
     /**
      * The Roles to be created.
@@ -5813,6 +12552,54 @@ export type RolesControllerReadOneError = any;
 export type RolesControllerSoftDeleteResponse = (boolean);
 
 export type RolesControllerSoftDeleteError = any;
+
+export type PermissionsControllerUpdateData = {
+    /**
+     * The Permissions to be updated.
+     */
+    body: UpdatePermissions;
+};
+
+export type PermissionsControllerUpdateResponse = ({
+    data?: PermissionsEntity;
+});
+
+export type PermissionsControllerUpdateError = any;
+
+export type PermissionsControllerReadOneData = {
+    query: {
+        /**
+         * The query to be used to read one Permissions.
+         */
+        query: ReadOnePermissionsQuery;
+    };
+};
+
+export type PermissionsControllerReadOneResponse = ({
+    data?: PermissionsEntity;
+});
+
+export type PermissionsControllerReadOneError = any;
+
+export type PermissionsControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Permissions.
+         */
+        query: ReadPermissionsQuery;
+    };
+};
+
+export type PermissionsControllerReadResponse = ({
+    data?: Array<PermissionsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type PermissionsControllerReadError = any;
 
 export type RolePermissionsControllerCreateData = {
     /**
@@ -5894,189 +12681,313 @@ export type RolePermissionsControllerUserPermissionsResponse = (any);
 
 export type RolePermissionsControllerUserPermissionsError = any;
 
-export type MediaControllerUploadFileResponse = ({
-    id: number;
-    url: string;
-    key: string;
-    size: number;
-    mime_type: string;
-    format: string;
-    created_at: string;
-    updated_at: string;
-    hero: HeroEntity;
-    leadership: LeadershipEntity;
-    ecosystem_sustainability: EcosystemSustainabilityEntity;
-    global_commitment_id: number;
-    global_commitment: GlobalCommitmentEntity;
-    card_social_id: number;
-    card_social: CardSocialEntity;
-    economic_sustainability_id: number;
-    economic_sustainability: EconomicSustainabilityEntity;
-    environmental_sustainability_points_id: number;
-    awards_cards_id: number;
-    awards_cards: AwardsCardsEntity;
-    alliances_vendors: AlliancesVendorsEntity;
-    alliances_clients: AlliancesClientsEntity;
-    automation_hero: AutomationHeroEntity;
-    automation_hero_logos_id: number;
-    automation_hero_logos: AutomationHeroEntity;
-    artificial_intelligence_image: ArtificialIntelligenceEntity;
-    artificial_intelligence_logo: ArtificialIntelligenceEntity;
-    artificial_intelligence_bullets_icon: ArtificialIntelligenceBulletsEntity;
-    business_automation_image: BusinessAutomationEntity;
-    business_automation_logo: BusinessAutomationEntity;
-    business_automation_bullets_icon: BusinessAutomationBulletsEntity;
-    data_management_image: DataManagementEntity;
-    data_management_logo: DataManagementEntity;
-    data_management_bullets_icon: DataManagementBulletsEntity;
-    cloud_image: CloudEntity;
-    cloud_logo: CloudEntity;
-    cloud_bullets_icon: CloudBulletsEntity;
-    it_infrastructure_hero_image: ItInfrastructureHeroEntity;
-    it_infrastructure_hero_icons_id: number;
-    it_infrastructure_hero_icons: ItInfrastructureHeroEntity;
-    data_center_image: DataCenterEntity;
-    data_center_logo: DataCenterEntity;
-    data_center_bullets_icon: DataCenterBulletsEntity;
-    mobility_logo: MobilityEntity;
-    mobility_cards_icon: MobilityCardsEntity;
-    software_defined_network_image: SoftwareDefinedNetworkEntity;
-    software_defined_network_logo: SoftwareDefinedNetworkEntity;
-    software_defined_network_cards_icon: SoftwareDefinedNetworkCardsEntity;
-    network_section_logo: NetworkSectionEntity;
-    network_section_cards_icon: NetworkSectionCardsEntity;
-    control_section_logo: ControlSectionEntity;
-    control_section_cards_icon: ControlSectionCardsEntity;
-    cybersecurity_hero_image: CybersecurityHeroEntity;
-    cybersecurity_hero_logos_id: number;
-    cybersecurity_hero_logos: CybersecurityHeroEntity;
-    cybersecurity_data_center_logo: CybersecurityDataCenterEntity;
-    cybersecurity_data_center_cards_icon: CybersecurityDataCenterCardsEntity;
-    operation_intelligence_logo: OperationIntelligenceEntity;
-    operation_intelligence_cards_icon: OperationIntelligenceCardsEntity;
-    identity_management_logo: IdentityManagementEntity;
-    identity_management_cards_icon: IdentityManagementCardsEntity;
-    application_data_logo: ApplicationDataEntity;
-    application_data_image: ApplicationDataEntity;
-    application_data_cards_icon: ApplicationDataCardsEntity;
-    about_barq_hero_media_id: number;
-    about_barq_hero_media: AboutBarqHeroEntity;
-    about_barq_group_affiliation_images_id: number;
-    about_barq_group_affiliation_images: AboutBarqGroupAffiliationEntity;
-    about_barq_mission_vision_icon: AboutBarqMissionVisionEntity;
-    about_barq_core_values_image: AboutBarqCoreValuesEntity;
-    about_barq_core_values_cards_icon: AboutBarqCoreValuesCardsEntity;
-    about_barq_milestones_image: AboutBarqMilestonesEntity;
-    contact_us_hero_image: ContactUsHeroEntity;
+export type CityControllerCreateData = {
+    /**
+     * The City to be created.
+     */
+    body: CreateCity;
+};
+
+export type CityControllerCreateResponse = ({
+    data?: CityEntity;
 });
 
-export type MediaControllerUploadFileError = any;
+export type CityControllerCreateError = any;
 
-export type MediaControllerUpdateFileResponse = ({
-    id: number;
-    url: string;
-    key: string;
-    size: number;
-    mime_type: string;
-    format: string;
-    created_at: string;
-    updated_at: string;
-    hero: HeroEntity;
-    leadership: LeadershipEntity;
-    ecosystem_sustainability: EcosystemSustainabilityEntity;
-    global_commitment_id: number;
-    global_commitment: GlobalCommitmentEntity;
-    card_social_id: number;
-    card_social: CardSocialEntity;
-    economic_sustainability_id: number;
-    economic_sustainability: EconomicSustainabilityEntity;
-    environmental_sustainability_points_id: number;
-    awards_cards_id: number;
-    awards_cards: AwardsCardsEntity;
-    alliances_vendors: AlliancesVendorsEntity;
-    alliances_clients: AlliancesClientsEntity;
-    automation_hero: AutomationHeroEntity;
-    automation_hero_logos_id: number;
-    automation_hero_logos: AutomationHeroEntity;
-    artificial_intelligence_image: ArtificialIntelligenceEntity;
-    artificial_intelligence_logo: ArtificialIntelligenceEntity;
-    artificial_intelligence_bullets_icon: ArtificialIntelligenceBulletsEntity;
-    business_automation_image: BusinessAutomationEntity;
-    business_automation_logo: BusinessAutomationEntity;
-    business_automation_bullets_icon: BusinessAutomationBulletsEntity;
-    data_management_image: DataManagementEntity;
-    data_management_logo: DataManagementEntity;
-    data_management_bullets_icon: DataManagementBulletsEntity;
-    cloud_image: CloudEntity;
-    cloud_logo: CloudEntity;
-    cloud_bullets_icon: CloudBulletsEntity;
-    it_infrastructure_hero_image: ItInfrastructureHeroEntity;
-    it_infrastructure_hero_icons_id: number;
-    it_infrastructure_hero_icons: ItInfrastructureHeroEntity;
-    data_center_image: DataCenterEntity;
-    data_center_logo: DataCenterEntity;
-    data_center_bullets_icon: DataCenterBulletsEntity;
-    mobility_logo: MobilityEntity;
-    mobility_cards_icon: MobilityCardsEntity;
-    software_defined_network_image: SoftwareDefinedNetworkEntity;
-    software_defined_network_logo: SoftwareDefinedNetworkEntity;
-    software_defined_network_cards_icon: SoftwareDefinedNetworkCardsEntity;
-    network_section_logo: NetworkSectionEntity;
-    network_section_cards_icon: NetworkSectionCardsEntity;
-    control_section_logo: ControlSectionEntity;
-    control_section_cards_icon: ControlSectionCardsEntity;
-    cybersecurity_hero_image: CybersecurityHeroEntity;
-    cybersecurity_hero_logos_id: number;
-    cybersecurity_hero_logos: CybersecurityHeroEntity;
-    cybersecurity_data_center_logo: CybersecurityDataCenterEntity;
-    cybersecurity_data_center_cards_icon: CybersecurityDataCenterCardsEntity;
-    operation_intelligence_logo: OperationIntelligenceEntity;
-    operation_intelligence_cards_icon: OperationIntelligenceCardsEntity;
-    identity_management_logo: IdentityManagementEntity;
-    identity_management_cards_icon: IdentityManagementCardsEntity;
-    application_data_logo: ApplicationDataEntity;
-    application_data_image: ApplicationDataEntity;
-    application_data_cards_icon: ApplicationDataCardsEntity;
-    about_barq_hero_media_id: number;
-    about_barq_hero_media: AboutBarqHeroEntity;
-    about_barq_group_affiliation_images_id: number;
-    about_barq_group_affiliation_images: AboutBarqGroupAffiliationEntity;
-    about_barq_mission_vision_icon: AboutBarqMissionVisionEntity;
-    about_barq_core_values_image: AboutBarqCoreValuesEntity;
-    about_barq_core_values_cards_icon: AboutBarqCoreValuesCardsEntity;
-    about_barq_milestones_image: AboutBarqMilestonesEntity;
-    contact_us_hero_image: ContactUsHeroEntity;
+export type CityControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Cities.
+         */
+        query: ReadCityQuery;
+    };
+};
+
+export type CityControllerReadResponse = ({
+    data?: Array<CityEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
 });
 
-export type MediaControllerUpdateFileError = any;
+export type CityControllerReadError = any;
 
-export type MediaControllerReadOneData = {
+export type CityControllerUpdateData = {
+    /**
+     * The City to be updated.
+     */
+    body: UpdateCity;
+    path: {
+        id: string;
+    };
+};
+
+export type CityControllerUpdateResponse = ({
+    data?: CityEntity;
+});
+
+export type CityControllerUpdateError = any;
+
+export type CityControllerReadOneData = {
     path: {
         id: string;
     };
     query: {
         /**
-         * The query to be used to read one Media.
+         * The query to be used to read one City.
          */
-        query: ReadOneMediaQuery;
+        query: ReadOneCityQuery;
     };
 };
 
-export type MediaControllerReadOneResponse = ({
-    data?: MediaEntity;
+export type CityControllerReadOneResponse = ({
+    data?: CityEntity;
 });
 
-export type MediaControllerReadOneError = any;
+export type CityControllerReadOneError = any;
 
-export type MediaControllerStreamMediaData = {
+export type CityControllerDeleteData = {
     path: {
         id: string;
     };
 };
 
-export type MediaControllerStreamMediaResponse = (string | any);
+export type CityControllerDeleteResponse = (any);
 
-export type MediaControllerStreamMediaError = (any);
+export type CityControllerDeleteError = any;
+
+export type CountryControllerCreateData = {
+    /**
+     * The Country to be created.
+     */
+    body: CreateCountry;
+};
+
+export type CountryControllerCreateResponse = ({
+    data?: CountryEntity;
+});
+
+export type CountryControllerCreateError = any;
+
+export type CountryControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Countries.
+         */
+        query: ReadCountryQuery;
+    };
+};
+
+export type CountryControllerReadResponse = ({
+    data?: Array<CountryEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CountryControllerReadError = any;
+
+export type CountryControllerUpdateData = {
+    /**
+     * The Country to be updated.
+     */
+    body: UpdateCountry;
+    path: {
+        id: string;
+    };
+};
+
+export type CountryControllerUpdateResponse = ({
+    data?: CountryEntity;
+});
+
+export type CountryControllerUpdateError = any;
+
+export type CountryControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Country.
+         */
+        query: ReadOneCountryQuery;
+    };
+};
+
+export type CountryControllerReadOneResponse = ({
+    data?: CountryEntity;
+});
+
+export type CountryControllerReadOneError = any;
+
+export type CountryControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type CountryControllerDeleteResponse = (any);
+
+export type CountryControllerDeleteError = any;
+
+export type CareerOpportunityControllerCreateData = {
+    /**
+     * The CareerOpportunity to be created.
+     */
+    body: CreateCareerOpportunity;
+};
+
+export type CareerOpportunityControllerCreateResponse = ({
+    data?: CareerOpportunityEntity;
+});
+
+export type CareerOpportunityControllerCreateError = any;
+
+export type CareerOpportunityControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CareerOpportunities.
+         */
+        query: ReadCareerOpportunityQuery;
+    };
+};
+
+export type CareerOpportunityControllerReadResponse = ({
+    data?: Array<CareerOpportunityEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CareerOpportunityControllerReadError = any;
+
+export type CareerOpportunityControllerUpdateData = {
+    /**
+     * The CareerOpportunity to be updated.
+     */
+    body: UpdateCareerOpportunity;
+    path: {
+        id: string;
+    };
+};
+
+export type CareerOpportunityControllerUpdateResponse = ({
+    data?: CareerOpportunityEntity;
+});
+
+export type CareerOpportunityControllerUpdateError = any;
+
+export type CareerOpportunityControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CareerOpportunity.
+         */
+        query: ReadOneCareerOpportunityQuery;
+    };
+};
+
+export type CareerOpportunityControllerReadOneResponse = ({
+    data?: CareerOpportunityEntity;
+});
+
+export type CareerOpportunityControllerReadOneError = any;
+
+export type CareerOpportunityControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type CareerOpportunityControllerDeleteResponse = (any);
+
+export type CareerOpportunityControllerDeleteError = any;
+
+export type CareerCategoryControllerCreateData = {
+    /**
+     * The CareerCategory to be created.
+     */
+    body: CreateCareerCategory;
+};
+
+export type CareerCategoryControllerCreateResponse = ({
+    data?: CareerCategoryEntity;
+});
+
+export type CareerCategoryControllerCreateError = any;
+
+export type CareerCategoryControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CareerCategories.
+         */
+        query: ReadCareerCategoryQuery;
+    };
+};
+
+export type CareerCategoryControllerReadResponse = ({
+    data?: Array<CareerCategoryEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CareerCategoryControllerReadError = any;
+
+export type CareerCategoryControllerUpdateData = {
+    /**
+     * The CareerCategory to be updated.
+     */
+    body: UpdateCareerCategory;
+    path: {
+        id: string;
+    };
+};
+
+export type CareerCategoryControllerUpdateResponse = ({
+    data?: CareerCategoryEntity;
+});
+
+export type CareerCategoryControllerUpdateError = any;
+
+export type CareerCategoryControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CareerCategory.
+         */
+        query: ReadOneCareerCategoryQuery;
+    };
+};
+
+export type CareerCategoryControllerReadOneResponse = ({
+    data?: CareerCategoryEntity;
+});
+
+export type CareerCategoryControllerReadOneError = any;
+
+export type CareerCategoryControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type CareerCategoryControllerDeleteResponse = (any);
+
+export type CareerCategoryControllerDeleteError = any;
 
 export type HeroControllerCreateData = {
     /**
@@ -6346,6 +13257,16 @@ export type CardSocialControllerReadOneResponse = ({
 
 export type CardSocialControllerReadOneError = any;
 
+export type CardSocialControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type CardSocialControllerDeleteResponse = (any);
+
+export type CardSocialControllerDeleteError = any;
+
 export type LandingNumbersControllerCreateData = {
     /**
      * The LandingNumbers to be created.
@@ -6423,30 +13344,30 @@ export type LandingNumbersControllerSoftDeleteResponse = (boolean);
 
 export type LandingNumbersControllerSoftDeleteError = any;
 
-export type LeadershipControllerCreateData = {
+export type ManagedServiceHeroControllerCreateData = {
     /**
-     * The Leadership to be created.
+     * The ManagedServiceHero to be created.
      */
-    body: CreateLeadership;
+    body: CreateManagedServiceHero;
 };
 
-export type LeadershipControllerCreateResponse = ({
-    data?: LeadershipEntity;
+export type ManagedServiceHeroControllerCreateResponse = ({
+    data?: ManagedServiceHeroEntity;
 });
 
-export type LeadershipControllerCreateError = any;
+export type ManagedServiceHeroControllerCreateError = any;
 
-export type LeadershipControllerReadData = {
+export type ManagedServiceHeroControllerReadData = {
     query: {
         /**
-         * The query to be used to read all Leaderships.
+         * The query to be used to read all ManagedServiceHeros.
          */
-        query: ReadLeadershipQuery;
+        query: ReadManagedServiceHeroQuery;
     };
 };
 
-export type LeadershipControllerReadResponse = ({
-    data?: Array<LeadershipEntity>;
+export type ManagedServiceHeroControllerReadResponse = ({
+    data?: Array<ManagedServiceHeroEntity>;
     meta?: {
         total?: number;
         skip?: number;
@@ -6454,41 +13375,1171 @@ export type LeadershipControllerReadResponse = ({
     };
 });
 
-export type LeadershipControllerReadError = any;
+export type ManagedServiceHeroControllerReadError = any;
 
-export type LeadershipControllerUpdateData = {
+export type ManagedServiceHeroControllerUpdateData = {
     /**
-     * The Leadership to be updated.
+     * The ManagedServiceHero to be updated.
      */
-    body: UpdateLeadership;
+    body: UpdateManagedServiceHero;
     path: {
         id: string;
     };
 };
 
-export type LeadershipControllerUpdateResponse = ({
-    data?: LeadershipEntity;
+export type ManagedServiceHeroControllerUpdateResponse = ({
+    data?: ManagedServiceHeroEntity;
 });
 
-export type LeadershipControllerUpdateError = any;
+export type ManagedServiceHeroControllerUpdateError = any;
 
-export type LeadershipControllerReadOneData = {
+export type ManagedServiceHeroControllerReadOneData = {
     path: {
         id: string;
     };
     query: {
         /**
-         * The query to be used to read one Leadership.
+         * The query to be used to read one ManagedServiceHero.
          */
-        query: ReadOneLeadershipQuery;
+        query: ReadOneManagedServiceHeroQuery;
     };
 };
 
-export type LeadershipControllerReadOneResponse = ({
-    data?: LeadershipEntity;
+export type ManagedServiceHeroControllerReadOneResponse = ({
+    data?: ManagedServiceHeroEntity;
 });
 
-export type LeadershipControllerReadOneError = any;
+export type ManagedServiceHeroControllerReadOneError = any;
+
+export type BarqAcademyHeroControllerCreateData = {
+    /**
+     * The BarqAcademyHero to be created.
+     */
+    body: CreateBarqAcademyHero;
+};
+
+export type BarqAcademyHeroControllerCreateResponse = ({
+    data?: BarqAcademyHeroEntity;
+});
+
+export type BarqAcademyHeroControllerCreateError = any;
+
+export type BarqAcademyHeroControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all BarqAcademyHeros.
+         */
+        query: ReadBarqAcademyHeroQuery;
+    };
+};
+
+export type BarqAcademyHeroControllerReadResponse = ({
+    data?: Array<BarqAcademyHeroEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqAcademyHeroControllerReadError = any;
+
+export type BarqAcademyHeroControllerUpdateData = {
+    /**
+     * The BarqAcademyHero to be updated.
+     */
+    body: UpdateBarqAcademyHero;
+    path: {
+        id: string;
+    };
+};
+
+export type BarqAcademyHeroControllerUpdateResponse = ({
+    data?: BarqAcademyHeroEntity;
+});
+
+export type BarqAcademyHeroControllerUpdateError = any;
+
+export type BarqAcademyHeroControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one BarqAcademyHero.
+         */
+        query: ReadOneBarqAcademyHeroQuery;
+    };
+};
+
+export type BarqAcademyHeroControllerReadOneResponse = ({
+    data?: BarqAcademyHeroEntity;
+});
+
+export type BarqAcademyHeroControllerReadOneError = any;
+
+export type SolutionsAndServicesHeroControllerCreateData = {
+    /**
+     * The SolutionsAndServicesHero to be created.
+     */
+    body: CreateSolutionsAndServicesHero;
+};
+
+export type SolutionsAndServicesHeroControllerCreateResponse = ({
+    data?: SolutionsAndServicesHeroEntity;
+});
+
+export type SolutionsAndServicesHeroControllerCreateError = any;
+
+export type SolutionsAndServicesHeroControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all SolutionsAndServicesHeros.
+         */
+        query: ReadSolutionsAndServicesHeroQuery;
+    };
+};
+
+export type SolutionsAndServicesHeroControllerReadResponse = ({
+    data?: Array<SolutionsAndServicesHeroEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type SolutionsAndServicesHeroControllerReadError = any;
+
+export type SolutionsAndServicesHeroControllerUpdateData = {
+    /**
+     * The SolutionsAndServicesHero to be updated.
+     */
+    body: UpdateSolutionsAndServicesHero;
+    path: {
+        id: string;
+    };
+};
+
+export type SolutionsAndServicesHeroControllerUpdateResponse = ({
+    data?: SolutionsAndServicesHeroEntity;
+});
+
+export type SolutionsAndServicesHeroControllerUpdateError = any;
+
+export type SolutionsAndServicesHeroControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one SolutionsAndServicesHero.
+         */
+        query: ReadOneSolutionsAndServicesHeroQuery;
+    };
+};
+
+export type SolutionsAndServicesHeroControllerReadOneResponse = ({
+    data?: SolutionsAndServicesHeroEntity;
+});
+
+export type SolutionsAndServicesHeroControllerReadOneError = any;
+
+export type SuccessStoryHeroControllerCreateData = {
+    /**
+     * The SuccessStoryHero to be created.
+     */
+    body: CreateSuccessStoryHero;
+};
+
+export type SuccessStoryHeroControllerCreateResponse = ({
+    data?: SuccessStoryHeroEntity;
+});
+
+export type SuccessStoryHeroControllerCreateError = any;
+
+export type SuccessStoryHeroControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all SuccessStoryHeros.
+         */
+        query: ReadSuccessStoryHeroQuery;
+    };
+};
+
+export type SuccessStoryHeroControllerReadResponse = ({
+    data?: Array<SuccessStoryHeroEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type SuccessStoryHeroControllerReadError = any;
+
+export type SuccessStoryHeroControllerUpdateData = {
+    /**
+     * The SuccessStoryHero to be updated.
+     */
+    body: UpdateSuccessStoryHero;
+    path: {
+        id: string;
+    };
+};
+
+export type SuccessStoryHeroControllerUpdateResponse = ({
+    data?: SuccessStoryHeroEntity;
+});
+
+export type SuccessStoryHeroControllerUpdateError = any;
+
+export type SuccessStoryHeroControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one SuccessStoryHero.
+         */
+        query: ReadOneSuccessStoryHeroQuery;
+    };
+};
+
+export type SuccessStoryHeroControllerReadOneResponse = ({
+    data?: SuccessStoryHeroEntity;
+});
+
+export type SuccessStoryHeroControllerReadOneError = any;
+
+export type EventJoinUsHeroControllerCreateData = {
+    /**
+     * The EventJoinUsHero to be created.
+     */
+    body: CreateEventJoinUsHero;
+};
+
+export type EventJoinUsHeroControllerCreateResponse = ({
+    data?: EventJoinUsHeroEntity;
+});
+
+export type EventJoinUsHeroControllerCreateError = any;
+
+export type EventJoinUsHeroControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all EventJoinUsHeros.
+         */
+        query: ReadEventJoinUsHeroQuery;
+    };
+};
+
+export type EventJoinUsHeroControllerReadResponse = ({
+    data?: Array<EventJoinUsHeroEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type EventJoinUsHeroControllerReadError = any;
+
+export type EventJoinUsHeroControllerUpdateData = {
+    /**
+     * The EventJoinUsHero to be updated.
+     */
+    body: UpdateEventJoinUsHero;
+    path: {
+        id: string;
+    };
+};
+
+export type EventJoinUsHeroControllerUpdateResponse = ({
+    data?: EventJoinUsHeroEntity;
+});
+
+export type EventJoinUsHeroControllerUpdateError = any;
+
+export type EventJoinUsHeroControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one EventJoinUsHero.
+         */
+        query: ReadOneEventJoinUsHeroQuery;
+    };
+};
+
+export type EventJoinUsHeroControllerReadOneResponse = ({
+    data?: EventJoinUsHeroEntity;
+});
+
+export type EventJoinUsHeroControllerReadOneError = any;
+
+export type SuccessStoryCaseStudiesControllerCreateData = {
+    /**
+     * The SuccessStoryCaseStudies to be created.
+     */
+    body: CreateSuccessStoryCaseStudies;
+};
+
+export type SuccessStoryCaseStudiesControllerCreateResponse = ({
+    data?: SuccessStoryCaseStudiesEntity;
+});
+
+export type SuccessStoryCaseStudiesControllerCreateError = any;
+
+export type SuccessStoryCaseStudiesControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all SuccessStoryCaseStudiess.
+         */
+        query: ReadSuccessStoryCaseStudiesQuery;
+    };
+};
+
+export type SuccessStoryCaseStudiesControllerReadResponse = ({
+    data?: Array<SuccessStoryCaseStudiesEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type SuccessStoryCaseStudiesControllerReadError = any;
+
+export type SuccessStoryCaseStudiesControllerUpdateData = {
+    /**
+     * The SuccessStoryCaseStudies to be updated.
+     */
+    body: UpdateSuccessStoryCaseStudies;
+    path: {
+        id: string;
+    };
+};
+
+export type SuccessStoryCaseStudiesControllerUpdateResponse = ({
+    data?: SuccessStoryCaseStudiesEntity;
+});
+
+export type SuccessStoryCaseStudiesControllerUpdateError = any;
+
+export type SuccessStoryCaseStudiesControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one SuccessStoryCaseStudies.
+         */
+        query: ReadOneSuccessStoryCaseStudiesQuery;
+    };
+};
+
+export type SuccessStoryCaseStudiesControllerReadOneResponse = ({
+    data?: SuccessStoryCaseStudiesEntity;
+});
+
+export type SuccessStoryCaseStudiesControllerReadOneError = any;
+
+export type SuccessStoryCaseStudiesControllerSoftDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type SuccessStoryCaseStudiesControllerSoftDeleteResponse = ({
+    data?: SuccessStoryCaseStudiesEntity;
+});
+
+export type SuccessStoryCaseStudiesControllerSoftDeleteError = any;
+
+export type SuccessStoryCaseStudiesControllerMarkAsFeaturedData = {
+    /**
+     * The SuccessStoryCaseStudies to be marked as featured.
+     */
+    body: any;
+    path: {
+        id: string;
+    };
+};
+
+export type SuccessStoryCaseStudiesControllerMarkAsFeaturedResponse = ({
+    data?: SuccessStoryCaseStudiesEntity;
+});
+
+export type SuccessStoryCaseStudiesControllerMarkAsFeaturedError = any;
+
+export type IndustriesControllerCreateData = {
+    /**
+     * The Industries to be created.
+     */
+    body: CreateIndustries;
+};
+
+export type IndustriesControllerCreateResponse = ({
+    data?: IndustriesEntity;
+});
+
+export type IndustriesControllerCreateError = any;
+
+export type IndustriesControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Industries.
+         */
+        query: ReadIndustriesQuery;
+    };
+};
+
+export type IndustriesControllerReadResponse = ({
+    data?: Array<IndustriesEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type IndustriesControllerReadError = any;
+
+export type IndustriesControllerUpdateData = {
+    /**
+     * The Industries to be updated.
+     */
+    body: UpdateIndustries;
+    path: {
+        id: string;
+    };
+};
+
+export type IndustriesControllerUpdateResponse = ({
+    data?: IndustriesEntity;
+});
+
+export type IndustriesControllerUpdateError = any;
+
+export type IndustriesControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Industries.
+         */
+        query: ReadOneIndustriesQuery;
+    };
+};
+
+export type IndustriesControllerReadOneResponse = ({
+    data?: IndustriesEntity;
+});
+
+export type IndustriesControllerReadOneError = any;
+
+export type IndustriesControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type IndustriesControllerDeleteResponse = (any);
+
+export type IndustriesControllerDeleteError = any;
+
+export type NewsroomCardsControllerCreateData = {
+    /**
+     * The NewsroomCards to be created.
+     */
+    body: CreateNewsroomCards;
+};
+
+export type NewsroomCardsControllerCreateResponse = ({
+    data?: NewsroomCardsEntity;
+});
+
+export type NewsroomCardsControllerCreateError = any;
+
+export type NewsroomCardsControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all NewsroomCardss.
+         */
+        query: ReadNewsroomCardsQuery;
+    };
+};
+
+export type NewsroomCardsControllerReadResponse = ({
+    data?: Array<NewsroomCardsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type NewsroomCardsControllerReadError = any;
+
+export type NewsroomCardsControllerUpdateData = {
+    /**
+     * The NewsroomCards to be updated.
+     */
+    body: UpdateNewsroomCards;
+    path: {
+        id: string;
+    };
+};
+
+export type NewsroomCardsControllerUpdateResponse = ({
+    data?: NewsroomCardsEntity;
+});
+
+export type NewsroomCardsControllerUpdateError = any;
+
+export type NewsroomCardsControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one NewsroomCards.
+         */
+        query: ReadOneNewsroomCardsQuery;
+    };
+};
+
+export type NewsroomCardsControllerReadOneResponse = ({
+    data?: NewsroomCardsEntity;
+});
+
+export type NewsroomCardsControllerReadOneError = any;
+
+export type NewsroomCardsControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type NewsroomCardsControllerDeleteResponse = (any);
+
+export type NewsroomCardsControllerDeleteError = any;
+
+export type EventJoinusFormControllerCreateData = {
+    /**
+     * The EventJoinusForm to be created.
+     */
+    body: CreateEventJoinusForm;
+};
+
+export type EventJoinusFormControllerCreateResponse = ({
+    data?: EventJoinusFormEntity;
+});
+
+export type EventJoinusFormControllerCreateError = any;
+
+export type EventJoinusFormControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all EventJoinusForms.
+         */
+        query: ReadEventJoinusFormQuery;
+    };
+};
+
+export type EventJoinusFormControllerReadResponse = ({
+    data?: Array<EventJoinusFormEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type EventJoinusFormControllerReadError = any;
+
+export type EventJoinusFormControllerUpdateData = {
+    /**
+     * The EventJoinusForm to be updated.
+     */
+    body: UpdateEventJoinusForm;
+    path: {
+        id: string;
+    };
+};
+
+export type EventJoinusFormControllerUpdateResponse = ({
+    data?: EventJoinusFormEntity;
+});
+
+export type EventJoinusFormControllerUpdateError = any;
+
+export type EventJoinusFormControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one EventJoinusForm.
+         */
+        query: ReadOneEventJoinusFormQuery;
+    };
+};
+
+export type EventJoinusFormControllerReadOneResponse = ({
+    data?: EventJoinusFormEntity;
+});
+
+export type EventJoinusFormControllerReadOneError = any;
+
+export type BarqAcademyHighlightsControllerCreateData = {
+    /**
+     * The BarqAcademyHighlights to be created.
+     */
+    body: CreateBarqAcademyHighlights;
+};
+
+export type BarqAcademyHighlightsControllerCreateResponse = ({
+    data?: BarqAcademyHighlightsEntity;
+});
+
+export type BarqAcademyHighlightsControllerCreateError = any;
+
+export type BarqAcademyHighlightsControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all BarqAcademyHighlights.
+         */
+        query: ReadBarqAcademyHighlightsQuery;
+    };
+};
+
+export type BarqAcademyHighlightsControllerReadResponse = ({
+    data?: Array<BarqAcademyHighlightsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqAcademyHighlightsControllerReadError = any;
+
+export type BarqAcademyHighlightsControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one BarqAcademyHighlights.
+         */
+        query: ReadOneBarqAcademyHighlightsQuery;
+    };
+};
+
+export type BarqAcademyHighlightsControllerReadOneResponse = ({
+    data?: BarqAcademyHighlightsEntity;
+});
+
+export type BarqAcademyHighlightsControllerReadOneError = any;
+
+export type BarqAcademyHighlightsControllerUpdateData = {
+    /**
+     * The BarqAcademyHighlights to be updated.
+     */
+    body: UpdateBarqAcademyHighlights;
+    path: {
+        id: string;
+    };
+};
+
+export type BarqAcademyHighlightsControllerUpdateResponse = ({
+    data?: BarqAcademyHighlightsEntity;
+});
+
+export type BarqAcademyHighlightsControllerUpdateError = any;
+
+export type BarqAcademyProgramsOpportunitiesControllerCreateData = {
+    /**
+     * The BarqAcademyProgramsOpportunities to be created.
+     */
+    body: CreateBarqAcademyProgramsOpportunities;
+};
+
+export type BarqAcademyProgramsOpportunitiesControllerCreateResponse = ({
+    data?: BarqAcademyProgramsOpportunitiesEntity;
+});
+
+export type BarqAcademyProgramsOpportunitiesControllerCreateError = any;
+
+export type BarqAcademyProgramsOpportunitiesControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all BarqAcademyProgramsOpportunities.
+         */
+        query: ReadBarqAcademyProgramsOpportunitiesQuery;
+    };
+};
+
+export type BarqAcademyProgramsOpportunitiesControllerReadResponse = ({
+    data?: Array<BarqAcademyProgramsOpportunitiesEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqAcademyProgramsOpportunitiesControllerReadError = any;
+
+export type BarqAcademyProgramsOpportunitiesControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one BarqAcademyProgramsOpportunities.
+         */
+        query: ReadOneBarqAcademyProgramsOpportunitiesQuery;
+    };
+};
+
+export type BarqAcademyProgramsOpportunitiesControllerReadOneResponse = ({
+    data?: BarqAcademyProgramsOpportunitiesEntity;
+});
+
+export type BarqAcademyProgramsOpportunitiesControllerReadOneError = any;
+
+export type BarqAcademyProgramsOpportunitiesControllerUpdateData = {
+    /**
+     * The BarqAcademyProgramsOpportunities to be updated.
+     */
+    body: UpdateBarqAcademyProgramsOpportunities;
+    path: {
+        id: string;
+    };
+};
+
+export type BarqAcademyProgramsOpportunitiesControllerUpdateResponse = ({
+    data?: BarqAcademyProgramsOpportunitiesEntity;
+});
+
+export type BarqAcademyProgramsOpportunitiesControllerUpdateError = any;
+
+export type BarqAcademyFoundationTracksFormDataControllerCreateData = {
+    /**
+     * The BarqAcademyFoundationTracksFormData to be created.
+     */
+    body: CreateBarqAcademyFoundationTracksFormData;
+};
+
+export type BarqAcademyFoundationTracksFormDataControllerCreateResponse = ({
+    data?: BarqAcademyFoundationTracksFormDataEntity;
+});
+
+export type BarqAcademyFoundationTracksFormDataControllerCreateError = any;
+
+export type BarqAcademyFoundationTracksFormDataControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all BarqAcademyFoundationTracksFormDatas.
+         */
+        query: ReadBarqAcademyFoundationTracksFormDataQuery;
+    };
+};
+
+export type BarqAcademyFoundationTracksFormDataControllerReadResponse = ({
+    data?: Array<BarqAcademyFoundationTracksFormDataEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqAcademyFoundationTracksFormDataControllerReadError = any;
+
+export type BarqAcademyFoundationTracksFormDataControllerUpdateData = {
+    /**
+     * The BarqAcademyFoundationTracksFormData to be updated.
+     */
+    body: UpdateBarqAcademyFoundationTracksFormData;
+    path: {
+        id: string;
+    };
+};
+
+export type BarqAcademyFoundationTracksFormDataControllerUpdateResponse = ({
+    data?: BarqAcademyFoundationTracksFormDataEntity;
+});
+
+export type BarqAcademyFoundationTracksFormDataControllerUpdateError = any;
+
+export type BarqAcademyFoundationTracksFormDataControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one BarqAcademyFoundationTracksFormData.
+         */
+        query: ReadOneBarqAcademyFoundationTracksFormDataQuery;
+    };
+};
+
+export type BarqAcademyFoundationTracksFormDataControllerReadOneResponse = ({
+    data?: BarqAcademyFoundationTracksFormDataEntity;
+});
+
+export type BarqAcademyFoundationTracksFormDataControllerReadOneError = any;
+
+export type BarqAcademyFoundationTracksFormControllerCreateData = {
+    /**
+     * The BarqAcademyFoundationTracksForm to be created.
+     */
+    body: CreateBarqAcademyFoundationTracksForm;
+};
+
+export type BarqAcademyFoundationTracksFormControllerCreateResponse = ({
+    data?: BarqAcademyFoundationTracksFormEntity;
+});
+
+export type BarqAcademyFoundationTracksFormControllerCreateError = any;
+
+export type BarqAcademyFoundationTracksFormControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all BarqAcademyFoundationTracksForms.
+         */
+        query: ReadBarqAcademyFoundationTracksFormQuery;
+    };
+};
+
+export type BarqAcademyFoundationTracksFormControllerReadResponse = ({
+    data?: Array<BarqAcademyFoundationTracksFormEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqAcademyFoundationTracksFormControllerReadError = any;
+
+export type BarqAcademyFoundationTracksFormControllerUpdateData = {
+    /**
+     * The BarqAcademyFoundationTracksForm to be updated.
+     */
+    body: UpdateBarqAcademyFoundationTracksForm;
+    path: {
+        id: string;
+    };
+};
+
+export type BarqAcademyFoundationTracksFormControllerUpdateResponse = ({
+    data?: BarqAcademyFoundationTracksFormEntity;
+});
+
+export type BarqAcademyFoundationTracksFormControllerUpdateError = any;
+
+export type BarqAcademyFoundationTracksFormControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one BarqAcademyFoundationTracksForm.
+         */
+        query: ReadOneBarqAcademyFoundationTracksFormQuery;
+    };
+};
+
+export type BarqAcademyFoundationTracksFormControllerReadOneResponse = ({
+    data?: BarqAcademyFoundationTracksFormEntity;
+});
+
+export type BarqAcademyFoundationTracksFormControllerReadOneError = any;
+
+export type BarqAcademyFoundationInternshipFormControllerCreateData = {
+    /**
+     * The BarqAcademyFoundationInternshipForm to be created.
+     */
+    body: CreateBarqAcademyFoundationInternshipForm;
+};
+
+export type BarqAcademyFoundationInternshipFormControllerCreateResponse = ({
+    data?: BarqAcademyFoundationInternshipFormEntity;
+});
+
+export type BarqAcademyFoundationInternshipFormControllerCreateError = any;
+
+export type BarqAcademyFoundationInternshipFormControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all BarqAcademyFoundationInternshipForms.
+         */
+        query: ReadBarqAcademyFoundationInternshipFormQuery;
+    };
+};
+
+export type BarqAcademyFoundationInternshipFormControllerReadResponse = ({
+    data?: Array<BarqAcademyFoundationInternshipFormEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqAcademyFoundationInternshipFormControllerReadError = any;
+
+export type BarqAcademyFoundationInternshipFormControllerUpdateData = {
+    /**
+     * The BarqAcademyFoundationInternshipForm to be updated.
+     */
+    body: UpdateBarqAcademyFoundationInternshipForm;
+    path: {
+        id: string;
+    };
+};
+
+export type BarqAcademyFoundationInternshipFormControllerUpdateResponse = ({
+    data?: BarqAcademyFoundationInternshipFormEntity;
+});
+
+export type BarqAcademyFoundationInternshipFormControllerUpdateError = any;
+
+export type BarqAcademyFoundationInternshipFormControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one BarqAcademyFoundationInternshipForm.
+         */
+        query: ReadOneBarqAcademyFoundationInternshipFormQuery;
+    };
+};
+
+export type BarqAcademyFoundationInternshipFormControllerReadOneResponse = ({
+    data?: BarqAcademyFoundationInternshipFormEntity;
+});
+
+export type BarqAcademyFoundationInternshipFormControllerReadOneError = any;
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerCreateData = {
+    /**
+     * The BarqAcademyProgramsOpportunitiesInternship to be created.
+     */
+    body: CreateBarqAcademyProgramsOpportunitiesInternship;
+};
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerCreateResponse = ({
+    data?: BarqAcademyProgramsOpportunitiesInternshipEntity;
+});
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerCreateError = any;
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all BarqAcademyProgramsOpportunitiesInternship.
+         */
+        query: ReadBarqAcademyProgramsOpportunitiesInternshipQuery;
+    };
+};
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerReadResponse = ({
+    data?: Array<BarqAcademyProgramsOpportunitiesInternshipEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerReadError = any;
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one BarqAcademyProgramsOpportunitiesInternship.
+         */
+        query: ReadOneBarqAcademyProgramsOpportunitiesInternshipQuery;
+    };
+};
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerReadOneResponse = ({
+    data?: BarqAcademyProgramsOpportunitiesInternshipEntity;
+});
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerReadOneError = any;
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerUpdateData = {
+    /**
+     * The BarqAcademyProgramsOpportunitiesInternship to be updated.
+     */
+    body: UpdateBarqAcademyProgramsOpportunitiesInternship;
+    path: {
+        id: string;
+    };
+};
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerUpdateResponse = ({
+    data?: BarqAcademyProgramsOpportunitiesInternshipEntity;
+});
+
+export type BarqAcademyProgramsOpportunitiesInternshipControllerUpdateError = any;
+
+export type BarqAcademyFoundationInternshipFormDataControllerCreateData = {
+    /**
+     * The BarqAcademyFoundationInternshipFormData to be created.
+     */
+    body: CreateBarqAcademyFoundationInternshipFormData;
+};
+
+export type BarqAcademyFoundationInternshipFormDataControllerCreateResponse = ({
+    data?: BarqAcademyFoundationInternshipFormDataEntity;
+});
+
+export type BarqAcademyFoundationInternshipFormDataControllerCreateError = any;
+
+export type BarqAcademyFoundationInternshipFormDataControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all BarqAcademyFoundationInternshipFormDatas.
+         */
+        query: ReadBarqAcademyFoundationInternshipFormDataQuery;
+    };
+};
+
+export type BarqAcademyFoundationInternshipFormDataControllerReadResponse = ({
+    data?: Array<BarqAcademyFoundationInternshipFormDataEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type BarqAcademyFoundationInternshipFormDataControllerReadError = any;
+
+export type BarqAcademyFoundationInternshipFormDataControllerUpdateData = {
+    /**
+     * The BarqAcademyFoundationInternshipFormData to be updated.
+     */
+    body: UpdateBarqAcademyFoundationInternshipFormData;
+    path: {
+        id: string;
+    };
+};
+
+export type BarqAcademyFoundationInternshipFormDataControllerUpdateResponse = ({
+    data?: BarqAcademyFoundationInternshipFormDataEntity;
+});
+
+export type BarqAcademyFoundationInternshipFormDataControllerUpdateError = any;
+
+export type BarqAcademyFoundationInternshipFormDataControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one BarqAcademyFoundationInternshipFormData.
+         */
+        query: ReadOneBarqAcademyFoundationInternshipFormDataQuery;
+    };
+};
+
+export type BarqAcademyFoundationInternshipFormDataControllerReadOneResponse = ({
+    data?: BarqAcademyFoundationInternshipFormDataEntity;
+});
+
+export type BarqAcademyFoundationInternshipFormDataControllerReadOneError = any;
+
+export type ManagedServiceCardsControllerCreateData = {
+    /**
+     * The Managed Service Cards to be created.
+     */
+    body: CreateManagedServiceCards;
+};
+
+export type ManagedServiceCardsControllerCreateResponse = ({
+    data?: ManagedServiceCardsEntity;
+});
+
+export type ManagedServiceCardsControllerCreateError = any;
+
+export type ManagedServiceCardsControllerFindAllData = {
+    query: {
+        /**
+         * Query parameters for filtering, sorting, and pagination.
+         */
+        query: any;
+    };
+};
+
+export type ManagedServiceCardsControllerFindAllResponse = ({
+    data?: Array<ManagedServiceCardsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type ManagedServiceCardsControllerFindAllError = any;
+
+export type ManagedServiceCardsControllerFindOneData = {
+    path: {
+        id: number;
+    };
+    query: {
+        /**
+         * Query parameters for relations.
+         */
+        query: any;
+    };
+};
+
+export type ManagedServiceCardsControllerFindOneResponse = ({
+    data?: ManagedServiceCardsEntity;
+});
+
+export type ManagedServiceCardsControllerFindOneError = any;
+
+export type ManagedServiceCardsControllerUpdateData = {
+    /**
+     * The Managed Service Cards to be updated.
+     */
+    body: UpdateManagedServiceCards;
+    path: {
+        id: number;
+    };
+};
+
+export type ManagedServiceCardsControllerUpdateResponse = ({
+    data?: ManagedServiceCardsEntity;
+});
+
+export type ManagedServiceCardsControllerUpdateError = any;
+
+export type ManagedServiceCardsControllerRemoveData = {
+    path: {
+        id: number;
+    };
+};
+
+export type ManagedServiceCardsControllerRemoveResponse = (any);
+
+export type ManagedServiceCardsControllerRemoveError = any;
 
 export type AboutBarqMissionVisionControllerCreateData = {
     /**
@@ -6712,160 +14763,6 @@ export type AboutBarqMilestonesControllerDeleteData = {
 export type AboutBarqMilestonesControllerDeleteResponse = (any);
 
 export type AboutBarqMilestonesControllerDeleteError = any;
-
-export type CountryControllerCreateData = {
-    /**
-     * The Country to be created.
-     */
-    body: CreateCountry;
-};
-
-export type CountryControllerCreateResponse = ({
-    data?: CountryEntity;
-});
-
-export type CountryControllerCreateError = any;
-
-export type CountryControllerReadData = {
-    query: {
-        /**
-         * The query to be used to read all Countries.
-         */
-        query: ReadCountryQuery;
-    };
-};
-
-export type CountryControllerReadResponse = ({
-    data?: Array<CountryEntity>;
-    meta?: {
-        total?: number;
-        skip?: number;
-        take?: number;
-    };
-});
-
-export type CountryControllerReadError = any;
-
-export type CountryControllerUpdateData = {
-    /**
-     * The Country to be updated.
-     */
-    body: UpdateCountry;
-    path: {
-        id: string;
-    };
-};
-
-export type CountryControllerUpdateResponse = ({
-    data?: CountryEntity;
-});
-
-export type CountryControllerUpdateError = any;
-
-export type CountryControllerReadOneData = {
-    path: {
-        id: string;
-    };
-    query: {
-        /**
-         * The query to be used to read one Country.
-         */
-        query: ReadOneCountryQuery;
-    };
-};
-
-export type CountryControllerReadOneResponse = ({
-    data?: CountryEntity;
-});
-
-export type CountryControllerReadOneError = any;
-
-export type CountryControllerDeleteData = {
-    path: {
-        id: string;
-    };
-};
-
-export type CountryControllerDeleteResponse = (any);
-
-export type CountryControllerDeleteError = any;
-
-export type IndustriesControllerCreateData = {
-    /**
-     * The Industries to be created.
-     */
-    body: CreateIndustries;
-};
-
-export type IndustriesControllerCreateResponse = ({
-    data?: IndustriesEntity;
-});
-
-export type IndustriesControllerCreateError = any;
-
-export type IndustriesControllerReadData = {
-    query: {
-        /**
-         * The query to be used to read all Industries.
-         */
-        query: ReadIndustriesQuery;
-    };
-};
-
-export type IndustriesControllerReadResponse = ({
-    data?: Array<IndustriesEntity>;
-    meta?: {
-        total?: number;
-        skip?: number;
-        take?: number;
-    };
-});
-
-export type IndustriesControllerReadError = any;
-
-export type IndustriesControllerUpdateData = {
-    /**
-     * The Industries to be updated.
-     */
-    body: UpdateIndustries;
-    path: {
-        id: string;
-    };
-};
-
-export type IndustriesControllerUpdateResponse = ({
-    data?: IndustriesEntity;
-});
-
-export type IndustriesControllerUpdateError = any;
-
-export type IndustriesControllerReadOneData = {
-    path: {
-        id: string;
-    };
-    query: {
-        /**
-         * The query to be used to read one Industries.
-         */
-        query: ReadOneIndustriesQuery;
-    };
-};
-
-export type IndustriesControllerReadOneResponse = ({
-    data?: IndustriesEntity;
-});
-
-export type IndustriesControllerReadOneError = any;
-
-export type IndustriesControllerDeleteData = {
-    path: {
-        id: string;
-    };
-};
-
-export type IndustriesControllerDeleteResponse = (any);
-
-export type IndustriesControllerDeleteError = any;
 
 export type SolutionsControllerCreateData = {
     /**
@@ -8259,6 +16156,207 @@ export type MobilityControllerUpdateResponse = ({
 
 export type MobilityControllerUpdateError = any;
 
+export type EventsSpeakersControllerCreateData = {
+    /**
+     * The EventsSpeakers to be created.
+     */
+    body: CreateEventsSpeakers;
+};
+
+export type EventsSpeakersControllerCreateResponse = ({
+    data?: EventsSpeakersEntity;
+});
+
+export type EventsSpeakersControllerCreateError = any;
+
+export type EventsSpeakersControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all EventsSpeakers.
+         */
+        query: ReadEventsSpeakersQuery;
+    };
+};
+
+export type EventsSpeakersControllerReadResponse = ({
+    data?: Array<EventsSpeakersEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type EventsSpeakersControllerReadError = any;
+
+export type EventsSpeakersControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one EventsSpeakers.
+         */
+        query: ReadOneEventsSpeakersQuery;
+    };
+};
+
+export type EventsSpeakersControllerReadOneResponse = ({
+    data?: EventsSpeakersEntity;
+});
+
+export type EventsSpeakersControllerReadOneError = any;
+
+export type EventsSpeakersControllerUpdateData = {
+    /**
+     * The EventsSpeakers to be updated.
+     */
+    body: UpdateEventsSpeakers;
+    path: {
+        id: string;
+    };
+};
+
+export type EventsSpeakersControllerUpdateResponse = ({
+    data?: EventsSpeakersEntity;
+});
+
+export type EventsSpeakersControllerUpdateError = any;
+
+export type EventsPartnerControllerCreateData = {
+    /**
+     * The EventsPartner to be created.
+     */
+    body: CreateEventsPartner;
+};
+
+export type EventsPartnerControllerCreateResponse = ({
+    data?: EventsPartnerEntity;
+});
+
+export type EventsPartnerControllerCreateError = any;
+
+export type EventsPartnerControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all EventsPartners.
+         */
+        query: ReadEventsPartnerQuery;
+    };
+};
+
+export type EventsPartnerControllerReadResponse = ({
+    data?: Array<EventsPartnerEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type EventsPartnerControllerReadError = any;
+
+export type EventsPartnerControllerUpdateData = {
+    /**
+     * The EventsPartner to be updated.
+     */
+    body: UpdateEventsPartner;
+    path: {
+        id: string;
+    };
+};
+
+export type EventsPartnerControllerUpdateResponse = ({
+    data?: EventsPartnerEntity;
+});
+
+export type EventsPartnerControllerUpdateError = any;
+
+export type EventsPartnerControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one EventsPartner.
+         */
+        query: ReadOneEventsPartnerQuery;
+    };
+};
+
+export type EventsPartnerControllerReadOneResponse = ({
+    data?: EventsPartnerEntity;
+});
+
+export type EventsPartnerControllerReadOneError = any;
+
+export type HomeAwardsControllerCreateData = {
+    /**
+     * The HomeAwards to be created.
+     */
+    body: CreateHomeAwards;
+};
+
+export type HomeAwardsControllerCreateResponse = ({
+    data?: HomeAwardsEntity;
+});
+
+export type HomeAwardsControllerCreateError = any;
+
+export type HomeAwardsControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all HomeAwards.
+         */
+        query: ReadHomeAwardsQuery;
+    };
+};
+
+export type HomeAwardsControllerReadResponse = ({
+    data?: Array<HomeAwardsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type HomeAwardsControllerReadError = any;
+
+export type HomeAwardsControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one HomeAwards.
+         */
+        query: ReadOneHomeAwardsQuery;
+    };
+};
+
+export type HomeAwardsControllerReadOneResponse = ({
+    data?: HomeAwardsEntity;
+});
+
+export type HomeAwardsControllerReadOneError = any;
+
+export type HomeAwardsControllerUpdateData = {
+    /**
+     * The HomeAwards to be updated.
+     */
+    body: UpdateHomeAwards;
+    path: {
+        id: string;
+    };
+};
+
+export type HomeAwardsControllerUpdateResponse = ({
+    data?: HomeAwardsEntity;
+});
+
+export type HomeAwardsControllerUpdateError = any;
+
 export type AboutBarqGroupAffiliationControllerCreateData = {
     /**
      * The AboutBarqGroupAffiliation to be created.
@@ -9164,6 +17262,73 @@ export type ContactUsHearAboutDropControllerSoftDeleteResponse = ({
 
 export type ContactUsHearAboutDropControllerSoftDeleteError = any;
 
+export type ContactUsOfficesControllerCreateData = {
+    /**
+     * The ContactUsOffices to be created.
+     */
+    body: CreateContactUsOffices;
+};
+
+export type ContactUsOfficesControllerCreateResponse = ({
+    data?: ContactUsOfficesEntity;
+});
+
+export type ContactUsOfficesControllerCreateError = any;
+
+export type ContactUsOfficesControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all ContactUsOffices.
+         */
+        query: ReadContactUsOfficesQuery;
+    };
+};
+
+export type ContactUsOfficesControllerReadResponse = ({
+    data?: Array<ContactUsOfficesEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type ContactUsOfficesControllerReadError = any;
+
+export type ContactUsOfficesControllerUpdateData = {
+    /**
+     * The ContactUsOffices to be updated.
+     */
+    body: UpdateContactUsOffices;
+    path: {
+        id: string;
+    };
+};
+
+export type ContactUsOfficesControllerUpdateResponse = ({
+    data?: ContactUsOfficesEntity;
+});
+
+export type ContactUsOfficesControllerUpdateError = any;
+
+export type ContactUsOfficesControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one ContactUsOffices.
+         */
+        query: ReadOneContactUsOfficesQuery;
+    };
+};
+
+export type ContactUsOfficesControllerReadOneResponse = ({
+    data?: ContactUsOfficesEntity;
+});
+
+export type ContactUsOfficesControllerReadOneError = any;
+
 export type ContactUsHeroControllerCreateData = {
     /**
      * The Contact Us Hero to be created.
@@ -9230,3 +17395,1531 @@ export type ContactUsHeroControllerReadOneResponse = ({
 });
 
 export type ContactUsHeroControllerReadOneError = any;
+
+export type ManagedSocServicesDetailsControllerCreateData = {
+    /**
+     * The Managed SOC Services Details to be created.
+     */
+    body: CreateManagedSocServicesDetails;
+};
+
+export type ManagedSocServicesDetailsControllerCreateResponse = ({
+    data?: ManagedSocServicesDetailsEntity;
+});
+
+export type ManagedSocServicesDetailsControllerCreateError = any;
+
+export type ManagedSocServicesDetailsControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Managed SOC Services Details.
+         */
+        query: ReadManagedSocServicesDetailsQuery;
+    };
+};
+
+export type ManagedSocServicesDetailsControllerReadResponse = ({
+    data?: Array<ManagedSocServicesDetailsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type ManagedSocServicesDetailsControllerReadError = any;
+
+export type ManagedSocServicesDetailsControllerUpdateData = {
+    /**
+     * The Managed SOC Services Details to be updated.
+     */
+    body: UpdateManagedSocServicesDetails;
+    path: {
+        id: string;
+    };
+};
+
+export type ManagedSocServicesDetailsControllerUpdateResponse = ({
+    data?: ManagedSocServicesDetailsEntity;
+});
+
+export type ManagedSocServicesDetailsControllerUpdateError = any;
+
+export type ManagedSocServicesDetailsControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Managed SOC Services Details.
+         */
+        query: ReadOneManagedSocServicesDetailsQuery;
+    };
+};
+
+export type ManagedSocServicesDetailsControllerReadOneResponse = ({
+    data?: ManagedSocServicesDetailsEntity;
+});
+
+export type ManagedSocServicesDetailsControllerReadOneError = any;
+
+export type ManagedCybersecurityServicesDetailsControllerCreateData = {
+    /**
+     * The ManagedCybersecurityServicesDetails to be created.
+     */
+    body: CreateManagedCybersecurityServicesDetails;
+};
+
+export type ManagedCybersecurityServicesDetailsControllerCreateResponse = ({
+    data?: ManagedCybersecurityServicesDetailsEntity;
+});
+
+export type ManagedCybersecurityServicesDetailsControllerCreateError = any;
+
+export type ManagedCybersecurityServicesDetailsControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all ManagedCybersecurityServicesDetails.
+         */
+        query: ReadManagedCybersecurityServicesDetailsQuery;
+    };
+};
+
+export type ManagedCybersecurityServicesDetailsControllerReadResponse = ({
+    data?: Array<ManagedCybersecurityServicesDetailsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type ManagedCybersecurityServicesDetailsControllerReadError = any;
+
+export type ManagedCybersecurityServicesDetailsControllerUpdateData = {
+    /**
+     * The ManagedCybersecurityServicesDetails to be updated.
+     */
+    body: UpdateManagedCybersecurityServicesDetails;
+    path: {
+        id: string;
+    };
+};
+
+export type ManagedCybersecurityServicesDetailsControllerUpdateResponse = ({
+    data?: ManagedCybersecurityServicesDetailsEntity;
+});
+
+export type ManagedCybersecurityServicesDetailsControllerUpdateError = any;
+
+export type ManagedCybersecurityServicesDetailsControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one ManagedCybersecurityServicesDetails.
+         */
+        query: ReadOneManagedCybersecurityServicesDetailsQuery;
+    };
+};
+
+export type ManagedCybersecurityServicesDetailsControllerReadOneResponse = ({
+    data?: ManagedCybersecurityServicesDetailsEntity;
+});
+
+export type ManagedCybersecurityServicesDetailsControllerReadOneError = any;
+
+export type ManagedGrcServicesDetailsControllerCreateData = {
+    /**
+     * The Managed GRC Services Details to be created.
+     */
+    body: CreateManagedGrcServicesDetails;
+};
+
+export type ManagedGrcServicesDetailsControllerCreateResponse = ({
+    data?: ManagedGrcServicesDetailsEntity;
+});
+
+export type ManagedGrcServicesDetailsControllerCreateError = any;
+
+export type ManagedGrcServicesDetailsControllerFindAllData = {
+    query: {
+        /**
+         * Query parameters for filtering, sorting, and pagination.
+         */
+        query: any;
+    };
+};
+
+export type ManagedGrcServicesDetailsControllerFindAllResponse = ({
+    data?: Array<ManagedGrcServicesDetailsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type ManagedGrcServicesDetailsControllerFindAllError = any;
+
+export type ManagedGrcServicesDetailsControllerFindOneData = {
+    path: {
+        id: number;
+    };
+    query: {
+        /**
+         * Query parameters for relations.
+         */
+        query: any;
+    };
+};
+
+export type ManagedGrcServicesDetailsControllerFindOneResponse = ({
+    data?: ManagedGrcServicesDetailsEntity;
+});
+
+export type ManagedGrcServicesDetailsControllerFindOneError = any;
+
+export type ManagedGrcServicesDetailsControllerUpdateData = {
+    /**
+     * The Managed GRC Services Details to be updated.
+     */
+    body: UpdateManagedGrcServicesDetails;
+    path: {
+        id: number;
+    };
+};
+
+export type ManagedGrcServicesDetailsControllerUpdateResponse = ({
+    data?: ManagedGrcServicesDetailsEntity;
+});
+
+export type ManagedGrcServicesDetailsControllerUpdateError = any;
+
+export type ManagedGrcServicesDetailsControllerRemoveData = {
+    path: {
+        id: number;
+    };
+};
+
+export type ManagedGrcServicesDetailsControllerRemoveResponse = (any);
+
+export type ManagedGrcServicesDetailsControllerRemoveError = any;
+
+export type CareerHeroControllerCreateData = {
+    /**
+     * The CareerHero to be created.
+     */
+    body: CreateCareerHero;
+};
+
+export type CareerHeroControllerCreateResponse = ({
+    data?: CareerHeroEntity;
+});
+
+export type CareerHeroControllerCreateError = any;
+
+export type CareerHeroControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CareerHeros.
+         */
+        query: ReadCareerHeroQuery;
+    };
+};
+
+export type CareerHeroControllerReadResponse = ({
+    data?: Array<CareerHeroEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CareerHeroControllerReadError = any;
+
+export type CareerHeroControllerUpdateData = {
+    /**
+     * The CareerHero to be updated.
+     */
+    body: UpdateCareerHero;
+    path: {
+        id: string;
+    };
+};
+
+export type CareerHeroControllerUpdateResponse = ({
+    data?: CareerHeroEntity;
+});
+
+export type CareerHeroControllerUpdateError = any;
+
+export type CareerHeroControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CareerHero.
+         */
+        query: ReadOneCareerHeroQuery;
+    };
+};
+
+export type CareerHeroControllerReadOneResponse = ({
+    data?: CareerHeroEntity;
+});
+
+export type CareerHeroControllerReadOneError = any;
+
+export type CareerOpenPositionHeroControllerCreateData = {
+    /**
+     * The CareerOpenPositionHero to be created.
+     */
+    body: CreateCareerOpenPositionHero;
+};
+
+export type CareerOpenPositionHeroControllerCreateResponse = ({
+    data?: CareerOpenPositionHeroEntity;
+});
+
+export type CareerOpenPositionHeroControllerCreateError = any;
+
+export type CareerOpenPositionHeroControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CareerOpenPositionHeros.
+         */
+        query: ReadCareerOpenPositionHeroQuery;
+    };
+};
+
+export type CareerOpenPositionHeroControllerReadResponse = ({
+    data?: Array<CareerOpenPositionHeroEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CareerOpenPositionHeroControllerReadError = any;
+
+export type CareerOpenPositionHeroControllerUpdateData = {
+    /**
+     * The CareerOpenPositionHero to be updated.
+     */
+    body: UpdateCareerOpenPositionHero;
+    path: {
+        id: string;
+    };
+};
+
+export type CareerOpenPositionHeroControllerUpdateResponse = ({
+    data?: CareerOpenPositionHeroEntity;
+});
+
+export type CareerOpenPositionHeroControllerUpdateError = any;
+
+export type CareerOpenPositionHeroControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CareerOpenPositionHero.
+         */
+        query: ReadOneCareerOpenPositionHeroQuery;
+    };
+};
+
+export type CareerOpenPositionHeroControllerReadOneResponse = ({
+    data?: CareerOpenPositionHeroEntity;
+});
+
+export type CareerOpenPositionHeroControllerReadOneError = any;
+
+export type CareerJobDetailControllerCreateData = {
+    /**
+     * The CareerJobDetail to be created.
+     */
+    body: CreateCareerJobDetail;
+};
+
+export type CareerJobDetailControllerCreateResponse = ({
+    data?: CareerJobDetailEntity;
+});
+
+export type CareerJobDetailControllerCreateError = any;
+
+export type CareerJobDetailControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CareerJobDetails.
+         */
+        query: ReadCareerJobDetailQuery;
+    };
+};
+
+export type CareerJobDetailControllerReadResponse = ({
+    data?: Array<CareerJobDetailEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CareerJobDetailControllerReadError = any;
+
+export type CareerJobDetailControllerUpdateData = {
+    /**
+     * The CareerJobDetail to be updated.
+     */
+    body: UpdateCareerJobDetail;
+    path: {
+        id: string;
+    };
+};
+
+export type CareerJobDetailControllerUpdateResponse = ({
+    data?: CareerJobDetailEntity;
+});
+
+export type CareerJobDetailControllerUpdateError = any;
+
+export type CareerJobDetailControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CareerJobDetail.
+         */
+        query: ReadOneCareerJobDetailQuery;
+    };
+};
+
+export type CareerJobDetailControllerReadOneResponse = ({
+    data?: CareerJobDetailEntity;
+});
+
+export type CareerJobDetailControllerReadOneError = any;
+
+export type CareerApplicationFormControllerCreateData = {
+    /**
+     * The CareerApplicationForm to be created.
+     */
+    body: CreateCareerApplicationForm;
+};
+
+export type CareerApplicationFormControllerCreateResponse = ({
+    data?: CareerApplicationFormEntity;
+});
+
+export type CareerApplicationFormControllerCreateError = any;
+
+export type CareerApplicationFormControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CareerApplicationForms.
+         */
+        query: ReadCareerApplicationFormQuery;
+    };
+};
+
+export type CareerApplicationFormControllerReadResponse = ({
+    data?: Array<CareerApplicationFormEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CareerApplicationFormControllerReadError = any;
+
+export type CareerApplicationFormControllerUpdateData = {
+    /**
+     * The CareerApplicationForm to be updated.
+     */
+    body: UpdateCareerApplicationForm;
+    path: {
+        id: string;
+    };
+};
+
+export type CareerApplicationFormControllerUpdateResponse = ({
+    data?: CareerApplicationFormEntity;
+});
+
+export type CareerApplicationFormControllerUpdateError = any;
+
+export type CareerApplicationFormControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CareerApplicationForm.
+         */
+        query: ReadOneCareerApplicationFormQuery;
+    };
+};
+
+export type CareerApplicationFormControllerReadOneResponse = ({
+    data?: CareerApplicationFormEntity;
+});
+
+export type CareerApplicationFormControllerReadOneError = any;
+
+export type ManagedServiceDownloadFormControllerCreateData = {
+    /**
+     * The Managed Service Download Form to be created.
+     */
+    body: CreateManagedServiceDownloadForm;
+};
+
+export type ManagedServiceDownloadFormControllerCreateResponse = ({
+    data?: ManagedServiceDownloadFormEntity;
+});
+
+export type ManagedServiceDownloadFormControllerCreateError = any;
+
+export type ManagedServiceDownloadFormControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Managed Service Download Forms.
+         */
+        query: ReadManagedServiceDownloadFormQuery;
+    };
+};
+
+export type ManagedServiceDownloadFormControllerReadResponse = ({
+    data?: Array<ManagedServiceDownloadFormEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type ManagedServiceDownloadFormControllerReadError = any;
+
+export type ManagedServiceDownloadFormControllerUpdateData = {
+    /**
+     * The Managed Service Download Form to be updated.
+     */
+    body: UpdateManagedServiceDownloadForm;
+    path: {
+        id: string;
+    };
+};
+
+export type ManagedServiceDownloadFormControllerUpdateResponse = ({
+    data?: ManagedServiceDownloadFormEntity;
+});
+
+export type ManagedServiceDownloadFormControllerUpdateError = any;
+
+export type ManagedServiceDownloadFormControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Managed Service Download Form.
+         */
+        query: ReadOneManagedServiceDownloadFormQuery;
+    };
+};
+
+export type ManagedServiceDownloadFormControllerReadOneResponse = ({
+    data?: ManagedServiceDownloadFormEntity;
+});
+
+export type ManagedServiceDownloadFormControllerReadOneError = any;
+
+export type ResourceHeroControllerCreateData = {
+    /**
+     * The Resource Hero to be created.
+     */
+    body: CreateResourceHero;
+};
+
+export type ResourceHeroControllerCreateResponse = ({
+    data?: ResourceHeroEntity;
+});
+
+export type ResourceHeroControllerCreateError = any;
+
+export type ResourceHeroControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Resource Heroes.
+         */
+        query: ReadResourceHeroQuery;
+    };
+};
+
+export type ResourceHeroControllerReadResponse = ({
+    data?: Array<ResourceHeroEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type ResourceHeroControllerReadError = any;
+
+export type ResourceHeroControllerUpdateData = {
+    /**
+     * The Resource Hero to be updated.
+     */
+    body: UpdateResourceHero;
+    path: {
+        id: string;
+    };
+};
+
+export type ResourceHeroControllerUpdateResponse = ({
+    data?: ResourceHeroEntity;
+});
+
+export type ResourceHeroControllerUpdateError = any;
+
+export type ResourceHeroControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Resource Hero.
+         */
+        query: ReadOneResourceHeroQuery;
+    };
+};
+
+export type ResourceHeroControllerReadOneResponse = ({
+    data?: ResourceHeroEntity;
+});
+
+export type ResourceHeroControllerReadOneError = any;
+
+export type ResourceCardsControllerCreateData = {
+    /**
+     * The Resource Card to be created.
+     */
+    body: CreateResourceCards;
+};
+
+export type ResourceCardsControllerCreateResponse = ({
+    data?: ResourceCardsEntity;
+});
+
+export type ResourceCardsControllerCreateError = any;
+
+export type ResourceCardsControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Resource Cards.
+         */
+        query: ReadResourceCardsQuery;
+    };
+};
+
+export type ResourceCardsControllerReadResponse = ({
+    data?: Array<ResourceCardsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type ResourceCardsControllerReadError = any;
+
+export type ResourceCardsControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Resource Card.
+         */
+        query: ReadOneResourceCardsQuery;
+    };
+};
+
+export type ResourceCardsControllerReadOneResponse = ({
+    data?: ResourceCardsEntity;
+});
+
+export type ResourceCardsControllerReadOneError = any;
+
+export type ResourceCardsControllerUpdateData = {
+    /**
+     * The Resource Card to be updated.
+     */
+    body: UpdateResourceCards;
+    path: {
+        id: string;
+    };
+};
+
+export type ResourceCardsControllerUpdateResponse = ({
+    data?: ResourceCardsEntity;
+});
+
+export type ResourceCardsControllerUpdateError = any;
+
+export type AdditionalManagedServicesOneControllerCreateData = {
+    /**
+     * The Additional Managed Services One to be created.
+     */
+    body: CreateAdditionalManagedServicesOne;
+};
+
+export type AdditionalManagedServicesOneControllerCreateResponse = ({
+    data?: AdditionalManagedServicesOneEntity;
+});
+
+export type AdditionalManagedServicesOneControllerCreateError = any;
+
+export type AdditionalManagedServicesOneControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Additional Managed Services One.
+         */
+        query: ReadAdditionalManagedServicesOneQuery;
+    };
+};
+
+export type AdditionalManagedServicesOneControllerReadResponse = ({
+    data?: Array<AdditionalManagedServicesOneEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type AdditionalManagedServicesOneControllerReadError = any;
+
+export type AdditionalManagedServicesOneControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Additional Managed Services One.
+         */
+        query: ReadOneAdditionalManagedServicesOneQuery;
+    };
+};
+
+export type AdditionalManagedServicesOneControllerReadOneResponse = ({
+    data?: AdditionalManagedServicesOneEntity;
+});
+
+export type AdditionalManagedServicesOneControllerReadOneError = any;
+
+export type AdditionalManagedServicesOneControllerUpdateData = {
+    /**
+     * The Additional Managed Services One to be updated.
+     */
+    body: UpdateAdditionalManagedServicesOne;
+    path: {
+        id: string;
+    };
+};
+
+export type AdditionalManagedServicesOneControllerUpdateResponse = ({
+    data?: AdditionalManagedServicesOneEntity;
+});
+
+export type AdditionalManagedServicesOneControllerUpdateError = any;
+
+export type AdditionalManagedServicesOneControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type AdditionalManagedServicesOneControllerDeleteResponse = ({
+    data?: AdditionalManagedServicesOneEntity;
+});
+
+export type AdditionalManagedServicesOneControllerDeleteError = any;
+
+export type AdditionalManagedServicesTwoControllerCreateData = {
+    /**
+     * The Additional Managed Services Two to be created.
+     */
+    body: CreateAdditionalManagedServicesTwo;
+};
+
+export type AdditionalManagedServicesTwoControllerCreateResponse = ({
+    data?: AdditionalManagedServicesTwoEntity;
+});
+
+export type AdditionalManagedServicesTwoControllerCreateError = any;
+
+export type AdditionalManagedServicesTwoControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Additional Managed Services Two.
+         */
+        query: ReadAdditionalManagedServicesTwoQuery;
+    };
+};
+
+export type AdditionalManagedServicesTwoControllerReadResponse = ({
+    data?: Array<AdditionalManagedServicesTwoEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type AdditionalManagedServicesTwoControllerReadError = any;
+
+export type AdditionalManagedServicesTwoControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Additional Managed Services Two.
+         */
+        query: ReadOneAdditionalManagedServicesTwoQuery;
+    };
+};
+
+export type AdditionalManagedServicesTwoControllerReadOneResponse = ({
+    data?: AdditionalManagedServicesTwoEntity;
+});
+
+export type AdditionalManagedServicesTwoControllerReadOneError = any;
+
+export type AdditionalManagedServicesTwoControllerUpdateData = {
+    /**
+     * The Additional Managed Services Two to be updated.
+     */
+    body: UpdateAdditionalManagedServicesTwo;
+    path: {
+        id: string;
+    };
+};
+
+export type AdditionalManagedServicesTwoControllerUpdateResponse = ({
+    data?: AdditionalManagedServicesTwoEntity;
+});
+
+export type AdditionalManagedServicesTwoControllerUpdateError = any;
+
+export type AdditionalManagedServicesTwoControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type AdditionalManagedServicesTwoControllerDeleteResponse = ({
+    data?: AdditionalManagedServicesTwoEntity;
+});
+
+export type AdditionalManagedServicesTwoControllerDeleteError = any;
+
+export type LeadershipTeamControllerCreateData = {
+    /**
+     * The Leadership Team to be created.
+     */
+    body: CreateLeadershipTeam;
+};
+
+export type LeadershipTeamControllerCreateResponse = ({
+    data?: LeadershipTeamEntity;
+});
+
+export type LeadershipTeamControllerCreateError = any;
+
+export type LeadershipTeamControllerFindAllData = {
+    query: {
+        /**
+         * Query parameters for retrieving Leadership Teams.
+         */
+        '': ReadLeadershipTeamQuery;
+    };
+};
+
+export type LeadershipTeamControllerFindAllResponse = ({
+    data?: Array<LeadershipTeamEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type LeadershipTeamControllerFindAllError = any;
+
+export type LeadershipTeamControllerFindOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * Query parameters for retrieving a Leadership Team.
+         */
+        '': ReadOneLeadershipTeamQuery;
+    };
+};
+
+export type LeadershipTeamControllerFindOneResponse = ({
+    data?: LeadershipTeamEntity;
+});
+
+export type LeadershipTeamControllerFindOneError = any;
+
+export type LeadershipTeamControllerUpdateData = {
+    /**
+     * The Leadership Team to be updated.
+     */
+    body: UpdateLeadershipTeam;
+    path: {
+        id: string;
+    };
+};
+
+export type LeadershipTeamControllerUpdateResponse = ({
+    data?: LeadershipTeamEntity;
+});
+
+export type LeadershipTeamControllerUpdateError = any;
+
+export type LeadershipExecutiveTeamControllerCreateData = {
+    /**
+     * The Leadership Executive Team to be created.
+     */
+    body: CreateLeadershipExecutiveTeam;
+};
+
+export type LeadershipExecutiveTeamControllerCreateResponse = ({
+    data?: LeadershipExecutiveTeamEntity;
+});
+
+export type LeadershipExecutiveTeamControllerCreateError = any;
+
+export type LeadershipExecutiveTeamControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all Leadership Executive Team.
+         */
+        query: ReadLeadershipExecutiveTeamQuery;
+    };
+};
+
+export type LeadershipExecutiveTeamControllerReadResponse = ({
+    data?: Array<LeadershipExecutiveTeamEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type LeadershipExecutiveTeamControllerReadError = any;
+
+export type LeadershipExecutiveTeamControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one Leadership Executive Team.
+         */
+        query: ReadOneLeadershipExecutiveTeamQuery;
+    };
+};
+
+export type LeadershipExecutiveTeamControllerReadOneResponse = ({
+    data?: LeadershipExecutiveTeamEntity;
+});
+
+export type LeadershipExecutiveTeamControllerReadOneError = any;
+
+export type LeadershipExecutiveTeamControllerUpdateData = {
+    /**
+     * The Leadership Executive Team to be updated.
+     */
+    body: UpdateLeadershipExecutiveTeam;
+    path: {
+        id: string;
+    };
+};
+
+export type LeadershipExecutiveTeamControllerUpdateResponse = ({
+    data?: LeadershipExecutiveTeamEntity;
+});
+
+export type LeadershipExecutiveTeamControllerUpdateError = any;
+
+export type NewsroomHeroControllerCreateData = {
+    /**
+     * The NewsroomHero to be created.
+     */
+    body: CreateNewsroomHero;
+};
+
+export type NewsroomHeroControllerCreateResponse = ({
+    data?: NewsroomHeroEntity;
+});
+
+export type NewsroomHeroControllerCreateError = any;
+
+export type NewsroomHeroControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all NewsroomHeros.
+         */
+        query: ReadNewsroomHeroQuery;
+    };
+};
+
+export type NewsroomHeroControllerReadResponse = ({
+    data?: Array<NewsroomHeroEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type NewsroomHeroControllerReadError = any;
+
+export type NewsroomHeroControllerUpdateData = {
+    /**
+     * The NewsroomHero to be updated.
+     */
+    body: UpdateNewsroomHero;
+    path: {
+        id: string;
+    };
+};
+
+export type NewsroomHeroControllerUpdateResponse = ({
+    data?: NewsroomHeroEntity;
+});
+
+export type NewsroomHeroControllerUpdateError = any;
+
+export type NewsroomHeroControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one NewsroomHero.
+         */
+        query: ReadOneNewsroomHeroQuery;
+    };
+};
+
+export type NewsroomHeroControllerReadOneResponse = ({
+    data?: NewsroomHeroEntity;
+});
+
+export type NewsroomHeroControllerReadOneError = any;
+
+export type NewsroomCategoryControllerCreateData = {
+    /**
+     * The NewsroomCategory to be created.
+     */
+    body: CreateNewsroomCategory;
+};
+
+export type NewsroomCategoryControllerCreateResponse = ({
+    data?: NewsroomCategoryEntity;
+});
+
+export type NewsroomCategoryControllerCreateError = any;
+
+export type NewsroomCategoryControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all NewsroomCategories.
+         */
+        query: ReadNewsroomCategoryQuery;
+    };
+};
+
+export type NewsroomCategoryControllerReadResponse = ({
+    data?: Array<NewsroomCategoryEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type NewsroomCategoryControllerReadError = any;
+
+export type NewsroomCategoryControllerUpdateData = {
+    /**
+     * The NewsroomCategory to be updated.
+     */
+    body: UpdateNewsroomCategory;
+    path: {
+        id: string;
+    };
+};
+
+export type NewsroomCategoryControllerUpdateResponse = ({
+    data?: NewsroomCategoryEntity;
+});
+
+export type NewsroomCategoryControllerUpdateError = any;
+
+export type NewsroomCategoryControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one NewsroomCategory.
+         */
+        query: ReadOneNewsroomCategoryQuery;
+    };
+};
+
+export type NewsroomCategoryControllerReadOneResponse = ({
+    data?: NewsroomCategoryEntity;
+});
+
+export type NewsroomCategoryControllerReadOneError = any;
+
+export type NewsroomCategoryControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type NewsroomCategoryControllerDeleteResponse = (any);
+
+export type NewsroomCategoryControllerDeleteError = any;
+
+export type FooterTermsControllerCreateData = {
+    /**
+     * The FooterTerms to be created.
+     */
+    body: CreateFooterTerms;
+};
+
+export type FooterTermsControllerCreateResponse = ({
+    data?: FooterTermsEntity;
+});
+
+export type FooterTermsControllerCreateError = any;
+
+export type FooterTermsControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all FooterTerms.
+         */
+        query: ReadFooterTermsQuery;
+    };
+};
+
+export type FooterTermsControllerReadResponse = ({
+    data?: Array<FooterTermsEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type FooterTermsControllerReadError = any;
+
+export type FooterTermsControllerUpdateData = {
+    /**
+     * The FooterTerms to be updated.
+     */
+    body: UpdateFooterTerms;
+    path: {
+        id: string;
+    };
+};
+
+export type FooterTermsControllerUpdateResponse = ({
+    data?: FooterTermsEntity;
+});
+
+export type FooterTermsControllerUpdateError = any;
+
+export type FooterTermsControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one FooterTerms.
+         */
+        query: ReadOneFooterTermsQuery;
+    };
+};
+
+export type FooterTermsControllerReadOneResponse = ({
+    data?: FooterTermsEntity;
+});
+
+export type FooterTermsControllerReadOneError = any;
+
+export type FooterTermsControllerDeleteData = {
+    path: {
+        id: string;
+    };
+};
+
+export type FooterTermsControllerDeleteResponse = (any);
+
+export type FooterTermsControllerDeleteError = any;
+
+export type CareerWorkingAtBarqControllerCreateData = {
+    /**
+     * The CareerWorkingAtBarq to be created.
+     */
+    body: CreateCareerWorkingAtBarq;
+};
+
+export type CareerWorkingAtBarqControllerCreateResponse = ({
+    data?: CareerWorkingAtBarqEntity;
+});
+
+export type CareerWorkingAtBarqControllerCreateError = any;
+
+export type CareerWorkingAtBarqControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CareerWorkingAtBarqs.
+         */
+        query: ReadCareerWorkingAtBarqQuery;
+    };
+};
+
+export type CareerWorkingAtBarqControllerReadResponse = ({
+    data?: Array<CareerWorkingAtBarqEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CareerWorkingAtBarqControllerReadError = any;
+
+export type CareerWorkingAtBarqControllerUpdateData = {
+    /**
+     * The CareerWorkingAtBarq to be updated.
+     */
+    body: UpdateCareerWorkingAtBarq;
+    path: {
+        id: string;
+    };
+};
+
+export type CareerWorkingAtBarqControllerUpdateResponse = ({
+    data?: CareerWorkingAtBarqEntity;
+});
+
+export type CareerWorkingAtBarqControllerUpdateError = any;
+
+export type CareerWorkingAtBarqControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CareerWorkingAtBarq.
+         */
+        query: ReadOneCareerWorkingAtBarqQuery;
+    };
+};
+
+export type CareerWorkingAtBarqControllerReadOneResponse = ({
+    data?: CareerWorkingAtBarqEntity;
+});
+
+export type CareerWorkingAtBarqControllerReadOneError = any;
+
+export type CampaignFormControllerCreateData = {
+    /**
+     * The CampaignForm to be created.
+     */
+    body: CreateCampaignForm;
+};
+
+export type CampaignFormControllerCreateResponse = ({
+    data?: CampaignFormEntity;
+});
+
+export type CampaignFormControllerCreateError = any;
+
+export type CampaignFormControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CampaignForms.
+         */
+        query: ReadCampaignFormQuery;
+    };
+};
+
+export type CampaignFormControllerReadResponse = ({
+    data?: Array<CampaignFormEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CampaignFormControllerReadError = any;
+
+export type CampaignFormControllerUpdateData = {
+    /**
+     * The CampaignForm to be updated.
+     */
+    body: UpdateCampaignForm;
+    path: {
+        id: string;
+    };
+};
+
+export type CampaignFormControllerUpdateResponse = ({
+    data?: CampaignFormEntity;
+});
+
+export type CampaignFormControllerUpdateError = any;
+
+export type CampaignFormControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CampaignForm.
+         */
+        query: ReadOneCampaignFormQuery;
+    };
+};
+
+export type CampaignFormControllerReadOneResponse = ({
+    data?: CampaignFormEntity;
+});
+
+export type CampaignFormControllerReadOneError = any;
+
+export type CampaignLayoutOneControllerCreateData = {
+    /**
+     * The CampaignLayoutOne to be created.
+     */
+    body: CreateCampaignLayoutOne;
+};
+
+export type CampaignLayoutOneControllerCreateResponse = ({
+    data?: CampaignLayoutOneEntity;
+});
+
+export type CampaignLayoutOneControllerCreateError = any;
+
+export type CampaignLayoutOneControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CampaignLayoutOnes.
+         */
+        query: ReadCampaignLayoutOneQuery;
+    };
+};
+
+export type CampaignLayoutOneControllerReadResponse = ({
+    data?: Array<CampaignLayoutOneEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CampaignLayoutOneControllerReadError = any;
+
+export type CampaignLayoutOneControllerUpdateData = {
+    /**
+     * The CampaignLayoutOne to be updated.
+     */
+    body: UpdateCampaignLayoutOne;
+    path: {
+        id: string;
+    };
+};
+
+export type CampaignLayoutOneControllerUpdateResponse = ({
+    data?: CampaignLayoutOneEntity;
+});
+
+export type CampaignLayoutOneControllerUpdateError = any;
+
+export type CampaignLayoutOneControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CampaignLayoutOne.
+         */
+        query: ReadOneCampaignLayoutOneQuery;
+    };
+};
+
+export type CampaignLayoutOneControllerReadOneResponse = ({
+    data?: CampaignLayoutOneEntity;
+});
+
+export type CampaignLayoutOneControllerReadOneError = any;
+
+export type CampaignLayoutTwoControllerCreateData = {
+    /**
+     * The CampaignLayoutTwo to be created.
+     */
+    body: CreateCampaignLayoutTwo;
+};
+
+export type CampaignLayoutTwoControllerCreateResponse = ({
+    data?: CampaignLayoutTwoEntity;
+});
+
+export type CampaignLayoutTwoControllerCreateError = any;
+
+export type CampaignLayoutTwoControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CampaignLayoutTwos.
+         */
+        query: ReadCampaignLayoutTwoQuery;
+    };
+};
+
+export type CampaignLayoutTwoControllerReadResponse = ({
+    data?: Array<CampaignLayoutTwoEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CampaignLayoutTwoControllerReadError = any;
+
+export type CampaignLayoutTwoControllerUpdateData = {
+    /**
+     * The CampaignLayoutTwo to be updated.
+     */
+    body: UpdateCampaignLayoutTwo;
+    path: {
+        id: string;
+    };
+};
+
+export type CampaignLayoutTwoControllerUpdateResponse = ({
+    data?: CampaignLayoutTwoEntity;
+});
+
+export type CampaignLayoutTwoControllerUpdateError = any;
+
+export type CampaignLayoutTwoControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CampaignLayoutTwo.
+         */
+        query: ReadOneCampaignLayoutTwoQuery;
+    };
+};
+
+export type CampaignLayoutTwoControllerReadOneResponse = ({
+    data?: CampaignLayoutTwoEntity;
+});
+
+export type CampaignLayoutTwoControllerReadOneError = any;
+
+export type CampaignLayoutThreeSectionTwoControllerCreateData = {
+    /**
+     * The CampaignLayoutThreeSectionTwo to be created.
+     */
+    body: CreateCampaignLayoutThreeSectionTwo;
+};
+
+export type CampaignLayoutThreeSectionTwoControllerCreateResponse = ({
+    data?: CampaignLayoutThreeSectionTwoEntity;
+});
+
+export type CampaignLayoutThreeSectionTwoControllerCreateError = any;
+
+export type CampaignLayoutThreeSectionTwoControllerReadData = {
+    query: {
+        /**
+         * The query to be used to read all CampaignLayoutThreeSectionTwo.
+         */
+        query: ReadCampaignLayoutThreeSectionTwoQuery;
+    };
+};
+
+export type CampaignLayoutThreeSectionTwoControllerReadResponse = ({
+    data?: Array<CampaignLayoutThreeSectionTwoEntity>;
+    meta?: {
+        total?: number;
+        skip?: number;
+        take?: number;
+    };
+});
+
+export type CampaignLayoutThreeSectionTwoControllerReadError = any;
+
+export type CampaignLayoutThreeSectionTwoControllerReadOneData = {
+    path: {
+        id: string;
+    };
+    query: {
+        /**
+         * The query to be used to read one CampaignLayoutThreeSectionTwo.
+         */
+        query: ReadOneCampaignLayoutThreeSectionTwoQuery;
+    };
+};
+
+export type CampaignLayoutThreeSectionTwoControllerReadOneResponse = ({
+    data?: CampaignLayoutThreeSectionTwoEntity;
+});
+
+export type CampaignLayoutThreeSectionTwoControllerReadOneError = any;
+
+export type CampaignLayoutThreeSectionTwoControllerUpdateData = {
+    /**
+     * The CampaignLayoutThreeSectionTwo to be updated.
+     */
+    body: UpdateCampaignLayoutThreeSectionTwo;
+    path: {
+        id: string;
+    };
+};
+
+export type CampaignLayoutThreeSectionTwoControllerUpdateResponse = ({
+    data?: CampaignLayoutThreeSectionTwoEntity;
+});
+
+export type CampaignLayoutThreeSectionTwoControllerUpdateError = any;

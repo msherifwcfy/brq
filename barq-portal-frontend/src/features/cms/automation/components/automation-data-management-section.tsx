@@ -321,6 +321,11 @@ export default function AutomationDataManagementSection() {
               {t("common.add")}
             </Button>
           </div>
+          {form.formState.errors.bullets?.root && (
+            <p className="text-sm font-medium text-destructive">
+              {form.formState.errors.bullets.root.message}
+            </p>
+          )}
 
           {bulletFields.map((field, index) => (
             <Card key={field.id}>
@@ -385,7 +390,7 @@ export default function AutomationDataManagementSection() {
                         <DocumentUploader
                           value={(field.value as any) || []}
                           maxDocuments={1}
-                          maxSize={2 * 1024 * 1024}
+                          maxSize={5 * 1024 * 1024}
                           acceptedFileTypes={["image/*"]}
                           onChange={field.onChange}
                         />
@@ -399,7 +404,7 @@ export default function AutomationDataManagementSection() {
           ))}
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex justify-end gap-2">
           <Button
             type="submit"
             disabled={createMutation.isPending || updateMutation.isPending}

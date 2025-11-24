@@ -15,6 +15,7 @@ import type { UpdateCardSocialFormData } from "../schemas/sustainability-card-so
 import { toast } from "sonner";
 import { useLang } from "@/shared/hooks/use-lang";
 import { Loader2 } from "lucide-react";
+import type { CardSocialEntity } from "@/sdk";
 
 export const UpdateSustainabilityCardSocialModal = () => {
   const { t } = useLang();
@@ -22,33 +23,12 @@ export const UpdateSustainabilityCardSocialModal = () => {
   const { onClose, refetch, isOpen, type, data } = useModal();
   const open = isOpen && type === "updateSustainabilityCardSocial";
 
-  const { data: cardSocialData, isPending } =
-    useCardSocialControllerReadOneQuery({
-      path: {
-        id: data?.cardSocial?.id.toString(),
-      },
-      query: {
-        query: {
-          relations: {
-            card_social_id_card_social_translations:true,
-            media: true,
-          },
-        },
-        headers: {
-          "x-skip-translations": "true",
-        },
-      },
-    });
-  const cardSocial = cardSocialData?.data;
-  console.log(cardSocial, "cardSocial");
+  const cardSocial = data?.cardSocial as CardSocialEntity;
   const enTranslation =
     cardSocial?.card_social_id_card_social_translations?.find(
       (t) => t.language === "en"
     );
-  const arTranslation =
-    cardSocial?.card_social_id_card_social_translations?.find(
-      (t) => t.language === "ar"
-    );
+
 
   const handleSubmit = async (formData: UpdateCardSocialFormData) => {
     try {
@@ -80,6 +60,7 @@ export const UpdateSustainabilityCardSocialModal = () => {
       console.error("Error updating card social:", error);
     }
   };
+  console.log(cardSocial, "cardSocial");
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -90,20 +71,17 @@ export const UpdateSustainabilityCardSocialModal = () => {
           </DialogTitle>
         </DialogHeader>
 
-        {isPending ? (
-          <div className="flex justify-center items-center h-full">
-            <Loader2 className="w-4 h-4 animate-spin" />
-          </div>
-        ) : (
+       
+       {data && (
           <SustainabilityCardSocialForm
             defaultValues={{
               title: {
                 en: enTranslation?.title || "",
-                ar: cardSocial?.title || arTranslation?.title || "",
+                ar: cardSocial?.title || "",
               },
               description: {
                 en: enTranslation?.description || "",
-                ar: cardSocial?.description || arTranslation?.description || "",
+                ar: cardSocial?.description || "",
               },
               icon: cardSocial?.media ? [cardSocial?.media] : ([] as any),
             }}

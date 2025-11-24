@@ -95,7 +95,6 @@ export default function HomeLandingNumbersSection() {
               </Button>
               <Button
                 variant="destructive"
-                disabled
                 onClick={() => onOpen("deleteWhoWeAreStat", { id: item.id })}
               >
                 {t("common.delete")}

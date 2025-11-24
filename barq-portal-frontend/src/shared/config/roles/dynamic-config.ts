@@ -26,8 +26,11 @@ import {
   Megaphone,
   FileText,
   Contact,
+  MapPin,
+  FolderTree,
 } from "lucide-react";
 import { Footer } from "react-day-picker";
+import { Form } from "react-hook-form";
 
 // Default sidebar items based on permissions
 const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -102,6 +105,38 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
         icon: Database,
         label: "dashboard.sidebar.automation.title",
         requiredPermissions: [PERMISSION_KEYS.AUTOMATION_HERO.VIEW],
+      },
+      {
+        // careers
+        path: "/dashboard/cms/careers",
+        icon: GraduationCap,
+        label: "dashboard.sidebar.cms.careers.title",
+        requiredPermissions: [
+          PERMISSION_KEYS.CAREER_HERO.VIEW,
+          PERMISSION_KEYS.CAREER_CATEGORY.VIEW,
+          PERMISSION_KEYS.CAREER_OPEN_POSITION.VIEW,
+        ],
+      },
+      {
+        path: "/dashboard/cms/leadership",
+        icon: Users,
+        label: "dashboard.sidebar.cms.leadership.title",
+        requiredPermissions: [PERMISSION_KEYS.LEADERSHIP_TEAM.VIEW],
+      },
+      {
+        // solutions and services
+        path: "/dashboard/cms/solutions-and-services",
+        icon: Rocket,
+        label: "dashboard.sidebar.cms.solutionsAndServices.title",
+        requiredPermissions: [
+          PERMISSION_KEYS.SOLUTIONS_AND_SERVICES_HERO.VIEW,
+        ],
+      },
+      {
+        path: "/dashboard/cms/case-studies",
+        icon: BookOpen,
+        label: "dashboard.sidebar.cms.caseStudies.title",
+        requiredPermissions: [PERMISSION_KEYS.SUCCESS_STORY_CASE_STUDIES.VIEW],
       },
       {
         path: "/dashboard/cms/cybersecurity",
@@ -185,15 +220,30 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
     label: "dashboard.sidebar.manageItems",
     requiredPermissions: [
       PERMISSION_KEYS.COUNTRIES.VIEW,
+      PERMISSION_KEYS.CITY.VIEW,
       PERMISSION_KEYS.INDUSTRIES.VIEW,
       PERMISSION_KEYS.SOLUTIONS.VIEW,
+      PERMISSION_KEYS.CONTACT_US_REQUEST_TYPES.VIEW,
+      PERMISSION_KEYS.CONTACT_US_HEAR_ABOUT_OPTIONS.VIEW,
     ],
     children: [
+{
+            path: "/dashboard/cms/newsroom/categories",
+            icon: FolderTree,
+            label: "dashboard.sidebar.cms.newsroom.categories",
+            // requiredPermissions: [PERMISSION_KEYS.NEWSROOM_CATEGORY.VIEW],
+          },
       {
         path: "/dashboard/countries",
         icon: Globe2,
         label: "dashboard.sidebar.countries.title",
         requiredPermissions: [PERMISSION_KEYS.COUNTRIES.VIEW],
+      },
+      {
+        path: "/dashboard/cities",
+        icon: MapPin,
+        label: "dashboard.sidebar.cities.title",
+        requiredPermissions: [PERMISSION_KEYS.CITY.VIEW],
       },
       {
         path: "/dashboard/industries",
@@ -206,6 +256,18 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
         icon: Rocket,
         label: "dashboard.sidebar.solutions.title",
         requiredPermissions: [PERMISSION_KEYS.SOLUTIONS.VIEW],
+      },
+      {
+        path: "/dashboard/request-types",
+        icon: Contact,
+        label: "dashboard.sidebar.requestTypes.title",
+        requiredPermissions: [PERMISSION_KEYS.CONTACT_US_REQUEST_TYPES.VIEW],
+      },
+      {
+        path: "/dashboard/hear-about-us-options",
+        icon: Contact,
+        label: "dashboard.sidebar.hearAboutUsOptions.title",
+        requiredPermissions: [PERMISSION_KEYS.CONTACT_US_HEAR_ABOUT_OPTIONS.VIEW],
       },
     ],
   },

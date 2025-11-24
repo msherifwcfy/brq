@@ -240,62 +240,110 @@ export default function OperationIntelligenceSection() {
             )}
           />
 
-          <div className="space-y-4">
-            <FormLabel>
-              {t("cms.cybersecurity.operationIntelligence.cards")}
-            </FormLabel>
-            {form.watch("cards")?.map((card, idx) => (
-              <div
-                key={idx}
-                className="grid grid-cols-1 gap-2 border p-3 rounded-md"
-              >
-                <I18nFormTextField
-                  name={`cards.${idx}.text`}
-                  control={form.control}
-                  label={t("common.text")}
-                  placeholder={t("common.text")}
-                  required
-                />
-                <DocumentUploader
-                  value={card.icon as any}
-                  onChange={(val) => {
-                    form.setValue(`cards.${idx}.icon`, val);
-                  }}
-                  multiple={false}
-                  maxDocuments={1}
-                />
-                <div className="flex justify-end gap-2">
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    onClick={() => {
-                      const currentCards = form.watch("cards") || [];
-                      form.setValue(
-                        "cards",
-                        currentCards.filter((_, i) => i !== idx)
-                      );
-                    }}
-                  >
-                    {t("common.remove")}
-                  </Button>
-                </div>
-              </div>
-            ))}
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() =>
-                form.setValue("cards", [
-                  ...(form.watch("cards") || []),
-                  { text: { en: "", ar: "" }, icon: undefined },
-                ])
-              }
-            >
-              {t("common.add")}
-            </Button>
-          </div>
+          <FormField
+            control={form.control}
+            name="cards"
+            render={({ field }) => {
+              const error = form.formState.errors.cards;
+              const errorMessage = error?.message || (error as any)?._root?.message || (error as any)?.root?.message;
+              return (
+                <FormItem>
+                  <FormLabel>
+                    {t("cms.cybersecurity.operationIntelligence.cards")}
+                  </FormLabel>
+                  <FormControl>
+                    <div className="space-y-4">
+                      {field.value?.map((card, idx) => (
+                      <div
+                        key={idx}
+                        className="grid grid-cols-1 gap-2 border p-3 rounded-md"
+                      >
+                        <I18nFormProvider currentLanguage={currentLanguage}>
+                          <I18nTabs
+                            value={currentLanguage}
+                            onValueChange={setCurrentLanguage}
+                            className="w-full"
+                          >
+                            <I18nTabContent language="en">
+                              <I18nFormTextField
+                                name={`cards.${idx}.text`}
+                                control={form.control}
+                                label={t("common.text")}
+                                placeholder={t("common.text")}
+                                required
+                              />
+                            </I18nTabContent>
+                            <I18nTabContent language="ar">
+                              <I18nFormTextField
+                                name={`cards.${idx}.text`}
+                                control={form.control}
+                                label={t("common.text")}
+                                placeholder={t("common.text")}
+                                required
+                              />
+                            </I18nTabContent>
+                          </I18nTabs>
+                        </I18nFormProvider>
+                        <FormField
+                          control={form.control}
+                          name={`cards.${idx}.icon`}
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t("common.icon")}</FormLabel>
+                              <FormControl>
+                                <DocumentUploader
+                                  value={field.value as any}
+                                  onChange={field.onChange}
+                                  multiple={false}
+                                  maxDocuments={1}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
 
-          <div className="flex gap-2">
+                        <div className="flex justify-end gap-2">
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            onClick={() => {
+                              const currentCards = field.value || [];
+                              field.onChange(
+                                currentCards.filter((_, i) => i !== idx)
+                              );
+                            }}
+                          >
+                            {t("common.remove")}
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      onClick={() =>
+                        field.onChange([
+                          ...(field.value || []),
+                          { text: { en: "", ar: "" }, icon: [] },
+                        ])
+                      }
+                    >
+                      {t("common.add")}
+                    </Button>
+                    </div>
+                  </FormControl>
+                  {errorMessage && (
+                    <p className="text-sm font-medium text-destructive">
+                      {errorMessage}
+                    </p>
+                  )}
+                </FormItem>
+              );
+            }}
+          />
+
+          <div className="flex justify-end gap-2">
             <Button
               type="submit"
               loading={createMutation.isPending || updateMutation.isPending}

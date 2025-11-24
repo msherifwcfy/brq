@@ -1,14 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
-import { Input } from "@/shared/components/ui/input";
-import { Textarea } from "@/shared/components/ui/textarea";
+import { useEffect, useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { useLang } from "@/shared/hooks/use-lang";
 import { type LanguageCode } from "@/shared/constants";
 import {
-  useLeadershipControllerReadQuery,
-  useLeadershipControllerCreate,
-  useLeadershipControllerUpdate,
-} from "@/sdk/modules/leadership.gen";
+  useLeadershipExecutiveTeamControllerReadQuery,
+  useLeadershipExecutiveTeamControllerCreate,
+  useLeadershipExecutiveTeamControllerUpdate,
+} from "@/sdk/modules/leadershipexecutiveteam.gen";
 import { DocumentUploader } from "@/shared/components/custom/DocumentUploader";
 import {
   Form,
@@ -41,28 +39,28 @@ export default function HomeLeadershipSection() {
   const { lang, t } = useLang();
   const [currentLanguage, setCurrentLanguage] = useState<LanguageCode>("en");
 
-  const { data, isLoading } = useLeadershipControllerReadQuery({
+  const { data, isLoading } = useLeadershipExecutiveTeamControllerReadQuery({
     query: {
       query: {
         relations: {
-          media: true,
-          leadership_id_leadership_translations: true,
+          leadership_executive_team_id_leadership_executive_team_translations: true,
+          leadership_executive_team_cards_id_leadership_executive_team_cards: {
+            image: true,
+            leadership_executive_team_cards_id_leadership_executive_team_cards_translations: true,
+          },
         },
         pagination: { take: 1, skip: 0 },
       },
     },
+    headers: {
+      "x-skip-translations": "true",
+    },
   });
 
   const existing = data?.data?.[0];
-  const currentTranslation = useMemo(
-    () =>
-      existing?.leadership_id_leadership_translations?.find(
-        (tr) => tr.language === lang
-      ),
-    [existing, lang]
-  );
+  const firstCard = existing?.leadership_executive_team_cards_id_leadership_executive_team_cards?.[0];
 
-  const isUpdate = !!existing;
+  const isUpdate = !!existing && !!firstCard;
 
   type FormData = CreateLeadershipFormData | UpdateLeadershipFormData;
   const form = useForm<FormData>({
@@ -81,44 +79,53 @@ export default function HomeLeadershipSection() {
   useEffect(() => {
     if (!existing) return;
 
-    // Transform API data to i18n format
-    const enTranslation = existing.leadership_id_leadership_translations?.find(
+    if (!firstCard) {
+      form.reset({
+        quote: { en: "", ar: "" },
+        name: { en: "", ar: "" },
+        position: { en: "", ar: "" },
+        media: [],
+      } as unknown as FormData);
+      return;
+    }
+
+    const enCardTranslation = firstCard.leadership_executive_team_cards_id_leadership_executive_team_cards_translations?.find(
       (t) => t.language === "en"
     );
-    const arTranslation = existing.leadership_id_leadership_translations?.find(
+    const arCardTranslation = firstCard.leadership_executive_team_cards_id_leadership_executive_team_cards_translations?.find(
       (t) => t.language === "ar"
     );
 
     form.reset({
       quote: {
-        en: enTranslation?.quote || existing.quote || "",
-        ar: arTranslation?.quote || "",
+        en: enCardTranslation?.bio || firstCard.bio || "",
+        ar: arCardTranslation?.bio || firstCard.bio || "",
       },
       name: {
-        en: enTranslation?.name || existing.name || "",
-        ar: arTranslation?.name || "",
+        en: enCardTranslation?.name || firstCard.name || "",
+        ar: arCardTranslation?.name || firstCard.name || "",
       },
       position: {
-        en: enTranslation?.position || existing.position || "",
-        ar: arTranslation?.position || "",
+        en: enCardTranslation?.role || firstCard.role || "",
+        ar: arCardTranslation?.role || firstCard.role || "",
       },
-      media: existing.media?.id
+      media: firstCard.image?.id
         ? [
             {
-              id: existing.media.id,
-              url: existing.media.url,
-              key: existing.media.key,
-              format: existing.media.format,
-              mime_type: existing.media.mime_type,
-              size: existing.media.size,
+              id: firstCard.image.id,
+              url: firstCard.image.url,
+              key: firstCard.image.key,
+              format: firstCard.image.format,
+              mime_type: firstCard.image.mime_type,
+              size: firstCard.image.size,
             },
           ]
         : [],
     } as unknown as FormData);
-  }, [existing, form]);
+  }, [existing, firstCard, form]);
 
-  const createMutation = useLeadershipControllerCreate();
-  const updateMutation = useLeadershipControllerUpdate();
+  const createMutation = useLeadershipExecutiveTeamControllerCreate();
+  const updateMutation = useLeadershipExecutiveTeamControllerUpdate();
 
   const onSubmit = async (values: FormData) => {
     const mediaId = Array.isArray((values as any).media)
@@ -129,22 +136,20 @@ export default function HomeLeadershipSection() {
       await createMutation.mutateAsync(
         {
           body: {
-            quote: values.quote?.en || "",
-            name: values.name?.en || "",
-            position: values.position?.en || "",
-            media_id: mediaId as number,
-            leadership_id_leadership_translations: [
+            leadership_executive_team_cards_id_leadership_executive_team_cards: [
               {
-                quote: values.quote?.en || "",
-                name: values.name?.en || "",
-                position: values.position?.en || "",
-                language: "en",
-              },
-              {
-                quote: values.quote?.ar || "",
                 name: values.name?.ar || "",
-                position: values.position?.ar || "",
-                language: "ar",
+                role: values.position?.ar || "",
+                bio: values.quote?.ar || "",
+                image_id: mediaId as number,
+                leadership_executive_team_cards_id_leadership_executive_team_cards_translations: [
+                  {
+                    name: values.name?.en || "",
+                    role: values.position?.en || "",
+                    bio: values.quote?.en || "",
+                    language: "en",
+                  },
+                ],
               },
             ],
           },
@@ -166,22 +171,21 @@ export default function HomeLeadershipSection() {
         {
           path: { id: String(existing.id) },
           body: {
-            quote: values.quote?.en || "",
-            name: values.name?.en || "",
-            position: values.position?.en || "",
-            media_id: mediaId,
-            leadership_id_leadership_translations: [
+            leadership_executive_team_cards_id_leadership_executive_team_cards: [
               {
-                quote: values.quote?.en || "",
-                name: values.name?.en || "",
-                position: values.position?.en || "",
-                language: "en",
-              },
-              {
-                quote: values.quote?.ar || "",
+                ...(firstCard?.id && { id: firstCard.id }),
                 name: values.name?.ar || "",
-                position: values.position?.ar || "",
-                language: "ar",
+                role: values.position?.ar || "",
+                bio: values.quote?.ar || "",
+                image_id: mediaId,
+                leadership_executive_team_cards_id_leadership_executive_team_cards_translations: [
+                  {
+                    name: values.name?.en || "",
+                    role: values.position?.en || "",
+                    bio: values.quote?.en || "",
+                    language: "en",
+                  },
+                ],
               },
             ],
           },
@@ -215,7 +219,7 @@ export default function HomeLeadershipSection() {
             <I18nFormProvider currentLanguage={currentLanguage}>
               <I18nTabContent language="en">
                 <div className="grid gap-4">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4 items-start">
                     <I18nFormTextField
                       name="name"
                       control={form.control}
@@ -239,7 +243,7 @@ export default function HomeLeadershipSection() {
               </I18nTabContent>
               <I18nTabContent language="ar">
                 <div className="grid gap-4">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4 items-start">
                     <I18nFormTextField
                       name="name"
                       control={form.control}
@@ -273,7 +277,7 @@ export default function HomeLeadershipSection() {
                   <DocumentUploader
                     value={(field.value as any) || []}
                     maxDocuments={1}
-                    maxSize={2 * 1024 * 1024}
+                    maxSize={5 * 1024 * 1024}
                     acceptedFileTypes={["image/*"]}
                     onChange={field.onChange}
                   />

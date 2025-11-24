@@ -25,7 +25,7 @@ export const createEnvironmentalSustainabilitySchema = z.object({
   intro: createI18nFieldSchema(
     z
       .string()
-      .min(100, "Intro paragraph must be at least 100 characters")
+      .min(50, "Intro paragraph must be at least 50 characters")
       .max(250, "Intro paragraph must be at most 250 characters")
   ),
   bulletPoints: z
@@ -45,7 +45,7 @@ export const updateEnvironmentalSustainabilitySchema = z.object({
   intro: createI18nFieldSchema(
     z
       .string()
-      .min(100, "Intro paragraph must be at least 100 characters")
+      .min(50, "Intro paragraph must be at least 50 characters")
       .max(250, "Intro paragraph must be at most 250 characters")
   ).optional(),
   bulletPoints: z

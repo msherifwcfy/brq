@@ -7,7 +7,6 @@ export const createAboutUsCoreValueItemSchema = z.object({
       .min(5, "Core value title must be at least 5 characters")
       .max(30, "Core value title must not exceed 30 characters")
   ),
-  description: createI18nFieldSchema(z.string().min(1, "Description is required")),
   icon_media: z.array(
     z.object({
       id: z.number(),
@@ -28,7 +27,6 @@ export const updateAboutUsCoreValueItemSchema = z.object({
       .min(5, "Core value title must be at least 5 characters")
       .max(30, "Core value title must not exceed 30 characters")
   ).optional(),
-  description: createI18nFieldSchema(z.string().min(1, "Description is required")).optional(),
   icon_media: z
     .array(
       z.object({

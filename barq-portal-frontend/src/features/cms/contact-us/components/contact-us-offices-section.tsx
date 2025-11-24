@@ -1,61 +1,204 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Textarea } from "@/shared/components/ui/textarea";
 import { DataTable } from "@/shared/components/ui/data-table";
-import { useContactUsOfficesControllerReadQuery, useContactUsOfficesControllerUpdate, type Office } from "../../../../../mock-sdk/modules/contact-us-offices.gen";
+import { Form } from "@/shared/components/ui/form";
+import {
+  useContactUsOfficesControllerReadQuery,
+  useContactUsOfficesControllerUpdate,
+} from "@/sdk/modules/contactusoffice.gen";
+import { useModal } from "@/shared/store/modal-store";
+import {
+  useContactUsOfficesColumns,
+  type ContactUsOfficeRow,
+} from "./contact-us-offices-columns";
+import { useLang } from "@/shared/hooks/use-lang";
+import {
+  I18nTabs,
+  I18nTabContent,
+  I18nFormProvider,
+  I18nFormTextField,
+} from "@/shared/components/custom/i18n";
+import { type LanguageCode } from "@/shared/constants";
+import { toast } from "sonner";
+
+type Office = ContactUsOfficeRow;
+
+type OfficeTitleFormValues = {
+  officeTitle: {
+    en: string;
+    ar: string;
+  };
+};
 
 export default function ContactUsOfficesSection() {
-  const { data } = useContactUsOfficesControllerReadQuery();
+  const { t } = useLang();
+  const [currentLanguage, setCurrentLanguage] = useState<LanguageCode>("en");
+  
+  const form = useForm<OfficeTitleFormValues>({
+    defaultValues: {
+      officeTitle: {
+        en: "",
+        ar: "",
+      },
+    },
+  });
+
+  const { data, isLoading, refetch } = useContactUsOfficesControllerReadQuery({
+    query: {
+      query: {
+        relations: {
+          contact_us_offices_id_contact_us_offices_translations: true,
+          contact_us_offices_bullets_id_contact_us_offices_bullets: {
+            contact_us_offices_bullets_id_contact_us_offices_bullets_translations:
+              true,
+            icon: true,
+          },
+        },
+        pagination: { take: 1, skip: 0 },
+      },
+    },
+    headers: {
+      "x-skip-translations": "true",
+    },
+  });
+
+  const existingOffices = data?.data?.[0];
+  const { onOpen } = useModal();
+  const [offices, setOffices] = useState<Office[]>([]);
+
   const updateMutation = useContactUsOfficesControllerUpdate();
-  const [sectionTitle, setSectionTitle] = useState("");
-  const [offices, setOffices] = useState<Office[]>([] as any);
 
   useEffect(() => {
-    if (data) {
-      setSectionTitle((data as any).sectionTitle ?? "");
-      setOffices((data as any).offices ?? []);
+    if (existingOffices) {
+      const bullets =
+        existingOffices.contact_us_offices_bullets_id_contact_us_offices_bullets ??
+        [];
+      const mappedOffices: Office[] = bullets.map((bullet) => {
+        const enTranslation =
+          bullet.contact_us_offices_bullets_id_contact_us_offices_bullets_translations?.find(
+            (t) => t.language === "en"
+          );
+        return {
+          id: bullet.id,
+          country: {
+            en: enTranslation?.country_name ?? "",
+            ar: bullet.country_name ?? "",
+          },
+          countryFlag: bullet.icon
+            ? [{ id: bullet.icon.id, url: bullet.icon.url }]
+            : [],
+          officeTitle: {
+            en: enTranslation?.office_name ?? "",
+            ar: bullet.office_name ?? "",
+          },
+          location: {
+            en: enTranslation?.location ?? "",
+            ar: bullet.location ?? "",
+          },
+          phone: bullet.phone ?? "",
+          fax: bullet.fax ?? "",
+          email: bullet.email ?? "",
+        };
+      });
+      setOffices(mappedOffices);
+
+      const enTranslation =
+        existingOffices.contact_us_offices_id_contact_us_offices_translations?.find(
+          (t) => t.language === "en"
+        );
+      form.reset({
+        officeTitle: {
+          en: enTranslation?.title ?? "",
+          ar: existingOffices.title ?? "",
+        },
+      });
     }
-  }, [data]);
+  }, [existingOffices, form]);
 
-  const columns = useMemo(
-    () => [
-      { header: "Country", accessorKey: "country" },
-      { header: "Office Title", accessorKey: "officeTitle" },
-      { header: "Location", accessorKey: "location" },
-      { header: "Phone", accessorKey: "phone" },
-      { header: "Fax", accessorKey: "fax" },
-      { header: "Email", accessorKey: "email" },
-    ],
-    []
-  );
+  const handleCreate = () =>
+    onOpen("createContactUsOffice", { existingOffices }, refetch);
+  const handleEdit = (office: Office) =>
+    onOpen("updateContactUsOffice", { office, existingOffices }, refetch);
+  const handleDelete = (office: Office) =>
+    onOpen("deleteContactUsOffice", { office, existingOffices }, refetch);
 
-  const onSave = () => {
-    updateMutation.mutate({ body: { sectionTitle, offices } as any } as any);
+  const columns = useContactUsOfficesColumns(handleEdit, handleDelete);
+
+  const onSubmit = async (values: OfficeTitleFormValues) => {
+    if (!existingOffices?.id) {
+      toast.error(t("cms.contactUs.offices.messages.errorUpdating"));
+      return;
+    }
+
+    try {
+      await updateMutation.mutateAsync({
+        path: {
+          id: existingOffices.id.toString(),
+        },
+        body: {
+          title: values.officeTitle.ar,
+          contact_us_offices_id_contact_us_offices_translations: [
+            {
+              title: values.officeTitle.en,
+              language: "en",
+            },
+          ],
+        },
+      });
+
+      toast.success(t("cms.contactUs.offices.messages.officeSaved"));
+      await refetch();
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : t("cms.contactUs.offices.messages.errorUpdating")
+      );
+    }
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-1 gap-4">
-        <div>
-          <label className="block text-sm font-medium mb-2">Section Title</label>
-          <Input value={sectionTitle} onChange={(e) => setSectionTitle(e.target.value)} />
-        </div>
-      </div>
+    <div className="space-y-6">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <I18nTabs value={currentLanguage} onValueChange={setCurrentLanguage}>
+            <I18nTabContent language="en">
+              <I18nFormProvider currentLanguage="en">
+                <I18nFormTextField
+                  name="officeTitle"
+                  control={form.control}
+                  label={t("cms.contactUs.offices.officeTitle")}
+                  placeholder={t("cms.contactUs.offices.officeTitlePlaceholder")}
+                />
+              </I18nFormProvider>
+            </I18nTabContent>
+            <I18nTabContent language="ar">
+              <I18nFormProvider currentLanguage="ar">
+                <I18nFormTextField
+                  name="officeTitle"
+                  control={form.control}
+                  label={t("cms.contactUs.offices.officeTitle")}
+                  placeholder={t("cms.contactUs.offices.officeTitlePlaceholder")}
+                />
+              </I18nFormProvider>
+            </I18nTabContent>
+          </I18nTabs>
+          <div className="flex justify-end">
+            <Button type="submit" loading={updateMutation.isPending}>
+              {t("cms.contactUs.offices.submit")}
+            </Button>
+          </div>
+        </form>
+      </Form>
 
-      <div>
-        {offices?.length ? (
-          <DataTable columns={columns as any} data={offices as any} />
-        ) : (
-          <div className="text-center py-8 text-muted-foreground">No offices found.</div>
-        )}
-      </div>
-
-      <div className="flex justify-end">
-        <Button onClick={onSave}>Save</Button>
-      </div>
+      <DataTable
+        columns={columns}
+        data={offices}
+        loading={isLoading}
+        tableId="contact-us-offices"
+        hideSearch
+      />
     </div>
   );
 }
-
-

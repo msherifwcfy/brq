@@ -65,8 +65,14 @@ export function WhoWeAreStatForm({
   return (
     <Form {...(methods as any)}>
       <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-6">
-        <div className="grid md:grid-cols-2 gap-4">
-          <FormField
+        <div className="">
+       
+          <I18nTabs
+            value={currentLanguage}
+            onValueChange={setCurrentLanguage}
+            className="w-full"
+          >
+   <FormField
             name={"number" as any}
             control={control}
             render={({ field }: any) => (
@@ -88,11 +94,6 @@ export function WhoWeAreStatForm({
               </FormItem>
             )}
           />
-          <I18nTabs
-            value={currentLanguage}
-            onValueChange={setCurrentLanguage}
-            className="w-full"
-          >
             <I18nFormProvider currentLanguage={currentLanguage}>
               <I18nTabContent language="en">
                 <I18nFormTextField

@@ -84,14 +84,12 @@ export default function HomeWhoWeAreSection() {
     const enTranslation = existing.who_are_we_id_who_are_we_translations?.find(
       (t) => t.language === "en"
     );
-    const arTranslation = existing.who_are_we_id_who_are_we_translations?.find(
-      (t) => t.language === "ar"
-    );
+
 
     form.reset({
       description: {
-        en: enTranslation?.description || existing.description || "",
-        ar: arTranslation?.description || "",
+        en: enTranslation?.description  || "",
+        ar: existing.description || "",
       },
     } as unknown as FormData);
   }, [existing, form]);
@@ -104,16 +102,13 @@ export default function HomeWhoWeAreSection() {
       await createMutation.mutateAsync(
         {
           body: {
-            description: values.description?.en || "",
+            description: values.description?.ar || "",
             who_are_we_id_who_are_we_translations: [
               {
                 description: values.description?.en || "",
                 language: "en",
               },
-              {
-                description: values.description?.ar || "",
-                language: "ar",
-              },
+           
             ],
           },
         },
@@ -134,15 +129,11 @@ export default function HomeWhoWeAreSection() {
         {
           path: { id: String(existing.id) },
           body: {
-            description: values.description?.en || "",
+            description: values.description?.ar || "",
             who_are_we_id_who_are_we_translations: [
               {
                 description: values.description?.en || "",
                 language: "en",
-              },
-              {
-                description: values.description?.ar || "",
-                language: "ar",
               },
             ],
           },

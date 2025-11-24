@@ -5,14 +5,14 @@ export const createAlliancesHeadSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(10, "alliancesHead.validation.titleMin")
-      .max(60, "alliancesHead.validation.titleMax")
+      .min(3, "alliancesHead.validation.titleMin")
+      .max(100, "alliancesHead.validation.titleMax")
   ),
   sub_title: createI18nFieldSchema(
     z
       .string()
-      .min(100, "alliancesHead.validation.subTitleMin")
-      .max(250, "alliancesHead.validation.subTitleMax")
+      .min(10, "alliancesHead.validation.subTitleMin")
+      .max(200, "alliancesHead.validation.subTitleMax")
   ),
 });
 
@@ -20,14 +20,14 @@ export const updateAlliancesHeadSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(10, "alliancesHead.validation.titleMin")
-      .max(60, "alliancesHead.validation.titleMax")
+      .min(3, "alliancesHead.validation.titleMin")
+      .max(100, "alliancesHead.validation.titleMax")
   ).optional(),
   sub_title: createI18nFieldSchema(
     z
       .string()
-      .min(100, "alliancesHead.validation.subTitleMin")
-      .max(250, "alliancesHead.validation.subTitleMax")
+      .min(10, "alliancesHead.validation.subTitleMin")
+      .max(200, "alliancesHead.validation.subTitleMax")
   ).optional(),
 });
 

@@ -15,13 +15,13 @@ export const createCybersecurityHeroSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(30, "Title must be at least 30 characters")
+      .min(1, "Title must be at least 1 characters")
       .max(80, "Title must not exceed 80 characters")
   ),
   sub_title: createI18nFieldSchema(
     z
       .string()
-      .min(150, "Subtitle must be at least 150 characters")
+      .min(1, "Subtitle must be at least 1 characters")
       .max(350, "Subtitle must not exceed 350 characters")
   ),
   image: z.array(mediaSchema).min(1, "Image is required"),

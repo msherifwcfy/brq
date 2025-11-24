@@ -121,7 +121,7 @@ export default function IdentityManagementSection() {
                 en: enCardTranslation?.description || "",
                 ar: card.description || arCardTranslation?.description || "",
               },
-              icon: card.icon ? [card.icon] : undefined,
+              icon: card.icon ? [card.icon] : [],
             };
           }
         ) || [],
@@ -241,77 +241,129 @@ export default function IdentityManagementSection() {
             )}
           />
 
-          <div className="space-y-4">
-            <FormLabel>
-              {t("cms.cybersecurity.identityManagement.cards.title")}
-            </FormLabel>
-            {form.watch("cards")?.map((card, idx) => (
-              <div
-                key={idx}
-                className="grid grid-cols-1 gap-4 border p-4 rounded-md"
-              >
-                <I18nFormTextField
-                  name={`cards.${idx}.title`}
-                  control={form.control}
-                  label={t("common.title")}
-                  placeholder={t("common.title")}
-                  required
-                />
-                <I18nFormTextareaField
-                  name={`cards.${idx}.description`}
-                  control={form.control}
-                  label={t("common.description")}
-                  placeholder={t("common.description")}
-                  required
-                />
-                <div>
-                  <FormLabel>{t("common.icon")}</FormLabel>
-                  <DocumentUploader
-                    value={card.icon || []}
-                    onChange={(val) => {
-                      form.setValue(`cards.${idx}.icon`, val);
-                    }}
-                    multiple={false}
-                    maxDocuments={1}
-                    acceptedFileTypes={["image/*"]}
-                  />
-                </div>
-                <div className="flex justify-end gap-2">
+          <FormField
+            control={form.control}
+            name="cards"
+            render={({ field }) => {
+              const error = form.formState.errors.cards;
+              const errorMessage = error?.message || (error as any)?._root?.message || (error as any)?.root?.message;
+              return (
+                <FormItem>
+                  <FormLabel>
+                    {t("cms.cybersecurity.identityManagement.cards.title")}
+                  </FormLabel>
+                  <FormControl>
+                    <div className="space-y-4">
+                      {field.value?.map((card, idx) => (
+                    <div
+                      key={idx}
+                      className="grid grid-cols-1 gap-4 border p-4 rounded-md"
+                    >
+                      <I18nFormProvider currentLanguage={currentLanguage}>
+                        <I18nTabs
+                          value={currentLanguage}
+                          onValueChange={setCurrentLanguage}
+                          className="w-full"
+                        >
+                          <I18nTabContent language="en">
+                            <I18nFormTextField
+                              name={`cards.${idx}.title`}
+                              control={form.control}
+                              label={t("common.title")}
+                              placeholder={t("common.title")}
+                              required
+                            />
+                            <I18nFormTextareaField
+                              name={`cards.${idx}.description`}
+                              control={form.control}
+                              label={t("common.description")}
+                              placeholder={t("common.description")}
+                              required
+                            />
+                          </I18nTabContent>
+                          <I18nTabContent language="ar">
+                            <I18nFormTextField
+                              name={`cards.${idx}.title`}
+                              control={form.control}
+                              label={t("common.title")}
+                              placeholder={t("common.title")}
+                              required
+                            />
+                            <I18nFormTextareaField
+                              name={`cards.${idx}.description`}
+                              control={form.control}
+                              label={t("common.description")}
+                              placeholder={t("common.description")}
+                              required
+                            />
+                          </I18nTabContent>
+                        </I18nTabs>
+                      </I18nFormProvider>
+                      <FormField
+                        control={form.control}
+                        name={`cards.${idx}.icon`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{t("common.icon")}</FormLabel>
+                            <FormControl>
+                              <DocumentUploader
+                                value={field.value || []}
+                                onChange={field.onChange}
+                                multiple={false}
+                                maxDocuments={1}
+                                acceptedFileTypes={["image/*"]}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <div className="flex justify-end gap-2">
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          onClick={() => {
+                            const currentCards = field.value || [];
+                            field.onChange(
+                              currentCards.filter((_, i) => i !== idx)
+                            );
+                          }}
+                        >
+                          {t("common.remove")}
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
                   <Button
                     type="button"
-                    variant="destructive"
+                    variant="secondary"
                     onClick={() => {
-                      const currentCards = form.watch("cards");
-                      form.setValue(
-                        "cards",
-                        currentCards.filter((_, i) => i !== idx)
-                      );
+                      const currentCards = field.value || [];
+                      field.onChange([
+                        ...currentCards,
+                        {
+                          title: { en: "", ar: "" },
+                          description: { en: "", ar: "" },
+                          icon: [],
+                        },
+                      ]);
                     }}
                   >
-                    {t("common.remove")}
+                    {t("common.add")}
                   </Button>
-                </div>
-              </div>
-            ))}
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() =>
-                form.setValue("cards", [
-                  ...form.watch("cards"),
-                  {
-                    title: { en: "", ar: "" },
-                    description: { en: "", ar: "" },
-                    icon: undefined,
-                  },
-                ])
-              }
-            >
-              {t("common.add")}
-            </Button>
-          </div>
+                    </div>
+                  </FormControl>
+                  {errorMessage && (
+                    <p className="text-sm font-medium text-destructive">
+                      {errorMessage}
+                    </p>
+                  )}
+                </FormItem>
+              );
+            }}
+          />
 
-          <div className="flex gap-2">
+          <div className="flex justify-end gap-2">
             <Button
               type="submit"
               loading={createMutation.isPending || updateMutation.isPending}

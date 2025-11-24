@@ -1,6 +1,18 @@
 import { z } from "zod";
 import { createI18nFieldSchema } from "@/shared/schemas/i18n.schema";
 
+const cardSchema = z.object({
+  id: z.string().optional(),
+  number: z.string()
+    .min(1, "Value is required")
+    .regex(/^\d{1,5}(\.\d+)?$/, "Value must be 1-5 digits (decimals accepted)"),
+  label: createI18nFieldSchema(
+    z.string()
+      .min(5, "Label must be at least 5 characters")
+      .max(35, "Label must not exceed 35 characters")
+  ),
+});
+
 export const createAboutUsGroupSchema = z.object({
   title: createI18nFieldSchema(
     z.string()
@@ -23,30 +35,7 @@ export const createAboutUsGroupSchema = z.object({
       size: z.number().optional(),
     })
   ).min(1, "Group logo is required"),
-  stat_1_value: z.string()
-    .min(1, "Stat 1 value is required")
-    .regex(/^\d{1,5}(\.\d+)?$/, "Stat 1 value must be 1-5 digits (decimals accepted)"),
-  stat_1_label: createI18nFieldSchema(
-    z.string()
-      .min(5, "Stat 1 label must be at least 5 characters")
-      .max(35, "Stat 1 label must not exceed 35 characters")
-  ),
-  stat_2_value: z.string()
-    .min(1, "Stat 2 value is required")
-    .regex(/^\d{1,5}(\.\d+)?$/, "Stat 2 value must be 1-5 digits (decimals accepted)"),
-  stat_2_label: createI18nFieldSchema(
-    z.string()
-      .min(5, "Stat 2 label must be at least 5 characters")
-      .max(35, "Stat 2 label must not exceed 35 characters")
-  ),
-  stat_3_value: z.string()
-    .min(1, "Stat 3 value is required")
-    .regex(/^\d{1,5}(\.\d+)?$/, "Stat 3 value must be 1-5 digits (decimals accepted)"),
-  stat_3_label: createI18nFieldSchema(
-    z.string()
-      .min(5, "Stat 3 label must be at least 5 characters")
-      .max(35, "Stat 3 label must not exceed 35 characters")
-  ),
+  cards: z.array(cardSchema).min(1, "At least one card is required"),
 });
 
 export const updateAboutUsGroupSchema = z.object({
@@ -71,33 +60,7 @@ export const updateAboutUsGroupSchema = z.object({
       size: z.number().optional(),
     })
   ).min(1, "Group logo is required").optional(),
-  stat_1_value: z.string()
-    .min(1, "Stat 1 value is required")
-    .regex(/^\d{1,5}(\.\d+)?$/, "Stat 1 value must be 1-5 digits (decimals accepted)")
-    .optional(),
-  stat_1_label: createI18nFieldSchema(
-    z.string()
-      .min(5, "Stat 1 label must be at least 5 characters")
-      .max(35, "Stat 1 label must not exceed 35 characters")
-  ).optional(),
-  stat_2_value: z.string()
-    .min(1, "Stat 2 value is required")
-    .regex(/^\d{1,5}(\.\d+)?$/, "Stat 2 value must be 1-5 digits (decimals accepted)")
-    .optional(),
-  stat_2_label: createI18nFieldSchema(
-    z.string()
-      .min(5, "Stat 2 label must be at least 5 characters")
-      .max(35, "Stat 2 label must not exceed 35 characters")
-  ).optional(),
-  stat_3_value: z.string()
-    .min(1, "Stat 3 value is required")
-    .regex(/^\d{1,5}(\.\d+)?$/, "Stat 3 value must be 1-5 digits (decimals accepted)")
-    .optional(),
-  stat_3_label: createI18nFieldSchema(
-    z.string()
-      .min(5, "Stat 3 label must be at least 5 characters")
-      .max(35, "Stat 3 label must not exceed 35 characters")
-  ).optional(),
+  cards: z.array(cardSchema).min(1, "At least one card is required").optional(),
 });
 
 export type CreateAboutUsGroupFormData = z.infer<typeof createAboutUsGroupSchema>;

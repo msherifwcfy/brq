@@ -55,7 +55,7 @@ export function DashboardHeader({
       }}
       transition={{ duration: 0.2, ease: "linear" }}
       className={cn(
-        "fixed top-0 h-[60px] shrink-0 z-50   items-center gap-2 ",
+        "fixed top-0 h-[60px] shrink-0 z-50 items-center gap-2 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70",
         className
       )}
     >

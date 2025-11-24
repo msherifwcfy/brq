@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { useLang } from "@/shared/hooks/use-lang";
 import { type LanguageCode } from "@/shared/constants";
@@ -14,8 +14,6 @@ import {
   useGlobalCommitmentControllerCreate,
   useGlobalCommitmentControllerUpdate,
 } from "@/sdk/modules/globalcommitment.gen";
-import { Input } from "@/shared/components/ui/input";
-import { Textarea } from "@/shared/components/ui/textarea";
 import { toast } from "sonner";
 import {
   DocumentUploader,
@@ -23,14 +21,7 @@ import {
 } from "@/shared/components/custom/DocumentUploader";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/shared/components/ui/form";
+import { Form } from "@/shared/components/ui/form";
 import {
   createGlobalCommitmentSchema,
   type CreateGlobalCommitmentFormData,
@@ -78,6 +69,7 @@ export default function SustainabilityGlobalCommitmentSection() {
 
   const form = useForm<FormData>({
     resolver: zodResolver(createGlobalCommitmentSchema),
+    mode: "onChange",
     defaultValues: {
       title: { en: "", ar: "" },
       description: { en: "", ar: "" },
@@ -147,7 +139,7 @@ export default function SustainabilityGlobalCommitmentSection() {
             ],
           },
         });
-        toast.success(t("cms.homePage.hero.messages.heroUpdated"));
+        toast.success(t("cms.sustainability.globalCommitment.messages.updated"));
       } else {
         await createMutation.mutateAsync({
           body: {
@@ -163,7 +155,7 @@ export default function SustainabilityGlobalCommitmentSection() {
             ],
           },
         });
-        toast.success(t("cms.homePage.hero.messages.heroCreated"));
+        toast.success(t("cms.sustainability.globalCommitment.messages.created"));
       }
     } catch (error: any) {
       toast.error(error?.message || "Error");
@@ -172,7 +164,7 @@ export default function SustainabilityGlobalCommitmentSection() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit, (err) => console.log(err))} className="space-y-4">
         <I18nTabs
           value={currentLanguage}
           onValueChange={setCurrentLanguage}
@@ -220,7 +212,14 @@ export default function SustainabilityGlobalCommitmentSection() {
         <div className="space-y-2">
           <DocumentUploader
             value={iconsValue}
-            onChange={setIconsValue}
+            onChange={(icons: DocumentUploadValue[] | undefined) => {
+              const safeIcons = (icons ?? []).map(icon => ({
+                ...icon,
+                name: icon.name ?? '',
+              }));
+              form.setValue("icons", safeIcons, { shouldValidate: true, shouldDirty: true });
+              setIconsValue(safeIcons);
+            }}
             multiple
             maxDocuments={10}
             acceptedFileTypes={["image/*"]}

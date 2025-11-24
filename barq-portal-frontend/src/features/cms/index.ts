@@ -10,3 +10,7 @@ export { CampaignsCMSPage } from "./campaigns";
 export { ResourcesCMSPage } from "./resources";
 export { CybersecurityPage } from "./cybersecurity";
 export { ItInfrastructurePage } from "./it-infrastructure";
+export { CareersPage } from "./careers";
+export { LeadershipPage } from "./leadership";
+export { SolutionsAndServicesPage } from "./solutions-and-services";
+export { CaseStudiesPage } from "./case-studies";

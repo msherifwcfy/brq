@@ -9,15 +9,27 @@ import { Button } from "@/shared/components/ui/button";
 import { useModal } from "@/shared/store/modal-store";
 import { useLang } from "@/shared/hooks/use-lang";
 import { toast } from "sonner";
+import { useLandingNumbersControllerSoftDelete } from "@/sdk/modules/landingnumber.gen";
 
 export const DeleteWhoWeAreStatModal = () => {
   const { t } = useLang();
-  const { onClose, isOpen, type } = useModal();
+  const { onClose, isOpen, type, data } = useModal();
   const open = isOpen && type === "deleteWhoWeAreStat";
 
+  const {mutateAsync: deleteMutation, isPending: isDeleting} = useLandingNumbersControllerSoftDelete();
+
   const onConfirm = async () => {
-    toast.error(t("cms.homePage.whoWeAreStats.messages.deleteNotAvailable"));
-    onClose();
+    try {
+      await deleteMutation({
+        path: {
+          id: data?.id,
+        },
+      });
+      toast.success(t("cms.homePage.whoWeAreStats.messages.deleted"));
+      onClose();
+    } catch (error: any) {
+      toast.error(error?.message || t("cms.homePage.whoWeAreStats.messages.errorDeleting"));
+    }
   };
 
   return (
@@ -35,7 +47,7 @@ export const DeleteWhoWeAreStatModal = () => {
           <Button variant="secondary" onClick={onClose}>
             {t("common.cancel")}
           </Button>
-          <Button variant="destructive" onClick={onConfirm}>
+          <Button variant="destructive" onClick={onConfirm} loading={isDeleting}>
             {t("common.delete")}
           </Button>
         </div>

@@ -60,7 +60,7 @@ export default function AlliancesVendorsSection() {
         },
         relations: {
           media: true,
-          country: {
+          countries: {
             country_id_country_translations: true,
           },
           solutions: {

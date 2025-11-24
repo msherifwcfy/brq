@@ -6,30 +6,30 @@ export const createAwardsCardsSchema = z.object({
   name: createI18nFieldSchema(
     z
       .string()
-      .min(3, "awardsCards.validation.nameMin")
-      .max(100, "awardsCards.validation.nameMax")
+      .min(30, "awardsCards.validation.nameMin")
+      .max(80, "awardsCards.validation.nameMax")
   ),
   description: createI18nFieldSchema(
     z
       .string()
-      .min(10, "awardsCards.validation.descriptionMin")
-      .max(500, "awardsCards.validation.descriptionMax")
+      .min(80, "awardsCards.validation.descriptionMin")
+      .max(180, "awardsCards.validation.descriptionMax")
   ),
 });
 
 export const updateAwardsCardsSchema = z.object({
-  media: z.array(z.any()).optional(),
+  media: z.array(z.any()).min(1, "awardsCards.validation.mediaIdRequired"),
   name: createI18nFieldSchema(
     z
       .string()
-      .min(3, "awardsCards.validation.nameMin")
-      .max(100, "awardsCards.validation.nameMax")
+      .min(30, "awardsCards.validation.nameMin")
+      .max(80, "awardsCards.validation.nameMax")
   ).optional(),
   description: createI18nFieldSchema(
     z
       .string()
-      .min(10, "awardsCards.validation.descriptionMin")
-      .max(500, "awardsCards.validation.descriptionMax")
+      .min(80, "awardsCards.validation.descriptionMin")
+      .max(180, "awardsCards.validation.descriptionMax")
   ).optional(),
 });
 

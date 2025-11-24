@@ -26,9 +26,9 @@ export const UpdateAlliancesClientModal = () => {
     try {
       await updateAlliancesClientMutation.mutateAsync({
         body: {
-          media_id: (formData as any)?.media_id,
-          country_id: formData.country_id,
-          industries_id: formData.industries_id,
+          media_id: formData.media?.[0].id,
+          countries_ids: formData.countries_ids,
+          industries_ids: formData.industries_ids,
         },
         path: {
           id: alliancesClient.id.toString(),
@@ -40,7 +40,7 @@ export const UpdateAlliancesClientModal = () => {
     } catch (error: any) {
       toast.error(
         error?.message ||
-          t("alliancesClients.messages.errorUpdatingAlliancesClient")
+        t("alliancesClients.messages.errorUpdatingAlliancesClient")
       );
       console.error("Error updating alliances client:", error);
     }
@@ -62,8 +62,8 @@ export const UpdateAlliancesClientModal = () => {
         <AlliancesClientForm
           defaultValues={{
             media: [alliancesClient.media],
-            country_id: alliancesClient.country_id,
-            industries_id: alliancesClient.industries_id,
+            countries_ids: alliancesClient.countries.map((country) => country.id),
+            industries_ids: alliancesClient.industries.map((industry) => industry.id),
           }}
           onSubmit={handleSubmit as any}
           isLoading={updateAlliancesClientMutation.isPending}

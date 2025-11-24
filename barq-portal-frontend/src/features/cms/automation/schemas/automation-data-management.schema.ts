@@ -27,8 +27,8 @@ export const createAutomationDataManagementSchema = z.object({
   subHeadline: createI18nFieldSchema(
     z
       .string()
-      .min(90, "Subheading must be at least 90 characters")
-      .max(150, "Subheading must be at most 150 characters")
+      .min(10, "Subtitle must be at least 10 characters")
+      .max(150, "Subtitle must be at most 150 characters")
   ),
   image: z
     .array(
@@ -66,8 +66,8 @@ export const updateAutomationDataManagementSchema = z.object({
   subHeadline: createI18nFieldSchema(
     z
       .string()
-      .min(90, "Subheading must be at least 90 characters")
-      .max(150, "Subheading must be at most 150 characters")
+      .min(10, "Subtitle must be at least 10 characters")
+      .max(150, "Subtitle must be at most 150 characters")
   ).optional(),
   image: z
     .array(

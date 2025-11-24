@@ -30,13 +30,6 @@ import {
   createSoftwareDefinedNetworkSchema,
   type CreateSoftwareDefinedNetworkFormData,
 } from "../schemas/software-defined-network.schema";
-import { Trash2, Plus } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/shared/components/ui/card";
 
 type FormData = CreateSoftwareDefinedNetworkFormData;
 
@@ -79,6 +72,7 @@ export default function SoftwareDefinedNetworkSection() {
       image: [],
       cards: [],
     },
+    mode: "onChange",
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -170,8 +164,8 @@ export default function SoftwareDefinedNetworkSection() {
       const logoId = values.logo?.[0]?.id;
       const imageId = values.image?.[0]?.id;
 
-      const cards = values.cards
-        ?.filter((card) => card.icon?.[0]?.id !== undefined)
+      const cards = (values.cards || [])
+        .filter((card) => card.icon?.[0]?.id !== undefined)
         .map((card) => ({
           ...(card.id ? { id: card.id } : {}),
           text: card.text.ar,
@@ -309,97 +303,104 @@ export default function SoftwareDefinedNetworkSection() {
         />
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <FormLabel>
-              {t("cms.itInfrastructure.softwareDefinedNetwork.form.cards")}
-            </FormLabel>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() =>
-                append({
-                  text: { en: "", ar: "" },
-                  icon: [],
-                })
-              }
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              {t("common.add")}
-            </Button>
-          </div>
+          <FormLabel>
+            {t("cms.itInfrastructure.softwareDefinedNetwork.form.cards")}
+          </FormLabel>
+          
 
           {fields.map((field, index) => (
-            <Card key={field.id}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {t("cms.itInfrastructure.softwareDefinedNetwork.form.card")}{" "}
-                  {index + 1}
-                </CardTitle>
+            <div
+              key={field.id}
+              className="grid grid-cols-1 gap-2 border p-3 rounded-md"
+            >
+              <I18nTabs
+                value={currentLanguage}
+                onValueChange={setCurrentLanguage}
+                className="w-full"
+              >
+                <I18nFormProvider currentLanguage={currentLanguage}>
+                  <I18nTabContent language="en">
+                    <I18nFormTextareaField
+                      name={`cards.${index}.text`}
+                      control={form.control}
+                      label={t("common.text")}
+                      placeholder={t("common.text")}
+                      required
+                    />
+                  </I18nTabContent>
+                  <I18nTabContent language="ar">
+                    <I18nFormTextareaField
+                      name={`cards.${index}.text`}
+                      control={form.control}
+                      label={t("common.text")}
+                      placeholder={t("common.text")}
+                      required
+                    />
+                  </I18nTabContent>
+                </I18nFormProvider>
+              </I18nTabs>
+
+              <FormLabel>
+                {t(
+                  "cms.itInfrastructure.softwareDefinedNetwork.form.icon"
+                )}
+              </FormLabel>
+              <FormField
+                control={form.control}
+                name={`cards.${index}.icon` as any}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <DocumentUploader
+                        value={(field.value as any) || []}
+                        maxDocuments={1}
+                        maxSize={50 * 1024 * 1024}
+                        acceptedFileTypes={["image/*"]}
+                        onChange={(value) => {
+                          field.onChange(value);
+                          form.trigger(`cards.${index}.icon`);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-end gap-2">
                 <Button
                   type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => remove(index)}
+                  variant="destructive"
+                  onClick={async () => {
+                    remove(index);
+                    await form.trigger("cards");
+                  }}
                 >
-                  <Trash2 className="w-4 h-4 text-destructive" />
+                  {t("common.remove")}
                 </Button>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <I18nTabs
-                  value={currentLanguage}
-                  onValueChange={setCurrentLanguage}
-                  className="w-full"
-                >
-                  <I18nFormProvider currentLanguage={currentLanguage}>
-                    <I18nTabContent language="en">
-                      <I18nFormTextareaField
-                        name={`cards.${index}.text`}
-                        control={form.control}
-                        label={t("common.text")}
-                        placeholder={t("common.text")}
-                        required
-                      />
-                    </I18nTabContent>
-                    <I18nTabContent language="ar">
-                      <I18nFormTextareaField
-                        name={`cards.${index}.text`}
-                        control={form.control}
-                        label={t("common.text")}
-                        placeholder={t("common.text")}
-                        required
-                      />
-                    </I18nTabContent>
-                  </I18nFormProvider>
-                </I18nTabs>
-
-                <FormField
-                  control={form.control}
-                  name={`cards.${index}.icon` as any}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        {t(
-                          "cms.itInfrastructure.softwareDefinedNetwork.form.icon"
-                        )}
-                      </FormLabel>
-                      <FormControl>
-                        <DocumentUploader
-                          value={(field.value as any) || []}
-                          maxDocuments={1}
-                          maxSize={50 * 1024 * 1024}
-                          acceptedFileTypes={["image/*"]}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={async () => {
+              append({
+                text: { en: "", ar: "" },
+                icon: [],
+              });
+              await form.trigger("cards");
+            }}
+          >
+            {t("common.add")}
+          </Button>
         </div>
+{(form.formState.errors.cards?.root?.message ||
+            form.formState.errors.cards?.message) && (
+            <p className="text-[0.8rem] font-medium text-destructive">
+              {form.formState.errors.cards?.root?.message ||
+                form.formState.errors.cards?.message}
+            </p>
+          )}
 
         <div className="flex justify-end w-full gap-2">
           <Button

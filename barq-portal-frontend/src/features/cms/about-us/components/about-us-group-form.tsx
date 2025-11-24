@@ -20,7 +20,7 @@ import {
   I18nFormProvider,
 } from "@/shared/components/custom/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import {
   createAboutUsGroupSchema,
   updateAboutUsGroupSchema,
@@ -33,6 +33,7 @@ import {
   useAboutBarqGroupAffiliationControllerCreate,
   useAboutBarqGroupAffiliationControllerUpdate,
 } from "@/sdk/modules/aboutbarqgroupaffiliation.gen";
+import { Trash2, Plus } from "lucide-react";
 
 export default function AboutUsGroupSectionForm() {
   const { lang, t } = useLang();
@@ -57,11 +58,7 @@ export default function AboutUsGroupSectionForm() {
   });
 
   const existingGroupAffiliation = data?.data?.[0];
-  const currentTranslation = useMemo(
-    () =>
-      existingGroupAffiliation?.about_barq_group_affiliation_id_about_barq_group_affiliation_translations?.find((t) => t.language === lang),
-    [existingGroupAffiliation, lang]
-  );
+
 
   const isUpdate = !!existingGroupAffiliation;
 
@@ -74,14 +71,20 @@ export default function AboutUsGroupSectionForm() {
       title: { en: "", ar: "" },
       description: { en: "", ar: "" },
       group_logo: [],
-      stat_1_value: "",
-      stat_1_label: { en: "", ar: "" },
-      stat_2_value: "",
-      stat_2_label: { en: "", ar: "" },
-      stat_3_value: "",
-      stat_3_label: { en: "", ar: "" },
+      cards: [
+        {
+          id: "1",
+          number: "",
+          label: { en: "", ar: "" },
+        },
+      ],
     } as unknown as FormData,
     mode: "onChange",
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "cards",
   });
 
   useEffect(() => {
@@ -95,6 +98,31 @@ export default function AboutUsGroupSectionForm() {
       (t) => t.language === "ar"
     );
 
+    // Transform cards data
+    const cards = existingGroupAffiliation.about_barq_group_affiliation_cards_id_about_barq_group_affiliation_cards?.map((card, index) => {
+      const enCardTranslation = card.about_barq_group_affiliation_cards_id_about_barq_group_affiliation_cards_translations?.find(
+        (t) => t.language === "en"
+      );
+      const arCardTranslation = card.about_barq_group_affiliation_cards_id_about_barq_group_affiliation_cards_translations?.find(
+        (t) => t.language === "ar"
+      );
+
+      return {
+        id: String(card.id),
+        number: String(card.number),
+        label: {
+          en: enCardTranslation?.label || "",
+          ar: card.label || arCardTranslation?.label || "",
+        },
+      };
+    }) || [
+      {
+        id: "1",
+        number: "",
+        label: { en: "", ar: "" },
+      },
+    ];
+
     form.reset({
       title: {
         en: enTranslation?.title || "",
@@ -104,22 +132,8 @@ export default function AboutUsGroupSectionForm() {
         en: enTranslation?.description || "",
         ar: existingGroupAffiliation.description || arTranslation?.description || "",
       },
-      group_logo: [], // TODO: Add group logo handling when API supports it
-      stat_1_value: "",
-      stat_1_label: {
-        en: "",
-        ar: "",
-      },
-      stat_2_value: "",
-      stat_2_label: {
-        en: "",
-        ar: "",
-      },
-      stat_3_value: "",
-      stat_3_label: {
-        en: "",
-        ar: "",
-      },
+      group_logo: existingGroupAffiliation.images?.[0]?.id ? [existingGroupAffiliation.images?.[0]] : [],
+      cards,
     } as unknown as FormData);
   }, [existingGroupAffiliation, form]);
 
@@ -131,6 +145,18 @@ export default function AboutUsGroupSectionForm() {
       ? (values as any).group_logo?.[0]?.id
       : undefined;
 
+    // Transform cards data for API
+    const cardsData = (values as any).cards?.map((card: any) => ({
+      label: card.label?.ar || "",
+      number: Number(card.number) || 0,
+      about_barq_group_affiliation_cards_id_about_barq_group_affiliation_cards_translations: [
+        {
+          label: card.label?.en || "",
+          language: "en",
+        },
+      ],
+    })) || [];
+
     if (!existingGroupAffiliation) {
       await createMutation.mutateAsync(
         {
@@ -138,6 +164,7 @@ export default function AboutUsGroupSectionForm() {
             title: values.title?.ar || "",
             description: values.description?.ar || "",
             images_ids: groupLogoId ? [groupLogoId] : [],
+            about_barq_group_affiliation_cards_id_about_barq_group_affiliation_cards: cardsData,
             about_barq_group_affiliation_id_about_barq_group_affiliation_translations: [
               {
                 title: values.title?.en || "",
@@ -164,6 +191,7 @@ export default function AboutUsGroupSectionForm() {
             title: values.title?.ar || "",
             description: values.description?.ar || "",
             images_ids: groupLogoId ? [groupLogoId] : [],
+            about_barq_group_affiliation_cards_id_about_barq_group_affiliation_cards: cardsData,
             about_barq_group_affiliation_id_about_barq_group_affiliation_translations: [
               {
                 title: values.title?.en || "",
@@ -211,26 +239,6 @@ export default function AboutUsGroupSectionForm() {
                     label={t("aboutUs.groupSection.form.description")}
                     required
                   />
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <I18nFormTextField
-                      name="stat_1_label"
-                      control={form.control}
-                      label={t("aboutUs.groupSection.form.stat1Label")}
-                      required
-                    />
-                    <I18nFormTextField
-                      name="stat_2_label"
-                      control={form.control}
-                      label={t("aboutUs.groupSection.form.stat2Label")}
-                      required
-                    />
-                  </div>
-                  <I18nFormTextField
-                    name="stat_3_label"
-                    control={form.control}
-                    label={t("aboutUs.groupSection.form.stat3Label")}
-                    required
-                  />
                 </div>
               </I18nTabContent>
               <I18nTabContent language="ar">
@@ -245,26 +253,6 @@ export default function AboutUsGroupSectionForm() {
                     name="description"
                     control={form.control}
                     label={t("aboutUs.groupSection.form.description")}
-                    required
-                  />
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <I18nFormTextField
-                      name="stat_1_label"
-                      control={form.control}
-                      label={t("aboutUs.groupSection.form.stat1Label")}
-                      required
-                    />
-                    <I18nFormTextField
-                      name="stat_2_label"
-                      control={form.control}
-                      label={t("aboutUs.groupSection.form.stat2Label")}
-                      required
-                    />
-                  </div>
-                  <I18nFormTextField
-                    name="stat_3_label"
-                    control={form.control}
-                    label={t("aboutUs.groupSection.form.stat3Label")}
                     required
                   />
                 </div>
@@ -293,47 +281,83 @@ export default function AboutUsGroupSectionForm() {
           />
 
           <div className="border-t pt-4 mt-2">
-            <h3 className="text-lg font-semibold mb-4">{t("aboutUs.groupSection.form.statisticsValues")}</h3>
-            <div className="grid md:grid-cols-3 gap-4">
-              <FormField
-                control={form.control}
-                name="stat_1_value"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("aboutUs.groupSection.form.stat1Value")}</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder={t("aboutUs.groupSection.form.stat1Placeholder")} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="stat_2_value"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("aboutUs.groupSection.form.stat2Value")}</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder={t("aboutUs.groupSection.form.stat2Placeholder")} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="stat_3_value"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("aboutUs.groupSection.form.stat3Value")}</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder={t("aboutUs.groupSection.form.stat3Placeholder")} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">{t("aboutUs.groupSection.form.statisticsCards")}</h3>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => append({
+                  id: String(Date.now()),
+                  number: "",
+                  label: { en: "", ar: "" },
+                })}
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                {t("aboutUs.groupSection.form.addCard")}
+              </Button>
+            </div>
+            
+            <div className="space-y-4">
+              {fields.map((field, index) => (
+                <div key={field.id} className="border rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <h4 className="font-medium">{t("aboutUs.groupSection.form.card")} {index + 1}</h4>
+                    {fields.length > 1 && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => remove(index)}
+                        className="text-red-600 hover:text-red-700"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    )}
+                  </div>
+                  
+                  <div className="grid gap-4">
+                    <I18nTabs
+                      value={currentLanguage}
+                      onValueChange={setCurrentLanguage}
+                      className="w-full"
+                    >
+                      <I18nFormProvider currentLanguage={currentLanguage}>
+                        <I18nTabContent language="en">
+                          <I18nFormTextField
+                            name={`cards.${index}.label`}
+                            control={form.control}
+                            label={t("aboutUs.groupSection.form.cardLabel")}
+                            required
+                          />
+                        </I18nTabContent>
+                        <I18nTabContent language="ar">
+                          <I18nFormTextField
+                            name={`cards.${index}.label`}
+                            control={form.control}
+                            label={t("aboutUs.groupSection.form.cardLabel")}
+                            required
+                          />
+                        </I18nTabContent>
+                      </I18nFormProvider>
+                    </I18nTabs>
+                    
+                    <FormField
+                      control={form.control}
+                      name={`cards.${index}.number`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{t("aboutUs.groupSection.form.cardValue")}</FormLabel>
+                          <FormControl>
+                            <Input {...field} placeholder={t("aboutUs.groupSection.form.cardValuePlaceholder")} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

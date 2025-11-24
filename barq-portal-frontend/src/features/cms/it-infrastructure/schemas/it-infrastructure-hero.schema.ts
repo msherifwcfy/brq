@@ -15,17 +15,23 @@ export const createItInfrastructureHeroSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(10, "Title must be at least 10 characters")
-      .max(100, "Title must be at most 100 characters")
+      .min(30, "Title must be at least 30 characters")
+      .max(80, "Title must be at most 80 characters")
   ),
   sub_title: createI18nFieldSchema(
     z
       .string()
-      .min(10, "Subtitle must be at least 10 characters")
-      .max(200, "Subtitle must be at most 200 characters")
+      .min(150, "Subtitle must be at least 150 characters")
+      .max(350, "Subtitle must be at most 350 characters")
   ),
-  image: z.array(mediaSchema).max(1, "Only one image is allowed").optional(),
-  logos: z.array(mediaSchema).max(10, "Maximum 10 logos allowed").optional(),
+  image: z
+    .array(mediaSchema)
+    .min(1, "Image is required")
+    .max(1, "Only one image is allowed"),
+  logos: z
+    .array(mediaSchema)
+    .length(5, "Exactly 5 icons are required")
+    .optional(),
 });
 
 export type CreateItInfrastructureHeroFormData = z.infer<

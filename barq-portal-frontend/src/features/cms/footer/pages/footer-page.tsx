@@ -8,6 +8,7 @@ import {
 import { useLang } from "@/shared/hooks/use-lang";
 import FooterContactsSection from "../components/footer-contacts-section";
 import FooterLocationsSection from "../components/footer-locations-section";
+import FooterTermsSection from "../components/footer-terms-section";
 
 export default function FooterPage() {
   const { t } = useLang();
@@ -35,6 +36,17 @@ export default function FooterPage() {
             title={t("cms.footer.locations.title")}
           >
             <FooterLocationsSection />
+          </CollapsibleCard>
+        </ProtectedComponent>
+
+        <ProtectedComponent
+          permissionKey={PERMISSION_KEYS.FOOTER_TERMS.VIEW}
+        >
+          <CollapsibleCard
+            className="relative"
+            title={t("cms.footer.terms.title")}
+          >
+            <FooterTermsSection />
           </CollapsibleCard>
         </ProtectedComponent>
       </CollapsibleGroup>

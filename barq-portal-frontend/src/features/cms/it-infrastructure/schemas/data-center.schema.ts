@@ -6,21 +6,27 @@ const bulletPointSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(3, "Title must be at least 3 characters")
-      .max(100, "Title must be at most 100 characters")
+      .min(5, "Title must be at least 5 characters")
+      .max(50, "Title must be at most 50 characters")
   ),
-  icon: z.array(documentSchema).max(1).optional(),
+  icon: z
+    .array(documentSchema)
+    .min(1, "Icon is required")
+    .max(1, "Only one icon is allowed")
 });
 
 export const createDataCenterSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(10, "Title must be at least 10 characters")
-      .max(100, "Title must be at most 100 characters")
+      .min(90, "Text must be at least 90 characters")
+      .max(150, "Text must be at most 150 characters")
   ),
-  image: z.array(documentSchema).max(1, "Only one image is allowed").optional(),
-  bulletPoints: z.array(bulletPointSchema).optional(),
+  image: z
+    .array(documentSchema)
+    .min(1, "Image is required")
+    .max(1, "Only one image is allowed"),
+  bulletPoints: z.array(bulletPointSchema).min(2, "At least 2 bullet points").max(6, "At most 6 bullet points").optional(),
 });
 
 export type CreateDataCenterFormData = z.infer<typeof createDataCenterSchema>;

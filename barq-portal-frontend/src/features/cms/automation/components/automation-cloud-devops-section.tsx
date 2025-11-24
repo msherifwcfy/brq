@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { useLang } from "@/shared/hooks/use-lang";
@@ -47,7 +48,6 @@ export default function AutomationCloudDevOpsSection() {
     query: {
       query: {
         relations: {
-          image: true,
           logo: true,
           cloud_id_cloud_translations: true,
           cloud_bullets_id_cloud_bullets: {
@@ -116,15 +116,15 @@ export default function AutomationCloudDevOpsSection() {
           },
           icon: bullet.icon?.id
             ? [
-                {
-                  id: bullet.icon.id,
-                  url: bullet.icon.url,
-                  key: bullet.icon.key,
-                  format: bullet.icon.format,
-                  mime_type: bullet.icon.mime_type,
-                  size: bullet.icon.size,
-                },
-              ]
+              {
+                id: bullet.icon.id,
+                url: bullet.icon.url,
+                key: bullet.icon.key,
+                format: bullet.icon.format,
+                mime_type: bullet.icon.mime_type,
+                size: bullet.icon.size,
+              },
+            ]
             : [],
         };
       }) || [];
@@ -134,29 +134,24 @@ export default function AutomationCloudDevOpsSection() {
         en: enTranslation?.sub_headline || "",
         ar: existing?.sub_headline || arTranslation?.sub_headline || "",
       },
-      image: existing.image?.id
+      image: existing.image_id
         ? [
-            {
-              id: existing.image.id,
-              url: existing.image.url,
-              key: existing.image.key,
-              format: existing.image.format,
-              mime_type: existing.image.mime_type,
-              size: existing.image.size,
-            },
-          ]
+          {
+            id: existing.image_id,
+          },
+        ]
         : [],
       logo: existing.logo?.id
         ? [
-            {
-              id: existing.logo.id,
-              url: existing.logo.url,
-              key: existing.logo.key,
-              format: existing.logo.format,
-              mime_type: existing.logo.mime_type,
-              size: existing.logo.size,
-            },
-          ]
+          {
+            id: existing.logo.id,
+            url: existing.logo.url,
+            key: existing.logo.key,
+            format: existing.logo.format,
+            mime_type: existing.logo.mime_type,
+            size: existing.logo.size,
+          },
+        ]
         : [],
       bullets,
     });
@@ -164,7 +159,7 @@ export default function AutomationCloudDevOpsSection() {
 
   const onSubmit = async (values: FormData) => {
     try {
-      const imageId = values.image?.[0]?.id;
+      const imageId = values.image?.[0]?.id || undefined;
       const logoId = values.logo?.[0]?.id;
 
       const bullets = values.bullets?.map((bullet) => ({
@@ -184,7 +179,6 @@ export default function AutomationCloudDevOpsSection() {
           path: { id: String(existing.id) },
           body: {
             sub_headline: values.subHeadline.ar,
-            image_id: imageId,
             logo_id: logoId,
             cloud_id_cloud_translations: [
               {
@@ -200,7 +194,6 @@ export default function AutomationCloudDevOpsSection() {
         await createMutation.mutateAsync({
           body: {
             sub_headline: values.subHeadline.ar,
-            image_id: imageId,
             logo_id: logoId,
             cloud_id_cloud_translations: [
               {
@@ -266,7 +259,10 @@ export default function AutomationCloudDevOpsSection() {
                   maxDocuments={1}
                   maxSize={10 * 1024 * 1024}
                   acceptedFileTypes={["image/*"]}
-                  onChange={field.onChange}
+                  onChange={(value) => {
+                    console.log(value);
+                    field.onChange(value);
+                  }}
                 />
               </FormControl>
               <FormMessage />
@@ -314,6 +310,11 @@ export default function AutomationCloudDevOpsSection() {
               {t("common.add")}
             </Button>
           </div>
+          {form.formState.errors.bullets?.root && (
+            <p className="text-sm font-medium text-destructive">
+              {form.formState.errors.bullets.root.message}
+            </p>
+          )}
 
           {bulletFields.map((field, index) => (
             <Card key={field.id}>
@@ -374,7 +375,7 @@ export default function AutomationCloudDevOpsSection() {
                         <DocumentUploader
                           value={field.value || []}
                           maxDocuments={1}
-                          maxSize={2 * 1024 * 1024}
+                          maxSize={5 * 1024 * 1024}
                           acceptedFileTypes={["image/*"]}
                           onChange={field.onChange}
                         />
@@ -388,7 +389,7 @@ export default function AutomationCloudDevOpsSection() {
           ))}
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex justify-end gap-2">
           <Button
             type="submit"
             disabled={createMutation.isPending || updateMutation.isPending}

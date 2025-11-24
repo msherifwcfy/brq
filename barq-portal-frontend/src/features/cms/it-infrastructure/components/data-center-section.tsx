@@ -187,6 +187,8 @@ export default function DataCenterSection() {
     }
   };
 
+  console.log(form.formState.errors, "errors");
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -248,26 +250,63 @@ export default function DataCenterSection() {
             <FormLabel>
               {t("cms.itInfrastructure.dataCenter.form.bulletPoints")}
             </FormLabel>
+            {form.formState.errors.bulletPoints?.root?.message ? (
+              <p className="text-[0.8rem] font-medium text-destructive">
+                {form.formState.errors.bulletPoints.root.message}
+              </p>
+            ) : null}
             {form.watch("bulletPoints")?.map((point, idx) => (
               <div
                 key={idx}
                 className="grid grid-cols-1 gap-2 border p-3 rounded-md"
               >
-                <I18nFormTextField
-                  name={`bulletPoints.${idx}.title`}
-                  control={form.control}
-                  label={t("common.title")}
-                  placeholder={t("common.title")}
-                  required
-                />
+                <I18nTabs
+                  value={currentLanguage}
+                  onValueChange={setCurrentLanguage}
+                  className="w-full"
+                >
+                  <I18nFormProvider currentLanguage={currentLanguage}>
+                    <I18nTabContent language="en">
+                      <div className="grid gap-4">
+                        <I18nFormTextField
+                          name={`bulletPoints.${idx}.title`}
+                          control={form.control}
+                          label={t("common.title")}
+                          placeholder={t("common.title")}
+                          required
+                        />
+                      </div>
+                    </I18nTabContent>
+                    <I18nTabContent language="ar">
+                      <div className="grid gap-4">
+                        <I18nFormTextField
+                          name={`bulletPoints.${idx}.title`}
+                          control={form.control}
+                          label={t("common.title")}
+                          placeholder={t("common.title")}
+                          required
+                        />
+                      </div>
+                    </I18nTabContent>
+                  </I18nFormProvider>
+                </I18nTabs>
                 <FormLabel>{t("common.icon")}</FormLabel>
-                <DocumentUploader
-                  value={point.icon}
-                  onChange={(val) => {
-                    form.setValue(`bulletPoints.${idx}.icon`, val);
-                  }}
-                  multiple={false}
-                  maxDocuments={1}
+                <FormField
+                  control={form.control}
+                  name={`bulletPoints.${idx}.icon`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <DocumentUploader
+                          value={field.value as any}
+                          onChange={field.onChange}
+                          multiple={false}
+                          maxDocuments={1}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
                 <div className="flex justify-end gap-2">
                   <Button
@@ -278,7 +317,8 @@ export default function DataCenterSection() {
                         form.watch("bulletPoints") || [];
                       form.setValue(
                         "bulletPoints",
-                        currentBulletPoints.filter((_, i) => i !== idx)
+                        currentBulletPoints.filter((_, i) => i !== idx),
+                        { shouldValidate: true }
                       );
                     }}
                   >
@@ -293,8 +333,8 @@ export default function DataCenterSection() {
               onClick={() =>
                 form.setValue("bulletPoints", [
                   ...(form.watch("bulletPoints") || []),
-                  { title: { en: "", ar: "" }, icon: undefined },
-                ])
+                  { title: { en: "", ar: "" }, icon: [] },
+                ], { shouldValidate: true })
               }
             >
               {t("common.add")}

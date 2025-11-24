@@ -32,6 +32,7 @@ import {
   useAboutBarqCoreValuesControllerCreate,
   useAboutBarqCoreValuesControllerUpdate,
 } from "@/sdk/modules/aboutbarqcorevalue.gen";
+import CoreValuesCardsManagement from "./about-us-core-values-cards-management";
 
 export default function AboutUsCoreValuesSectionForm() {
   const { lang, t } = useLang();
@@ -42,6 +43,11 @@ export default function AboutUsCoreValuesSectionForm() {
       query: {
         relations: {
           about_barq_core_values_id_about_barq_core_values_translations: true,
+          about_barq_core_values_cards_id_about_barq_core_values_cards: {
+            about_barq_core_values_cards_id_about_barq_core_values_cards_translations: true,
+            icon: true,
+          },
+          image: true,
         },
         pagination: { take: 1, skip: 0 },
       },
@@ -77,13 +83,42 @@ export default function AboutUsCoreValuesSectionForm() {
   useEffect(() => {
     if (!existingCoreValues) return;
 
-    // Transform API data to i18n format
     const enTranslation = existingCoreValues.about_barq_core_values_id_about_barq_core_values_translations?.find(
       (t) => t.language === "en"
     );
     const arTranslation = existingCoreValues.about_barq_core_values_id_about_barq_core_values_translations?.find(
       (t) => t.language === "ar"
     );
+
+    const cards = existingCoreValues.about_barq_core_values_cards_id_about_barq_core_values_cards || [];
+    const transformedCards = cards.map((card, index) => {
+      const enCardTranslation = card.about_barq_core_values_cards_id_about_barq_core_values_cards_translations?.find(
+        (t) => t.language === "en"
+      );
+      const arCardTranslation = card.about_barq_core_values_cards_id_about_barq_core_values_cards_translations?.find(
+        (t) => t.language === "ar"
+      );
+
+      return {
+        title: {
+          en: enCardTranslation?.title || "",
+          ar: card.title || arCardTranslation?.title || "",
+        },
+        description: {
+          en: "",
+          ar: "",
+        },
+        icon_media: card.icon ? [{
+          id: card.icon.id,
+          url: card.icon.url,
+          key: card.icon.key || "",
+          format: card.icon.format,
+          mime_type: card.icon.mime_type,
+          size: card.icon.size,
+        }] : [],
+        order_index: index,
+      };
+    });
 
     form.reset({
       section_title: {
@@ -94,8 +129,8 @@ export default function AboutUsCoreValuesSectionForm() {
         en: enTranslation?.description || "",
         ar: existingCoreValues.description || arTranslation?.description || "",
       },
-      core_values: [], // TODO: Add core values handling when API supports it
-      supporting_image: [], // TODO: Add supporting image handling when API supports it
+      core_values: transformedCards,
+      supporting_image: existingCoreValues.image ? [existingCoreValues.image] : [],
     } as unknown as FormData);
   }, [existingCoreValues, form]);
 
@@ -106,6 +141,17 @@ export default function AboutUsCoreValuesSectionForm() {
     const supportingImageId = Array.isArray((values as any).supporting_image)
       ? (values as any).supporting_image?.[0]?.id
       : undefined;
+
+    const cardsData = (values.core_values || []).map((card) => ({
+      title: card.title?.ar || "",
+      icon_id: card.icon_media?.[0]?.id || 1,
+      about_barq_core_values_cards_id_about_barq_core_values_cards_translations: [
+        {
+          title: card.title?.en || "",
+          language: "en" as const,
+        },
+      ],
+    }));
 
     if (!existingCoreValues) {
       await createMutation.mutateAsync(
@@ -121,6 +167,7 @@ export default function AboutUsCoreValuesSectionForm() {
                 language: "en",
               },
             ],
+            about_barq_core_values_cards_id_about_barq_core_values_cards: cardsData,
           },
         },
         {
@@ -147,6 +194,7 @@ export default function AboutUsCoreValuesSectionForm() {
                 language: "en",
               },
             ],
+            about_barq_core_values_cards_id_about_barq_core_values_cards: cardsData,
           },
         },
         {
@@ -160,6 +208,7 @@ export default function AboutUsCoreValuesSectionForm() {
       );
     }
   };
+  console.log(form.formState.errors, "errors");
 
   if (isLoading) return <div />;
 
@@ -229,19 +278,23 @@ export default function AboutUsCoreValuesSectionForm() {
           />
 
           <div className="border-t pt-4">
-            <h3 className="text-lg font-semibold mb-4">{t("aboutUs.coreValuesSection.form.coreValuesCards")}</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              {t("aboutUs.coreValuesSection.form.coreValuesDescription")}
-            </p>
-            <div className="bg-muted/50 p-4 rounded-lg">
-              <p className="text-sm text-muted-foreground">
-                <strong>{t("aboutUs.coreValuesSection.requirements.title")}</strong><br/>
-                • {t("aboutUs.coreValuesSection.requirements.minMax")}<br/>
-                • {t("aboutUs.coreValuesSection.requirements.cardTitles")}<br/>
-                • {t("aboutUs.coreValuesSection.requirements.cardIcons")}<br/>
-                • {t("aboutUs.coreValuesSection.requirements.layout")}
-              </p>
-            </div>
+            <FormField
+              control={form.control}
+              name="core_values"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CoreValuesCardsManagement
+                      cards={field.value || []}
+                      onCardsChange={field.onChange}
+                      maxCards={6}
+                      errors={form.formState.errors.core_values}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
 
           <div className="flex justify-end items-center gap-3">

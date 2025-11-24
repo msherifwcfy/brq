@@ -15,7 +15,7 @@ const imageSchema = z.object({
       "Only JPG, PNG, and WebP images are allowed"
     ),
   size: z.number().refine(
-    (size) => size <= 2 * 1024 * 1024, // 2MB in bytes
+    (size) => size <= 5 * 1024 * 1024, // 2MB in bytes
     "Image size must be less than 2MB"
   ),
 });

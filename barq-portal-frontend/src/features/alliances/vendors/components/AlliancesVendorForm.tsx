@@ -51,24 +51,22 @@ export function AlliancesVendorForm({
     media: z
       .array(z.any())
       .min(1, t("alliancesVendors.validation.mediaIdRequired")),
-    country_id: z
-      .number()
-      .positive(t("alliancesVendors.validation.countryIdRequired")),
-    solutions_id: z
-      .number()
-      .positive(t("alliancesVendors.validation.solutionsIdRequired")),
+    countries_ids: z.array(z.number()
+      .positive(t("alliancesVendors.validation.countriesIdsRequired"))
+    ),
+    solutions_ids: z.array(z.number()
+      .positive(t("alliancesVendors.validation.solutionsIdRequired"))
+    ),
   });
 
   const localizedUpdateSchema = z.object({
     media: z.array(z.any()).optional(),
-    country_id: z
-      .number()
-      .positive(t("alliancesVendors.validation.countryIdRequired"))
-      .optional(),
-    solutions_id: z
-      .number()
+    countries_ids: z.array(z.number()
+      .positive(t("alliancesVendors.validation.countriesIdsRequired"))
+    ).optional(),
+    solutions_ids: z.array(z.number()
       .positive(t("alliancesVendors.validation.solutionsIdRequired"))
-      .optional(),
+    ).optional(),
   });
 
   const schema = isUpdate ? localizedUpdateSchema : localizedCreateSchema;
@@ -77,8 +75,8 @@ export function AlliancesVendorForm({
     resolver: zodResolver(schema),
     defaultValues: {
       media: defaultValues?.media ? defaultValues?.media : undefined,
-      country_id: defaultValues?.country_id || 0,
-      solutions_id: defaultValues?.solutions_id || 0,
+      countries_ids: defaultValues?.countries_ids ? defaultValues?.countries_ids : [],
+      solutions_ids: defaultValues?.solutions_ids || [],
     },
     mode: "onChange",
   });
@@ -90,7 +88,6 @@ export function AlliancesVendorForm({
       ...values,
       media_id: values.media?.[0]?.id,
     };
-    delete formData.media;
     onSubmit(formData);
   };
 
@@ -126,15 +123,26 @@ export function AlliancesVendorForm({
         />
 
         <FormField
-          name="country_id"
+          name="countries_ids"
           control={control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("alliancesVendors.form.countryId")}</FormLabel>
               <FormControl>
                 <CountrySelect
-                  value={field.value ? String(field.value) : undefined}
-                  onValueChange={(value) => field.onChange(Number(value))}
+                  multiple={true}
+                  value={
+                    Array.isArray(field.value)
+                      ? field.value.map((id) => String(id))
+                      : field.value
+                  }
+                  onValueChange={(value) => {
+                    if (Array.isArray(value)) {
+                      field.onChange(value.map((v) => Number(v)));
+                    } else {
+                      field.onChange(value ? [Number(value)] : []);
+                    }
+                  }}
                   disabled={isLoading}
                   placeholder={t("alliancesVendors.form.countryIdPlaceholder")}
                 />
@@ -145,15 +153,26 @@ export function AlliancesVendorForm({
         />
 
         <FormField
-          name="solutions_id"
+          name="solutions_ids"
           control={control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("alliancesVendors.form.solutionsId")}</FormLabel>
               <FormControl>
                 <SolutionSelect
-                  value={field.value ? String(field.value) : undefined}
-                  onValueChange={(value) => field.onChange(Number(value))}
+                  multiple={true}
+                  value={
+                    Array.isArray(field.value)
+                      ? field.value.map((id) => String(id))
+                      : field.value
+                  }
+                  onValueChange={(value) => {
+                    if (Array.isArray(value)) {
+                      field.onChange(value.map((v) => Number(v)));
+                    } else {
+                      field.onChange(value ? [Number(value)] : []);
+                    }
+                  }}
                   disabled={isLoading}
                   placeholder={t(
                     "alliancesVendors.form.solutionsIdPlaceholder"

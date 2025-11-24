@@ -6,7 +6,7 @@ export const createHeroSchema = z.object({
     z
       .string()
       .refine(
-        (v) => v.length >= 30 && v.length <= 70,
+        (v) => v.trimEnd().length >= 30 && v.trimEnd().length <= 70,
         "cms.homePage.hero.validation.headlineLength"
       )
   ),
@@ -14,7 +14,7 @@ export const createHeroSchema = z.object({
     z
       .string()
       .refine(
-        (v) => v.length >= 80 && v.length <= 200,
+        (v) => v.trimEnd().length >= 80 && v.trimEnd().length <= 200,
         "cms.homePage.hero.validation.subHeadlineLength"
       )
   ),
@@ -22,7 +22,7 @@ export const createHeroSchema = z.object({
     z
       .string()
       .refine(
-        (v) => v.length >= 15 && v.length <= 25,
+        (v) => v.trimEnd().length >= 15 && v.trimEnd().length <= 25,
         "cms.homePage.hero.validation.ctaLabelLength"
       )
   ),
@@ -34,9 +34,12 @@ export const createHeroSchema = z.object({
       name: z.string().optional(),
       format: z.string().optional(),
       mime_type: z.string().optional(),
-      size: z.number().optional(),
+      size: z
+        .number()
+        .max(70 * 1024 * 1024, "cms.homePage.hero.validation.mediaSize")
+        .optional(),
     })
-  ),
+  ).min(1, "Media is required"),
 });
 
 export const updateHeroSchema = z.object({
@@ -73,10 +76,14 @@ export const updateHeroSchema = z.object({
         name: z.string().optional(),
         format: z.string().optional(),
         mime_type: z.string().optional(),
-        size: z.number().optional(),
+        size: z
+          .number()
+          .max(70 * 1024 * 1024, "cms.homePage.hero.validation.mediaSize")
+          .optional(),
       })
     )
-    .optional(),
+    .min(1, "Media is required")
+    ,
 });
 
 export type CreateHeroFormData = z.infer<typeof createHeroSchema>;

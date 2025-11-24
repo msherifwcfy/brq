@@ -8,13 +8,13 @@ export const createAboutUsJourneyMilestoneSchema = z.object({
     .regex(/^\d{4}$/, "Year must be a 4-digit number"),
   title: createI18nFieldSchema(
     z.string()
-      .min(5, "Title must be at least 5 characters")
-      .max(50, "Title must not exceed 50 characters")
+      .min(10, "Title must be at least 10 characters")
+      .max(120, "Title must not exceed 120 characters")
   ),
   description: createI18nFieldSchema(
     z.string()
-      .min(100, "Description must be at least 100 characters")
-      .max(350, "Description must not exceed 350 characters")
+      .min(30, "Description must be at least 30 characters")
+      .max(400, "Description must not exceed 400 characters")
   ),
   image: z.array(
     z.object({
@@ -38,13 +38,13 @@ export const updateAboutUsJourneyMilestoneSchema = z.object({
     .optional(),
   title: createI18nFieldSchema(
     z.string()
-      .min(5, "Title must be at least 5 characters")
-      .max(50, "Title must not exceed 50 characters")
+      .min(10, "Title must be at least 10 characters")
+      .max(120, "Title must not exceed 120 characters")
   ).optional(),
   description: createI18nFieldSchema(
     z.string()
-      .min(100, "Description must be at least 100 characters")
-      .max(350, "Description must not exceed 350 characters")
+      .min(30, "Description must be at least 30 characters")
+      .max(400, "Description must not exceed 400 characters")
   ).optional(),
   image: z.array(
     z.object({

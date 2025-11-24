@@ -98,14 +98,6 @@ export const DocumentUploader = ({
     );
   };
 
-  const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-  };
-
   const isImageFile = (format: string) => {
     return (
       format?.includes("png") ||
@@ -148,22 +140,8 @@ export const DocumentUploader = ({
             size: file.size,
           };
         } catch (error) {
-          console.error("File upload failed, falling back to preview:", error);
-          return new Promise<DocumentUploadValue>((resolve) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-              resolve({
-                id: Date.now(),
-                url: reader.result as string,
-                name: file.name,
-                format: file.type,
-                mime_type: file.type,
-                key: file.name,
-                size: file.size,
-              });
-            };
-            reader.readAsDataURL(file);
-          });
+          console.error("File upload failed:", error);
+          throw error;
         }
       }
     },
@@ -200,7 +178,7 @@ export const DocumentUploader = ({
         if (multiple) {
           onChange?.([...(value || []), ...results]);
         } else {
-          onChange?.(results);
+          onChange?.(results.length ? results : []);
         }
       } catch (err) {
         const errorMessage =
@@ -253,9 +231,9 @@ export const DocumentUploader = ({
     if (multiple && value) {
       const newValue = [...value];
       newValue.splice(index, 1);
-      onChange?.(newValue.length > 0 ? newValue : undefined);
+      onChange?.(newValue.length > 0 ? newValue : []);
     } else {
-      onChange?.(undefined);
+      onChange?.([]);
     }
 
     setError(null);
@@ -356,7 +334,7 @@ export const DocumentUploader = ({
   ) => (
     <div
       key={document.id || index}
-      className="relative rounded-lg sm:rounded-xl w-full aspect-square overflow-hidden bg-white cursor-pointer hover:shadow-md transition-all duration-200 "
+      className="relative rounded-lg min-w-24 min-h-24 sm:rounded-xl w-full aspect-square overflow-hidden bg-white cursor-pointer hover:shadow-md transition-all duration-200 "
       onClick={() => handleView(document)}
     >
       <div className="absolute inset-0">

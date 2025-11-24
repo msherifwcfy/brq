@@ -5,13 +5,14 @@ import { CommandSelect } from "@/shared/components/custom/CommandSelect";
 import { useLang } from "@/shared/hooks/use-lang";
 
 interface IndustrySelectProps {
-  value?: string;
-  onValueChange?: (value: string) => void;
+  value?: string | string[];
+  onValueChange?: (value: string | string[]) => void;
+  multiple?: boolean;
   placeholder?: string;
   searchPlaceholder?: string;
   disabled?: boolean;
   className?: string;
-  defaultValue?: string;
+  defaultValue?: string | string[];
   size?: "sm" | "default";
   filters?: Record<string, any>;
 }
@@ -19,6 +20,7 @@ interface IndustrySelectProps {
 export function IndustrySelect({
   value,
   onValueChange,
+  multiple = false,
   placeholder,
   searchPlaceholder,
   disabled = false,
@@ -65,6 +67,7 @@ export function IndustrySelect({
   return (
     <CommandSelect
       value={value}
+      multiple={multiple}
       onValueChange={onValueChange}
       disabled={disabled || isLoading}
       defaultValue={defaultValue}

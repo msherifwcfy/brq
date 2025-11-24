@@ -9,10 +9,7 @@ import {
 } from "@/shared/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {
-  createAlliancesClientSchema,
-  updateAlliancesClientSchema,
-} from "../schemas/alliances-clients.schema";
+
 import type {
   CreateAlliancesClientFormData,
   UpdateAlliancesClientFormData,
@@ -46,29 +43,26 @@ export function AlliancesClientForm({
 }: AlliancesClientFormProps) {
   const { t } = useLang();
 
-  // Create localized schemas with document validation
   const localizedCreateSchema = z.object({
     media: z
       .array(z.any())
       .min(1, t("alliancesClients.validation.mediaIdRequired")),
-    country_id: z
-      .number()
-      .positive(t("alliancesClients.validation.countryIdRequired")),
-    industries_id: z
-      .number()
-      .positive(t("alliancesClients.validation.industriesIdRequired")),
+    countries_ids: z.array(z.number()
+      .positive(t("alliancesClients.validation.countriesIdsRequired"))
+    ),
+    industries_ids: z.array(z.number()
+      .positive(t("alliancesClients.validation.industriesIdsRequired"))
+    ),
   });
 
   const localizedUpdateSchema = z.object({
     media: z.array(z.any()).optional(),
-    country_id: z
-      .number()
-      .positive(t("alliancesClients.validation.countryIdRequired"))
-      .optional(),
-    industries_id: z
-      .number()
-      .positive(t("alliancesClients.validation.industriesIdRequired"))
-      .optional(),
+    countries_ids: z.array(z.number()
+      .positive(t("alliancesClients.validation.countriesIdsRequired"))
+    ).optional(),
+    industries_ids: z.array(z.number()
+      .positive(t("alliancesClients.validation.industriesIdsRequired"))
+    ).optional(),
   });
 
   const schema = isUpdate ? localizedUpdateSchema : localizedCreateSchema;
@@ -77,8 +71,8 @@ export function AlliancesClientForm({
     resolver: zodResolver(schema),
     defaultValues: {
       media: defaultValues?.media ? defaultValues?.media : undefined,
-      country_id: defaultValues?.country_id || 0,
-      industries_id: defaultValues?.industries_id || 0,
+      countries_ids: defaultValues?.countries_ids?.map((country) => Number(country)) || [],
+      industries_ids: defaultValues?.industries_ids?.map((industry) => Number(industry)) || [],
     },
     mode: "onChange",
   });
@@ -90,7 +84,6 @@ export function AlliancesClientForm({
       ...values,
       media_id: values.media?.[0]?.id,
     };
-    delete formData.media;
     onSubmit(formData);
   };
 
@@ -126,15 +119,26 @@ export function AlliancesClientForm({
         />
 
         <FormField
-          name="country_id"
+          name="countries_ids"
           control={control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("alliancesClients.form.countryId")}</FormLabel>
               <FormControl>
                 <CountrySelect
-                  value={field.value ? String(field.value) : undefined}
-                  onValueChange={(value) => field.onChange(Number(value))}
+                  multiple={true}
+                  value={
+                    Array.isArray(field.value)
+                      ? field.value.map((id) => String(id))
+                      : field.value
+                  }
+                  onValueChange={(value) => {
+                    if (Array.isArray(value)) {
+                      field.onChange(value.map((v) => Number(v)));
+                    } else {
+                      field.onChange(value ? [Number(value)] : []);
+                    }
+                  }}
                   disabled={isLoading}
                   placeholder={t("alliancesClients.form.countryIdPlaceholder")}
                 />
@@ -145,15 +149,26 @@ export function AlliancesClientForm({
         />
 
         <FormField
-          name="industries_id"
+          name="industries_ids"
           control={control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("alliancesClients.form.industriesId")}</FormLabel>
               <FormControl>
                 <IndustrySelect
-                  value={field.value ? String(field.value) : undefined}
-                  onValueChange={(value) => field.onChange(Number(value))}
+                  multiple={true}
+                  value={
+                    Array.isArray(field.value)
+                      ? field.value.map((id) => String(id))
+                      : field.value
+                  }
+                  onValueChange={(value) => {
+                    if (Array.isArray(value)) {
+                      field.onChange(value.map((v) => Number(v)));
+                    } else {
+                      field.onChange(value ? [Number(value)] : []);
+                    }
+                  }}
                   disabled={isLoading}
                   placeholder={t(
                     "alliancesClients.form.industriesIdPlaceholder"

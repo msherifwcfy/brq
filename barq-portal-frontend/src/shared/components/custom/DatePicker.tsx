@@ -33,9 +33,9 @@ export default function DatePicker({
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
-          size={"lg"}
+          size={"sm"}
           className={cn(
-            "w-[240px] rounded-md h-12 shadow-none px-4 py-0 justify-between text-start font-normal transition-colors duration-default border-input",
+            "rounded-md  shadow-none px-4 py-0 justify-between text-start font-normal transition-colors duration-default border-input",
             !date && "text-muted-foreground",
             className
           )}

@@ -26,9 +26,9 @@ export const UpdateAlliancesVendorModal = () => {
     try {
       await updateAlliancesVendorMutation.mutateAsync({
         body: {
-          media_id: (formData as any)?.media_id,
-          country_id: formData.country_id,
-          solutions_id: formData.solutions_id,
+          countries_ids: formData.countries_ids,
+          solutions_ids: formData.solutions_ids,
+          media_id: formData.media?.[0].id,
         },
         path: {
           id: alliancesVendor.id.toString(),
@@ -40,7 +40,7 @@ export const UpdateAlliancesVendorModal = () => {
     } catch (error: any) {
       toast.error(
         error?.message ||
-          t("alliancesVendors.messages.errorUpdatingAlliancesVendor")
+        t("alliancesVendors.messages.errorUpdatingAlliancesVendor")
       );
       console.error("Error updating alliances vendor:", error);
     }
@@ -62,8 +62,8 @@ export const UpdateAlliancesVendorModal = () => {
         <AlliancesVendorForm
           defaultValues={{
             media: [alliancesVendor.media],
-            country_id: alliancesVendor.country_id,
-            solutions_id: alliancesVendor.solutions_id,
+            countries_ids: alliancesVendor.countries.map((country) => country.id),
+            solutions_ids: alliancesVendor.solutions.map((solution) => solution.id),
           }}
           onSubmit={handleSubmit as any}
           isLoading={updateAlliancesVendorMutation.isPending}

@@ -22,7 +22,7 @@ export const createSocialImpactSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(25, "Title must be at least 25 characters")
+      .min(20, "Title must be at least 20 characters")
       .max(60, "Title must be at most 60 characters")
   ),
   description: createI18nFieldSchema(
@@ -37,7 +37,7 @@ export const updateSocialImpactSchema = z.object({
   title: createI18nFieldSchema(
     z
       .string()
-      .min(25, "Title must be at least 25 characters")
+      .min(20, "Title must be at least 20 characters")
       .max(60, "Title must be at most 60 characters")
   ).optional(),
   description: createI18nFieldSchema(

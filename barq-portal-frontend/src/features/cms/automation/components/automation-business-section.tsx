@@ -384,7 +384,7 @@ export default function AutomationBusinessSection() {
                         <DocumentUploader
                           value={(field.value as any) || []}
                           maxDocuments={1}
-                          maxSize={2 * 1024 * 1024}
+                          maxSize={5 * 1024 * 1024}
                           acceptedFileTypes={["image/*"]}
                           onChange={field.onChange}
                         />

@@ -2,24 +2,22 @@ import { z } from "zod";
 
 export const createAlliancesClientSchema = z.object({
   media: z.array(z.any()).min(1, "alliancesClients.validation.mediaIdRequired"),
-  country_id: z
-    .number()
-    .positive("alliancesClients.validation.countryIdRequired"),
-  industries_id: z
-    .number()
-    .positive("alliancesClients.validation.industriesIdRequired"),
+  countries_ids: z.array(z.number()
+    .positive("alliancesClients.validation.countriesIdsRequired")
+  ),
+  industries_ids: z.array(z.number()
+    .positive("alliancesClients.validation.industriesIdsRequired")
+  ),
 });
 
 export const updateAlliancesClientSchema = z.object({
   media: z.array(z.any()).optional(),
-  country_id: z
-    .number()
-    .positive("alliancesClients.validation.countryIdRequired")
-    .optional(),
-  industries_id: z
-    .number()
-    .positive("alliancesClients.validation.industriesIdRequired")
-    .optional(),
+  countries_ids: z.array(z.number()
+    .positive("alliancesClients.validation.countriesIdsRequired")
+  ).optional(),
+  industries_ids: z.array(z.number()
+    .positive("alliancesClients.validation.industriesIdsRequired")
+  ).optional(),
 });
 
 export const alliancesClientFiltersSchema = z.object({

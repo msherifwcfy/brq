@@ -5,18 +5,19 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss() as any],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@root": path.resolve(__dirname, "./"),
     },
   },
   server: {
-    port: 3000,
+    port: 3001,
   },
   preview: {
-    allowedHosts: ['cms.barq.wecodeforyou.io'],
-    port: 4173,
+    allowedHosts: ['cms.barq.wecodeforyou.io', 'connectorstg.barqsystems.com'],
+    port: 5000,
     host: true,
   },
 });

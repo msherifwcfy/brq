@@ -25,13 +25,6 @@ import {
   I18nFormProvider,
 } from "@/shared/components/custom/i18n";
 import { DocumentUploader } from "@/shared/components/custom/DocumentUploader";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/shared/components/ui/card";
-import { Trash2, Plus } from "lucide-react";
 import { toast } from "sonner";
 import {
   createMobilitySchema,
@@ -261,112 +254,114 @@ export default function MobilitySection() {
         />
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold">
-              {t("cms.itInfrastructure.mobility.form.cards")}
-            </h3>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() =>
-                append({
-                  title: { en: "", ar: "" },
-                  sub_title: { en: "", ar: "" },
-                  icon: [],
-                })
-              }
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              {t("common.add")}
-            </Button>
-          </div>
+          <FormLabel>
+            {t("cms.itInfrastructure.mobility.form.cards")}
+          </FormLabel>
+          {(form.formState.errors.mobility_cards?.root?.message ||
+            form.formState.errors.mobility_cards?.message) && (
+            <p className="text-[0.8rem] font-medium text-destructive">
+              {form.formState.errors.mobility_cards?.root?.message ||
+                form.formState.errors.mobility_cards?.message}
+            </p>
+          )}
 
           {fields.map((field, index) => (
-            <Card key={field.id}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-                <CardTitle className="text-base">
-                  {t("cms.itInfrastructure.mobility.form.card")} {index + 1}
-                </CardTitle>
+            <div
+              key={field.id}
+              className="grid grid-cols-1 gap-2 border p-3 rounded-md"
+            >
+              <I18nTabs
+                value={currentLanguage}
+                onValueChange={setCurrentLanguage}
+                className="w-full"
+              >
+                <I18nFormProvider currentLanguage={currentLanguage}>
+                  <I18nTabContent language="en">
+                    <div className="grid gap-4">
+                      <I18nFormTextField
+                        name={`mobility_cards.${index}.title`}
+                        control={form.control}
+                        label={t("common.title")}
+                        placeholder={t("common.title")}
+                        required
+                      />
+                      <I18nFormTextareaField
+                        name={`mobility_cards.${index}.sub_title`}
+                        control={form.control}
+                        label={t("common.subtitle")}
+                        placeholder={t("common.subtitle")}
+                        required
+                      />
+                    </div>
+                  </I18nTabContent>
+                  <I18nTabContent language="ar">
+                    <div className="grid gap-4">
+                      <I18nFormTextField
+                        name={`mobility_cards.${index}.title`}
+                        control={form.control}
+                        label={t("common.title")}
+                        placeholder={t("common.title")}
+                        required
+                      />
+                      <I18nFormTextareaField
+                        name={`mobility_cards.${index}.sub_title`}
+                        control={form.control}
+                        label={t("common.subtitle")}
+                        placeholder={t("common.subtitle")}
+                        required
+                      />
+                    </div>
+                  </I18nTabContent>
+                </I18nFormProvider>
+              </I18nTabs>
+
+              <FormLabel>{t("cms.itInfrastructure.mobility.form.icon")}</FormLabel>
+              <FormField
+                control={form.control}
+                name={`mobility_cards.${index}.icon` as any}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <DocumentUploader
+                        value={(field.value as any) || []}
+                        maxDocuments={1}
+                        maxSize={50 * 1024 * 1024}
+                        acceptedFileTypes={["image/*"]}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-end gap-2">
                 <Button
                   type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => remove(index)}
+                  variant="destructive"
+                  onClick={() => {
+                    remove(index);
+                    form.trigger("mobility_cards");
+                  }}
                 >
-                  <Trash2 className="w-4 h-4" />
+                  {t("common.remove")}
                 </Button>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <I18nTabs
-                  value={currentLanguage}
-                  onValueChange={setCurrentLanguage}
-                  className="w-full"
-                >
-                  <I18nFormProvider currentLanguage={currentLanguage}>
-                    <I18nTabContent language="en">
-                      <div className="grid gap-4">
-                        <I18nFormTextField
-                          name={`mobility_cards.${index}.title`}
-                          control={form.control}
-                          label={t("common.title")}
-                          placeholder={t("common.title")}
-                          required
-                        />
-                        <I18nFormTextareaField
-                          name={`mobility_cards.${index}.sub_title`}
-                          control={form.control}
-                          label={t("common.subtitle")}
-                          placeholder={t("common.subtitle")}
-                          required
-                        />
-                      </div>
-                    </I18nTabContent>
-                    <I18nTabContent language="ar">
-                      <div className="grid gap-4">
-                        <I18nFormTextField
-                          name={`mobility_cards.${index}.title`}
-                          control={form.control}
-                          label={t("common.title")}
-                          placeholder={t("common.title")}
-                          required
-                        />
-                        <I18nFormTextareaField
-                          name={`mobility_cards.${index}.sub_title`}
-                          control={form.control}
-                          label={t("common.subtitle")}
-                          placeholder={t("common.subtitle")}
-                          required
-                        />
-                      </div>
-                    </I18nTabContent>
-                  </I18nFormProvider>
-                </I18nTabs>
-
-                <FormField
-                  control={form.control}
-                  name={`mobility_cards.${index}.icon` as any}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        {t("cms.itInfrastructure.mobility.form.icon")}
-                      </FormLabel>
-                      <FormControl>
-                        <DocumentUploader
-                          value={(field.value as any) || []}
-                          maxDocuments={1}
-                          maxSize={50 * 1024 * 1024}
-                          acceptedFileTypes={["image/*"]}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              append({
+                title: { en: "", ar: "" },
+                sub_title: { en: "", ar: "" },
+                icon: [],
+              });
+              form.trigger("mobility_cards");
+            }}
+          >
+            {t("common.add")}
+          </Button>
         </div>
 
         <div className="flex justify-end w-full gap-2">

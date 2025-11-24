@@ -20,6 +20,9 @@ export type ModalType =
   | "createCountry"
   | "updateCountry"
   | "deleteCountry"
+  | "createCity"
+  | "updateCity"
+  | "deleteCity"
   | "createIndustry"
   | "updateIndustry"
   | "deleteIndustry"
@@ -32,6 +35,9 @@ export type ModalType =
   | "createFooterLocation"
   | "updateFooterLocation"
   | "deleteFooterLocation"
+  | "createFooterTerm"
+  | "updateFooterTerm"
+  | "deleteFooterTerm"
   | "createSustainabilityCardSocial"
   | "updateSustainabilityCardSocial"
   | "deleteSustainabilityCardSocial"
@@ -47,7 +53,56 @@ export type ModalType =
   | "deleteIdentityManagementCard"
   | "createApplicationDataBullet"
   | "updateApplicationDataBullet"
-  | "deleteApplicationDataBullet";
+  | "deleteApplicationDataBullet"
+  | "createRequestType"
+  | "updateRequestType"
+  | "deleteRequestType"
+  | "createHearAboutUsOption"
+  | "updateHearAboutUsOption"
+  | "deleteHearAboutUsOption"
+  | "createContactUsOffice"
+  | "updateContactUsOffice"
+  | "deleteContactUsOffice"
+  | "createManagedServiceCard"
+  | "updateManagedServiceCard"
+  | "deleteManagedServiceCard"
+  | "createAdditionalManagedServicesOne"
+  | "updateAdditionalManagedServicesOne"
+  | "deleteAdditionalManagedServicesOne"
+  | "createAdditionalManagedServicesTwo"
+  | "updateAdditionalManagedServicesTwo"
+  | "deleteAdditionalManagedServicesTwo"
+  | "createHomeAwardsCard"
+  | "updateHomeAwardsCard"
+  | "deleteHomeAwardsCard"
+  | "createCareerOpportunity"
+  | "updateCareerOpportunity"
+  | "deleteCareerOpportunity"
+  | "createCareerCategory"
+  | "updateCareerCategory"
+  | "deleteCareerCategory"
+  | "createCareerOpenPosition"
+  | "updateCareerOpenPosition"
+  | "deleteCareerOpenPosition"
+  | "createCaseStudy"
+  | "updateCaseStudy"
+  | "deleteCaseStudy"
+  | "createNewsroomArticle"
+  | "updateNewsroomArticle"
+  | "deleteNewsroomArticle"
+  | "createNewsroomCategory"
+  | "updateNewsroomCategory"
+  | "createEventsPartner"
+  | "updateEventsPartner"
+  | "createEventsSpeakers"
+  | "updateEventsSpeakers"
+  | "createSocServicesDetails"
+  | "updateSocServicesDetails"
+  | "createCybersecurityServicesDetails"
+  | "updateCybersecurityServicesDetails"
+  | "createGrcServicesDetails"
+  | "updateGrcServicesDetails"
+  | "deleteGrcServicesDetails";
 
 export interface ModalData {
   id?: string;
@@ -59,6 +114,17 @@ export interface ModalData {
   private?: number;
   role?: any;
   user?: any;
+  country?: any;
+  city?: any;
+  requestType?: any;
+  hearAboutUsOption?: any;
+  card?: any;
+  alliancesClient?: any;
+  caseStudy?: any;
+  partner?: any;
+  speakers?: any;
+  service?: any;
+  category?: any;
 }
 
 interface ModalStore {

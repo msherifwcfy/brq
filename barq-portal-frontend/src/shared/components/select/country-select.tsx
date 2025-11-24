@@ -5,15 +5,16 @@ import { CommandSelect } from "@/shared/components/custom/CommandSelect";
 import { useLang } from "@/shared/hooks/use-lang";
 
 interface CountrySelectProps {
-  value?: string;
-  onValueChange?: (value: string) => void;
+  value?: string | string[];
+  onValueChange?: (value: string | string[]) => void;
   placeholder?: string;
   searchPlaceholder?: string;
   disabled?: boolean;
   className?: string;
-  defaultValue?: string;
+  defaultValue?: string | string[];
   size?: "sm" | "default";
   filters?: Record<string, any>;
+  multiple?: boolean;
 }
 
 export function CountrySelect({
@@ -22,6 +23,7 @@ export function CountrySelect({
   placeholder,
   searchPlaceholder,
   disabled = false,
+  multiple = false,
   className,
   defaultValue,
   size,
@@ -65,6 +67,7 @@ export function CountrySelect({
   return (
     <CommandSelect
       value={value}
+      multiple={multiple}
       onValueChange={onValueChange}
       disabled={disabled || isLoading}
       defaultValue={defaultValue}

@@ -265,21 +265,57 @@ export default function ApplicationDataSection() {
           />
 
           <div className="space-y-4">
-            <FormLabel>
-              {t("cms.cybersecurity.applicationData.bullets.title")}
-            </FormLabel>
+            <FormField
+              control={form.control}
+              name="cards"
+              render={() => {
+                const error = form.formState.errors.cards;
+                const errorMessage = error?.message || (error as any)?._root?.message || (error as any)?.root?.message;
+                return (
+                  <FormItem>
+                    <FormLabel>
+                      {t("cms.cybersecurity.applicationData.bullets.title")}
+                    </FormLabel>
+                    {errorMessage && (
+                      <p className="text-sm font-medium text-destructive">
+                        {errorMessage}
+                      </p>
+                    )}
+                  </FormItem>
+                );
+              }}
+            />
             {form.watch("cards")?.map((card, idx) => (
               <div
                 key={idx}
                 className="grid grid-cols-1 gap-2 border p-3 rounded-md"
               >
-                <I18nFormTextField
-                  name={`cards.${idx}.title`}
-                  control={form.control}
-                  label={t("common.title")}
-                  placeholder={t("common.title")}
-                  required
-                />
+                <I18nFormProvider currentLanguage={currentLanguage}>
+                  <I18nTabs
+                    value={currentLanguage}
+                    onValueChange={setCurrentLanguage}
+                    className="w-full"
+                  >
+                    <I18nTabContent language="en">
+                      <I18nFormTextField
+                        name={`cards.${idx}.title`}
+                        control={form.control}
+                        label={t("common.title")}
+                        placeholder={t("common.title")}
+                        required
+                      />
+                    </I18nTabContent>
+                    <I18nTabContent language="ar">
+                      <I18nFormTextField
+                        name={`cards.${idx}.title`}
+                        control={form.control}
+                        label={t("common.title")}
+                        placeholder={t("common.title")}
+                        required
+                      />
+                    </I18nTabContent>
+                  </I18nTabs>
+                </I18nFormProvider>
                 <FormItem>
                   <FormLabel>{t("common.icon")}</FormLabel>
                   <DocumentUploader
@@ -325,7 +361,7 @@ export default function ApplicationDataSection() {
             </Button>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex justify-end gap-2">
             <Button
               type="submit"
               loading={createMutation.isPending || updateMutation.isPending}

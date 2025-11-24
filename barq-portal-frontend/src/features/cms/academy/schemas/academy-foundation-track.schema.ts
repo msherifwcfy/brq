@@ -1,33 +1,62 @@
 import { z } from "zod";
-import { createI18nFieldSchema, createOptionalI18nFieldSchema } from "@/shared/schemas/i18n.schema";
+import { createI18nFieldSchema } from "@/shared/schemas/i18n.schema";
 
-const mediaSchema = z.array(
-  z.object({
-    id: z.number(),
-    url: z.string(),
-    key: z.string(),
-    name: z.string().optional(),
-    format: z.string(),
-    mime_type: z.string(),
-    size: z.number(),
-  })
-);
-
-export const createAcademyFoundationTrackSchema = z.object({
-  title: createI18nFieldSchema(z.string().min(1, "Title is required")),
-  subtitle: createOptionalI18nFieldSchema(z.string()),
-  description: createI18nFieldSchema(z.string().min(1, "Description is required")),
-  image: mediaSchema.optional(),
-  displayOrder: z.number().int().min(0),
+const mediaSchema = z.object({
+  id: z.number(),
+  url: z.string(),
+  key: z.string().optional(),
+  name: z.string().optional(),
+  format: z.string().optional(),
+  mime_type: z.string().optional(),
+  size: z.number().optional(),
 });
 
-export const updateAcademyFoundationTrackSchema = z.object({
-  title: createI18nFieldSchema(z.string().min(1, "Title is required")).optional(),
-  subtitle: createOptionalI18nFieldSchema(z.string()),
-  description: createI18nFieldSchema(z.string().min(1, "Description is required")).optional(),
-  image: mediaSchema.optional(),
-  displayOrder: z.number().int().min(0).optional(),
+const foundationTrackCardSchema = z.object({
+  id: z.number().optional(),
+  image: z.array(mediaSchema).min(1, "Image is required"),
+  translations: z.object({
+    en: z.object({
+      title: z.string()
+        .min(10, "Card title must be at least 10 characters")
+        .max(120, "Card title must not exceed 120 characters"),
+      description: z.string()
+        .min(50, "Description must be at least 50 characters")
+        .max(150, "Description must not exceed 150 characters"),
+    }),
+    ar: z.object({
+      title: z.string()
+        .min(10, "Card title must be at least 10 characters")
+        .max(120, "Card title must not exceed 120 characters"),
+      description: z.string()
+        .min(50, "Description must be at least 50 characters")
+        .max(150, "Description must not exceed 150 characters"),
+    }),
+  }),
 });
 
-export type CreateAcademyFoundationTrackFormData = z.infer<typeof createAcademyFoundationTrackSchema>;
-export type UpdateAcademyFoundationTrackFormData = z.infer<typeof updateAcademyFoundationTrackSchema>;
+export const createAcademyProgramsOpportunitiesSchema = z.object({
+  title: createI18nFieldSchema(
+    z.string()
+      .min(5, "Title must be at least 5 characters")
+      .max(40, "Title must not exceed 40 characters")
+  ),
+  cards: z.array(foundationTrackCardSchema)
+    .min(3, "At least 3 cards are required")
+    .max(12, "Maximum 12 cards allowed"),
+});
+
+export const updateAcademyProgramsOpportunitiesSchema = z.object({
+  title: createI18nFieldSchema(
+    z.string()
+      .min(5, "Title must be at least 5 characters")
+      .max(40, "Title must not exceed 40 characters")
+  ).optional(),
+  cards: z.array(foundationTrackCardSchema)
+    .min(3, "At least 3 cards are required")
+    .max(12, "Maximum 12 cards allowed")
+    .optional(),
+});
+
+export type FoundationTrackCardFormData = z.infer<typeof foundationTrackCardSchema>;
+export type CreateAcademyProgramsOpportunitiesFormData = z.infer<typeof createAcademyProgramsOpportunitiesSchema>;
+export type UpdateAcademyProgramsOpportunitiesFormData = z.infer<typeof updateAcademyProgramsOpportunitiesSchema>;

@@ -61,7 +61,7 @@ export function AwardsCardsForm({
   const methods = useForm<FormData>({
     resolver: zodResolver(schema) as any,
     defaultValues: {
-      media: undefined,
+      media: [],
       name: { en: "", ar: "" },
       description: { en: "", ar: "" },
       ...defaultValues,

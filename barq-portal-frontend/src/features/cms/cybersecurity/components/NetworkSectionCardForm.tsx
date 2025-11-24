@@ -90,20 +90,30 @@ export function NetworkSectionCardForm({
 
         <FormField
           control={form.control}
-          name={"icon" as any}
+          name={"icon"}
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("common.icon")}</FormLabel>
               <FormControl>
                 <DocumentUploader
-                  value={(field.value as any) || []}
+                  value={Array.isArray(field.value) ? (field.value as any) : []}
                   maxDocuments={1}
                   maxSize={5 * 1024 * 1024}
                   acceptedFileTypes={["image/*"]}
-                  onChange={field.onChange}
+                  onChange={(val) => {
+                    field.onChange(val);
+                    form.trigger("icon");
+                  }}
                 />
               </FormControl>
               <FormMessage />
+              {Array.isArray((form.formState.errors as any)?.icon) &&
+                (form.formState.errors as any).icon.some(Boolean) && (
+                  <p className="text-sm font-medium text-destructive">
+                    {((form.formState.errors as any).icon.find(Boolean)?.message as
+                      string) || t("validation.required")}
+                  </p>
+                )}
             </FormItem>
           )}
         />

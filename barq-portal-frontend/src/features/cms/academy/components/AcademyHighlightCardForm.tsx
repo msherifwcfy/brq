@@ -30,6 +30,7 @@ import {
   createAcademyHighlightCardSchema,
   type CreateAcademyHighlightCardFormData,
 } from "../schemas/academy-highlight-card.schema";
+import { useLang } from "@/shared/hooks/use-lang";
 
 interface AcademyHighlightCardFormProps {
   onSubmit: (values: CreateAcademyHighlightCardFormData) => Promise<void>;
@@ -44,6 +45,7 @@ export default function AcademyHighlightCardForm({
   submitLabel = "Save",
   defaultValues,
 }: AcademyHighlightCardFormProps) {
+  const { t } = useLang();
   const [currentLanguage, setCurrentLanguage] = useState<LanguageCode>("en");
 
   const form = useForm<CreateAcademyHighlightCardFormData>({
@@ -63,6 +65,18 @@ export default function AcademyHighlightCardForm({
     mode: "onChange",
   });
 
+  const resolvedSubmitLabel = submitLabel ?? t("common.save");
+  const selectPlaceholder = t("cms.academy.highlightCards.cardTypes.placeholder");
+  const stat2Label = t("cms.academy.highlightCards.form.statisticOptional", {
+    number: 2,
+  });
+  const stat3Label = t("cms.academy.highlightCards.form.statisticOptional", {
+    number: 3,
+  });
+  const buttonLabel = isLoading
+    ? t("cms.academy.highlightCards.form.saving")
+    : resolvedSubmitLabel;
+
   return (
     <div>
       <Form {...form}>
@@ -72,7 +86,7 @@ export default function AcademyHighlightCardForm({
             name="icon"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Icon</FormLabel>
+                <FormLabel>{t("common.icon")}</FormLabel>
                 <FormControl>
                   <DocumentUploader
                     value={field.value}
@@ -96,7 +110,7 @@ export default function AcademyHighlightCardForm({
                   <I18nFormTextField
                     name="title"
                     control={form.control}
-                    label="Card Title"
+                    label={t("cms.academy.highlightCards.form.cardTitle")}
                     required
                   />
                 </div>
@@ -108,7 +122,7 @@ export default function AcademyHighlightCardForm({
                   <I18nFormTextField
                     name="title"
                     control={form.control}
-                    label="عنوان البطاقة"
+                    label={t("cms.academy.highlightCards.form.cardTitle")}
                     required
                   />
                 </div>
@@ -121,18 +135,28 @@ export default function AcademyHighlightCardForm({
             name="cardType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Card Type</FormLabel>
+                <FormLabel>
+                  {t("cms.academy.highlightCards.form.cardType")}
+                </FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select card type" />
+                      <SelectValue placeholder={selectPlaceholder} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="internships">Internships</SelectItem>
-                    <SelectItem value="trainings">Trainings</SelectItem>
-                    <SelectItem value="seminars">Seminars</SelectItem>
-                    <SelectItem value="graduates">Graduates</SelectItem>
+                    <SelectItem value="internships">
+                      {t("cms.academy.highlightCards.cardTypes.internships")}
+                    </SelectItem>
+                    <SelectItem value="trainings">
+                      {t("cms.academy.highlightCards.cardTypes.trainings")}
+                    </SelectItem>
+                    <SelectItem value="seminars">
+                      {t("cms.academy.highlightCards.cardTypes.seminars")}
+                    </SelectItem>
+                    <SelectItem value="graduates">
+                      {t("cms.academy.highlightCards.cardTypes.graduates")}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -141,7 +165,9 @@ export default function AcademyHighlightCardForm({
           />
 
           <div className="grid gap-2">
-            <FormLabel>Statistic 1 (Required)</FormLabel>
+            <FormLabel>
+              {t("cms.academy.highlightCards.form.statisticRequired")}
+            </FormLabel>
             <div className="grid grid-cols-3 gap-2">
               <FormField
                 control={form.control}
@@ -149,7 +175,12 @@ export default function AcademyHighlightCardForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input {...field} placeholder="Value (e.g., 11)" />
+                      <Input
+                        {...field}
+                        placeholder={t(
+                          "cms.academy.highlightCards.form.statValueExample"
+                        )}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -161,7 +192,12 @@ export default function AcademyHighlightCardForm({
                 render={({ field }) => (
                   <FormItem className="col-span-2">
                     <FormControl>
-                      <Input {...field} placeholder="Label" />
+                      <Input
+                        {...field}
+                        placeholder={t(
+                          "cms.academy.highlightCards.form.statLabelPlaceholder"
+                        )}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -171,7 +207,7 @@ export default function AcademyHighlightCardForm({
           </div>
 
           <div className="grid gap-2">
-            <FormLabel>Statistic 2 (Optional)</FormLabel>
+            <FormLabel>{stat2Label}</FormLabel>
             <div className="grid grid-cols-3 gap-2">
               <FormField
                 control={form.control}
@@ -179,7 +215,12 @@ export default function AcademyHighlightCardForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input {...field} placeholder="Value" />
+                      <Input
+                        {...field}
+                        placeholder={t(
+                          "cms.academy.highlightCards.form.statValuePlaceholder"
+                        )}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -191,7 +232,12 @@ export default function AcademyHighlightCardForm({
                 render={({ field }) => (
                   <FormItem className="col-span-2">
                     <FormControl>
-                      <Input {...field} placeholder="Label" />
+                      <Input
+                        {...field}
+                        placeholder={t(
+                          "cms.academy.highlightCards.form.statLabelPlaceholder"
+                        )}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -201,7 +247,7 @@ export default function AcademyHighlightCardForm({
           </div>
 
           <div className="grid gap-2">
-            <FormLabel>Statistic 3 (Optional)</FormLabel>
+            <FormLabel>{stat3Label}</FormLabel>
             <div className="grid grid-cols-3 gap-2">
               <FormField
                 control={form.control}
@@ -209,7 +255,12 @@ export default function AcademyHighlightCardForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input {...field} placeholder="Value" />
+                      <Input
+                        {...field}
+                        placeholder={t(
+                          "cms.academy.highlightCards.form.statValuePlaceholder"
+                        )}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -221,7 +272,12 @@ export default function AcademyHighlightCardForm({
                 render={({ field }) => (
                   <FormItem className="col-span-2">
                     <FormControl>
-                      <Input {...field} placeholder="Label" />
+                      <Input
+                        {...field}
+                        placeholder={t(
+                          "cms.academy.highlightCards.form.statLabelPlaceholder"
+                        )}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -235,7 +291,9 @@ export default function AcademyHighlightCardForm({
             name="displayOrder"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Display Order</FormLabel>
+                <FormLabel>
+                  {t("cms.academy.highlightCards.form.displayOrder")}
+                </FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -249,7 +307,7 @@ export default function AcademyHighlightCardForm({
           />
 
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Saving..." : submitLabel}
+            {buttonLabel}
           </Button>
         </form>
       </Form>

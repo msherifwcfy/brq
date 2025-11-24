@@ -55,6 +55,9 @@ export default function SustainabilityCardSocialSection() {
         },
       },
     },
+    headers: {
+      "x-skip-translations": "true",
+    },
   });
 
   const cardSocialItems = cardSocialData?.data || [];

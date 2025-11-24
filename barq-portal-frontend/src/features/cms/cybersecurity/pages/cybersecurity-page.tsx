@@ -42,7 +42,7 @@ export default function CybersecurityPage() {
           </CollapsibleCard>
         </ProtectedComponent>
 
-        <ProtectedComponent
+        {/* <ProtectedComponent
           permissionKey={PERMISSION_KEYS.CYBERSECURITY_DATA_CENTER.VIEW}
         >
           <CollapsibleCard
@@ -51,7 +51,7 @@ export default function CybersecurityPage() {
           >
             <CybersecurityDataCenterSection />
           </CollapsibleCard>
-        </ProtectedComponent>
+        </ProtectedComponent> */}
 
         <ProtectedComponent
           permissionKey={PERMISSION_KEYS.OPERATION_INTELLIGENCE.VIEW}

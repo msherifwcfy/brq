@@ -23,8 +23,8 @@ export const CreateAlliancesVendorModal = () => {
       await createAlliancesVendorMutation.mutateAsync({
         body: {
           media_id: (data as any)?.media_id,
-          country_id: data.country_id,
-          solutions_id: data.solutions_id,
+          countries_ids: data.countries_ids,
+          solutions_ids: data.solutions_ids,
         },
       });
       toast.success(t("alliancesVendors.messages.alliancesVendorCreated"));
@@ -33,7 +33,7 @@ export const CreateAlliancesVendorModal = () => {
     } catch (error: any) {
       toast.error(
         error?.message ||
-          t("alliancesVendors.messages.errorCreatingAlliancesVendor")
+        t("alliancesVendors.messages.errorCreatingAlliancesVendor")
       );
       console.error("Error creating alliances vendor:", error);
     }

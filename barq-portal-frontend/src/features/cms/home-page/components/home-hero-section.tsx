@@ -9,7 +9,6 @@ import {
   useHeroControllerUpdate,
 } from "@/sdk/modules/hero.gen";
 import { DocumentUploader } from "@/shared/components/custom/DocumentUploader";
-import DashboardLayout from "@/shared/components/layout/DashboardLayout";
 import {
   Form,
   FormControl,
@@ -201,7 +200,7 @@ export default function HomeHeroSection() {
             <I18nFormProvider currentLanguage={currentLanguage}>
               <I18nTabContent language="en">
                 <div className="grid gap-4">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4 items-start">
                     <I18nFormTextField
                       name="headline"
                       control={form.control}
@@ -225,7 +224,7 @@ export default function HomeHeroSection() {
               </I18nTabContent>
               <I18nTabContent language="ar">
                 <div className="grid gap-4">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4 items-start">
                     <I18nFormTextField
                       name="headline"
                       control={form.control}
@@ -260,7 +259,7 @@ export default function HomeHeroSection() {
                   <DocumentUploader
                     value={(field.value as any) || []}
                     maxDocuments={1}
-                    maxSize={50 * 1024 * 1024}
+                    maxSize={100 * 1024 * 1024}
                     acceptedFileTypes={["image/*", "video/*"]}
                     onChange={field.onChange}
                   />

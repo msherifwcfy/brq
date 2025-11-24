@@ -124,4 +124,3 @@ Clicking a map marker updates the corresponding card and vice versa.
 Highlight state visually identifies the active office on the map.
 
 Section fully responsive and consistent across devices.
-

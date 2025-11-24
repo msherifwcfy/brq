@@ -39,15 +39,15 @@ const AlliancesVendorsListPage: React.FC = () => {
         filters: toSdkFilters(
           {
             media_id: mediaIdFilter,
-            country_id: countryIdFilter,
-            solutions_id: solutionsIdFilter,
+            countries_ids: countryIdFilter,
+            solutions_ids: solutionsIdFilter,
             created_at: createdAtFilter,
             updated_at: updatedAtFilter,
           },
           {
             media_id: "Eq",
-            country_id: "Eq",
-            solutions_id: "Eq",
+            countries_ids: "In",
+            solutions_ids: "In",
             created_at: "Eq",
             updated_at: "Eq",
           }
@@ -61,7 +61,7 @@ const AlliancesVendorsListPage: React.FC = () => {
         },
         relations: {
           media: true,
-          country: true,
+          countries: true,
           solutions: true,
         },
       },

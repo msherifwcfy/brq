@@ -28,7 +28,7 @@ export const createGlobalCommitmentSchema = z.object({
       .max(50, "Title must be at most 50 characters")
   ),
   description: createI18nFieldSchema(
-    z.string().min(1, "Description is required")
+    z.string().min(1, "Description is required").max(500, "Description must be at most 500 characters")
   ),
   icons: z
     .array(iconSchema)
@@ -44,7 +44,7 @@ export const updateGlobalCommitmentSchema = z.object({
       .max(50, "Title must be at most 50 characters")
   ).optional(),
   description: createI18nFieldSchema(
-    z.string().min(1, "Description is required")
+    z.string().min(1, "Description is required").max(500, "Description must be at most 500 characters")
   ).optional(),
   icons: z
     .array(iconSchema)

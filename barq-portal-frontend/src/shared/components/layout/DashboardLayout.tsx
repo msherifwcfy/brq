@@ -30,7 +30,7 @@ export default function DashboardLayout({
         <DashboardHeader title={title} />
         <main
           className={cn(
-            "flex-1 py-6 px-6 relative  overflow-hidden mt-[60px] ",
+            "flex-1 py-6 px-6 relative  overflow-hidden mt-[72px] ",
             className
           )}
         >
