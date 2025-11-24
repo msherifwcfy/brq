@@ -78,16 +78,17 @@ export const useCareerOpportunitiesColumns = (
                 {t("common.edit")}
               </Button>
             </ProtectedComponent>
-            
+            <ProtectedComponent
+              permissionKeys={[PERMISSION_KEYS.CAREER_OPPORTUNITY.DELETE]}
+            >
               <Button
                 variant="destructive"
                 onClick={() => onDelete(row.original)}
               >
                 {t("common.delete")}
               </Button>
+            </ProtectedComponent>
           </div>
-            
-            
         );
       },
     },

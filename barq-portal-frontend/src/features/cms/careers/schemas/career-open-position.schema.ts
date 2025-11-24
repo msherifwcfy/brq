@@ -14,7 +14,7 @@ export const careerOpenPositionSchema = z.object({
   ),
   opening_date: z.date().optional(),
   closing_date: z.date().optional(),
-  status: z.enum(["OPEN", "CLOSED"]).optional(),
+  status: z.enum(["OPEN", "CLOSED"]).default("OPEN"),
   country_id: z.number().optional(),
   city_id: z.number().optional(),
   career_opportunity_id: z.number().optional(),

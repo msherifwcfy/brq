@@ -88,12 +88,21 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
 
     return officesData.contact_us_offices_bullets_id_contact_us_offices_bullets.map(
       bullet => {
+        // Get translations
+        const translation = bullet.contact_us_offices_bullets_id_contact_us_offices_bullets_translations?.find(
+          t => t.language === i18n.language
+        ) || bullet.contact_us_offices_bullets_id_contact_us_offices_bullets_translations?.[0];
+
+        const countryName = translation?.country_name || bullet.country_name;
+        const officeName = translation?.office_name || bullet.office_name;
+        const location = translation?.location || bullet.location;
+
         // Generate a unique ID based on country and office name
         const id = `${bullet.country_name.toLowerCase().replace(/\s+/g, '-')}-${bullet.office_name.toLowerCase().replace(/\s+/g, '-')}`;
 
-        const flagImage = getImageUrl(bullet.icon) 
+        const flagImage = getImageUrl(bullet.icon)
 
-        // Get pin positions based on country and office name
+        // Get pin positions based on country and office name (use original for key matching)
         const positionKey = getPinPositionKey(
           bullet.country_name,
           bullet.office_name
@@ -104,10 +113,10 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
 
         return {
           id,
-          name: bullet.country_name,
-          country: bullet.office_name,
+          name: countryName,
+          country: officeName,
           flagImage,
-          address: bullet.location,
+          address: location,
           phone: bullet.phone || undefined,
           fax: bullet.fax || undefined,
           email: bullet.email,
@@ -116,7 +125,7 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
         };
       }
     );
-  }, [officesData]);
+  }, [officesData, i18n.language]);
 
   const [selectedLocation, setSelectedLocation] = useState<string>('');
   const [hoveredPin, setHoveredPin] = useState<string | null>(null);

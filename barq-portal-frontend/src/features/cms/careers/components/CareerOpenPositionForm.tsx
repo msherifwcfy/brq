@@ -86,17 +86,20 @@ export function CareerOpenPositionForm({
   const enTranslation = position?.career_open_position_id_career_open_position_translations?.find(
     (t) => t.language === "en"
   );
+  const arTranslation = position?.career_open_position_id_career_open_position_translations?.find(
+    (t) => t.language === "ar"
+  );
 
   const form = useForm<CareerOpenPositionFormData>({
     resolver: zodResolver(careerOpenPositionSchema),
     defaultValues: {
       job_title: {
         en: enTranslation?.job_title  || "",
-        ar: position?.job_title || "",
+        ar: arTranslation?.job_title || "",
       },
       job_description: {
         en: enTranslation?.job_description  || "",
-        ar: position?.job_description || "",
+        ar: arTranslation?.job_description || "",
       },
       opening_date: position?.opening_date ? new Date(position?.opening_date) : undefined,
       closing_date: position?.closing_date ? new Date(position?.closing_date) : undefined,
