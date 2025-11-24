@@ -219,9 +219,8 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
       <div className='relative w-full h-[330px] lg:h-[877px] max-w-full lg:max-w-[1440px] mx-auto pb-[120px] lg:pb-[156px]'>
         {/* content section */}
         <div
-          className={`max-w-full lg:max-w-7xl mx-auto absolute
-                    ${i18n.language === 'ar' ? 'right-0 lg:right-[5.6%]' : 'left-0 lg:left-[5.6%]'}
-                    w-full lg:w-[547px] px-[5%] lg:px-0 z-[99999]`}
+          className="max-w-full lg:max-w-7xl mx-auto absolute left-0 lg:left-[5.6%] w-full lg:w-[547px] px-[5%] lg:px-0 z-[99999]"
+          dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
         >
           <motion.div
             className='w-full lg:w-[547px] flex flex-col items-start justify-start'
@@ -399,6 +398,8 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
                     background: 'rgba(255, 255, 255, 0.04)',
                     maxHeight: '394px',
                     backdropFilter: 'blur(10px)',
+                    direction: i18n.language === 'ar' ? 'rtl' : 'ltr',
+                    textAlign: i18n.language === 'ar' ? 'right' : 'left',
                   }}
                 >
                   {/* Country Badge */}
