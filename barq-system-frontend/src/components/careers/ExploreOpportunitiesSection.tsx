@@ -46,10 +46,42 @@ export default function ExploreOpportunitiesSection({
     searchParams.get('opportunities')?.split(',').filter(Boolean) || []
   );
 
-  const { data: categoriesData } = useCareerCategoryControllerReadQuery();
-  const { data: countriesData } = useCountryControllerReadQuery();
-  const { data: citiesData } = useCityControllerReadQuery();
-  const { data: opportunitiesData } = useCareerOpportunityControllerReadQuery();
+  const { data: categoriesData } = useCareerCategoryControllerReadQuery({
+    query: {
+      query: {
+        relations: {
+          career_category_id_career_category_translations: true,
+        },
+      },
+    },
+  });
+  const { data: countriesData } = useCountryControllerReadQuery({
+    query: {
+      query: {
+        relations: {
+          country_id_country_translations: true,
+        },
+      },
+    },
+  });
+  const { data: citiesData } = useCityControllerReadQuery({
+    query: {
+      query: {
+        relations: {
+          city_id_city_translations: true,
+        },
+      },
+    },
+  });
+  const { data: opportunitiesData } = useCareerOpportunityControllerReadQuery({
+    query: {
+      query: {
+        relations: {
+          career_opportunity_id_career_opportunity_translations: true,
+        },
+      },
+    },
+  });
   const { data: heroData } = useCareerOpenPositionHeroControllerReadQuery();
 
   const heroTitle = (() => {

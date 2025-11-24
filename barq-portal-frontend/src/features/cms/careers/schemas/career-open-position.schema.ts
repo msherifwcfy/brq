@@ -4,7 +4,7 @@ import { createI18nFieldSchema } from "@/shared/schemas/i18n.schema";
 export const careerOpenPositionSchema = z.object({
   job_title: createI18nFieldSchema(
     z.string()
-      .min(5, "Job title must be at least -5 characters")
+      .min(5, "Job title must be at least 5 characters")
       .max(50, "Job title must not exceed 50 characters")
   ),
   job_description: createI18nFieldSchema(
@@ -19,7 +19,18 @@ export const careerOpenPositionSchema = z.object({
   city_id: z.number().optional(),
   career_opportunity_id: z.number().optional(),
   career_category_id: z.number().optional(),
-});
+}).refine(
+  (data) => {
+    if (data.opening_date && data.closing_date) {
+      return data.closing_date >= data.opening_date;
+    }
+    return true;
+  },
+  {
+    message: "Closing date must be after or equal to opening date",
+    path: ["closing_date"],
+  }
+);
 
 export type CareerOpenPositionFormData = z.infer<typeof careerOpenPositionSchema>;
 

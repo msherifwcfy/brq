@@ -212,7 +212,7 @@ const EventsContent = ({ eventData, speakersData, partnersData }: EventsContentP
                             <div className='flex lg:items-center flex-col lg:flex-row gap-4 lg:gap-8  items-start'>
                                 <Button
                                     onClick={scrollToForm}
-                                    className='z-[3000] text-white flex items-center justify-center gap-[10px] hover:gap-[4px] text-[18px] h-[56px] font-normal transition-all duration-300   rounded-[12px] academy-button min-w-[284px] w-full lg:w-auto'
+                                    className='z-[3000] text-white flex items-center justify-center gap-[10px] hover:gap-[14px] text-[18px] h-[56px] font-normal transition-all duration-300   rounded-[12px] academy-button min-w-[284px] w-full lg:w-auto'
                                     style={{
                                         background:
                                             'linear-gradient(95deg, var(--Secondary-Blue-100, #318CCC) 13.23%, #0040C3 81.63%)',
@@ -220,7 +220,7 @@ const EventsContent = ({ eventData, speakersData, partnersData }: EventsContentP
                                         padding: '16px 24px',
                                     }}
                                 >
-                                    <span className='h-[24px'>
+                                    <span className='h-[24px]'>
                                         Register Now
                                     </span>
                                     <Image
@@ -228,7 +228,7 @@ const EventsContent = ({ eventData, speakersData, partnersData }: EventsContentP
                                         alt='arrow-right'
                                         width={24}
                                         height={24}
-                                        className=' mt-[3px] w-[24px] h-[24px] object-contain'
+                                        className='w-[24px] h-[24px] object-contain'
                                     />
                                 </Button>
                                 <Button

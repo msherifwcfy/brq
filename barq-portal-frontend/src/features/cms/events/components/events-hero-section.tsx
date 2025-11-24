@@ -51,7 +51,6 @@ export default function EventsHeroSection() {
     defaultValues: {
       title: { en: "", ar: "" },
       subTitle: { en: "", ar: "" },
-      quote: { en: "", ar: "" },
     },
   });
 
@@ -70,10 +69,6 @@ export default function EventsHeroSection() {
       en: enTranslation?.sub_title || "",
       ar: existing?.sub_title || "",
     }
-    const quote = {
-      en: (enTranslation as any)?.quote || "",
-      ar: (existing as any)?.quote || "",
-    }
 
     form.reset({
       title: {
@@ -84,10 +79,6 @@ export default function EventsHeroSection() {
         en: subTitle.en || "",
         ar: existing.sub_title || "",
       },
-      quote: {
-        en: quote.en || "",
-        ar: existing.quote || "",
-      },
     });
   }, [existing, form]);
 
@@ -95,13 +86,11 @@ export default function EventsHeroSection() {
     const payload = {
       title: values.title.ar,
       sub_title: values.subTitle.ar,
-      quote: values.quote.ar,
       event_join_us_hero_id_event_join_us_hero_translations: [
         {
           language: "en" as const,
           title: values.title.en,
           sub_title: values.subTitle.en,
-          quote: values.quote.en,
         },
       ],
     };
@@ -155,13 +144,6 @@ export default function EventsHeroSection() {
                   placeholder={t("cms.events.hero.fields.subTitle")}
                   required
                 />
-                <I18nFormTextareaField
-                  name="quote"
-                  control={form.control}
-                  label={t("cms.events.hero.fields.quote")}
-                  placeholder={t("cms.events.hero.fields.quote")}
-                  required
-                />
               </div>
             </I18nTabContent>
             <I18nTabContent language="ar">
@@ -178,13 +160,6 @@ export default function EventsHeroSection() {
                   control={form.control}
                   label={t("cms.events.hero.fields.subTitle")}
                   placeholder={t("cms.events.hero.fields.subTitle")}
-                  required
-                />
-                <I18nFormTextareaField
-                  name="quote"
-                  control={form.control}
-                  label={t("cms.events.hero.fields.quote")}
-                  placeholder={t("cms.events.hero.fields.quote")}
                   required
                 />
               </div>
