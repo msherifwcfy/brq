@@ -15,7 +15,6 @@ interface PageProps {
 const Page = async ({ searchParams }: PageProps) => {
   const params = await searchParams;
 
-  // Fetch all data without pagination for client-side pagination
   const {
     hero: heroData,
     caseStudies: cmsData,
@@ -24,6 +23,8 @@ const Page = async ({ searchParams }: PageProps) => {
   } = await caseStudiesService.getAllCaseStudiesData({
     pagination: { caseStudiesPagination: { take: 1000, skip: 0 } },
   });
+
+  const featuredCaseStudy = await caseStudiesService.getFeaturedCaseStudiesData();
 
   return (
     <>
@@ -34,6 +35,7 @@ const Page = async ({ searchParams }: PageProps) => {
         industriesData={industriesData}
         initialCountry={params.country || ''}
         initialIndustry={params.industry || ''}
+        featuredCaseStudy={featuredCaseStudy}
       />
       <Footer />
     </>

@@ -138,7 +138,7 @@ export default function SuccessStoriesSection({
               damping: 30,
               stiffness: 120,
               duration: 0.3,
-              delay: 0.2
+              delay: 0.1
             }}
           >
             <span
@@ -179,7 +179,7 @@ export default function SuccessStoriesSection({
               damping: 30,
               stiffness: 120,
               duration: 0.3,
-              delay: 0.2
+              delay: 0.3
             }}
           >
             <button
@@ -201,7 +201,7 @@ export default function SuccessStoriesSection({
             damping: 30,
             stiffness: 120,
             duration: 0.3,
-            delay: 0.2
+            delay: 0.4
           }}
           className='flex flex-col lg:flex-row items-center justify-center gap-8 px-[5%]'
         >
@@ -214,7 +214,7 @@ export default function SuccessStoriesSection({
               const buttonClass = buttonClassVariants[index] ?? buttonClassVariants[0];
               const descriptionClass = descriptionClamp[index] ?? '';
               const hideLogo = hideLogoWhenActive[index] ?? true;
-              const delay = 0.3 + index * 0.1;
+              const delay = 0.5 + index * 0.1;
               const imageSrc = story.home_image ?? story.image ?? '/assets/success_stories_section/image-1.jpg';
 
               return (
@@ -246,18 +246,18 @@ export default function SuccessStoriesSection({
                         src={imageSrc}
                         alt={story.title}
                         fill
-                        className={`object-fill ${isActive ? '' : 'grayscale'}`}
+                        className={`object-cover  object-top-left ${isActive ? '' : 'grayscale'}`}
                       />
                     </motion.div>
                     {!isActive && (
                       <div
-                        className='absolute inset-0 z-5'
+                        className='absolute inset-0 z-5 '
                         style={{
                           borderRadius: '24px',
                           background: `#333, url(${imageSrc})`,
                           backgroundBlendMode: 'hue',
                           backgroundSize: 'cover',
-                          backgroundPosition: 'center',
+                          backgroundPosition: 'top-left',
                           backgroundRepeat: 'no-repeat',
                         }}
                       />
@@ -269,7 +269,7 @@ export default function SuccessStoriesSection({
                           background: `linear-gradient(0deg, #25B8E4, #25B8E4), url(${imageSrc})`,
                           backgroundBlendMode: 'hue, normal',
                           backgroundSize: 'cover, cover',
-                          backgroundPosition: 'center, center',
+                          backgroundPosition: 'top-left, top-left',
                           backgroundRepeat: 'no-repeat, no-repeat',
                         }}
                         initial={{ opacity: 0 }}

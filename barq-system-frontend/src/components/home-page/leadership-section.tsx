@@ -197,9 +197,12 @@ export default function LeadershipSection({
                     className='h-[24px] w-[24px]  '
                   />
 
-                  <p className='text-[#FFF] mt-[-2px] max-w-[618px] text-[18px] xl:text-[32px] font-light leading-[28px] xl:leading-[48px] leadership-quote'>
-                    {leadershipContent?.quote ||
-                      '"We partner with our customers to enable them to digitally transform their business. That keeps them ahead of the competition and improves their bottom lines."'}
+                  <p className='text-[#FFF] mt-[-2px] max-w-[618px] text-[18px] xl:text-[32px] font-light leading-[28px] xl:leading-[48px] leadership-quote mb-16'>
+                    {leadershipContent?.quote
+                      ? (leadershipContent.quote.length > 250
+                        ? `${leadershipContent.quote.substring(0, 250)}...`
+                        : leadershipContent.quote)
+                      : '"We partner with our customers to enable them to digitally transform their business. That keeps them ahead of the competition and improves their bottom lines."'}
                   </p>
 
                   <div className='text-white text-[18px] mb-3  frutiger-lt-std-bold h-[13px] lg:h-[13px]'>

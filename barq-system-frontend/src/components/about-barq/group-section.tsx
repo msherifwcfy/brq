@@ -84,7 +84,7 @@ export default function GroupSection({
               t('aboutBarq.group.description')}
           </motion.p>
           <motion.div
-            className='grid grid-cols-2  sm:grid-cols-4  lg:gap-[92px] gap-8 lg:pr-8 pr-0 justify-center text-center  lg:mt-12 mt-8 items-start'
+            className='flex grid-cols-2  sm:grid-cols-4 justify-between gap-8 lg:pr-8 pr-0 text-center  lg:mt-12 mt-8 items-start'
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -101,7 +101,7 @@ export default function GroupSection({
                       : { opacity: 0, scale: 0.8 }
                   }
                   transition={{ duration: 0.5, delay: 1.0 + index * 0.1 }}
-                  className='w-fit flex flex-col items-center justify-center'
+                  className='w-fit max-w-[150px] flex flex-col items-center justify-center'
                 >
                   <div className='text-white font-outfit text-center lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
                     {formatNumber(card.number)}

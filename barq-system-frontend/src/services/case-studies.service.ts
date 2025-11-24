@@ -177,4 +177,34 @@ export const caseStudiesService = {
       industries,
     };
   },
+
+  async getFeaturedCaseStudiesData() {
+    try {
+      const response = await successStoryCaseStudiesControllerRead({
+        query: {
+          query: {
+            filters: {
+              featured: {
+                $op: 'Is',
+                $val: true,
+              }
+            },
+            orders: {
+              updated_at: 'desc',
+            },
+            relations: {
+              image: true,
+              industries: true,
+              country: true,
+            },
+          },
+        },
+        headers: await getLanguageHeaders(),
+      });
+      return response.data?.data?.[0] ?? null;
+    } catch (error) {
+      console.error('Error fetching featured case studies data:', error);
+      return null;
+    }
+  },
 };

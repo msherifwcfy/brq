@@ -1,0 +1,31 @@
+name: Staging deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploying
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login and deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASS }}
+          script: |
+            whoami;
+            cd /home/wcfy/dev/barq-system-frontend;
+            if [ ! -n "$(grep "^github.com " ~/.ssh/known_hosts)" ]; then ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null; fi;
+            git remote set-url origin git@github.com:MohamedSherifReda/barq-system-frontend.git
+            git stash -u;
+            git checkout staging;
+            git fetch --all --prune;
+            git pull --force origin staging;
+            git clean -fd;
+            docker compose up -d --build --remove-orphans;

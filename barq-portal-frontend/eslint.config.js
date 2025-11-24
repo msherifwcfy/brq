@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint";
 import { globalIgnores } from "eslint/config";
 
 export default tseslint.config([
-  globalIgnores(["dist"]),
+  globalIgnores(["dist", "src/sdk/*"]),
   {
     files: ["**/*.{ts,tsx}"],
 
@@ -25,6 +25,7 @@ export default tseslint.config([
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-unused-imports": "off",
+      "react-refresh/only-export-components": "off"
     },
   },
 ]);

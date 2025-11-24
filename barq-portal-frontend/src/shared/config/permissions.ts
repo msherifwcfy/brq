@@ -353,11 +353,13 @@ export const PERMISSION_KEYS = {
     DELETE: "delete_managed_grc_services_details",
   },
   CAREER_OPPORTUNITY: {
+    DELETE: "delete_career_opportunity",
     VIEW: "view_career_opportunity",
     UPDATE: "update_career_opportunity",
     CREATE: "create_career_opportunity",
   },
   CAREER_CATEGORY: {
+    DELETE: "delete_career_category",
     VIEW: "view_career_category",
     UPDATE: "update_career_category",
     CREATE: "create_career_category",
@@ -379,6 +381,7 @@ export const PERMISSION_KEYS = {
     DELETE: "delete_city",
   },
   CAREER_OPEN_POSITION: {
+    DELETE: "delete_career_open_position",
     VIEW: "view_career_open_position",
     UPDATE: "update_career_open_position",
     CREATE: "create_career_open_position",

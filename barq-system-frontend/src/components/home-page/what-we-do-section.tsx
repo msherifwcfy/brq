@@ -53,12 +53,44 @@ const services: ServiceItem[] = [
     }
 ];
 
+const servicesArabic: ServiceItem[] = [
+    {
+        id: 1,
+        link: '/solutionsandservices/managed-services',
+        title: 'الخدمات المدارة',
+        image: '/assets/what_we_do_section/managed_services.jpg',
+        description: 'التسليم الكامل ، الsurveillance ، والتحكم المدار بواسطة الذكاء الاصطناعي لتحسين عملياتك التكنولوجية.'
+    },
+    {
+        id: 2,
+        link: '/solutionsandservices/cybersecurity',
+        title: 'الأمن الإلكتروني',
+        image: '/assets/what_we_do_section/cybersecurity.jpg',
+        description: 'الأطارات الحماية التي تضمن أنظمتك وتضمن الامتثال.'
+    },
+    {
+        id: 3,
+        link: '/solutionsandservices/automation',
+        title: 'الأتمتة والذكاء الاصطناعي',
+        image: '/assets/what_we_do_section/ai.jpg',
+        description: 'الأتمتة والذكاء الاصطناعي الذي يقيس عملياتك ويتخذ القرارات لتطوير عملك.'
+    },
+    {
+        id: 4,
+        link: '/solutionsandservices/infrastructure',
+        title: 'البنية التحتية للتكنولوجيا',
+        image: '/assets/what_we_do_section/ai.jpg',
+        description: 'النظام والبنية التحتية المناسبة للأداء العالي والمرونة.'
+    }
+];
+
 type WhatWeDoSectionProps = {
     successStories?: Array<SuccessStoryCaseStudiesEntity>;
 };
 
 export default function WhatWeDoSection({ successStories }: WhatWeDoSectionProps) {
     const { t, i18n } = useTranslation();
+
     const containerRef = useRef<HTMLElement>(null);
     const carouselRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(containerRef, { once: true, margin: '-20%', amount: 0.1 });
@@ -308,7 +340,6 @@ export default function WhatWeDoSection({ successStories }: WhatWeDoSectionProps
 
 
                         </motion.h2>
-
                         <motion.div
                             className="mt-6"
                             initial={{ opacity: 0, y: 20 }}
@@ -361,7 +392,7 @@ export default function WhatWeDoSection({ successStories }: WhatWeDoSectionProps
                             setApi={setApi}
                         >
                             <CarouselContent className="ml-0 max-w-[1360px] lg:space-x-10 space-x-6">
-                                {services.map((service, index) =>
+                                {(i18n.language === "ar" ? servicesArabic : services).map((service, index) =>
                                     <CarouselItem
                                         key={service.id}
                                         className="md:basis-1/2 lg:basis-1/3 pl-0 z-30"

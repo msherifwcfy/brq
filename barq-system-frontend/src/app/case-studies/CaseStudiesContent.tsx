@@ -17,6 +17,7 @@ import type {
     SuccessStoryCaseStudiesControllerReadResponse,
     CountryControllerReadResponse,
     IndustriesControllerReadResponse,
+    SuccessStoryCaseStudiesEntity,
 } from '@/sdk/types.gen';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTranslation } from 'react-i18next';
@@ -136,6 +137,7 @@ interface CaseStudiesContentProps {
     industriesData: IndustriesControllerReadResponse | null;
     initialCountry: string;
     initialIndustry: string;
+    featuredCaseStudy: SuccessStoryCaseStudiesEntity | null;
 }
 
 const CaseStudiesContent = ({
@@ -145,6 +147,7 @@ const CaseStudiesContent = ({
     industriesData,
     initialCountry,
     initialIndustry,
+    featuredCaseStudy,
 }: CaseStudiesContentProps) => {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -345,15 +348,6 @@ const CaseStudiesContent = ({
         return filtered;
     }, [caseStudies, selectedCountry, selectedIndustry, countryMap, industryMap]);
 
-    // Get the first item as featured (only on first page)
-    const featuredCaseStudy = useMemo(() => {
-        if (currentPage === 1 && filteredCaseStudies.length > 0) {
-            return filteredCaseStudies[0];
-        }
-        return null;
-    }, [filteredCaseStudies, currentPage]);
-
-    // Calculate pagination: Page 1 shows 11 items (1 featured + 10 grid), subsequent pages show 10 items each
     const totalPages = useMemo(() => {
         const totalItems = filteredCaseStudies.length;
         if (totalItems === 0) return 1;
@@ -658,13 +652,13 @@ const CaseStudiesContent = ({
                     <RevealOnScroll>
                         <div className='lg:mt-[96px] mt-[48px] flex flex-col lg:flex-row gap-6 lg:gap-8 items-center '>
                             <div className='w-full lg:w-auto'>
-                                {featuredCaseStudy.img ? (
+                                {featuredCaseStudy.image ? (
                                     <Image
-                                        src={featuredCaseStudy.img.url + featuredCaseStudy.img.key}
+                                        src={featuredCaseStudy.image.url + featuredCaseStudy.image.key}
                                         alt={featuredCaseStudy.title}
                                         width={619}
                                         height={333}
-                                        className='w-full lg:w-[619px] h-auto lg:h-[333px] object-fill rounded-[8px]'
+                                        className='w-full lg:w-[619px] h-auto lg:h-[333px] object-cover object-top rounded-[8px]'
                                     />
                                 ) : (
                                     <div
@@ -703,8 +697,7 @@ const CaseStudiesContent = ({
                                     className='text-[#25B8E4]  flex  gap-3 lg:gap-4 items-center text-[14px] lg:text-[16px] frutiger-lt-std-bold py-3 lg:py-4  '
                                     dir={isRTL ? 'rtl' : 'ltr'}
                                 >
-                                    {featuredCaseStudy.ctaLabel ||
-                                        t('caseStudies.exploreCaseStudy')}
+                                    {t('caseStudies.exploreCaseStudy')}
                                     <span className={`mt-[2px] ${isRTL ? 'rotate-180' : ''}`}>
                                         <svg
                                             xmlns='http://www.w3.org/2000/svg'

@@ -16,9 +16,9 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
     const containerRef = useRef<HTMLElement>(null);
     const isInView = useInView(containerRef, { once: true, margin: '-100px' });
     const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
-
+    console.log({ newsItemData })
     // Transform CMS data
-    const newsItem = useMemo(() => {
+    const articleContent = useMemo(() => {
         if (!newsItemData?.data) return null;
 
         const item = newsItemData.data;
@@ -26,9 +26,9 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
             (t) => t.language === language
         ) || item.newsroom_cards_id_newsroom_cards_translations?.[0];
 
-        const categoryTranslation = item.newsroom_category?.newsroom_category_id_newsroom_category_translations?.find(
-            (t) => t.language === language
-        ) || item.newsroom_category?.newsroom_category_id_newsroom_category_translations?.[0];
+        const categoryTranslation = language === 'ar'
+            ? item.newsroom_category.name
+            : item.newsroom_category?.newsroom_category_id_newsroom_category_translations[0].name;
 
         // Construct image URL from url + key
         const imageUrl = item.image?.url && item.image?.key
@@ -46,78 +46,27 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
 
         return {
             id: item.id,
+            long_description: translation?.long_description || item.long_description,
             title: translation?.title || item.title,
             description: translation?.description || item.description,
-            category: categoryTranslation?.name || item.newsroom_category?.name || '',
+            category: categoryTranslation,
             date: formattedDate,
             image: imageUrl,
+            layout: item.is_vertical ? 'vertical' : 'horizontal',
             mimeType: item.image?.mime_type,
         };
     }, [newsItemData, language]);
 
-    if (!newsItem) return null;
+    if (!articleContent) return null;
 
-    // Extended content for the article (you can move this to your data file later)
-    const getArticleContent = (item: any) => {
-        switch (item.id) {
-            case 1:
-                return {
-                    subtitle: "Advanced AI Security Solutions",
-                    content: [
-                        "The exposure of sensitive data through AI tool usage occurs in 73% of businesses that implement these technologies without their knowledge. Does your organization fall into the 73% of businesses which expose sensitive data through AI tool usage?",
-                        "BARQ Systems views security as an essential front-line defense system which protects businesses operating in an AI-driven environment.",
-                        "The rapid development of AI technology requires regional businesses to implement security solutions which understand their specific needs. Our team developed an AI Gateway Guardrail solution at BARQ Systems which functions as a homegrown version of F5's technology to monitor and protect sensitive data during AI system operations.",
-                        "The system features advanced Arabic search capabilities with dual protection mechanisms that defend against all potential threats. No guesswork. No leaks. The system delivers exact protection that matches your business growth trajectory.",
-                        "The system operates with native Arabic language processing which gives it a major market advantage compared to competing solutions. The PII Guardrails from BARQ Systems delivers a revolutionary AI data protection system which includes automatic dangerous content prevention and cleansing during transmission. Your organization can protect its most valuable asset through artificial intelligence while achieving maximum potential."
-                    ]
-                };
-            case 2:
-                return {
-                    subtitle: "Dedicated Security Operations Center",
-                    content: [
-                        "We're thrilled to announce a game-changing solution by BARQ Systems for organizations looking to strengthen their cybersecurity posture while keeping full control over their operations. Lately, we've seen rising demand—especially in the critical national infrastructure—for internal SOCs that meet regulatory, data, and budget requirements without relying on traditional managed services.",
-                        "BARQ Systems introduces the In-House SOC service – helping organizations build and operate their own Security Operations Centers.",
-                        "Our solution includes expert SIEM/SOAR implementation support, step-by-step playbooks, and on-ground mentoring to empower your team to run your SOC efficiently and securely in-house."
-                    ]
-                };
-            case 3:
-                return {
-                    subtitle: "Commitment to Sustainable Business Practices",
-                    content: [
-                        "BARQ Systems CEO Mahmoud Soliman presented his analysis of AI and technological developments at the F5 Dubai APPWorld conference. During his F5 Dubai APPWorld presentation our CEO Mahmoud Soliman explained how AI and new technologies help protect partners' infrastructure through essential support functions. The presentation demonstrated how these technological advancements affect strategic business sectors which include public institutions and tourism operations. The complete video presentation explains how BARQ Systems implements digital resilience and innovation for its partner organizations."
-                    ]
-                };
-            case 4:
-                return {
-                    subtitle: "Strategic Partnership for Intelligent Automation",
-                    content: [
-                        "BARQ Systems CEO Mahmoud Soliman presented his analysis of AI and technological developments at the F5 Dubai APPWorld conference. During his F5 Dubai APPWorld presentation our CEO Mahmoud Soliman explained how AI and new technologies help protect partners' infrastructure through essential support functions. The presentation demonstrated how these technological advancements affect strategic business sectors which include public institutions and tourism operations. The complete video presentation explains how BARQ Systems implements digital resilience and innovation for its partner organizations."
-                    ]
-                };
-            case 5:
-                return {
-                    subtitle: "Leadership Insights on Application Security",
-                    content: [
-                        "BARQ Systems CEO Mahmoud Soliman presented his analysis of AI and technological developments at the F5 Dubai APPWorld conference. During his F5 Dubai APPWorld presentation our CEO Mahmoud Soliman explained how AI and new technologies help protect partners' infrastructure through essential support functions. The presentation demonstrated how these technological advancements affect strategic business sectors which include public institutions and tourism operations. The complete video presentation explains how BARQ Systems implements digital resilience and innovation for its partner organizations."
-                    ]
-                };
-            default:
-                return {
-                    subtitle: "Latest Updates from BARQ Systems",
-                    content: [
-                        "Stay informed about the latest developments and innovations from BARQ Systems as we continue to lead in cybersecurity and digital transformation solutions."
-                    ]
-                };
-        }
-    };
-
-    const articleContent = getArticleContent(newsItem);
 
     // Render different layouts based on media type
     const renderMediaSection = () => {
-        const mediaType = (newsItem as any)?.mediaType || 'image';
-        switch (mediaType) {
-            case 'vertical-video':
+        const mediaType = (articleContent)?.mimeType || 'image';
+        const isVideo = mediaType?.startsWith('video/');
+        const layout = articleContent?.layout;
+        switch (layout) {
+            case 'vertical':
                 return (
                     <motion.div
                         className=""
@@ -141,8 +90,8 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                     }}
                                 >
                                     <div className='absolute inset-0 bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[24px] border border-[#FFFFFF20]'></div>
-                                    <div className='relative p-4 lg:p-6'>
-                                        {(newsItem as any)?.videoUrl ? (
+                                    <div className='relative p-4 lg:p-6 h-full'>
+                                        {(isVideo) ? (
                                             <div className="relative">
                                                 <video
                                                     className="w-full h-full object-cover rounded-[16px] min-h-[400px] lg:min-h-[639px] lg:min-w-[391px] cursor-pointer"
@@ -158,7 +107,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                                         }
                                                     }}
                                                 >
-                                                    <source src={(newsItem as any)?.videoUrl} type="video/mp4" />
+                                                    <source src={articleContent.image} type="video/mp4" />
                                                     Your browser does not support the video tag.
                                                 </video>
                                                 {/* Dimming overlay when not playing */}
@@ -168,8 +117,8 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                             </div>
                                         ) : (
                                             <Image
-                                                src={(newsItem as any)?.mainImage || (newsItem as any)?.image}
-                                                alt={newsItem.title}
+                                                src={(articleContent.image)}
+                                                alt={articleContent.title}
                                                 fill
                                                 className="object-cover"
                                             />
@@ -198,7 +147,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                         transition={{ duration: 1.2, delay: 0.8 }}
                                     >
-                                        {newsItem.title}
+                                        {articleContent.title}
                                     </motion.h1>
                                     <motion.p
                                         className='text-[#D9DDDD] text-[14px] lg:text-[16px] opacity-60 leading-[20px] lg:leading-[24px]'
@@ -206,11 +155,11 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                         animate={isInView ? { opacity: 0.6, x: 0 } : { opacity: 0, x: -20 }}
                                         transition={{ duration: 1, delay: 0.6 }}
                                     >
-                                        {newsItem.category}
+                                        {articleContent.category}
                                         <span className='px-2'>
                                             |
                                         </span>
-                                        {newsItem.date}
+                                        {articleContent.date}
                                     </motion.p>
                                 </div>
                                 <motion.div
@@ -219,15 +168,19 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                                     transition={{ duration: 1.2, delay: 0.8 }}
                                 >
-                                    <div className="space-y-6 lg:space-y-[40px] max-w-[777px]">
-                                        {articleContent.content.map((paragraph, index) => (
-                                            <p
-                                                key={index}
-                                                className="text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[24px] font-normal [leading-trim:both] [text-edge:cap] max-w-[777px] tracking-wide"
-                                            >
-                                                {paragraph}
-                                            </p>
-                                        ))}
+                                    <div className="space-y-6 lg:space-y-[40px]">
+                                        <p
+                                            className="text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[24px] font-normal [leading-trim:both] [text-edge:cap] tracking-wide"
+                                        >
+                                            {articleContent.description}
+                                        </p>
+                                    </div>
+                                    <div className="space-y-6 lg:space-y-[40px]">
+                                        <p
+                                            className="text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[24px] font-normal [leading-trim:both] [text-edge:cap] tracking-wide"
+                                        >
+                                            {articleContent.long_description}
+                                        </p>
                                     </div>
                                 </motion.div>
                             </div>
@@ -235,7 +188,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                     </motion.div>
                 );
 
-            case 'horizontal-video':
+            case 'horizontal':
                 return (
                     <>
                         <div className='flex flex-col justify-center items-center gap-4 lg:gap-6'>
@@ -253,11 +206,11 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                 animate={isInView ? { opacity: 0.6, x: 0 } : { opacity: 0, x: -20 }}
                                 transition={{ duration: 1, delay: 0.6 }}
                             >
-                                {newsItem.category}
+                                {articleContent.category}
                                 <span className='px-2'>
                                     |
                                 </span>
-                                {newsItem.date}
+                                {articleContent.date}
                             </motion.p>
                         </div>
                         <motion.div
@@ -276,9 +229,9 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                 <div
                                     className='relative rounded-[24px] overflow-hidden w-full lg:w-[974px] h-auto lg:h-[468px]'>
                                     <div className='absolute inset-0 bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[24px] border border-[#FFFFFF20]'></div>
-                                    <div className='relative p-4 lg:p-6'>
-                                        {(newsItem as any)?.videoUrl ? (
-                                            <div className='relative '>
+                                    <div className='relative p-4 lg:p-6 h-full'>
+                                        {isVideo ? (
+                                            <>
                                                 <video
                                                     className="w-full h-full object-cover z-50 rounded-[16px] max-h-[300px] lg:max-h-[420px] lg:max-w-[926px] cursor-pointer"
                                                     onPlay={() => setIsVideoPlaying(true)}
@@ -293,23 +246,23 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                                         }
                                                     }}
                                                 >
-                                                    <source src={(newsItem as any)?.videoUrl} type="video/mp4" />
+                                                    <source src={(articleContent.image)} type="video/mp4" />
                                                     Your browser does not support the video tag.
                                                 </video>
-                                                {!isVideoPlaying && (
+                                                {isVideo && !isVideoPlaying && (
                                                     <div className="absolute inset-0 bg-black/50 bg-opacity-40 rounded-[16px] transition-opacity duration-300 pointer-events-none"></div>
                                                 )}
-                                            </div>
+                                            </>
                                         ) : (
                                             <Image
-                                                src={(newsItem as any)?.mainImage || (newsItem as any)?.image}
-                                                alt={newsItem.title}
+                                                src={(articleContent.image)}
+                                                alt={articleContent.title}
                                                 fill
                                                 className="object-cover"
                                             />
                                         )}
                                         {/* Play button overlay - only show when not playing */}
-                                        {!isVideoPlaying && (
+                                        {isVideo && !isVideoPlaying && (
                                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                                                 <div className="w-16 h-16 lg:w-20 lg:h-20 bg-[#25B8E4] rounded-full flex items-center justify-center hover:bg-[#1e9bb8] transition-colors shadow-lg">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 80 80" fill="none" className="lg:w-[80px] lg:h-[80px]">
@@ -324,14 +277,27 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
 
                             </motion.div>
                             <div className="mt-8 lg:mt-12 space-y-4 lg:space-y-[23px] max-w-[974px] mx-auto">
-                                {articleContent.content.map((paragraph, index) => (
-                                    <p
-                                        key={index}
-                                        className="text-white text-[16px] lg:text-[16px] leading-[22px] lg:leading-[24px] font-normal w-full [leading-trim:both] [text-edge:cap] tracking-[0.016em] first-line:tracking-[0.008em]"
-                                    >
-                                        {paragraph}
-                                    </p>
-                                ))}
+                                <motion.div
+                                    className="space-y-4 lg:space-y-6"
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                                    transition={{ duration: 1.2, delay: 0.8 }}
+                                >
+                                    <div className="space-y-6 lg:space-y-[40px] max-w-[777px]">
+                                        <p
+                                            className="text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[24px] font-normal [leading-trim:both] [text-edge:cap] tracking-wide"
+                                        >
+                                            {articleContent.description}
+                                        </p>
+                                    </div>
+                                    <div className="space-y-6 lg:space-y-[40px]">
+                                        <p
+                                            className="text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[24px] font-normal [leading-trim:both] [text-edge:cap] tracking-wide"
+                                        >
+                                            {articleContent.long_description}
+                                        </p>
+                                    </div>
+                                </motion.div>
                             </div>
                         </motion.div>
                     </>
@@ -347,7 +313,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                 transition={{ duration: 1.2, delay: 0.8 }}
                             >
-                                {newsItem.title}
+                                {articleContent.title}
                             </motion.h1>
                             <motion.p
                                 className='text-[#D9DDDD] text-[14px] lg:text-[16px] opacity-60 leading-[20px] lg:leading-[24px]'
@@ -355,11 +321,11 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                 animate={isInView ? { opacity: 0.6, x: 0 } : { opacity: 0, x: -20 }}
                                 transition={{ duration: 1, delay: 0.6 }}
                             >
-                                {newsItem.category}
+                                {articleContent.category}
                                 <span className='px-2'>
                                     |
                                 </span>
-                                {newsItem.date}
+                                {articleContent.date}
                             </motion.p>
                         </div>
 
@@ -384,7 +350,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                 >
                                     <div className='absolute inset-0 bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[24px] border border-[#FFFFFF20]'></div>
                                     <div className='relative p-4 lg:p-6'>
-                                        {newsItem.mimeType?.startsWith('video/') ? (
+                                        {articleContent.mimeType?.startsWith('video/') ? (
                                             <video
                                                 className='rounded-[16px] object-contain h-auto lg:h-[420px] w-full'
                                                 style={{
@@ -393,13 +359,13 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                                 controls
                                                 preload="metadata"
                                             >
-                                                <source src={newsItem.image} type={newsItem.mimeType} />
+                                                <source src={articleContent.image} type={articleContent.mimeType} />
                                                 Your browser does not support the video tag.
                                             </video>
                                         ) : (
                                             <Image
-                                                src={(newsItem as any)?.mainImage ? (newsItem as any)?.mainImage : newsItem.image}
-                                                alt={newsItem.title}
+                                                src={articleContent.image}
+                                                alt={articleContent.title}
                                                 width={926}
                                                 height={420}
                                                 className='rounded-[16px] object-contain h-auto lg:h-[420px] w-full'
@@ -411,37 +377,35 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                                     </div>
                                 </div>
                             </motion.div>
-
-                            <div className="mt-8 lg:mt-12 space-y-4 lg:space-y-[23px] max-w-[974px] mx-auto">
-                                {articleContent.content.map((paragraph, index) => (
-                                    <p
-                                        key={index}
-                                        className="text-white text-[16px] lg:text-[16px] leading-[22px] lg:leading-[24px] font-normal tracking-[0.014em]"
-                                    >
-                                        {paragraph}
-                                    </p>
-                                ))}
+                            <div className="mt-8 lg:mt-12 space-y-4 lg:space-y-[23px] max-w-[974px] mx-auto text-white">
+                                {
+                                    articleContent.description
+                                }
+                            </div>
+                            <div className="mt-8 lg:mt-12 space-y-4 lg:space-y-[23px] max-w-[974px] mx-auto text-white">
+                                {
+                                    articleContent.long_description
+                                }
                             </div>
                         </motion.div>
                     </div>
                 );
         }
     };
-
-
+    console.log({ articleContent })
     return (
         <div className="bg-black min-h-screen">
             <section
                 ref={containerRef}
-                className={`relative bg-black overflow-hidden ${(newsItem as any)?.mediaType === 'vertical-video'
+                className={`relative bg-black overflow-hidden ${(articleContent as any)?.mediaType === 'vertical-video'
                     ? 'pb-[150px] lg:pb-[364px]'
-                    : (newsItem as any)?.mediaType === 'horizontal-video'
+                    : (articleContent as any)?.mediaType === 'horizontal-video'
                         ? 'pb-[100px] lg:pb-[139px]'
                         : 'pb-[100px] lg:pb-[188px]'
                     }`}
             >
                 <div className='absolute top-0 left-0 right-0 bottom-0 z-5 h-full w-full hidden lg:block'>
-                    {(newsItem as any)?.mediaType === 'vertical-video' ?
+                    {(articleContent?.layout === 'vertical') ?
                         <Image
                             src="/assets/newsroom/news-background-2.svg"
                             alt="Alliances background"
@@ -450,7 +414,7 @@ const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => 
                             className="object-cover z-5 h-full w-full min-h-[1276]"
                         />
                         :
-                        (newsItem as any)?.mediaType === 'horizontal-video' ?
+                        (articleContent?.layout === 'horizontal') ?
                             <Image
                                 src="/assets/newsroom/news-background-3.svg"
                                 alt="Alliances background"

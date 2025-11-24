@@ -111,15 +111,15 @@ export default function HomeLeadershipSection() {
       },
       media: firstCard.image?.id
         ? [
-            {
-              id: firstCard.image.id,
-              url: firstCard.image.url,
-              key: firstCard.image.key,
-              format: firstCard.image.format,
-              mime_type: firstCard.image.mime_type,
-              size: firstCard.image.size,
-            },
-          ]
+          {
+            id: firstCard.image.id,
+            url: firstCard.image.url,
+            key: firstCard.image.key,
+            format: firstCard.image.format,
+            mime_type: firstCard.image.mime_type,
+            size: firstCard.image.size,
+          },
+        ]
         : [],
     } as unknown as FormData);
   }, [existing, firstCard, form]);
@@ -161,7 +161,7 @@ export default function HomeLeadershipSection() {
           onError: (error) => {
             toast.error(
               error.message ||
-                t("cms.homePage.leadership.messages.errorCreating")
+              t("cms.homePage.leadership.messages.errorCreating")
             );
           },
         }
@@ -173,7 +173,6 @@ export default function HomeLeadershipSection() {
           body: {
             leadership_executive_team_cards_id_leadership_executive_team_cards: [
               {
-                ...(firstCard?.id && { id: firstCard.id }),
                 name: values.name?.ar || "",
                 role: values.position?.ar || "",
                 bio: values.quote?.ar || "",
@@ -197,7 +196,7 @@ export default function HomeLeadershipSection() {
           onError: (error) => {
             toast.error(
               error.message ||
-                t("cms.homePage.leadership.messages.errorUpdating")
+              t("cms.homePage.leadership.messages.errorUpdating")
             );
           },
         }

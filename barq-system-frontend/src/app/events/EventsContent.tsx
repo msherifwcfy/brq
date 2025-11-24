@@ -20,13 +20,12 @@ interface EventsContentProps {
 const EventsContent = ({ eventData, speakersData, partnersData }: EventsContentProps) => {
     const event = eventData?.data?.[0]
     const formSectionRef = useRef<HTMLDivElement>(null)
-    console.log('speakersData', event);
 
     const scrollToForm = () => {
         if (formSectionRef.current) {
             const elementPosition = formSectionRef.current.getBoundingClientRect().top
             const offsetPosition = elementPosition + window.pageYOffset - 100
-            
+
             window.scrollTo({
                 top: offsetPosition,
                 behavior: 'smooth'
@@ -153,23 +152,24 @@ const EventsContent = ({ eventData, speakersData, partnersData }: EventsContentP
 
                         <RevealOnScroll>
                             <p className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] mb-4 tracking-[0.0205em] frutiger-lt-std-roman'>
-                                {event.shortDescription || event.description || 'Join us for an exclusive event...'}
+                                {event.description || 'Join us for an exclusive event...'}
                             </p>
                         </RevealOnScroll>
 
-                        {event.description && event.shortDescription && (
-                            <RevealOnScroll>
-                                <div className='mb-6 p-4 rounded-lg' style={{
-                                    border: '1px solid rgba(255, 255, 255, 0.16)',
-                                    background: 'rgba(255, 255, 255, 0.04)',
-                                    backdropFilter: 'blur(10px)'
-                                }}>
-                                    <p className='text-[#ECEEEE] text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] italic'>
-                                        "{event.description}"
-                                    </p>
-                                </div>
-                            </RevealOnScroll>
-                        )}
+                        {
+                            event.description && (
+                                <RevealOnScroll>
+                                    <div className='mb-6 p-4 rounded-lg' style={{
+                                        border: '1px solid rgba(255, 255, 255, 0.16)',
+                                        background: 'rgba(255, 255, 255, 0.04)',
+                                        backdropFilter: 'blur(10px)'
+                                    }}>
+                                        <p className='text-[#ECEEEE] text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] italic'>
+                                            {event.description}
+                                        </p>
+                                    </div>
+                                </RevealOnScroll>
+                            )}
 
                         <RevealOnScroll>
                             <div className='flex flex-col gap-4 mb-8'>

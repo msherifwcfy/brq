@@ -1,0 +1,87 @@
+name: Old Staging deployment
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server (build on host, PM2 on 8111)
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          CI: "true" # non-interactive installs (pnpm/npm)
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          username: ${{ secrets.SSH_USERNAME }} # ⚠️ set to the repo owner user (e.g. 'sherif')
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASS }}
+          script: |
+            set -Eeuo pipefail
+
+            REPO="/home/wcfy/dev/barq-frontend/barq-system-frontend"
+
+            # --- Node 20 via nvm (user-space) ---
+            export NVM_DIR="$HOME/.nvm"
+            if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+              curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+            fi
+            . "$NVM_DIR/nvm.sh"
+            nvm install 20
+            nvm use 20
+
+            cd "$REPO"
+
+            # --- Preflight: ensure we can write repo config as THIS SSH user ---
+            if ! test -w ".git/config"; then
+              echo "::error ::$REPO/.git/config is not writable by $(whoami). Set SSH_USERNAME to the repo owner or fix ownership/ACLs."
+              exit 1
+            fi
+
+            # --- Trust GitHub host key (idempotent) ---
+            grep -q "github.com" ~/.ssh/known_hosts 2>/dev/null || ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+
+            # --- Remote check: only set SSH remote if needed (avoids needless writes) ---
+            if ! git remote get-url origin | grep -q '^git@github.com:'; then
+              git remote set-url origin git@github.com:MohamedSherifReda/barq-system-frontend.git
+            fi
+
+            # --- Update code ---
+            git fetch --all --prune
+            git checkout main
+            git pull --ff-only
+
+            # --- Clean installs to avoid EPERM / TTY prompts from earlier owners ---
+            rm -rf node_modules .pnpm .pnpm-store || true
+            umask 022
+
+            # --- Install + build (rootless pnpm via Corepack; else npm) ---
+            if [ -f pnpm-lock.yaml ]; then
+              echo "Using pnpm (Corepack, no /usr/bin writes)"
+              corepack prepare pnpm@10.17.1 --activate
+              hash -r || true
+              corepack pnpm --version
+              corepack pnpm install --frozen-lockfile
+              corepack pnpm build
+            else
+              echo "Using npm"
+              unset NODE_ENV
+              npm ci --include=dev
+              npm run build
+            fi
+
+            # --- PM2: run Next.js on port 8111 (no ecosystem file needed) ---
+            if ! command -v pm2 >/dev/null 2>&1; then
+              npm i -g pm2
+            fi
+
+            if pm2 describe nextapp >/dev/null 2>&1; then
+              pm2 reload nextapp
+            else
+              pm2 start npm --name nextapp -- start -- -p 8111
+            fi
+
+            pm2 save

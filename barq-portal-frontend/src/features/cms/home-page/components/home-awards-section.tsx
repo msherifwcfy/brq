@@ -127,7 +127,7 @@ export default function HomeAwardsSection() {
           onError: (error) => {
             toast.error(
               error.message ||
-                t("cms.homePage.homeAwards.messages.errorCreatingHomeAwards")
+              t("cms.homePage.homeAwards.messages.errorCreatingHomeAwards")
             );
           },
         }
@@ -143,10 +143,6 @@ export default function HomeAwardsSection() {
                 description: values.description?.en || "",
                 language: "en",
               },
-              {
-                description: values.description?.ar || "",
-                language: "ar",
-              },
             ],
           },
         },
@@ -157,7 +153,7 @@ export default function HomeAwardsSection() {
           onError: (error) => {
             toast.error(
               error.message ||
-                t("cms.homePage.homeAwards.messages.errorUpdatingHomeAwards")
+              t("cms.homePage.homeAwards.messages.errorUpdatingHomeAwards")
             );
           },
         }
@@ -166,7 +162,7 @@ export default function HomeAwardsSection() {
   };
 
   const cards = existing?.home_awards_id_home_awards_cards || [];
-
+  const canAddMoreCards = cards.length < 3;
   const handleCreateCard = () => {
     if (!existing) {
       toast.error(t("cms.homePage.homeAwards.cards.messages.homeAwardsNotFound"));
@@ -232,7 +228,7 @@ export default function HomeAwardsSection() {
             <ProtectedComponent
               permissionKey={PERMISSION_KEYS.HOME_AWARDS.CREATE}
             >
-              <Button onClick={handleCreateCard} size="sm">
+              <Button onClick={handleCreateCard} size="sm" disabled={!canAddMoreCards}>
                 <PlusIcon className="w-4 h-4" />
                 {t("cms.homePage.homeAwards.cards.create")}
               </Button>

@@ -30,24 +30,6 @@ export default function HomePage() {
           </CollapsibleCard>
         </ProtectedComponent>
 
-        <ProtectedComponent permissionKey={PERMISSION_KEYS.HERO.VIEW}>
-          <CollapsibleCard
-            className="relative"
-            title={t("cms.homePage.success_stories_images.title")}
-          >
-            <HomeSuccessStoriesImages />
-          </CollapsibleCard>
-        </ProtectedComponent>
-
-        <ProtectedComponent permissionKey={PERMISSION_KEYS.HERO.VIEW}>
-          <CollapsibleCard
-            className="relative"
-            title={t("cms.homePage.insights_and_news_images.title")}
-          >
-            <HomeInsightsAndNewsImages />
-          </CollapsibleCard>
-        </ProtectedComponent>
-
         <ProtectedComponent
           permissionKey={PERMISSION_KEYS.LEADERSHIP_EXECUTIVE_TEAM.VIEW}
         >

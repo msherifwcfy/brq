@@ -94,13 +94,14 @@ export function CareerOpenPositionForm({
     resolver: zodResolver(careerOpenPositionSchema),
     defaultValues: {
       job_title: {
-        en: enTranslation?.job_title  || "",
+        en: enTranslation?.job_title || "",
         ar: arTranslation?.job_title || "",
       },
       job_description: {
-        en: enTranslation?.job_description  || "",
+        en: enTranslation?.job_description || "",
         ar: arTranslation?.job_description || "",
       },
+
       opening_date: position?.opening_date ? new Date(position?.opening_date) : undefined,
       closing_date: position?.closing_date ? new Date(position?.closing_date) : undefined,
       status: (position?.status as "OPEN" | "CLOSED") || "OPEN",
@@ -225,150 +226,150 @@ export function CareerOpenPositionForm({
           />
         </div>
 
-<div className="grid grid-cols-2 gap-4">
-        <FormField
-          control={form.control}
-          name="status"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("cms.careers.openPositions.form.status")}</FormLabel>
-              <Select onValueChange={field.onChange} value={field.value}>
-                <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t("cms.careers.openPositions.form.statusPlaceholder")} />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="OPEN">OPEN</SelectItem>
-                  <SelectItem value="CLOSED">CLOSED</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="grid grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="status"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("cms.careers.openPositions.form.status")}</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={t("cms.careers.openPositions.form.statusPlaceholder")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="OPEN">OPEN</SelectItem>
+                    <SelectItem value="CLOSED">CLOSED</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="career_opportunity_id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("cms.careers.openPositions.form.careerOpportunity")}</FormLabel>
-              <Select
-                onValueChange={(value) => field.onChange(Number(value))}
-                value={field.value?.toString()}
-              >
-                <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t("cms.careers.openPositions.form.careerOpportunityPlaceholder")} />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {opportunities.map((opp) => {
-                    const enTranslation = opp.career_opportunity_id_career_opportunity_translations?.find(
-                      (t) => t.language === "en"
-                    );
-                    return (
-                      <SelectItem key={opp.id} value={opp.id.toString()}>
-                        {enTranslation?.name || opp.name}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-</div>
-<div className="grid grid-cols-2 gap-4">
-        <FormField
-          control={form.control}
-          name="career_category_id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("cms.careers.openPositions.form.careerCategory")}</FormLabel>
-              <Select
-                onValueChange={(value) => field.onChange(Number(value))}
-                value={field.value?.toString()}
-              >
-                <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t("cms.careers.openPositions.form.careerCategoryPlaceholder")} />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {categories.map((cat) => {
-                    const enTranslation = cat.career_category_id_career_category_translations?.find(
-                      (t) => t.language === "en"
-                    );
-                    return (
-                      <SelectItem key={cat.id} value={cat.id.toString()}>
-                        {enTranslation?.name || cat.name}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="country_id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("cms.careers.openPositions.form.country")}</FormLabel>
-              <FormControl>
-                <CountrySelect
+          <FormField
+            control={form.control}
+            name="career_opportunity_id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("cms.careers.openPositions.form.careerOpportunity")}</FormLabel>
+                <Select
+                  onValueChange={(value) => field.onChange(Number(value))}
                   value={field.value?.toString()}
-                  onValueChange={(value) => {
-                    field.onChange(value ? Number(value) : undefined);
-                    form.setValue("city_id", undefined);
-                  }}
-                  placeholder={t("cms.careers.openPositions.form.countryPlaceholder")}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-</div>
-<div className="grid grid-cols-2 gap-4">
-        <FormField
-          control={form.control}
-          name="city_id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("cms.careers.openPositions.form.city")}</FormLabel>
-              <Select
-                onValueChange={(value) => field.onChange(Number(value))}
-                value={field.value?.toString()}
-                disabled={!selectedCountryId}
-              >
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={t("cms.careers.openPositions.form.careerOpportunityPlaceholder")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {opportunities.map((opp) => {
+                      const enTranslation = opp.career_opportunity_id_career_opportunity_translations?.find(
+                        (t) => t.language === "en"
+                      );
+                      return (
+                        <SelectItem key={opp.id} value={opp.id.toString()}>
+                          {enTranslation?.name || opp.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="career_category_id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("cms.careers.openPositions.form.careerCategory")}</FormLabel>
+                <Select
+                  onValueChange={(value) => field.onChange(Number(value))}
+                  value={field.value?.toString()}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={t("cms.careers.openPositions.form.careerCategoryPlaceholder")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {categories.map((cat) => {
+                      const enTranslation = cat.career_category_id_career_category_translations?.find(
+                        (t) => t.language === "en"
+                      );
+                      return (
+                        <SelectItem key={cat.id} value={cat.id.toString()}>
+                          {enTranslation?.name || cat.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="country_id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("cms.careers.openPositions.form.country")}</FormLabel>
                 <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t("cms.careers.openPositions.form.cityPlaceholder")} />
-                  </SelectTrigger>
+                  <CountrySelect
+                    value={field.value?.toString()}
+                    onValueChange={(value) => {
+                      field.onChange(value ? Number(value) : undefined);
+                      form.setValue("city_id", undefined);
+                    }}
+                    placeholder={t("cms.careers.openPositions.form.countryPlaceholder")}
+                  />
                 </FormControl>
-                <SelectContent>
-                  {cities.map((city) => {
-                  
-                    return (
-                      <SelectItem key={city.id} value={city.id.toString()}>
-                        {city.name}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-</div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="city_id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("cms.careers.openPositions.form.city")}</FormLabel>
+                <Select
+                  onValueChange={(value) => field.onChange(Number(value))}
+                  value={field.value?.toString()}
+                  disabled={!selectedCountryId}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={t("cms.careers.openPositions.form.cityPlaceholder")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {cities.map((city) => {
+
+                      return (
+                        <SelectItem key={city.id} value={city.id.toString()}>
+                          {city.name}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className="flex justify-end">
           <Button type="submit" disabled={isLoading}>
             {submitLabel}

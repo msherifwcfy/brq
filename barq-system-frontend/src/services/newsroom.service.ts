@@ -39,7 +39,11 @@ export const newsroomService = {
         query: {
           query: cardsQuery,
         },
-        headers: await getLanguageHeaders(),
+        headers: {
+          ...await getLanguageHeaders(),
+          "x-skip-translations": "true",
+
+        },
       });
       console.log('newsroom response.data', response);
       return response.data ?? null;
@@ -164,11 +168,17 @@ export const newsroomService = {
             relations: {
               newsroom_cards_id_newsroom_cards_translations: true,
               image: true,
-              newsroom_category: true,
+              newsroom_category: {
+                newsroom_cards: true,
+                newsroom_category_id_newsroom_category_translations: true
+              },
             },
           },
         },
-        headers: await getLanguageHeaders(),
+        headers: {
+          // ...(await getLanguageHeaders()),
+          "x-skip-translations": "true",
+        },
       });
       console.log('newsroom detail response.data', response);
       return response.data ?? null;
