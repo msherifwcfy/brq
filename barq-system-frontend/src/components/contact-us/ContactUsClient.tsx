@@ -505,7 +505,11 @@ const ContactUsClient = ({
                                         textAlign: i18n.language === 'ar' ? 'right' : 'left',
                                     }}
                                     className="py-3 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[64px] w-full lg:w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors"
-                                    placeholder={`${formData.countryCode === 'KSA' ? '+966' : formData.countryCode === 'UAE' ? '+971' : '+20'} ${t("contactUs.mobileNumber")}`}
+                                    placeholder={
+                                        i18n.language === 'ar'
+                                            ? `${t("contactUs.mobileNumber")} ${formData.countryCode === 'KSA' ? '+966' : formData.countryCode === 'UAE' ? '+971' : '+20'}`
+                                            : `${formData.countryCode === 'KSA' ? '+966' : formData.countryCode === 'UAE' ? '+971' : '+20'} ${t("contactUs.mobileNumber")}`
+                                    }
                                 />
                             </div>
                         </motion.div>
