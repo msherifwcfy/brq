@@ -1,0 +1,1542 @@
+{
+  "common": {
+    "title": "العنوان",
+    "description": "الوصف",
+    "create": "إنشاء",
+    "update": "تحديث",
+    "add": "إضافة",
+    "icon": "الأيقونة",
+    "icons": "الأيقونات",
+    "remove": "إزالة",
+    "cancel": "إلغاء",
+    "actions": "الإجراءات",
+    "loading": "جاري التحميل...",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "yes": "نعم",
+    "no": "لا",
+    "search": "بحث",
+    "filters": "فلاتر",
+    "sortBy": "ترتيب حسب",
+    "sortField": "حقل الترتيب",
+    "sortOrder": "اتجاه الترتيب",
+    "asc": "تصاعدي",
+    "desc": "تنازلي",
+    "clearAll": "مسح الكل",
+    "noData": "لا توجد بيانات",
+    "text": "النص",
+    "logo": "الشعار",
+    "image": "الصورة",
+    "subTitle": "العنوان الفرعي",
+    "subtitle": "العنوان الفرعي",
+    "selectCountry": "اختر دولة",
+    "searchCountries": "بحث عن الدول",
+    "noCountriesFound": "لم يتم العثور على دول",
+    "loadingCountries": "جاري تحميل الدول...",
+    "selectIndustry": "اختر صناعة",
+    "searchIndustries": "بحث عن الصناعات",
+    "noIndustriesFound": "لم يتم العثور على صناعات",
+    "loadingIndustries": "جاري تحميل الصناعات...",
+    "selectSolution": "اختر حل",
+    "searchSolutions": "بحث عن الحلول",
+    "noSolutionsFound": "لم يتم العثور على حلول",
+    "loadingSolutions": "جاري تحميل الحلول...",
+    "language": {
+      "en": "English",
+      "ar": "العربية"
+    }
+  },
+  "auth": {
+    "welcome": {
+      "title": "مرحباً بك في لوحة تحكم نظام برق",
+      "subtitle": "بوابتك للمصادقة السلسة وإدارة الوصول الآمن",
+      "back": "مرحباً بعودتك",
+      "signIn": "سجل دخولك إلى حسابك"
+    },
+    "forms": {
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "newPasswordPlaceholder": "أدخل كلمة المرور الجديدة",
+      "confirmPasswordPlaceholder": "أكد كلمة المرور الجديدة"
+    },
+    "buttons": {
+      "signIn": "تسجيل الدخول",
+      "signingIn": "جاري تسجيل الدخول...",
+      "verifyOtp": "التحقق من رمز التحقق",
+      "verifying": "جاري التحقق...",
+      "resetPassword": "إعادة تعيين كلمة المرور",
+      "sendResetLink": "إرسال رابط إعادة التعيين",
+      "sending": "جاري الإرسال...",
+      "setNewPassword": "تعيين كلمة مرور جديدة",
+      "updatePassword": "تحديث كلمة المرور",
+      "updating": "جاري التحديث...",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "resendOtp": "إعادة إرسال رمز التحقق",
+      "resendIn": "إعادة الإرسال خلال {count} ثانية",
+      "loggingOut": "جاري الخروج...",
+      "logout": "خروج"
+    },
+    "otp": {
+      "title": "التحقق من رمز التحقق",
+      "subtitle": "لقد أرسلنا رمز التحقق إلى {email}",
+      "resendOtp": "إعادة إرسال رمز التحقق"
+    },
+    "forgotPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطاً لإعادة تعيين كلمة المرور.",
+      "checkEmail": "تحقق من بريدك الإلكتروني",
+      "emailSent": "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى عنوان بريدك الإلكتروني."
+    },
+    "completePassword": {
+      "title": "تعيين كلمة مرور جديدة",
+      "subtitle": "أدخل كلمة المرور الجديدة أدناه.",
+      "success": "تم تحديث كلمة المرور!",
+      "successMessage": "تم تحديث كلمة المرور بنجاح. يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة."
+    },
+    "errors": {
+      "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+      "invalidOtp": "رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.",
+      "resendFailed": "فشل في إعادة إرسال رمز التحقق. يرجى المحاولة مرة أخرى.",
+      "resetFailed": "فشل في إرسال بريد إعادة التعيين. يرجى المحاولة مرة أخرى.",
+      "updateFailed": "فشل في تحديث كلمة المرور. يرجى المحاولة مرة أخرى."
+    },
+    "footer": "© {year} برق. جميع الحقوق محفوظة."
+  },
+  "dashboard": {
+    "titles": {
+      "dashboard": "لوحة التحكم",
+      "home": "الرئيسية",
+      "roles": "الأدوار",
+      "employees": "الموظفون"
+    },
+    "sidebar": {
+      "mainNavigation": "التنقل الرئيسي",
+      "employeeManagement": "إدارة الموظفين",
+      "home": "الرئيسية",
+      "roles": "الأدوار",
+      "employees": "الموظفون",
+      "manageItems": "إدارة العناصر",
+      "contactUs":{
+        "title": "التواصل معنا"
+      },
+      "cybersecurity": {
+        "title": "الأمن السيبراني"
+      },
+      "sustainability": {
+        "title": "الاستدامة"
+      },
+      "automation": {
+        "title": "الأتمتة"
+      },
+      "footer": {
+        "title": "الفوتر"
+      },
+      "countries": {
+        "title": "الدول"
+      },
+      "industries": {
+        "title": "الصناعات"
+      },
+      "solutions": {
+        "title": "الحلول"
+      },
+      "cms": {
+        "title": "إدارة المحتوى",
+        "homePage": {
+          "title": "إدارة الصفحة الرئيسية",
+          "hero": "الصفحة الرئيسية"
+        },
+        "alliances": {
+          "title": "التحالفات"
+        },
+        "awards": {
+          "title": "الجوائز"
+        },
+        "sustainability": {
+          "title": "الاستدامة"
+        },
+        "automation": {
+          "title": "الأتمتة"
+        },
+        "aboutUs": {
+          "title": "من نحن"
+        },
+        "academy": {
+          "title": "الأكاديمية"
+        },
+        "managedServices": {
+          "title": "الخدمات المُدارة"
+        },
+        "newsroom": {
+          "title": "غرفة الأخبار"
+        },
+        "events": {
+          "title": "الفعاليات"
+        },
+        "campaigns": {
+          "title": "الحملات"
+        },
+        "resources": {
+          "title": "الموارد"
+        },
+        "cybersecurity": {
+          "title": "الأمن السيبراني"
+        },
+        "itInfrastructure": {
+          "title": "البنية التحتية لتقنية المعلومات"
+        },
+        "footer": {
+          "title": "التذييل"
+        }
+      },
+      "alliances": {
+        "title": "التحالفات",
+        "clients": "عملاء التحالفات",
+        "head": "رؤساء التحالفات",
+        "vendors": "موردي التحالفات"
+      },
+      "awards": {
+        "title": "الجوائز",
+        "head": "رئيس الجوائز",
+        "cards": "بطاقات الجوائز"
+      },
+      "cmsHome": "الصفحة الرئيسية"
+    },
+    "home": {
+      "welcome": "مرحباً",
+      "overview": "هذه لمحة عامة عن لوحة التحكم.",
+      "quickLinks": "روابط سريعة",
+      "manageRoles": "إدارة الأدوار",
+      "manageEmployees": "إدارة الموظفين",
+      "status": "الحالة",
+      "systemNormal": "كل الأنظمة تعمل بشكل طبيعي."
+    }
+  },
+
+  "cms": {
+    "alliances": {
+      "title": "إدارة التحالفات",
+      "head": {
+        "title": "رئيس التحالفات"
+      },
+      "clients": {
+        "title": "عملاء التحالفات"
+      },
+      "vendors": {
+        "title": "موردي التحالفات"
+      }
+    },
+    "footer": {
+      "title": "إدارة التواصلات الفوتر",
+      "contacts": {
+        "title": "التواصلات الفوتر"
+      },
+      "locations": {
+        "title": "المواقع الفوتر"
+      }
+    },
+    "awards": {
+      "title": "إدارة الجوائز",
+      "head": {
+        "title": "رئيس الجوائز"
+      },
+      "cards": {
+        "title": "بطاقات الجوائز"
+      }
+    },
+    "sustainability": {
+      "title": "الاستدامة",
+      "economic": { "title": "الاستدامة الاقتصادية" },
+      "ecosystem": { "title": "استدامة النظام البيئي" },
+      "environmental": { "title": "الاستدامة البيئية" },
+      "globalCommitment": { "title": "الالتزام العالمي" },
+      "mainSocial": { "title": "الاجتماعي الرئيسي" },
+      "cardSocial": {
+        "title": "بطاقة الاجتماعي",
+        "createCardSocial": "إنشاء بطاقة اجتماعي",
+        "createNewCardSocial": "إنشاء بطاقة اجتماعي جديدة",
+        "updateCardSocial": "تحديث بطاقة الاجتماعي",
+        "deleteCardSocial": "حذف بطاقة الاجتماعي",
+        "columns": {
+          "id": "المعرف",
+          "title": "العنوان",
+          "description": "الوصف",
+          "createdAt": "تاريخ الإنشاء",
+          "updatedAt": "تاريخ التحديث",
+          "actions": "الإجراءات",
+          "edit": "تعديل",
+          "delete": "حذف"
+        },
+        "form": {
+          "title": "العنوان",
+          "titlePlaceholder": "أدخل العنوان",
+          "description": "الوصف",
+          "descriptionPlaceholder": "أدخل الوصف",
+          "save": "حفظ",
+          "loading": "جاري التحميل..."
+        },
+        "filters": {
+          "createdAt": "تاريخ الإنشاء",
+          "updatedAt": "تاريخ التحديث"
+        },
+        "sort": {
+          "id": "المعرف",
+          "title": "العنوان",
+          "createdAt": "تاريخ الإنشاء",
+          "updatedAt": "تاريخ التحديث"
+        },
+        "validation": {
+          "titleRequired": "العنوان مطلوب",
+          "descriptionRequired": "الوصف مطلوب"
+        },
+        "messages": {
+          "cardSocialCreated": "تم إنشاء بطاقة الاجتماعي بنجاح",
+          "cardSocialUpdated": "تم تحديث بطاقة الاجتماعي بنجاح",
+          "errorCreatingCardSocial": "خطأ في إنشاء بطاقة الاجتماعي",
+          "errorUpdatingCardSocial": "خطأ في تحديث بطاقة الاجتماعي",
+          "errorDeletingCardSocial": "خطأ في حذف بطاقة الاجتماعي",
+          "deleteConfirmation": "هل أنت متأكد من حذف \"{title}\"؟",
+          "deleteNotSupported": "وظيفة الحذف غير مدعومة"
+        }
+      }
+    },
+
+    "automation": {
+      "title": "الأتمتة",
+      "hero": {
+        "title": "بطل الأتمتة",
+        "form": {
+          "heroImage": "صورة البطل",
+          "logos": "الشعارات"
+        },
+        "messages": {
+          "created": "تم إنشاء بطل الأتمتة بنجاح",
+          "updated": "تم تحديث بطل الأتمتة بنجاح"
+        }
+      },
+      "ai": {
+        "title": "الذكاء الاصطناعي",
+        "form": {
+          "image": "الصورة",
+          "logo": "الشعار",
+          "bullets": "النقاط",
+          "bullet": "نقطة",
+          "bulletText": "نص النقطة",
+          "bulletIcon": "أيقونة النقطة"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم الذكاء الاصطناعي بنجاح",
+          "updated": "تم تحديث قسم الذكاء الاصطناعي بنجاح"
+        }
+      },
+      "business": {
+        "title": "أتمتة الأعمال",
+        "form": {
+          "image": "الصورة",
+          "logo": "الشعار",
+          "bullets": "النقاط",
+          "bullet": "نقطة",
+          "bulletText": "نص النقطة",
+          "bulletIcon": "أيقونة النقطة"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم أتمتة الأعمال بنجاح",
+          "updated": "تم تحديث قسم أتمتة الأعمال بنجاح"
+        }
+      },
+      "dataManagement": {
+        "title": "إدارة البيانات",
+        "form": {
+          "image": "الصورة",
+          "logo": "الشعار",
+          "bullets": "النقاط",
+          "bullet": "نقطة",
+          "bulletText": "نص النقطة",
+          "bulletIcon": "أيقونة النقطة"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم إدارة البيانات بنجاح",
+          "updated": "تم تحديث قسم إدارة البيانات بنجاح"
+        }
+      },
+      "cloudDevOps": {
+        "title": "السحابة وDevOps",
+        "form": {
+          "image": "الصورة",
+          "logo": "الشعار",
+          "bullets": "النقاط",
+          "bullet": "نقطة",
+          "bulletText": "نص النقطة",
+          "bulletIcon": "أيقونة النقطة"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم السحابة وDevOps بنجاح",
+          "updated": "تم تحديث قسم السحابة وDevOps بنجاح"
+        }
+      }
+    },
+
+    "cybersecurity": {
+      "title": "الأمن السيبراني",
+      "hero": {
+        "title": "بطل الأمن السيبراني",
+        "form": {
+          "image": "صورة البطل",
+          "logos": "الشعارات"
+        },
+        "messages": {
+          "created": "تم إنشاء بطل الأمن السيبراني بنجاح",
+          "updated": "تم تحديث بطل الأمن السيبراني بنجاح"
+        }
+      },
+      "networkSection": {
+        "title": "قسم الشبكات",
+        "rowNumber": "رقم الصف",
+        "position": "الموضع",
+        "messages": {
+          "created": "تم إنشاء قسم الشبكات بنجاح",
+          "updated": "تم تحديث قسم الشبكات بنجاح"
+        },
+        "cards": {
+          "title": "بطاقات قسم الشبكات",
+          "create": "إنشاء بطاقة",
+          "update": "تحديث البطاقة",
+          "delete": "حذف البطاقة",
+          "deleteConfirmation": "هل أنت متأكد من حذف هذه البطاقة؟",
+          "columns": {
+            "id": "المعرف",
+            "icon": "الأيقونة",
+            "text": "النص",
+            "rowNumber": "الصف",
+            "position": "الموضع",
+            "actions": "الإجراءات",
+            "edit": "تعديل",
+            "delete": "حذف"
+          },
+          "messages": {
+            "created": "تم إنشاء البطاقة بنجاح",
+            "updated": "تم تحديث البطاقة بنجاح",
+            "deleted": "تم حذف البطاقة بنجاح",
+            "errorCreating": "خطأ في إنشاء البطاقة",
+            "errorUpdating": "خطأ في تحديث البطاقة",
+            "errorDeleting": "خطأ في حذف البطاقة"
+          }
+        }
+      },
+      "dataCenter": {
+        "title": "مركز البيانات",
+        "messages": {
+          "created": "تم إنشاء قسم مركز البيانات بنجاح",
+          "updated": "تم تحديث قسم مركز البيانات بنجاح"
+        },
+        "cards": {
+          "title": "بطاقات مركز البيانات",
+          "create": "إنشاء بطاقة",
+          "update": "تحديث البطاقة",
+          "delete": "حذف البطاقة",
+          "deleteConfirmation": "هل أنت متأكد من حذف هذه البطاقة؟",
+          "columns": {
+            "id": "المعرف",
+            "icon": "الأيقونة",
+            "text": "النص",
+            "rowNumber": "الصف",
+            "position": "الموضع",
+            "actions": "الإجراءات",
+            "edit": "تعديل",
+            "delete": "حذف"
+          },
+          "messages": {
+            "created": "تم إنشاء البطاقة بنجاح",
+            "updated": "تم تحديث البطاقة بنجاح",
+            "deleted": "تم حذف البطاقة بنجاح",
+            "errorCreating": "خطأ في إنشاء البطاقة",
+            "errorUpdating": "خطأ في تحديث البطاقة",
+            "errorDeleting": "خطأ في حذف البطاقة"
+          }
+        }
+      },
+      "operationIntelligence": {
+        "title": "عمليات الأمن والذكاء",
+        "cards": "البطاقات",
+        "messages": {
+          "created": "تم إنشاء قسم عمليات الذكاء بنجاح",
+          "updated": "تم تحديث قسم عمليات الذكاء بنجاح"
+        },
+        "bullets": {
+          "title": "ميزات عمليات الذكاء",
+          "create": "إنشاء ميزة",
+          "update": "تحديث الميزة",
+          "delete": "حذف الميزة",
+          "deleteConfirmation": "هل أنت متأكد من حذف هذه الميزة؟",
+          "columns": {
+            "id": "المعرف",
+            "icon": "الأيقونة",
+            "text": "النص",
+            "actions": "الإجراءات",
+            "edit": "تعديل",
+            "delete": "حذف"
+          },
+          "messages": {
+            "created": "تم إنشاء الميزة بنجاح",
+            "updated": "تم تحديث الميزة بنجاح",
+            "deleted": "تم حذف الميزة بنجاح",
+            "errorCreating": "خطأ في إنشاء الميزة",
+            "errorUpdating": "خطأ في تحديث الميزة",
+            "errorDeleting": "خطأ في حذف الميزة"
+          }
+        }
+      },
+      "identityManagement": {
+        "title": "إدارة نقاط النهاية والهوية",
+        "messages": {
+          "created": "تم إنشاء قسم إدارة الهوية بنجاح",
+          "updated": "تم تحديث قسم إدارة الهوية بنجاح"
+        },
+        "cards": {
+          "title": "خدمات إدارة الهوية",
+          "create": "إنشاء خدمة",
+          "update": "تحديث الخدمة",
+          "delete": "حذف الخدمة",
+          "deleteConfirmation": "هل أنت متأكد من حذف هذه الخدمة؟",
+          "columns": {
+            "id": "المعرف",
+            "icon": "الأيقونة",
+            "title": "العنوان",
+            "description": "الوصف",
+            "actions": "الإجراءات",
+            "edit": "تعديل",
+            "delete": "حذف"
+          },
+          "messages": {
+            "created": "تم إنشاء الخدمة بنجاح",
+            "updated": "تم تحديث الخدمة بنجاح",
+            "deleted": "تم حذف الخدمة بنجاح",
+            "errorCreating": "خطأ في إنشاء الخدمة",
+            "errorUpdating": "خطأ في تحديث الخدمة",
+            "errorDeleting": "خطأ في حذف الخدمة"
+          }
+        }
+      },
+      "applicationData": {
+        "title": "حماية التطبيقات والبيانات",
+        "messages": {
+          "created": "تم إنشاء قسم بيانات التطبيق بنجاح",
+          "updated": "تم تحديث قسم بيانات التطبيق بنجاح"
+        },
+        "bullets": {
+          "title": "ميزات التطبيقات والبيانات",
+          "create": "إنشاء ميزة",
+          "update": "تحديث الميزة",
+          "delete": "حذف الميزة",
+          "deleteConfirmation": "هل أنت متأكد من حذف هذه الميزة؟",
+          "columns": {
+            "id": "المعرف",
+            "icon": "الأيقونة",
+            "text": "النص",
+            "side": "الجانب",
+            "left": "يسار",
+            "right": "يمين",
+            "actions": "الإجراءات",
+            "edit": "تعديل",
+            "delete": "حذف"
+          },
+          "messages": {
+            "created": "تم إنشاء الميزة بنجاح",
+            "updated": "تم تحديث الميزة بنجاح",
+            "deleted": "تم حذف الميزة بنجاح",
+            "errorCreating": "خطأ في إنشاء الميزة",
+            "errorUpdating": "خطأ في تحديث الميزة",
+            "errorDeleting": "خطأ في حذف الميزة"
+          }
+        }
+      }
+    },
+
+    "itInfrastructure": {
+      "title": "البنية التحتية لتقنية المعلومات",
+      "hero": {
+        "title": "هيرو البنية التحتية لتقنية المعلومات",
+        "form": {
+          "image": "صورة الهيرو",
+          "logos": "الشعارات"
+        },
+        "messages": {
+          "created": "تم إنشاء هيرو البنية التحتية لتقنية المعلومات بنجاح",
+          "updated": "تم تحديث هيرو البنية التحتية لتقنية المعلومات بنجاح"
+        }
+      },
+      "dataCenter": {
+        "title": "مركز البيانات",
+        "form": {
+          "image": "الصورة",
+          "bulletPoints": "النقاط النقطية"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم مركز البيانات بنجاح",
+          "updated": "تم تحديث قسم مركز البيانات بنجاح"
+        }
+      },
+      "mobility": {
+        "title": "التنقل",
+        "form": {
+          "logo": "الشعار",
+          "cards": "بطاقات التنقل",
+          "card": "بطاقة",
+          "icon": "الأيقونة"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم التنقل بنجاح",
+          "updated": "تم تحديث قسم التنقل بنجاح"
+        }
+      },
+      "softwareDefinedNetwork": {
+        "title": "الشبكة المعرفة بالبرمجيات",
+        "form": {
+          "logo": "الشعار",
+          "image": "الصورة",
+          "cards": "بطاقات الشبكة",
+          "card": "بطاقة",
+          "icon": "الأيقونة"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم الشبكة المعرفة بالبرمجيات بنجاح",
+          "updated": "تم تحديث قسم الشبكة المعرفة بالبرمجيات بنجاح"
+        }
+      }
+    },
+
+  
+    "homePage": {
+      "title": "إدارة الصفحة الرئيسية",
+      "hero": {
+        "title": "الهيرو",
+        "form": {
+          "headline": "العنوان الرئيسي",
+          "subHeadline": "العنوان الفرعي",
+          "ctaLabel": "نص زر الدعوة للفعل",
+          "heroImage": "صورة الهيرو",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "validation": {
+          "headlineRequired": "العنوان الرئيسي مطلوب",
+          "headlineLength": "يجب أن يكون العنوان الرئيسي بين 30 و70 حرفًا.",
+          "subHeadlineRequired": "العنوان الفرعي مطلوب",
+          "subHeadlineLength": "يجب أن يكون العنوان الفرعي بين 80 و200 حرف.",
+          "ctaLabelRequired": "نص زر الدعوة للفعل مطلوب",
+          "ctaLabelLength": "يجب أن يكون نص زر الدعوة للفعل بين 15 و25 حرفًا."
+        },
+        "messages": {
+          "heroCreated": "تم الانشاء بنجاح",
+          "heroUpdated": "تم التحديث بنجاح",
+          "errorCreatingHero": "خطأ في إنشاء الهيرو",
+          "errorUpdatingHero": "خطأ في تحديث الهيرو"
+        }
+      },
+      "whoWeAre": {
+        "title": "من نحن؟",
+        "messages": {
+          "whoWeAreCreated": "تم إنشاء من نحن بنجاح",
+          "whoWeAreUpdated": "تم تحديث من نحن بنجاح",
+          "errorCreatingWhoWeAre": "خطأ في إنشاء من نحن",
+          "errorUpdatingWhoWeAre": "خطأ في تحديث من نحن"
+        },
+        "form": {
+          "subHeadline": "الوصف",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "validation": {
+          "subHeadlineRequired": "الوصف مطلوب",
+          "descriptionLength": "يجب أن يكون الوصف بين 200 و400 حرف."
+        }
+      },
+      "whoWeAreStats": {
+        "title": "إحصائيات من نحن",
+        "form": {
+          "number": "الرقم",
+          "label": "التسمية",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "validation": {
+          "numberRequired": "الرقم مطلوب",
+          "numberInvalid": "يجب أن يكون الرقم عددًا صحيحًا.",
+          "numberDigits": "يجب أن يكون الرقم بين 0 و9999.",
+          "labelRequired": "التسمية مطلوبة",
+          "labelMax": "يجب ألا تزيد التسمية عن 100 حرف.",
+          "labelWords": "يجب أن تتكون التسمية من 1 إلى 3 كلمات."
+        },
+        "update": "تحديث الإحصائية",
+        "create": "إنشاء الإحصائية",
+        "delete": "حذف الإحصائية",
+        "deleteTitle": "حذف الإحصائية",
+        "deleteDescription": "هل أنت متأكد أنك تريد حذف هذه الإحصائية؟",
+        "messages": {
+          "created": "تم إنشاء الإحصائية بنجاح",
+          "updated": "تم تحديث الإحصائية بنجاح",
+          "errorCreating": "خطأ في إنشاء الإحصائية",
+          "errorUpdating": "خطأ في تحديث الإحصائية",
+          "deleteNotAvailable": "نقطة حذف غير متوفرة حالياً",
+          "deleteTitle": "حذف الإحصائية",
+          "deleteDescription": "هل أنت متأكد أنك تريد حذف هذه الإحصائية؟",
+          "deleteSuccess": "تم حذف الإحصائية بنجاح",
+          "deleteError": "خطأ في حذف الإحصائية"
+        }
+      },
+      "leadership": {
+        "title": "القيادة",
+        "form": {
+          "name": "الاسم",
+          "position": "المنصب",
+          "quote": "الاقتباس",
+          "image": "الصورة",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "validation": {
+          "nameRequired": "الاسم مطلوب",
+          "positionRequired": "المنصب مطلوب",
+          "quoteRequired": "الاقتباس مطلوب",
+          "quoteLength": "يجب أن يتراوح طول الاقتباس بين 100 و250 حرفًا."
+        },
+        "messages": {
+          "created": "تم إنشاء القيادة بنجاح",
+          "updated": "تم تحديث القيادة بنجاح",
+          "errorCreating": "حدث خطأ أثناء إنشاء القيادة",
+          "errorUpdating": "حدث خطأ أثناء تحديث القيادة"
+        }
+      },
+      "landingNumbers": {
+        "title": "الأرقام الرئيسية",
+        "form": {
+          "number": "الرقم",
+          "label": "التسمية",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "validation": {
+          "numberRequired": "الرقم مطلوب",
+          "numberInvalid": "يجب أن يكون الرقم عددًا صحيحًا.",
+          "numberDigits": "يجب أن يكون الرقم بين 0 و9999.",
+          "labelRequired": "التسمية مطلوبة",
+          "labelMax": "يجب ألا تزيد التسمية عن 100 حرف.",
+          "labelWords": "يجب أن تتكون التسمية من 1 إلى 3 كلمات."
+        }
+      }
+    }
+  },
+  "aboutUs": {
+      "title": "إدارة محتوى من نحن",
+      "contentTitle": "محتوى من نحن",
+      "heroSection": {
+        "title": "قسم البطل",
+        "form": {
+          "title": "العنوان",
+          "description": "الوصف",
+          "backgroundImage": "صورة/فيديو الخلفية",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم البطل بنجاح",
+          "updated": "تم تحديث قسم البطل بنجاح",
+          "errorCreating": "فشل في إنشاء قسم البطل",
+          "errorUpdating": "فشل في تحديث قسم البطل"
+        }
+      },
+      "groupSection": {
+        "title": "قسم إحصائيات المجموعة",
+        "form": {
+          "title": "العنوان",
+          "description": "الوصف",
+          "groupLogo": "شعار المجموعة",
+          "stat1Label": "تسمية الإحصائية 1",
+          "stat2Label": "تسمية الإحصائية 2",
+          "stat3Label": "تسمية الإحصائية 3",
+          "stat1Value": "قيمة الإحصائية 1",
+          "stat2Value": "قيمة الإحصائية 2",
+          "stat3Value": "قيمة الإحصائية 3",
+          "stat1Placeholder": "مثال: 1985",
+          "stat2Placeholder": "مثال: 39+",
+          "stat3Placeholder": "مثال: 600+",
+          "statisticsValues": "قيم الإحصائيات",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم انتماء المجموعة بنجاح",
+          "updated": "تم تحديث قسم انتماء المجموعة بنجاح",
+          "errorCreating": "فشل في إنشاء قسم انتماء المجموعة",
+          "errorUpdating": "فشل في تحديث قسم انتماء المجموعة"
+        }
+      },
+      "missionVisionSection": {
+        "title": "قسم المهمة والرؤية",
+        "form": {
+          "sectionTitle": "عنوان القسم",
+          "missionCard": "بطاقة المهمة",
+          "missionTitle": "عنوان المهمة (ثابت)",
+          "missionDescription": "وصف المهمة",
+          "visionCard": "بطاقة الرؤية",
+          "visionTitle": "عنوان الرؤية (ثابت)",
+          "visionDescription": "وصف الرؤية",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم المهمة والرؤية بنجاح",
+          "updated": "تم تحديث قسم المهمة والرؤية بنجاح",
+          "errorCreating": "فشل في إنشاء قسم المهمة والرؤية",
+          "errorUpdating": "فشل في تحديث قسم المهمة والرؤية"
+        },
+        "requirements": {
+          "title": "متطلبات الملحمة:",
+          "sectionTitle": "عنوان القسم: 5-35 حرف",
+          "cards": "بطاقتان بالضبط (المهمة والرؤية)",
+          "cardTitles": "عناوين البطاقات: ثابتة (\"المهمة\" و \"الرؤية\")",
+          "cardIcons": "أيقونات البطاقات: ثابتة (لا يمكن تعديلها)",
+          "descriptions": "الأوصاف: 150-350 حرف لكل منها"
+        }
+      },
+      "coreValuesSection": {
+        "title": "قسم القيم الأساسية",
+        "form": {
+          "sectionTitle": "عنوان القسم",
+          "sectionDescription": "وصف القسم",
+          "supportingImage": "صورة داعمة (رسم جانبي)",
+          "coreValuesCards": "بطاقات القيم الأساسية",
+          "coreValuesDescription": "يمكن إدارة بطاقات القيم الأساسية (1-6 عناصر) بشكل منفصل في قسمها الخاص أدناه. تتطلب كل بطاقة عنوان (5-30 حرف) وأيقونة.",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم القيم الأساسية بنجاح",
+          "updated": "تم تحديث قسم القيم الأساسية بنجاح",
+          "errorCreating": "فشل في إنشاء قسم القيم الأساسية",
+          "errorUpdating": "فشل في تحديث قسم القيم الأساسية"
+        },
+        "requirements": {
+          "title": "متطلبات الملحمة:",
+          "minMax": "الحد الأدنى 1، الحد الأقصى 6 بطاقات قيم أساسية",
+          "cardTitles": "عناوين البطاقات: 5-30 حرف لكل منها",
+          "cardIcons": "أيقونات البطاقات: قابلة للتعديل (صورة أو متجه)",
+          "layout": "الحد الأدنى صف واحد، الحد الأقصى صفان"
+        }
+      },
+      "journeySection": {
+        "title": "قسم الرحلة",
+        "form": {
+          "sectionTitle": "عنوان القسم",
+          "milestonesDescription": "يمكن إدارة معالم الرحلة الفردية بشكل منفصل في قسمها الخاص أدناه.",
+          "create": "إنشاء",
+          "update": "تحديث"
+        },
+        "messages": {
+          "created": "تم إنشاء قسم الرحلة بنجاح",
+          "updated": "تم تحديث قسم الرحلة بنجاح",
+          "errorCreating": "فشل في إنشاء قسم الرحلة",
+          "errorUpdating": "فشل في تحديث قسم الرحلة"
+        }
+      }
+    },
+  "employees": {
+    "title": "الموظفون",
+    "createEmployee": "إنشاء موظف",
+    "updateEmployee": "تحديث الموظف",
+    "deleteEmployee": "حذف الموظف",
+    "createNewEmployee": "إنشاء موظف جديد",
+    "updateEmployeeTitle": "تحديث الموظف: {name}",
+    "deleteEmployeeTitle": "حذف الموظف",
+    "deleteEmployeeDescription": "هل أنت متأكد من حذف \"{name}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "name": "الاسم",
+      "namePlaceholder": "أدخل الاسم",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل البريد الإلكتروني",
+      "role": "الدور",
+      "roleId": "معرف الدور",
+      "selectRole": "اختر دوراً",
+      "loading": "جاري التحميل...",
+      "save": "حفظ",
+      "creating": "جاري الإنشاء...",
+      "updating": "جاري التحديث...",
+      "deleting": "جاري الحذف..."
+    },
+    "columns": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "role": "الدور",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "status": "الحالة"
+    },
+    "filters": {
+      "email": "البريد الإلكتروني",
+      "roleId": "معرف الدور",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "roleId": "معرف الدور",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "messages": {
+      "employeeCreated": "تم إنشاء الموظف بنجاح",
+      "employeeUpdated": "تم تحديث الموظف بنجاح",
+      "employeeDeleted": "تم حذف الموظف بنجاح",
+      "errorCreatingEmployee": "خطأ في إنشاء الموظف",
+      "errorUpdatingEmployee": "خطأ في تحديث الموظف",
+      "errorDeletingEmployee": "خطأ في حذف الموظف"
+    },
+    "validation": {
+      "nameRequired": "الاسم مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+      "roleRequired": "الدور مطلوب"
+    }
+  },
+  "roles": {
+    "title": "الأدوار",
+    "createRole": "إنشاء دور",
+    "updateRole": "تحديث الدور",
+    "deleteRole": "حذف الدور",
+    "createNewRole": "إنشاء دور جديد",
+    "updateRoleTitle": "تحديث الدور: {name}",
+    "deleteRoleTitle": "حذف الدور",
+    "deleteRoleDescription": "هل أنت متأكد من أنك تريد حذف الدور \"{name}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "roleName": "اسم الدور",
+      "roleNamePlaceholder": "أدخل اسم الدور",
+      "permissions": "الصلاحيات",
+      "searchPermissions": "البحث في الصلاحيات...",
+      "permissionsSelected": "{selected} من {total} صلاحية محددة",
+      "selectAll": "تحديد الكل",
+      "clearAll": "مسح الكل",
+      "noPermissionsFound": "لم يتم العثور على صلاحيات تطابق \"{searchTerm}\"",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "columns": {
+      "roleName": "اسم الدور",
+      "prefix": "البادئة",
+      "adminRole": "دور المدير",
+      "permissionsCount": "عدد الصلاحيات",
+      "createdAt": "تاريخ الإنشاء",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "yes": "نعم",
+      "no": "لا",
+      "permissions": "صلاحيات"
+    },
+    "filters": {
+      "prefix": "البادئة",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "name": "الاسم",
+      "prefix": "البادئة",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "messages": {
+      "roleCreated": "تم إنشاء الدور بنجاح",
+      "roleUpdated": "تم تحديث الدور بنجاح",
+      "roleDeleted": "تم حذف الدور بنجاح",
+      "errorCreatingRole": "خطأ في إنشاء الدور",
+      "errorUpdatingRole": "خطأ في تحديث الدور",
+      "errorDeletingRole": "خطأ في حذف الدور"
+    },
+    "validation": {
+      "roleNameRequired": "اسم الدور مطلوب",
+      "translationNameRequired": "اسم الترجمة مطلوب",
+      "permissionIdPositive": "معرف الصلاحية يجب أن يكون موجباً"
+    }
+  },
+  "alliancesClients": {
+    "title": "عملاء التحالفات",
+    "createAlliancesClient": "إنشاء عميل تحالف",
+    "updateAlliancesClient": "تحديث عميل تحالف",
+    "deleteAlliancesClient": "حذف عميل تحالف",
+    "createNewAlliancesClient": "إنشاء عميل تحالف جديد",
+    "updateAlliancesClientTitle": "تحديث عميل التحالف: {id}",
+    "deleteAlliancesClientTitle": "حذف عميل التحالف",
+    "deleteAlliancesClientDescription": "هل أنت متأكد من أنك تريد حذف عميل التحالف هذا؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "mediaId": "معرف الوسائط",
+      "mediaIdPlaceholder": "اختر الوسائط",
+      "countryId": "معرف البلد",
+      "countryIdPlaceholder": "اختر البلد",
+      "industriesId": "معرف الصناعات",
+      "industriesIdPlaceholder": "اختر الصناعات",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "columns": {
+      "id": "المعرف",
+      "media": "الوسائط",
+      "country": "البلاد",
+      "industries": "الصناعات",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "filters": {
+      "mediaId": "معرف الوسائط",
+      "countryId": "معرف البلد",
+      "industriesId": "معرف الصناعات",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "id": "المعرف",
+      "mediaId": "معرف الوسائط",
+      "countryId": "معرف البلد",
+      "industriesId": "معرف الصناعات",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "messages": {
+      "alliancesClientCreated": "تم إنشاء عميل التحالف بنجاح",
+      "alliancesClientUpdated": "تم تحديث عميل التحالف بنجاح",
+      "alliancesClientDeleted": "تم حذف عميل التحالف بنجاح",
+      "errorCreatingAlliancesClient": "خطأ في إنشاء عميل التحالف",
+      "errorUpdatingAlliancesClient": "خطأ في تحديث عميل التحالف",
+      "errorDeletingAlliancesClient": "خطأ في حذف عميل التحالف"
+    },
+    "validation": {
+      "mediaIdRequired": "معرف الوسائط مطلوب",
+      "countryIdRequired": "معرف البلد مطلوب",
+      "industriesIdRequired": "معرف الصناعات مطلوب"
+    }
+  },
+  "alliancesHead": {
+    "title": "رؤساء التحالفات",
+    "createAlliancesHead": "إنشاء رئيس تحالف",
+    "updateAlliancesHead": "تحديث رئيس تحالف",
+    "deleteAlliancesHead": "حذف رئيس تحالف",
+    "createNewAlliancesHead": "إنشاء رئيس تحالف جديد",
+    "updateAlliancesHeadTitle": "تحديث رئيس التحالف: {id}",
+    "deleteAlliancesHeadTitle": "حذف رئيس التحالف",
+    "deleteAlliancesHeadDescription": "هل أنت متأكد من أنك تريد حذف رئيس التحالف هذا؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "title": "العنوان",
+      "titlePlaceholder": "أدخل العنوان",
+      "subTitle": "العنوان الفرعي",
+      "subTitlePlaceholder": "أدخل العنوان الفرعي",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "columns": {
+      "id": "المعرف",
+      "title": "العنوان",
+      "subTitle": "العنوان الفرعي",
+      "translationsCount": "عدد الترجمات",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "translations": "ترجمات"
+    },
+    "filters": {
+      "title": "العنوان",
+      "subTitle": "العنوان الفرعي",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "id": "المعرف",
+      "title": "العنوان",
+      "subTitle": "العنوان الفرعي",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "messages": {
+      "alliancesHeadCreated": "تم إنشاء رئيس التحالف بنجاح",
+      "alliancesHeadUpdated": "تم تحديث رئيس التحالف بنجاح",
+      "alliancesHeadDeleted": "تم حذف رئيس التحالف بنجاح",
+      "errorCreatingAlliancesHead": "خطأ في إنشاء رئيس التحالف",
+      "errorUpdatingAlliancesHead": "خطأ في تحديث رئيس التحالف",
+      "errorDeletingAlliancesHead": "خطأ في حذف رئيس التحالف"
+    },
+    "validation": {
+      "titleMin": "يجب أن يكون العنوان 10 أحرف على الأقل",
+      "titleMax": "يجب ألا يتجاوز العنوان 60 حرفاً",
+      "subTitleMin": "يجب أن يكون العنوان الفرعي 100 حرف على الأقل",
+      "subTitleMax": "يجب ألا يتجاوز العنوان الفرعي 250 حرفاً",
+      "translationTitleMin": "يجب أن يكون عنوان الترجمة 10 أحرف على الأقل",
+      "translationTitleMax": "يجب ألا يتجاوز عنوان الترجمة 60 حرفاً",
+      "translationSubTitleMin": "يجب أن يكون العنوان الفرعي للترجمة 100 حرف على الأقل",
+      "translationSubTitleMax": "يجب ألا يتجاوز العنوان الفرعي للترجمة 250 حرفاً"
+    }
+  },
+  "alliancesVendors": {
+    "title": "موردي التحالفات",
+    "createAlliancesVendor": "إنشاء مورد تحالف",
+    "updateAlliancesVendor": "تحديث مورد تحالف",
+    "deleteAlliancesVendor": "حذف مورد تحالف",
+    "createNewAlliancesVendor": "إنشاء مورد تحالف جديد",
+    "updateAlliancesVendorTitle": "تحديث مورد التحالف: {id}",
+    "deleteAlliancesVendorTitle": "حذف مورد التحالف",
+    "deleteAlliancesVendorDescription": "هل أنت متأكد من أنك تريد حذف مورد التحالف هذا؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "mediaId": "معرف الوسائط",
+      "mediaIdPlaceholder": "اختر الوسائط",
+      "countryId": "معرف البلد",
+      "countryIdPlaceholder": "أدخل معرف البلد",
+      "solutionsId": "معرف الحلول",
+      "solutionsIdPlaceholder": "أدخل معرف الحلول",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "columns": {
+      "id": "المعرف",
+      "media": "الوسائط",
+      "country": "البلاد",
+      "solutions": "الحلول",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "filters": {
+      "mediaId": "معرف الوسائط",
+      "countryId": "معرف البلد",
+      "solutionsId": "معرف الحلول",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "id": "المعرف",
+      "mediaId": "معرف الوسائط",
+      "countryId": "معرف البلد",
+      "solutionsId": "معرف الحلول",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "messages": {
+      "alliancesVendorCreated": "تم إنشاء مورد التحالف بنجاح",
+      "alliancesVendorUpdated": "تم تحديث مورد التحالف بنجاح",
+      "alliancesVendorDeleted": "تم حذف مورد التحالف بنجاح",
+      "errorCreatingAlliancesVendor": "خطأ في إنشاء مورد التحالف",
+      "errorUpdatingAlliancesVendor": "خطأ في تحديث مورد التحالف",
+      "errorDeletingAlliancesVendor": "خطأ في حذف مورد التحالف"
+    },
+    "validation": {
+      "mediaIdRequired": "معرف الوسائط مطلوب",
+      "countryIdRequired": "معرف البلد مطلوب",
+      "solutionsIdRequired": "معرف الحلول مطلوب"
+    }
+  },
+  "countries": {
+    "title": "الدول",
+    "createCountry": "إنشاء دولة",
+    "updateCountry": "تحديث دولة",
+    "deleteCountry": "حذف دولة",
+    "createNewCountry": "إنشاء دولة جديدة",
+    "updateCountryTitle": "تحديث الدولة: {name}",
+    "deleteCountryTitle": "حذف دولة",
+    "deleteCountryDescription": "هل أنت متأكد من أنك تريد حذف الدولة \"{name}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "countryName": "اسم الدولة",
+      "countryNamePlaceholder": "أدخل اسم الدولة",
+      "translations": "الترجمات",
+      "englishName": "الاسم بالإنجليزية",
+      "englishNamePlaceholder": "أدخل الاسم بالإنجليزية",
+      "arabicName": "الاسم بالعربية",
+      "arabicNamePlaceholder": "أدخل الاسم بالعربية",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "columns": {
+      "countryName": "اسم الدولة",
+      "translations": "الترجمات",
+      "createdAt": "تاريخ الإنشاء",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "filters": {
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "name": "الاسم",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "messages": {
+      "countryCreated": "تم إنشاء الدولة بنجاح",
+      "countryUpdated": "تم تحديث الدولة بنجاح",
+      "countryDeleted": "تم حذف الدولة بنجاح",
+      "errorCreatingCountry": "خطأ في إنشاء الدولة",
+      "errorUpdatingCountry": "خطأ في تحديث الدولة",
+      "errorDeletingCountry": "خطأ في حذف الدولة"
+    },
+    "validation": {
+      "countryNameRequired": "اسم الدولة مطلوب",
+      "translationNameRequired": "اسم الترجمة مطلوب"
+    }
+  },
+  "industries": {
+    "title": "الصناعات",
+    "createIndustry": "إنشاء صناعة",
+    "updateIndustry": "تحديث صناعة",
+    "deleteIndustry": "حذف صناعة",
+    "createNewIndustry": "إنشاء صناعة جديدة",
+    "updateIndustryTitle": "تحديث الصناعة: {name}",
+    "deleteIndustryTitle": "حذف صناعة",
+    "deleteIndustryDescription": "هل أنت متأكد من أنك تريد حذف الصناعة \"{name}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "industryName": "(عربي) اسم الصناعة",
+      "industryNamePlaceholder": "أدخل اسم الصناعة بالعربية",
+      "translations": "الترجمات",
+      "englishName": "(إنجليزي) الاسم",
+      "englishNamePlaceholder": "أدخل الاسم بالإنجليزية",
+      "arabicName": "(عربي) الاسم",
+      "arabicNamePlaceholder": "أدخل الاسم بالعربية",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "columns": {
+      "industryName": " اسم الصناعة",
+      "translations": "الترجمات",
+      "createdAt": "تاريخ الإنشاء",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "filters": {
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "name": "الاسم",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "messages": {
+      "industryCreated": "تم إنشاء الصناعة بنجاح",
+      "industryUpdated": "تم تحديث الصناعة بنجاح",
+      "industryDeleted": "تم حذف الصناعة بنجاح",
+      "errorCreatingIndustry": "خطأ في إنشاء الصناعة",
+      "errorUpdatingIndustry": "خطأ في تحديث الصناعة",
+      "errorDeletingIndustry": "خطأ في حذف الصناعة"
+    },
+    "validation": {
+      "industryNameRequired": "اسم الصناعة مطلوب",
+      "translationNameRequired": "اسم الترجمة مطلوب"
+    }
+  },
+  "solutions": {
+    "title": "الحلول",
+    "createSolution": "إنشاء حل",
+    "updateSolution": "تحديث حل",
+    "deleteSolution": "حذف حل",
+    "createNewSolution": "إنشاء حل جديد",
+    "updateSolutionTitle": "تحديث الحل: {name}",
+    "deleteSolutionTitle": "حذف حل",
+    "deleteSolutionDescription": "هل أنت متأكد من أنك تريد حذف الحل \"{name}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "solutionName": "(عربي) اسم الحل",
+      "solutionNamePlaceholder": "أدخل اسم الحل",
+      "translations": "الترجمات",
+      "englishName": "(إنجليزي) الاسم",
+      "englishNamePlaceholder": "أدخل الاسم بالإنجليزية",
+      "arabicName": "(عربي) الاسم",
+      "arabicNamePlaceholder": "أدخل الاسم بالعربية",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "columns": {
+      "solutionName": "اسم الحل",
+      "translations": "الترجمات",
+      "createdAt": "تاريخ الإنشاء",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "filters": {
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "name": "الاسم",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "messages": {
+      "solutionCreated": "تم إنشاء الحل بنجاح",
+      "solutionUpdated": "تم تحديث الحل بنجاح",
+      "solutionDeleted": "تم حذف الحل بنجاح",
+      "errorCreatingSolution": "خطأ في إنشاء الحل",
+      "errorUpdatingSolution": "خطأ في تحديث الحل",
+      "errorDeletingSolution": "خطأ في حذف الحل"
+    },
+    "validation": {
+      "solutionNameRequired": "اسم الحل مطلوب",
+      "translationNameRequired": "اسم الترجمة مطلوب"
+    }
+  },
+  "awardsHead": {
+    "title": "رئيس الجوائز",
+    "createAwardsHead": "إنشاء رئيس جوائز",
+    "updateAwardsHead": "تحديث رئيس الجوائز",
+    "deleteAwardsHead": "حذف رئيس الجوائز",
+    "createNewAwardsHead": "إنشاء رئيس جوائز جديد",
+    "updateAwardsHeadTitle": "تحديث رئيس الجوائز: {id}",
+    "deleteAwardsHeadTitle": "حذف رئيس الجوائز",
+    "deleteAwardsHeadDescription": "هل أنت متأكد من أنك تريد حذف رئيس الجوائز هذا؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "title": "العنوان",
+      "titlePlaceholder": "أدخل العنوان",
+      "subTitle": "العنوان الفرعي",
+      "subTitlePlaceholder": "أدخل العنوان الفرعي",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "columns": {
+      "id": "المعرف",
+      "title": "العنوان",
+      "subTitle": "العنوان الفرعي",
+      "translationsCount": "عدد الترجمات",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "translations": "ترجمات"
+    },
+    "filters": {
+      "title": "العنوان",
+      "subTitle": "العنوان الفرعي",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "id": "المعرف",
+      "title": "العنوان",
+      "subTitle": "العنوان الفرعي",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "messages": {
+      "awardsHeadCreated": "تم إنشاء رئيس الجوائز بنجاح",
+      "awardsHeadUpdated": "تم تحديث رئيس الجوائز بنجاح",
+      "awardsHeadDeleted": "تم حذف رئيس الجوائز بنجاح",
+      "errorCreatingAwardsHead": "خطأ في إنشاء رئيس الجوائز",
+      "errorUpdatingAwardsHead": "خطأ في تحديث رئيس الجوائز",
+      "errorDeletingAwardsHead": "خطأ في حذف رئيس الجوائز"
+    },
+    "validation": {
+      "titleMin": "يجب أن يكون العنوان 10 أحرف على الأقل",
+      "titleMax": "يجب ألا يتجاوز العنوان 60 حرفاً",
+      "subTitleMin": "يجب أن يكون العنوان الفرعي 100 حرف على الأقل",
+      "subTitleMax": "يجب ألا يتجاوز العنوان الفرعي 250 حرفاً",
+      "translationTitleMin": "يجب أن يكون عنوان الترجمة 10 أحرف على الأقل",
+      "translationTitleMax": "يجب ألا يتجاوز عنوان الترجمة 60 حرفاً",
+      "translationSubTitleMin": "يجب أن يكون العنوان الفرعي للترجمة 100 حرف على الأقل",
+      "translationSubTitleMax": "يجب ألا يتجاوز العنوان الفرعي للترجمة 250 حرفاً"
+    }
+  },
+  "awardsCards": {
+    "title": "بطاقات الجوائز",
+    "createAwardsCard": "إنشاء بطاقة جائزة",
+    "updateAwardsCard": "تحديث بطاقة الجائزة",
+    "deleteAwardsCard": "حذف بطاقة الجائزة",
+    "createNewAwardsCard": "إنشاء بطاقة جائزة جديدة",
+    "updateAwardsCardTitle": "تحديث بطاقة الجائزة: {id}",
+    "deleteAwardsCardTitle": "حذف بطاقة الجائزة",
+    "deleteAwardsCardDescription": "هل أنت متأكد من أنك تريد حذف بطاقة الجائزة هذه؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "media": "الوسائط",
+      "mediaPlaceholder": "اختر الوسائط",
+      "name": "الاسم",
+      "namePlaceholder": "أدخل الاسم",
+      "description": "الوصف",
+      "descriptionPlaceholder": "أدخل الوصف",
+      "loading": "جاري التحميل...",
+      "save": "حفظ"
+    },
+    "table": {
+      "id": "المعرف",
+      "media": "الوسائط",
+      "name": "الاسم",
+      "description": "الوصف",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "filters": {
+      "mediaId": "معرف الوسائط",
+      "name": "الاسم",
+      "description": "الوصف",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "id": "المعرف",
+      "name": "الاسم",
+      "description": "الوصف",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "messages": {
+      "awardsCardCreated": "تم إنشاء بطاقة الجائزة بنجاح",
+      "awardsCardUpdated": "تم تحديث بطاقة الجائزة بنجاح",
+      "awardsCardDeleted": "تم حذف بطاقة الجائزة بنجاح",
+      "errorCreatingAwardsCard": "خطأ في إنشاء بطاقة الجائزة",
+      "errorUpdatingAwardsCard": "خطأ في تحديث بطاقة الجائزة",
+      "errorDeletingAwardsCard": "خطأ في حذف بطاقة الجائزة",
+      "confirmDelete": "هل أنت متأكد من أنك تريد حذف \"{name}\"؟ لا يمكن التراجع عن هذا الإجراء."
+    },
+    "validation": {
+      "mediaIdRequired": "الوسائط مطلوبة",
+      "nameMin": "يجب أن يكون الاسم 3 أحرف على الأقل",
+      "nameMax": "يجب ألا يتجاوز الاسم 100 حرف",
+      "descriptionMin": "يجب أن يكون الوصف 10 أحرف على الأقل",
+      "descriptionMax": "يجب ألا يتجاوز الوصف 500 حرف",
+      "translationNameMin": "يجب أن يكون اسم الترجمة 3 أحرف على الأقل",
+      "translationNameMax": "يجب ألا يتجاوز اسم الترجمة 100 حرف",
+      "translationDescriptionMin": "يجب أن يكون وصف الترجمة 10 أحرف على الأقل",
+      "translationDescriptionMax": "يجب ألا يتجاوز وصف الترجمة 500 حرف"
+    }
+  },
+
+  "components": {
+    "documentUploader": {
+      "placeholder": "أفلت صورة هنا أو انقر للتصفح",
+      "browse": "تصفح",
+      "supportingText": "أفلت صورة هنا أو انقر للتصفح"
+    }
+  },
+  "footerContacts": {
+    "title": "تواصلات الفوتر",
+    "deleteFooterContacts": "حذف تواصلات الفوتر",
+    "deleteDescription": "هل أنت متأكد من أنك تريد حذف تواصلات الفوتر؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "phoneNumberKey": "رمز الهاتف",
+      "phoneNumberKeyPlaceholder": "أدخل رمز الهاتف",
+      "phoneNumber": "الهاتف",
+      "phoneNumberPlaceholder": "أدخل الهاتف",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل البريد الإلكتروني"
+    },
+    "messages": {
+      "footerContactsCreated": "تم إنشاء تواصلات الفوتر بنجاح",
+      "footerContactsUpdated": "تم تحديث تواصلات الفوتر بنجاح",
+      "errorCreatingFooterContacts": "خطأ في إنشاء تواصلات الفوتر",
+      "errorUpdatingFooterContacts": "خطأ في تحديث تواصلات الفوتر",
+      "footerContactsDeleted": "تم حذف تواصلات الفوتر بنجاح"
+    },
+    "createFooterContacts": "إنشاء تواصلات الفوتر",
+    "updateFooterContacts": "تحديث تواصلات الفوتر"
+  },
+  "footerLocations": {
+    "title": "مواقع الفوتر",
+    "deleteFooterLocations": "حذف مواقع الفوتر",
+    "deleteDescription": "هل أنت متأكد من أنك تريد حذف مواقع الفوتر؟ لا يمكن التراجع عن هذا الإجراء.",
+    "form": {
+      "name": "الاسم",
+      "namePlaceholder": "أدخل الاسم"
+    },
+    "messages": {
+      "footerLocationCreated": "تم إنشاء مواقع الفوتر بنجاح",
+      "footerLocationUpdated": "تم تحديث مواقع الفوتر بنجاح",
+      "errorCreatingFooterLocations": "خطأ في إنشاء مواقع الفوتر",
+      "errorUpdatingFooterLocations": "خطأ في تحديث مواقع الفوتر",
+      "footerLocationDeleted": "تم حذف مواقع الفوتر بنجاح",
+      "errorCreatingFooterLocation": "خطأ في إنشاء مواقع الفوتر",
+      "errorUpdatingFooterLocation": "خطأ في تحديث مواقع الفوتر",
+      "errorDeletingFooterLocation": "خطأ في حذف مواقع الفوتر",
+      "maxLocationsReached": "يجب أن يكون لديك أقل من 5 مواقع"
+    },
+    "table": {
+      "id": "المعرف",
+      "name": "الاسم",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "filters": {
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث"
+    },
+    "sort": {
+      "id": "المعرف",
+      "name": "الاسم",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "createFooterLocation": "إنشاء مواقع الفوتر",
+    "updateFooterLocation": "تحديث مواقع الفوتر",
+    "deleteFooterLocation": "حذف مواقع الفوتر"
+  },
+  "sustainability": {
+    "cardSocial": {
+      "title": "بطاقة الاجتماعي",
+      "createCardSocial": "إنشاء بطاقة اجتماعي",
+      "createNewCardSocial": "إنشاء بطاقة اجتماعي جديدة",
+      "updateCardSocial": "تحديث بطاقة الاجتماعي",
+      "deleteCardSocial": "حذف بطاقة الاجتماعي",
+      "columns": {
+        "id": "المعرف",
+        "title": "العنوان",
+        "media": "الوسائط",
+        "description": "الوصف",
+        "createdAt": "تاريخ الإنشاء",
+        "updatedAt": "تاريخ التحديث",
+        "actions": "الإجراءات",
+        "edit": "تعديل",
+        "delete": "حذف"
+      },
+      "form": {
+        "title": "العنوان",
+        "titlePlaceholder": "أدخل العنوان",
+        "media": "الوسائط",
+        "description": "الوصف",
+        "descriptionPlaceholder": "أدخل الوصف",
+        "save": "حفظ",
+        "loading": "جاري التحميل..."
+      },
+      "filters": {
+        "createdAt": "تاريخ الإنشاء",
+        "updatedAt": "تاريخ التحديث"
+      },
+      "sort": {
+        "id": "المعرف",
+        "title": "العنوان",
+        "createdAt": "تاريخ الإنشاء",
+        "updatedAt": "تاريخ التحديث"
+      },
+      "validation": {
+        "titleRequired": "العنوان مطلوب",
+        "mediaRequired": "الوسائط مطلوبة",
+        "descriptionRequired": "الوصف مطلوب",
+        "mediaMin": "يجب أن يكون الوسائط 1 صورة على الأقل",
+        "mediaMax": "يجب ألا يتجاوز الوسائط 10 صور",
+        "mediaType": "يجب أن يكون الوسائط صورة",
+        "mediaSize": "يجب أن يكون الوسائط 1000 حرف على الأقل",
+        "mediaFormat": "يجب أن يكون الوسائط في الشكل .jpg, .jpeg, .png, .gif, .bmp, .tiff, .ico, .webp"
+      },
+      "messages": {
+        "cardSocialCreated": "تم إنشاء بطاقة الاجتماعي بنجاح",
+        "cardSocialUpdated": "تم تحديث بطاقة الاجتماعي بنجاح",
+        "errorCreatingCardSocial": "خطأ في إنشاء بطاقة الاجتماعي",
+        "errorUpdatingCardSocial": "خطأ في تحديث بطاقة الاجتماعي",
+        "errorDeletingCardSocial": "خطأ في حذف بطاقة الاجتماعي",
+        "deleteConfirmation": "هل أنت متأكد من حذف \"{title}\"؟",
+        "deleteNotSupported": "وظيفة الحذف غير مدعومة"
+      }
+    }
+  }
+}

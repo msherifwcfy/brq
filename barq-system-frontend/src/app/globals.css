@@ -1,0 +1,198 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Import Frutiger LT Std fonts - Local files */
+@font-face {
+  font-family: 'Frutiger LT Std Light';
+  src: url('/assets/fonts/Frutiger LT Std/Frutiger LT Std 45 Light/Frutiger LT Std 45 Light.otf')
+    format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frutiger LT Std Roman';
+  src: url('/assets/fonts/Frutiger LT Std/Frutiger LT Std 55 Roman/Frutiger LT Std 55 Roman.otf')
+    format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frutiger LT Std Light Italic';
+  src: url('/assets/fonts/Frutiger LT Std/Frutiger LT Std 46 Light Italic/Frutiger LT Std 46 Light Italic.otf')
+    format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frutiger LT Std Bold';
+  src: url('/assets/fonts/Frutiger LT Std/Frutiger LT Std 65 Bold/Frutiger LT Std 65 Bold.otf')
+    format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frutiger LT Std Bold Italic';
+  src: url('/assets/fonts/Frutiger LT Std/Frutiger LT Std 66 Bold Italic/Frutiger LT Std 66 Bold Italic.otf')
+    format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frutiger LT Std Black';
+  src: url('/assets/fonts/Frutiger LT Std/Frutiger LT Std 75 Black/Frutiger LT Std 75 Black.otf')
+    format('opentype');
+  font-weight: 850;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frutiger LT Std Condensed';
+  src: url('/assets/fonts/Frutiger LT Std/Frutiger LT Std 46 Light Italic/Frutiger LT Std 46 Light Italic.otf')
+    format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: condensed;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frutiger LT Std Bold extra ';
+  src: url('/assets/fonts/Frutiger LT Std/Frutiger LT Std 75 Black/Frutiger LT Std 75 Black.otf')
+    format('opentype');
+  font-weight: 850;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans:
+    'Frutiger LT Std Roman', var(--font-geist-sans), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-sans-bold:
+    'Frutiger LT Std Bold', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono);
+  --font-outfit: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Frutiger LT Std', ui-sans-serif, system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .hero-heading {
+    font-family: 'Frutiger LT Std', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 61.6px;
+  }
+
+  .hero-text {
+    font-family: 'Frutiger LT Std', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  .nav-text {
+    font-family: 'Frutiger LT Std', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  .academy-button:hover {
+    border: 1px solid var(--Primary-Blue-20, #d3f1fa) !important;
+    background: linear-gradient(
+      95deg,
+      var(--Secondary-Blue-100, #318ccc) 13.23%,
+      var(--Primary-Blue-100, #25b8e4) 81.63%
+    ) !important;
+    box-shadow: 4px 8px 24px 0 rgba(32, 32, 32, 0.25) inset !important;
+  }
+}
+
+.frutiger-lt-std-bold {
+  font-family:
+    'Frutiger LT Std Bold', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.frutiger-lt-std-light {
+  font-family:
+    'Frutiger LT Std Light', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.frutiger-lt-std-light-italic {
+  font-family:
+    'Frutiger LT Std Light Italic', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.frutiger-lt-std-black {
+  font-family:
+    'Frutiger LT Std Black', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.frutiger-lt-std-condensed {
+  font-family:
+    'Frutiger LT Std Condensed', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.frutiger-lt-std-bold-extra {
+  font-family:
+    'Frutiger LT Std Bold extra', ui-sans-serif, system-ui, sans-serif !important;
+}

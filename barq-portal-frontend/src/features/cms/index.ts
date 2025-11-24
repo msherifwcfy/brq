@@ -1,0 +1,12 @@
+export { AlliancesPage } from "./alliances";
+export { AwardsPage } from "./awards";
+export { SustainabilityPage } from "./sustainability";
+export { AutomationPage } from "./automation";
+export { FooterPage } from "./footer";
+export { ManagedServicesPage } from "./managed-services";
+export { NewsroomCMSPage } from "./newsroom";
+export { EventsCMSPage } from "./events";
+export { CampaignsCMSPage } from "./campaigns";
+export { ResourcesCMSPage } from "./resources";
+export { CybersecurityPage } from "./cybersecurity";
+export { ItInfrastructurePage } from "./it-infrastructure";

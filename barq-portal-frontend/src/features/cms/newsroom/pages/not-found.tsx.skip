@@ -1,0 +1,77 @@
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+;
+import { Link } from 'react-router';
+
+;
+
+const NotFound = () => {
+    return (
+        <div className="bg-black min-h-screen">
+            <section className="relative bg-black overflow-hidden min-h-screen flex flex-col">
+                {/* Background Elements */}
+                <div className='absolute top-0 left-0 right-0 bottom-0 z-5 h-full w-full'>
+                    <img
+                        src="/assets/newsroom/newsroom-bg.svg"
+                        alt="Background"
+                        width={1440}
+                        height={1200}
+                        className="object-cover z-5"
+                        style={{
+                            opacity: "0.3",
+                            minHeight: "100vh",
+                            minWidth: "100%"
+                        }}
+                    />
+                </div>
+
+                {/* Navbar */}
+                <div className="relative z-30 max-w-7xl mx-auto w-full">
+                    {/* Navbar removed for CMS */}
+                </div>
+
+                {/* Content */}
+                <div className="relative z-40 flex-1 flex items-center justify-center">
+                    <div className="max-w-2xl mx-auto px-[5%] text-center">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.2 }}
+                            className="space-y-6"
+                        >
+                            <h1 className='text-white text-[48px] lg:text-[64px] frutiger-lt-std-bold leading-[56px] lg:leading-[72px]'>
+                                Article Not Found
+                            </h1>
+
+                            <p className='text-[#D9DDDD] text-[18px] leading-[27px] max-w-[500px] mx-auto'>
+                                The newsroom article you are looking for does not exist or has been moved.
+                            </p>
+
+                            <div className="flex gap-4 justify-center mt-8">
+                                <Link
+                                    href="/newsroom"
+                                    className="inline-flex items-center gap-3 px-6 py-3 border-[2px] border-[#25B8E4] text-[#25B8E4] rounded-[8px] text-[16px] font-bold transition-all duration-300 hover:bg-[#25B8E4] hover:text-white"
+                                >
+                                    Back to Newsroom
+                                </Link>
+
+                                <Link
+                                    href="/"
+                                    className="inline-flex items-center gap-3 px-6 py-3 bg-[#25B8E4] text-white rounded-[8px] text-[16px] font-bold transition-all duration-300 hover:bg-[#1e9bb8]"
+                                >
+                                    Go Home
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Footer removed for CMS */}
+            </section>
+        </div>
+    );
+};
+
+export default NotFound;

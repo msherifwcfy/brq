@@ -1,0 +1,3811 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_entry",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["App"]
+      }
+    },
+    "/users": {
+      "post": {
+        "operationId": "UsersController_create",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read one Users.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadOneUserQuery"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Users has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/UsersEntity"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": ["Users"]
+      },
+      "get": {
+        "operationId": "UsersController_read",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read all Users.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadUsersQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Users has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UsersEntity"
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "number"
+                        },
+                        "skip": {
+                          "type": "number"
+                        },
+                        "take": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Users"]
+      }
+    },
+    "/users/{id}": {
+      "patch": {
+        "operationId": "UsersController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Users has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/UsersEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Users"]
+      },
+      "get": {
+        "operationId": "UsersController_readOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read one Users.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadOneUserQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Users has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/UsersEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Users"]
+      }
+    },
+    "/users/profile": {
+      "patch": {
+        "operationId": "UsersController_updateProfile",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Users has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/UsersEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Users"]
+      }
+    },
+    "/users/me": {
+      "get": {
+        "operationId": "UsersController_readMe",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read one Users.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadOneUserQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Users has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/UsersEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Users"]
+      }
+    },
+    "/users/{id}/soft": {
+      "delete": {
+        "operationId": "UsersController_softDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Users has been successfully soft deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Users"]
+      }
+    },
+    "/auth/verify-otp": {
+      "post": {
+        "operationId": "AuthController_verifyOtp",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The OTP has been successfully verified."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/resend-otp": {
+      "post": {
+        "operationId": "AuthController_resendOtp",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The OTP has been successfully resent."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "operationId": "AuthController_signin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The signin has been successfully completed."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/forget-password": {
+      "post": {
+        "operationId": "AuthController_forgetPassword",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The forget password has been successfully completed."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/complete-forget-password": {
+      "post": {
+        "operationId": "AuthController_completeForgetPassword",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The forget password has been successfully completed."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The logout has been successfully completed."
+          },
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/refresh-token": {
+      "post": {
+        "operationId": "AuthController_refreshToken",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Access token has been successfully refreshed."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/verify-link": {
+      "post": {
+        "operationId": "AuthController_verifyLink",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The link has been successfully verified."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/resend-link": {
+      "post": {
+        "operationId": "AuthController_resendLink",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The link has been successfully resent."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/complete-password": {
+      "post": {
+        "operationId": "AuthController_completePassword",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The password has been successfully completed."
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/permissions/{id}": {
+      "patch": {
+        "operationId": "PermissionsController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "The Permissions to be updated.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Permissions has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/PermissionsEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Permissions"]
+      },
+      "get": {
+        "operationId": "PermissionsController_readOne",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read one Permissions.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadOnePermissionsQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Permissions has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/PermissionsEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Permissions"]
+      }
+    },
+    "/permissions": {
+      "get": {
+        "operationId": "PermissionsController_read",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read all Permissions.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadPermissionsQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Permissions has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PermissionsEntity"
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "number"
+                        },
+                        "skip": {
+                          "type": "number"
+                        },
+                        "take": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Permissions"]
+      }
+    },
+    "/roles": {
+      "post": {
+        "operationId": "RolesController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "The Roles to be created.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoles"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The Roles has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/RolesEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Roles"]
+      },
+      "get": {
+        "operationId": "RolesController_read",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read all Roles.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadRolesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Roles has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RolesEntity"
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "number"
+                        },
+                        "skip": {
+                          "type": "number"
+                        },
+                        "take": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Roles"]
+      }
+    },
+    "/roles/{id}": {
+      "patch": {
+        "operationId": "RolesController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "The Roles to be updated.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoles"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Roles has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/RolesEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Roles"]
+      },
+      "delete": {
+        "operationId": "RolesController_delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Roles has been successfully deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Roles"]
+      },
+      "get": {
+        "operationId": "RolesController_readOne",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read one Roles.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadOneRolesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Roles has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/RolesEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Roles"]
+      }
+    },
+    "/roles/{id}/soft": {
+      "delete": {
+        "operationId": "RolesController_softDelete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Roles has been successfully soft deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Roles"]
+      }
+    },
+    "/role-permissions": {
+      "post": {
+        "operationId": "RolePermissionsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "The RolePermissions to be created.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRolePermissions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The RolePermissions has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/RolePermissionsEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["RolePermissions"]
+      },
+      "get": {
+        "operationId": "RolePermissionsController_read",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read all RolePermissions.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadRolePermissionsQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RolePermissions has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RolePermissionsEntity"
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "number"
+                        },
+                        "skip": {
+                          "type": "number"
+                        },
+                        "take": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["RolePermissions"]
+      }
+    },
+    "/role-permissions/{id}": {
+      "patch": {
+        "operationId": "RolePermissionsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "The RolePermissions to be updated.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRolePermissions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The RolePermissions has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/RolePermissionsEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["RolePermissions"]
+      },
+      "get": {
+        "operationId": "RolePermissionsController_readOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read one RolePermissions.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadOneRolePermissionsQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RolePermissions has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/RolePermissionsEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["RolePermissions"]
+      }
+    },
+    "/role-permissions/user-permissions": {
+      "get": {
+        "operationId": "RolePermissionsController_userPermissions",
+        "parameters": [
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read all RolePermissions.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadRolePermissionsQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": ["RolePermissions"]
+      }
+    },
+    "/media/upload": {
+      "post": {
+        "operationId": "MediaController_uploadFile",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "File uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaEntity"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Media"]
+      }
+    },
+    "/media/upload/{id}": {
+      "put": {
+        "operationId": "MediaController_updateFile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "File updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaEntity"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Media"]
+      }
+    },
+    "/media/{id}": {
+      "get": {
+        "operationId": "MediaController_readOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "description": "The query to be used to read one Media.",
+            "schema": {
+              "$ref": "#/components/schemas/ReadOneMediaQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Media has been successfully read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MediaEntity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Media"]
+      }
+    },
+    "/media/{id}/stream": {
+      "get": {
+        "operationId": "MediaController_streamMedia",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Media file is being streamed.",
+            "headers": {
+              "Content-Type": {
+                "description": "MIME type of the file",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Length": {
+                "description": "Size of the file in bytes",
+                "schema": {
+                  "type": "number"
+                }
+              },
+              "Accept-Ranges": {
+                "description": "Indicates that the server supports range requests",
+                "schema": {
+                  "type": "string",
+                  "example": "bytes"
+                }
+              },
+              "Content-Range": {
+                "description": "Range of bytes being served (for partial content)",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial content is being streamed (for range requests)."
+          },
+          "404": {
+            "description": "Media file not found."
+          }
+        },
+        "tags": ["Media"]
+      }
+    }
+  },
+  "info": {
+    "title": "Nestjs Template API",
+    "description": "",
+    "version": "0.1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "UsersEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "account_verified": {
+            "type": "boolean"
+          },
+          "verification_code": {
+            "type": "string"
+          },
+          "verification_code_reason": {
+            "type": "string",
+            "enum": [
+              "signup",
+              "signin",
+              "forget_password",
+              "forget_password_verified",
+              "invited_user",
+              "invited_user_verified"
+            ]
+          },
+          "verification_code_expire_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "refresh_token": {
+            "type": "string"
+          },
+          "preferred_language": {
+            "type": "string",
+            "enum": ["ar", "en"]
+          },
+          "role_id": {
+            "type": "number"
+          },
+          "user_role": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RolesEntity"
+              }
+            ]
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deleted_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "name",
+          "password",
+          "account_verified",
+          "verification_code",
+          "verification_code_reason",
+          "verification_code_expire_at",
+          "refresh_token",
+          "preferred_language",
+          "role_id",
+          "created_at",
+          "updated_at",
+          "deleted_at"
+        ]
+      },
+      "RoleTranslationsEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "role_id": {
+            "type": "number"
+          },
+          "role_translation_role": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RolesEntity"
+              }
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string",
+            "enum": ["ar", "en"]
+          }
+        },
+        "required": ["id", "role_id", "name", "language"]
+      },
+      "PermissionTranslationsEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "permission_id": {
+            "type": "number"
+          },
+          "permission_translation_permission": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PermissionsEntity"
+              }
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "permission_id", "name", "language"]
+      },
+      "PermissionsEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "resource": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "permission_permission_translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionTranslationsEntity"
+            }
+          },
+          "permission_role_permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RolePermissionsEntity"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "key",
+          "resource",
+          "action",
+          "created_at",
+          "updated_at",
+          "permission_permission_translations",
+          "permission_role_permissions"
+        ]
+      },
+      "RolePermissionsEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "role_id": {
+            "type": "number"
+          },
+          "role_permission_role": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RolesEntity"
+              }
+            ]
+          },
+          "permission_id": {
+            "type": "number"
+          },
+          "role_permission_permission": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PermissionsEntity"
+              }
+            ]
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "role_id",
+          "permission_id",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "RolesEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "prefix": {
+            "nullable": true,
+            "enum": ["ADMIN", "EMPLOYEE"],
+            "type": "string"
+          },
+          "admin_role": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "role_users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsersEntity"
+            }
+          },
+          "role_role_translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleTranslationsEntity"
+            }
+          },
+          "role_role_permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RolePermissionsEntity"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "prefix",
+          "admin_role",
+          "created_at",
+          "updated_at",
+          "role_users",
+          "role_role_translations",
+          "role_role_permissions"
+        ]
+      },
+      "MediaEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "mime_type": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "key",
+          "size",
+          "mime_type",
+          "format",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "CompletePassword": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])[A-Za-z\\d!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{8,}$"
+          }
+        },
+        "required": ["email", "password"],
+        "additionalProperties": false
+      },
+      "Complete_forget_password": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])[A-Za-z\\d!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{8,}$"
+          }
+        },
+        "required": ["email", "password"],
+        "additionalProperties": false
+      },
+      "ForgetPassword": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": ["email"],
+        "additionalProperties": false
+      },
+      "RefreshToken": {
+        "type": "object",
+        "properties": {
+          "refresh_token": {
+            "type": "string"
+          }
+        },
+        "required": ["refresh_token"],
+        "additionalProperties": false
+      },
+      "ResendLink": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": ["email"],
+        "additionalProperties": false
+      },
+      "ResendOtp": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "Signin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["email", "password"],
+        "additionalProperties": false
+      },
+      "VerifyLink": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": ["token"],
+        "additionalProperties": false
+      },
+      "VerifyOtp": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "otp": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 4
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "CreateMedia": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "mime_type": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string"
+          }
+        },
+        "required": ["url", "key", "size", "mime_type", "format"],
+        "additionalProperties": false
+      },
+      "ReadMediaFilters": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "type": "number"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ],
+                      "type": "number"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "url": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "key": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "size": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "type": "number"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ],
+                      "type": "number"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "mime_type": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "format": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "created_at": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadMediaOrders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "enum": ["asc", "desc"]
+          },
+          "url": {
+            "enum": ["asc", "desc"]
+          },
+          "key": {
+            "enum": ["asc", "desc"]
+          },
+          "size": {
+            "enum": ["asc", "desc"]
+          },
+          "mime_type": {
+            "enum": ["asc", "desc"]
+          },
+          "format": {
+            "enum": ["asc", "desc"]
+          },
+          "created_at": {
+            "enum": ["asc", "desc"]
+          },
+          "updated_at": {
+            "enum": ["asc", "desc"]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadMediaQuery": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/ReadMediaFilters"
+          },
+          "relations": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": false
+          },
+          "orders": {
+            "$ref": "#/components/schemas/ReadMediaOrders"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "skip": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 0
+              },
+              "take": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 25
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "skip": 0,
+              "take": 25
+            }
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadMediaRelations": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadOneMediaQuery": {
+        "type": "object",
+        "properties": {
+          "relations": {
+            "$ref": "#/components/schemas/ReadMediaRelations"
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "CreatePermissions": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "resource": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "permission_permission_translations": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["id"],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "permission_id": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["name", "language"],
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "nullable": true
+          },
+          "permission_role_permissions": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["id"],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role_id": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "permission_id": {
+                      "type": "number",
+                      "nullable": true
+                    }
+                  },
+                  "required": [],
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "required": ["name", "key", "resource", "action"],
+        "additionalProperties": false
+      },
+      "ReadOnePermissionsQuery": {
+        "type": "object",
+        "properties": {
+          "relations": {
+            "type": "object",
+            "properties": {
+              "permission_permission_translations": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "type": "boolean"
+              },
+              "permission_role_permissions": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadRolePermissionsRelations"
+                  }
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "permission_permission_translations": true
+            }
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadPermissionsFilters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "key": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "resource": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "action": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "permission_role_permissions": {
+            "$ref": "#/components/schemas/ReadRolePermissionsFilters",
+            "nullable": true
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadPermissionsOrders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "enum": ["asc", "desc"]
+          },
+          "name": {
+            "enum": ["asc", "desc"]
+          },
+          "key": {
+            "enum": ["asc", "desc"]
+          },
+          "resource": {
+            "enum": ["asc", "desc"]
+          },
+          "action": {
+            "enum": ["asc", "desc"]
+          },
+          "created_at": {
+            "enum": ["asc", "desc"]
+          },
+          "updated_at": {
+            "enum": ["asc", "desc"]
+          },
+          "permission_role_permissions": {
+            "anyOf": [
+              {
+                "enum": ["asc", "desc"]
+              },
+              {
+                "$ref": "#/components/schemas/ReadRolePermissionsOrders"
+              }
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadPermissionsQuery": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/ReadPermissionsFilters"
+          },
+          "relations": {
+            "type": "object",
+            "properties": {
+              "permission_permission_translations": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "type": "boolean"
+              },
+              "permission_role_permissions": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadRolePermissionsRelations"
+                  }
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "permission_permission_translations": true
+            }
+          },
+          "orders": {
+            "$ref": "#/components/schemas/ReadPermissionsOrders"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "skip": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 0
+              },
+              "take": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 25
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "skip": 0,
+              "take": 25
+            }
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadPermissionsRelations": {
+        "type": "object",
+        "properties": {
+          "permission_permission_translations": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "boolean"
+          },
+          "permission_role_permissions": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/components/schemas/ReadRolePermissionsRelations"
+              }
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "UpdatePermissions": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "permission_permission_translations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "name": {
+                  "type": "string"
+                },
+                "language": {
+                  "enum": ["ar", "en"]
+                }
+              },
+              "required": ["name", "language"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["name", "permission_permission_translations"],
+        "additionalProperties": false
+      },
+      "CreateRolePermissions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "role_id": {
+              "type": "number",
+              "nullable": true
+            },
+            "permission_id": {
+              "type": "number",
+              "nullable": true
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "ReadOneRolePermissionsQuery": {
+        "type": "object",
+        "properties": {
+          "relations": {
+            "type": "object",
+            "properties": {
+              "role_permission_role": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadRolesRelations"
+                  }
+                ]
+              },
+              "role_permission_permission": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadPermissionsRelations"
+                  }
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadRolePermissionsFilters": {
+        "type": "object",
+        "properties": {
+          "role_id": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "type": "number"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ],
+                      "type": "number"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "role_permission_role": {
+            "$ref": "#/components/schemas/ReadRolesFilters",
+            "nullable": true
+          },
+          "permission_id": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "type": "number"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ],
+                      "type": "number"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "role_permission_permission": {
+            "$ref": "#/components/schemas/ReadPermissionsFilters",
+            "nullable": true
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadRolePermissionsOrders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "enum": ["asc", "desc"]
+          },
+          "role_id": {
+            "enum": ["asc", "desc"]
+          },
+          "role_permission_role": {
+            "anyOf": [
+              {
+                "enum": ["asc", "desc"]
+              },
+              {
+                "$ref": "#/components/schemas/ReadRolesOrders"
+              }
+            ]
+          },
+          "permission_id": {
+            "enum": ["asc", "desc"]
+          },
+          "role_permission_permission": {
+            "anyOf": [
+              {
+                "enum": ["asc", "desc"]
+              },
+              {
+                "$ref": "#/components/schemas/ReadPermissionsOrders"
+              }
+            ]
+          },
+          "created_at": {
+            "enum": ["asc", "desc"]
+          },
+          "updated_at": {
+            "enum": ["asc", "desc"]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadRolePermissionsQuery": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/ReadRolePermissionsFilters"
+          },
+          "relations": {
+            "type": "object",
+            "properties": {
+              "role_permission_role": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadRolesRelations"
+                  }
+                ]
+              },
+              "role_permission_permission": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadPermissionsRelations"
+                  }
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "orders": {
+            "$ref": "#/components/schemas/ReadRolePermissionsOrders"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "skip": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 0
+              },
+              "take": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 25
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "skip": 0,
+              "take": 25
+            }
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadRolePermissionsRelations": {
+        "type": "object",
+        "properties": {
+          "role_permission_role": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/components/schemas/ReadRolesRelations"
+              }
+            ]
+          },
+          "role_permission_permission": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/components/schemas/ReadPermissionsRelations"
+              }
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "UpdateRolePermissions": {
+        "type": "object",
+        "properties": {
+          "role_id": {
+            "type": "number",
+            "nullable": true
+          },
+          "role_permission_role": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  }
+                },
+                "required": ["id"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "prefix": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "prefix"],
+                "additionalProperties": false
+              }
+            ],
+            "nullable": true
+          },
+          "permission_id": {
+            "type": "number",
+            "nullable": true
+          },
+          "role_permission_permission": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  }
+                },
+                "required": ["id"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "key": {
+                    "type": "string"
+                  },
+                  "resource": {
+                    "type": "string"
+                  },
+                  "action": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "key", "resource", "action"],
+                "additionalProperties": false
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "CreateRoles": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role_role_translations": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "enum": ["ar", "en"]
+                    }
+                  },
+                  "required": ["name", "language"],
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "nullable": true
+          },
+          "role_role_permissions": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "permission_id": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["permission_id"],
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      },
+      "ReadOneRolesQuery": {
+        "type": "object",
+        "properties": {
+          "relations": {
+            "type": "object",
+            "properties": {
+              "role_users": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadUsersRelations"
+                  }
+                ]
+              },
+              "role_role_translations": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "type": "boolean"
+              },
+              "role_role_permissions": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadRolePermissionsRelations"
+                  }
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "role_role_translations": true
+            }
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadRolesFilters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "prefix": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "business_account_id": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "type": "number"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ],
+                      "type": "number"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "admin_role": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "type": "boolean"
+              },
+              "$op": {
+                "enum": ["Is", "IsNot", "IsNull", "IsNotNull"]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "role_users": {
+            "$ref": "#/components/schemas/ReadUsersFilters",
+            "nullable": true
+          },
+          "role_role_permissions": {
+            "$ref": "#/components/schemas/ReadRolePermissionsFilters",
+            "nullable": true
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadRolesOrders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "enum": ["asc", "desc"]
+          },
+          "name": {
+            "enum": ["asc", "desc"]
+          },
+          "prefix": {
+            "enum": ["asc", "desc"]
+          },
+          "created_at": {
+            "enum": ["asc", "desc"]
+          },
+          "updated_at": {
+            "enum": ["asc", "desc"]
+          },
+          "role_users": {
+            "anyOf": [
+              {
+                "enum": ["asc", "desc"]
+              },
+              {
+                "$ref": "#/components/schemas/ReadUsersOrders"
+              }
+            ]
+          },
+          "role_role_permissions": {
+            "anyOf": [
+              {
+                "enum": ["asc", "desc"]
+              },
+              {
+                "$ref": "#/components/schemas/ReadRolePermissionsOrders"
+              }
+            ]
+          },
+          "admin_role": {
+            "enum": ["asc", "desc"]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadRolesQuery": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/ReadRolesFilters"
+          },
+          "relations": {
+            "type": "object",
+            "properties": {
+              "role_users": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadUsersRelations"
+                  }
+                ]
+              },
+              "role_role_translations": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "type": "boolean"
+              },
+              "role_role_permissions": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadRolePermissionsRelations"
+                  }
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "role_role_translations": true
+            }
+          },
+          "orders": {
+            "$ref": "#/components/schemas/ReadRolesOrders"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "skip": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 0
+              },
+              "take": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 25
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "skip": 0,
+              "take": 25
+            }
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadRolesRelations": {
+        "type": "object",
+        "properties": {
+          "role_users": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/components/schemas/ReadUsersRelations"
+              }
+            ]
+          },
+          "role_role_translations": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "boolean"
+          },
+          "role_role_permissions": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/components/schemas/ReadRolePermissionsRelations"
+              }
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "UpdateRoles": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role_role_translations": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "role_id": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "enum": ["ar", "en"]
+                    }
+                  },
+                  "required": ["name", "language"],
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "nullable": true
+          },
+          "role_role_permissions": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["id"],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role_id": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "permission_id": {
+                      "type": "number",
+                      "nullable": true
+                    }
+                  },
+                  "required": [],
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "CreateUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role_id": {
+            "type": "integer"
+          }
+        },
+        "required": ["email", "name", "role_id"],
+        "additionalProperties": false
+      },
+      "ReadOneUserQuery": {
+        "type": "object",
+        "properties": {
+          "relations": {
+            "type": "object",
+            "properties": {
+              "user_role": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadRolesRelations"
+                  }
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadUsersFilters": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "name": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "Contains",
+                  "StartsWith",
+                  "EndsWith",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "role_id": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "type": "number"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ],
+                      "type": "number"
+                    }
+                  }
+                ]
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull",
+                  "In",
+                  "NotIn"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "created_at": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "object",
+            "properties": {
+              "$val": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "$op": {
+                "enum": [
+                  "Eq",
+                  "NotEq",
+                  "GreaterThan",
+                  "LessThan",
+                  "GreaterThanOrEq",
+                  "LessThanOrEq",
+                  "IsNull",
+                  "IsNotNull"
+                ]
+              }
+            },
+            "required": ["$op"],
+            "additionalProperties": false,
+            "nullable": true
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadUsersOrders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "enum": ["asc", "desc"]
+          },
+          "email": {
+            "enum": ["asc", "desc"]
+          },
+          "name": {
+            "enum": ["asc", "desc"]
+          },
+          "role_id": {
+            "enum": ["asc", "desc"]
+          },
+          "user_role": {
+            "anyOf": [
+              {
+                "enum": ["asc", "desc"]
+              },
+              {
+                "$ref": "#/components/schemas/ReadRolesOrders"
+              }
+            ]
+          },
+          "created_at": {
+            "enum": ["asc", "desc"]
+          },
+          "updated_at": {
+            "enum": ["asc", "desc"]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadUsersQuery": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/ReadUsersFilters"
+          },
+          "relations": {
+            "type": "object",
+            "properties": {
+              "user_role": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ],
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadRolesRelations"
+                  }
+                ]
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "orders": {
+            "$ref": "#/components/schemas/ReadUsersOrders"
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "skip": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 0
+              },
+              "take": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "number",
+                "default": 25
+              }
+            },
+            "required": [],
+            "additionalProperties": false,
+            "default": {
+              "skip": 0,
+              "take": 25
+            }
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "ReadUsersRelations": {
+        "type": "object",
+        "properties": {
+          "user_role": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/components/schemas/ReadRolesRelations"
+              }
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "UpdateUserProfile": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])[A-Za-z\\d!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{8,}$"
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "UpdateUsers": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "role_id": {
+            "type": "integer",
+            "nullable": true
+          }
+        },
+        "required": ["name", "role_id"],
+        "additionalProperties": false
+      },
+      "ValidateParamId": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Postman Collection",
+    "url": "/docs-json"
+  }
+}
