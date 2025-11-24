@@ -7,6 +7,7 @@ import type {
   WhoAreWeControllerReadResponse,
   LandingNumbersControllerReadResponse,
 } from '@/sdk/types.gen';
+import { useTranslation } from 'react-i18next';
 
 interface CounterProps {
   end: number;
@@ -83,17 +84,11 @@ export default function WhoAreWeSection({
   const statsRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px', amount: 0.2 });
   const isStatsInView = useInView(statsRef, { once: true, amount: 0.3 });
+  const { i18n, t } = useTranslation();
 
   const whoAreWeContent = whoAreWeData?.data?.[0];
   const landingNumbers = landingNumbersData?.data || [];
 
-  // const defaultStats = [
-  //   { value: 4, label: 'Regional Offices', prefix: '', suffix: '' },
-  //   { value: 400, label: 'Employees', prefix: '+', suffix: '' },
-  //   { value: 1500, label: 'Customers Across MEA', prefix: '+', suffix: '' },
-  //   { value: 100, label: 'Vendors & Partners', prefix: '+', suffix: '' },
-  //   { value: 50, label: 'Awards', prefix: '+', suffix: '' },
-  // ];
 
   const stats =
     landingNumbers.length > 0
@@ -118,7 +113,7 @@ export default function WhoAreWeSection({
           damping: 30,
           stiffness: 120,
           duration: 0.4,
-          delay: 0.1
+          delay: 0.2
         }}
         className='absolute top-[45%] right-0 bottom-0 left-0  flex items-center justify-center z-[50] '
       >
@@ -133,7 +128,7 @@ export default function WhoAreWeSection({
         </div>
       </motion.div>
 
-      <div className='absolute top-[-30%] right-0 bottom-0 left-0  flex items-center justify-center z-[50] lg:hidden '>
+      <div className={` ${i18n.language === "ar" ? "hidden" : "flex"} absolute top-[-30%] right-0 bottom-0 left-0  flex items-center justify-center z-[50] lg:hidden `}>
         <div className='relative w-full h-full '>
           <Image
             src='/assets/who_are_we_background.png'
@@ -147,14 +142,14 @@ export default function WhoAreWeSection({
 
 
 
-      <div className='absolute top-[55%] right-0 bottom-0 left-[-20%]  flex items-center justify-center z-[10]  h-[620px]  '>
+      <div className={` ${i18n.language === "ar" ? "hidden" : "flex"} absolute top-[55%] right-0 bottom-0 left-[-20%]  flex items-center justify-center z-[10]  h-[620px]  `}>
         <div className='relative w-full h-full '>
           <Image
             src='/assets/who_are_we_background.png'
             alt='Background ellipse'
             width={1660}
             height={620}
-            className='min-h-[120px]  object-cover w-full opacity-70 '
+            className='min-h-[120px]  object-cover w-full opacity-100 '
           />
         </div>
       </div>
@@ -165,7 +160,7 @@ export default function WhoAreWeSection({
           <div className='flex-shrink-0 lg:w-auto w-full'>
             <div className='hidden lg:flex items-start gap-6 '>
               <motion.div
-                className='flex relative left-[-28px] flex-col gap-2 mt-2  h-[181px] w-[57px]'
+                className={`flex relative ${i18n.language === "ar" ? "right-[-28px] " : "left-[-128px]"} flex-col gap-2 mt-2  h-[181px] w-[57px]`}
                 initial={{ opacity: 0, x: -20 }}
                 animate={
                   isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
@@ -219,7 +214,7 @@ export default function WhoAreWeSection({
                 damping: 30,
                 stiffness: 120,
                 duration: 0.4,
-                delay: 0.3
+                delay: 0.2
               }}
             >
               <span
@@ -232,7 +227,7 @@ export default function WhoAreWeSection({
                   backgroundClip: 'text',
                 }}
               >
-                Who Are We?
+                {t('navbar.whoWeAre.title')} {i18n.language === "ar" ? "؟" : "?"}
               </span>
             </motion.h2>
             <motion.p
@@ -244,17 +239,17 @@ export default function WhoAreWeSection({
                 damping: 30,
                 stiffness: 120,
                 duration: 0.4,
-                delay: 0.4
+                delay: 0.2
               }}
             >
               {whoAreWeContent?.description ||
                 'At BARQ Systems, we are more than just a technology solutions provider—we are a catalyst for digital transformation across the Middle East. With decades of experience in IT integration and enterprise services, we empower organizations to evolve, innovate, and lead through next-generation infrastructure, cybersecurity, automation, and AI-powered solutions.'}
             </motion.p>
-            <div ref={statsRef} className='flex items-center justify-between   flex-col lg:h-[89px] lg:flex-row gap-5  w-full'>
+            <div ref={statsRef} className='flex lg:items-start justify-between   flex-col lg:h-[120px] lg:flex-row gap-5  w-full'>
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
-                  className='text-center'
+                  className='text-center '
                   initial={{ opacity: 0, y: 40 }}
                   animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                   transition={{
@@ -265,7 +260,7 @@ export default function WhoAreWeSection({
                     delay: index * 0.1
                   }}
                 >
-                  <div className='text-white flex flex-col items-center justify-center lg:w-[122px] text-[28px] lg:text-[48px] mb-2 font-normal leading-[57.6px] tracking-[-0.96px] font-outfit'>
+                  <div className='text-white flex flex-col items-center justify-center lg:w-[160px] h-[58px] lg:h-[64px] text-[28px] lg:text-[48px] mb-2 font-normal leading-[57.6px] tracking-[-0.96px] font-outfit'>
                     <AnimatedCounter
                       end={stat.value}
                       prefix={stat.prefix}
@@ -275,7 +270,7 @@ export default function WhoAreWeSection({
                       delay={index * 0.6}
                     />
                   </div>
-                  <div className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-tight'>
+                  <div className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-tight lg:w-[160px] h-[40px] lg:h-[44px] flex items-start justify-center'>
                     {stat.label}
                   </div>
                 </motion.div>

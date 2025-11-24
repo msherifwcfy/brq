@@ -1,8 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
+import type { BarqAcademyHighlightsEntity } from '@/sdk/types.gen'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { useTranslation } from 'react-i18next'
 
 interface HighlightData {
     title: string
@@ -13,9 +16,12 @@ interface HighlightData {
     hrsAvgStaff?: string
     Hoursin2023?: string
     GraduatesSinceInception?: string
+    state_title_one?: string
+    state_title_two?: string
+    state_title_three?: string
 }
 
-const highlights: HighlightData[] = [
+const fallbackHighlights: HighlightData[] = [
     {
         title: 'Internships',
         icon: '/assets/academy-page/graduation-cap.svg',
@@ -42,6 +48,10 @@ const highlights: HighlightData[] = [
 
     }
 ]
+
+interface AcademyHighlightsSectionProps {
+    highlightsData: BarqAcademyHighlightsEntity | null;
+}
 // Animated Counter Component
 const AnimatedCounter = ({ value, suffix = '' }: { value: string | number, suffix?: string }) => {
     const ref = useRef(null)
@@ -97,9 +107,43 @@ const AnimatedCounter = ({ value, suffix = '' }: { value: string | number, suffi
     )
 }
 
-const AcademyHighlightsSection = () => {
+const AcademyHighlightsSection = ({ highlightsData }: AcademyHighlightsSectionProps) => {
     const containerRef = useRef(null)
     const isInView = useInView(containerRef, { once: true, margin: "-50px" })
+    const { language, isRTL } = useLanguage()
+    const { t } = useTranslation()
+
+    // Transform CMS data to highlight format
+    const highlights = useMemo(() => {
+        if (!highlightsData?.barq_academy_highlights_cards_id_barq_academy_highlights_cards?.length) {
+            return fallbackHighlights;
+        }
+
+        return highlightsData.barq_academy_highlights_cards_id_barq_academy_highlights_cards.map((card) => {
+            const translation = card.barq_academy_highlights_cards_id_barq_academy_highlights_cards_translations?.find(
+                (t) => t.language === language
+            ) || card.barq_academy_highlights_cards_id_barq_academy_highlights_cards_translations?.[0];
+
+            // Construct image URL from url + key
+            const iconUrl = card.icon?.url && card.icon?.key
+                ? `${card.icon.url}${card.icon.key}`
+                : '/assets/academy-page/graduation-cap.svg';
+
+            return {
+                title: translation?.title || card.title,
+                icon: iconUrl,
+                programs: card.state_number_one?.toString(),
+                Graduates: card.state_number_two?.toString(),
+                HiringRate: card.state_number_three ? `${card.state_number_three}%` : undefined,
+                hrsAvgStaff: card.state_number_one?.toString(),
+                Hoursin2023: card.state_number_two ? `${card.state_number_two / 1000}k` : undefined,
+                GraduatesSinceInception: card.state_number_one ? card.state_number_one.toLocaleString() : undefined,
+                state_title_one: translation?.state_title_one || card.state_title_one,
+                state_title_two: translation?.state_title_two || card.state_title_two,
+                state_title_three: translation?.state_title_three || card.state_title_three,
+            };
+        });
+    }, [highlightsData, language]);
 
     return (
         <div ref={containerRef} className='w-full  grid grid-cols-1 xl:grid-cols-2  gap-6 lg:gap-12'>
@@ -122,65 +166,83 @@ const AcademyHighlightsSection = () => {
                     key={highlight.title} className='w-full max-w-[616px] flex flex-col gap-6 lg:gap-8 py-8 lg:py-12 px-6 lg:px-10 min-h-[240px] lg:min-h-[262px]'>
                     <div className='flex  items-center gap-4 lg:gap-6 h-10 lg:h-12 '>
                         <Image src={highlight.icon} alt={highlight.title} width={100} height={100} className={` ${index === 0 ? " w-[40px] lg:w-[48px]  h-[29px] lg:h-[34.7px]" : index === 1 ? " w-[40px] lg:w-[48px]  h-[30px] lg:h-[36.7px] " : index === 2 ? " w-[40px] lg:w-[48px]  h-[35px] lg:h-[42px] pb-[6px]" : "w-[34px] lg:w-[41.2px] h-[35px] lg:h-[42.5px] "}`} />
-                        <h3 className='text-white text-[20px] lg:text-[24px] frutiger-lt-std-bold leading-[28px] lg:leading-[33.6px]'>{highlight.title}</h3>
+                        <h3 className='text-white text-[20px] lg:text-[24px] frutiger-lt-std-bold leading-[28px] lg:leading-[33.6px]'>{highlight.title || "BARQ Academy Highlights"}</h3>
                     </div>
                     <div className='flex flex-col gap-3 lg:gap-4'>
                         {/* Internships Card */}
-                        {highlight.title === 'Internships' && (
+                        {(highlight.title === 'Internships' || highlight.title?.toLowerCase().includes('internship')) && (
                             <div className='flex gap-8 lg:gap-16 flex-wrap'>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.programs || "0"} />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Programs</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_one || t('academy.highlights.programs')}
+                                    </span>
                                 </div>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.Graduates || "0"} />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Graduates (2023)</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_two || t('academy.highlights.graduates2023')}
+                                    </span>
                                 </div>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.HiringRate || "0%"} />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Hiring Rate</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_three || t('academy.highlights.hiringRate')}
+                                    </span>
                                 </div>
                             </div>
                         )}
 
                         {/* Trainings Card */}
-                        {highlight.title === 'Trainings' && (
+                        {(highlight.title === 'Trainings' || highlight.title?.toLowerCase().includes('training')) && (
                             <div className='flex  gap-8 lg:gap-16'>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.hrsAvgStaff || "0"} />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Hrs Avg/Staff</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_one || t('academy.highlights.hrsAvgStaff')}
+                                    </span>
                                 </div>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.Hoursin2023 || "0"} suffix=" +" />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Hours in 2023</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_two || t('academy.highlights.hoursIn2023')}
+                                    </span>
                                 </div>
                             </div>
                         )}
 
                         {/* Seminars Card */}
-                        {highlight.title === 'Seminars' && (
+                        {(highlight.title === 'Seminars' || highlight.title?.toLowerCase().includes('seminar')) && (
                             <div className='flex gap-8 lg:gap-16 flex-wrap'>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.programs || "0"} />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Programs</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_one || t('academy.highlights.programs')}
+                                    </span>
                                 </div>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.Graduates || "0"} />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Graduates (2023)</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_two || t('academy.highlights.graduates2023')}
+                                    </span>
                                 </div>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.HiringRate || "0%"} />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Hiring Rate</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_three || t('academy.highlights.hiringRate')}
+                                    </span>
                                 </div>
                             </div>
                         )}
 
                         {/* Graduates Card */}
-                        {highlight.title === 'Graduates' && (
+                        {(highlight.title === 'Graduates' || highlight.title?.toLowerCase().includes('graduate')) && (
                             <div className='flex justify-start items-end'>
                                 <div className='flex flex-col gap-[8px] lg:gap-[10px]'>
                                     <AnimatedCounter value={highlight.GraduatesSinceInception || "0"} suffix=" +" />
-                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]'>Graduates Since Inception</span>
+                                    <span className='text-[#C9C9C9] text-[14px] lg:text-[16px] font-normal leading-[20px] lg:leading-[22.4px]' dir={isRTL ? 'rtl' : 'ltr'}>
+                                        {highlight.state_title_one || t('academy.highlights.graduatesSinceInception')}
+                                    </span>
                                 </div>
                             </div>
                         )}

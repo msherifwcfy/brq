@@ -8,6 +8,7 @@ import type {
   EconomicSustainabilityControllerReadResponse,
   EnvironmentalSustainabilityControllerReadResponse,
 } from '@/sdk/types.gen';
+import { useTranslation } from 'react-i18next';
 
 interface EconomicSectionProps {
   economicData: EconomicSustainabilityControllerReadResponse | null;
@@ -20,7 +21,7 @@ export default function EconomicSection({
 }: EconomicSectionProps) {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
-
+  const { t, i18n } = useTranslation()
   const economicContent = economicData?.data?.[0];
   const mediaUrl = economicContent?.media
     ? `${economicContent.media.url}${economicContent.media.key}`
@@ -34,7 +35,7 @@ export default function EconomicSection({
       <div className='px-[5%] relative'>
         {/* Background - Same as Leadership Section */}
         <motion.div
-          className='absolute top-[22%] bottom-0 left-[-1.4%] z-10'
+          className={`absolute top-[22%] bottom-0 ${i18n.language === "ar" ? "right-[-1.4%]" : "left-[-1.4%]"} z-10`}
           initial={{ opacity: 0, x: -50 }}
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
           transition={{ duration: 0.8, delay: 1 }}
@@ -67,7 +68,7 @@ export default function EconomicSection({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          className='absolute top-[15%] right-0  bottom-0 left-[55%]   z-25'
+          className={`absolute top-[15%] ${i18n.language === "ar" ? "right-0  bottom-0 left-[55%]" : "left-0  bottom-0 right-[55%]"}   z-25`}
         >
           <div className='relative w-full h-full '>
             <Image
@@ -101,7 +102,7 @@ export default function EconomicSection({
                 backgroundClip: 'text',
               }}
             >
-              Economic
+              {t('sustainability.economic')}
             </span>
 
             <h2 className='text-white text-[36px] lg:text-[56px] mt-6 font-normal leading-[44px] lg:leading-[61.6px] break-words'>

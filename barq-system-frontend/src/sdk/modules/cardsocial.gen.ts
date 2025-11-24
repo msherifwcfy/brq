@@ -7,6 +7,7 @@ import {
   cardSocialControllerRead,
   cardSocialControllerUpdate,
   cardSocialControllerReadOne,
+  cardSocialControllerDelete,
 } from '../sdk.gen';
 import {
   type UseMutationOptions,
@@ -27,6 +28,9 @@ import type {
   CardSocialControllerUpdateResponse,
   CardSocialControllerReadOneData,
   CardSocialControllerReadOneResponse,
+  CardSocialControllerDeleteData,
+  CardSocialControllerDeleteError,
+  CardSocialControllerDeleteResponse,
 } from '../types.gen';
 type QueryKey<TOptions extends OptionsLegacyParser> = [
   Pick<TOptions, 'baseUrl' | 'body' | 'headers' | 'path' | 'query'> & {
@@ -224,5 +228,52 @@ export const useCardSocialControllerReadOneQuery = <
 ) => {
   return useQuery({
     ...cardSocialControllerReadOneOptions(dataOptions ?? {}, hookOptions),
+  });
+};
+export const cardSocialControllerDeleteMutation = <
+  TResponse = CardSocialControllerDeleteResponse,
+>(
+  options?: Partial<OptionsLegacyParser<CardSocialControllerDeleteData>>,
+  hookOptions?: Omit<
+    MutationOptions<
+      TResponse,
+      CardSocialControllerDeleteError,
+      OptionsLegacyParser<CardSocialControllerDeleteData>
+    >,
+    'mutationKey' | 'mutationFn'
+  >
+) => {
+  const mutationOptions: UseMutationOptions<
+    TResponse,
+    CardSocialControllerDeleteError,
+    OptionsLegacyParser<CardSocialControllerDeleteData>
+  > = {
+    mutationFn: async localOptions => {
+      const { data } = await cardSocialControllerDelete({
+        ...options,
+        ...localOptions,
+        throwOnError: true,
+      });
+      return data;
+    },
+    ...hookOptions,
+  };
+  return mutationOptions;
+};
+export const useCardSocialControllerDelete = <
+  TResponse = CardSocialControllerDeleteResponse,
+>(
+  dataOptions?: OptionsLegacyParser<CardSocialControllerDeleteData>,
+  hookOptions?: Omit<
+    MutationOptions<
+      TResponse,
+      CardSocialControllerDeleteError,
+      OptionsLegacyParser<CardSocialControllerDeleteData>
+    >,
+    'mutationKey' | 'mutationFn'
+  >
+) => {
+  return useMutation({
+    ...cardSocialControllerDeleteMutation(dataOptions ?? {}, hookOptions),
   });
 };

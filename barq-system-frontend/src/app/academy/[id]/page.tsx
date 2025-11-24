@@ -2,7 +2,9 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 import Footer from '@/components/footer'
 import AcademyApplicationContent from './AcademyApplicationContent'
-import { academyPrograms } from '@/data/academyPrograms'
+import { academyService } from '@/services/academy.service'
+
+export const dynamic = 'force-dynamic';
 
 interface AcademyApplicationPageProps {
     params: Promise<{
@@ -13,15 +15,24 @@ interface AcademyApplicationPageProps {
 const AcademyApplicationPage = async ({ params }: AcademyApplicationPageProps) => {
     const { id: paramId } = await params;
     const id = Number(paramId);
-    const program = academyPrograms.find(p => p.id === id);
 
-    if (!program) {
+    // Fetch all foundation tracks from CMS
+    const foundationTracksData = await academyService.getFoundationTracksData();
+    const allCards = foundationTracksData?.data?.[0]?.barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards || [];
+    
+    // Find the specific card by ID
+    const programCard = allCards.find(card => card.id === id);
+
+    if (!programCard) {
         notFound();
     }
 
     return (
         <>
-            <AcademyApplicationContent program={program} />
+            <AcademyApplicationContent 
+                programCard={programCard}
+                programType="foundation"
+            />
             <Footer />
         </>
     )

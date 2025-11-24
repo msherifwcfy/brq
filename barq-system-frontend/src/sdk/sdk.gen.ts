@@ -10,6 +10,78 @@ import { default as ApiConfig } from '../../api.config';
 import type {
   AppControllerEntryError,
   AppControllerEntryResponse,
+  BarqExternalApiControllerGetEventsError,
+  BarqExternalApiControllerGetEventsResponse,
+  BarqExternalApiControllerSyncEventsError,
+  BarqExternalApiControllerSyncEventsResponse,
+  BarqExternalApiControllerSyncCampaignsError,
+  BarqExternalApiControllerSyncCampaignsResponse,
+  BarqExternalApiControllerReadOneEventData,
+  BarqExternalApiControllerReadOneEventError,
+  BarqExternalApiControllerReadOneEventResponse,
+  BarqExternalApiControllerReadEventsData,
+  BarqExternalApiControllerReadEventsError,
+  BarqExternalApiControllerReadEventsResponse,
+  EventControllerReadData,
+  EventControllerReadError,
+  EventControllerReadResponse,
+  EventControllerReadOneData,
+  EventControllerReadOneError,
+  EventControllerReadOneResponse,
+  CampaignControllerReadData,
+  CampaignControllerReadError,
+  CampaignControllerReadResponse,
+  CampaignControllerReadOneData,
+  CampaignControllerReadOneError,
+  CampaignControllerReadOneResponse,
+  CampaignControllerUpdateData,
+  CampaignControllerUpdateError,
+  CampaignControllerUpdateResponse,
+  MediaControllerUploadFileError,
+  MediaControllerUploadFileResponse,
+  MediaControllerUpdateFileError,
+  MediaControllerUpdateFileResponse,
+  MediaControllerReadOneData,
+  MediaControllerReadOneError,
+  MediaControllerReadOneResponse,
+  MediaControllerStreamMediaData,
+  MediaControllerStreamMediaError,
+  MediaControllerStreamMediaResponse,
+  CareerOpenPositionControllerCreateData,
+  CareerOpenPositionControllerCreateError,
+  CareerOpenPositionControllerCreateResponse,
+  CareerOpenPositionControllerReadData,
+  CareerOpenPositionControllerReadError,
+  CareerOpenPositionControllerReadResponse,
+  CareerOpenPositionControllerUpdateData,
+  CareerOpenPositionControllerUpdateError,
+  CareerOpenPositionControllerUpdateResponse,
+  CareerOpenPositionControllerReadOneData,
+  CareerOpenPositionControllerReadOneError,
+  CareerOpenPositionControllerReadOneResponse,
+  CareerOpenPositionControllerDeleteData,
+  CareerOpenPositionControllerDeleteError,
+  CareerOpenPositionControllerDeleteResponse,
+  AuthControllerVerifyOtpError,
+  AuthControllerVerifyOtpResponse,
+  AuthControllerResendOtpError,
+  AuthControllerResendOtpResponse,
+  AuthControllerSigninError,
+  AuthControllerSigninResponse,
+  AuthControllerForgetPasswordError,
+  AuthControllerForgetPasswordResponse,
+  AuthControllerCompleteForgetPasswordError,
+  AuthControllerCompleteForgetPasswordResponse,
+  AuthControllerLogoutError,
+  AuthControllerLogoutResponse,
+  AuthControllerRefreshTokenError,
+  AuthControllerRefreshTokenResponse,
+  AuthControllerVerifyLinkError,
+  AuthControllerVerifyLinkResponse,
+  AuthControllerResendLinkError,
+  AuthControllerResendLinkResponse,
+  AuthControllerCompletePasswordError,
+  AuthControllerCompletePasswordResponse,
   UsersControllerCreateData,
   UsersControllerCreateError,
   UsersControllerCreateResponse,
@@ -31,35 +103,6 @@ import type {
   UsersControllerSoftDeleteData,
   UsersControllerSoftDeleteError,
   UsersControllerSoftDeleteResponse,
-  AuthControllerVerifyOtpError,
-  AuthControllerVerifyOtpResponse,
-  AuthControllerResendOtpError,
-  AuthControllerResendOtpResponse,
-  AuthControllerSigninError,
-  AuthControllerSigninResponse,
-  AuthControllerForgetPasswordError,
-  AuthControllerForgetPasswordResponse,
-  AuthControllerCompleteForgetPasswordError,
-  AuthControllerCompleteForgetPasswordResponse,
-  AuthControllerLogoutError,
-  AuthControllerLogoutResponse,
-  AuthControllerRefreshTokenError,
-  AuthControllerRefreshTokenResponse,
-  AuthControllerVerifyLinkError,
-  AuthControllerVerifyLinkResponse,
-  AuthControllerResendLinkError,
-  AuthControllerResendLinkResponse,
-  AuthControllerCompletePasswordError,
-  AuthControllerCompletePasswordResponse,
-  PermissionsControllerUpdateData,
-  PermissionsControllerUpdateError,
-  PermissionsControllerUpdateResponse,
-  PermissionsControllerReadOneData,
-  PermissionsControllerReadOneError,
-  PermissionsControllerReadOneResponse,
-  PermissionsControllerReadData,
-  PermissionsControllerReadError,
-  PermissionsControllerReadResponse,
   RolesControllerCreateData,
   RolesControllerCreateError,
   RolesControllerCreateResponse,
@@ -76,6 +119,15 @@ import type {
   RolesControllerReadOneResponse,
   RolesControllerSoftDeleteError,
   RolesControllerSoftDeleteResponse,
+  PermissionsControllerUpdateData,
+  PermissionsControllerUpdateError,
+  PermissionsControllerUpdateResponse,
+  PermissionsControllerReadOneData,
+  PermissionsControllerReadOneError,
+  PermissionsControllerReadOneResponse,
+  PermissionsControllerReadData,
+  PermissionsControllerReadError,
+  PermissionsControllerReadResponse,
   RolePermissionsControllerCreateData,
   RolePermissionsControllerCreateError,
   RolePermissionsControllerCreateResponse,
@@ -91,16 +143,66 @@ import type {
   RolePermissionsControllerUserPermissionsData,
   RolePermissionsControllerUserPermissionsError,
   RolePermissionsControllerUserPermissionsResponse,
-  MediaControllerUploadFileError,
-  MediaControllerUploadFileResponse,
-  MediaControllerUpdateFileError,
-  MediaControllerUpdateFileResponse,
-  MediaControllerReadOneData,
-  MediaControllerReadOneError,
-  MediaControllerReadOneResponse,
-  MediaControllerStreamMediaData,
-  MediaControllerStreamMediaError,
-  MediaControllerStreamMediaResponse,
+  CityControllerCreateData,
+  CityControllerCreateError,
+  CityControllerCreateResponse,
+  CityControllerReadData,
+  CityControllerReadError,
+  CityControllerReadResponse,
+  CityControllerUpdateData,
+  CityControllerUpdateError,
+  CityControllerUpdateResponse,
+  CityControllerReadOneData,
+  CityControllerReadOneError,
+  CityControllerReadOneResponse,
+  CityControllerDeleteData,
+  CityControllerDeleteError,
+  CityControllerDeleteResponse,
+  CountryControllerCreateData,
+  CountryControllerCreateError,
+  CountryControllerCreateResponse,
+  CountryControllerReadData,
+  CountryControllerReadError,
+  CountryControllerReadResponse,
+  CountryControllerUpdateData,
+  CountryControllerUpdateError,
+  CountryControllerUpdateResponse,
+  CountryControllerReadOneData,
+  CountryControllerReadOneError,
+  CountryControllerReadOneResponse,
+  CountryControllerDeleteData,
+  CountryControllerDeleteError,
+  CountryControllerDeleteResponse,
+  CareerOpportunityControllerCreateData,
+  CareerOpportunityControllerCreateError,
+  CareerOpportunityControllerCreateResponse,
+  CareerOpportunityControllerReadData,
+  CareerOpportunityControllerReadError,
+  CareerOpportunityControllerReadResponse,
+  CareerOpportunityControllerUpdateData,
+  CareerOpportunityControllerUpdateError,
+  CareerOpportunityControllerUpdateResponse,
+  CareerOpportunityControllerReadOneData,
+  CareerOpportunityControllerReadOneError,
+  CareerOpportunityControllerReadOneResponse,
+  CareerOpportunityControllerDeleteData,
+  CareerOpportunityControllerDeleteError,
+  CareerOpportunityControllerDeleteResponse,
+  CareerCategoryControllerCreateData,
+  CareerCategoryControllerCreateError,
+  CareerCategoryControllerCreateResponse,
+  CareerCategoryControllerReadData,
+  CareerCategoryControllerReadError,
+  CareerCategoryControllerReadResponse,
+  CareerCategoryControllerUpdateData,
+  CareerCategoryControllerUpdateError,
+  CareerCategoryControllerUpdateResponse,
+  CareerCategoryControllerReadOneData,
+  CareerCategoryControllerReadOneError,
+  CareerCategoryControllerReadOneResponse,
+  CareerCategoryControllerDeleteData,
+  CareerCategoryControllerDeleteError,
+  CareerCategoryControllerDeleteResponse,
   HeroControllerCreateData,
   HeroControllerCreateError,
   HeroControllerCreateResponse,
@@ -149,6 +251,9 @@ import type {
   CardSocialControllerReadOneData,
   CardSocialControllerReadOneError,
   CardSocialControllerReadOneResponse,
+  CardSocialControllerDeleteData,
+  CardSocialControllerDeleteError,
+  CardSocialControllerDeleteResponse,
   LandingNumbersControllerCreateData,
   LandingNumbersControllerCreateError,
   LandingNumbersControllerCreateResponse,
@@ -164,33 +269,84 @@ import type {
   LandingNumbersControllerSoftDeleteData,
   LandingNumbersControllerSoftDeleteError,
   LandingNumbersControllerSoftDeleteResponse,
-  LeadershipControllerCreateData,
-  LeadershipControllerCreateError,
-  LeadershipControllerCreateResponse,
-  LeadershipControllerReadData,
-  LeadershipControllerReadError,
-  LeadershipControllerReadResponse,
-  LeadershipControllerUpdateData,
-  LeadershipControllerUpdateError,
-  LeadershipControllerUpdateResponse,
-  LeadershipControllerReadOneData,
-  LeadershipControllerReadOneError,
-  LeadershipControllerReadOneResponse,
-  CountryControllerCreateData,
-  CountryControllerCreateError,
-  CountryControllerCreateResponse,
-  CountryControllerReadData,
-  CountryControllerReadError,
-  CountryControllerReadResponse,
-  CountryControllerUpdateData,
-  CountryControllerUpdateError,
-  CountryControllerUpdateResponse,
-  CountryControllerReadOneData,
-  CountryControllerReadOneError,
-  CountryControllerReadOneResponse,
-  CountryControllerDeleteData,
-  CountryControllerDeleteError,
-  CountryControllerDeleteResponse,
+  ManagedServiceHeroControllerCreateData,
+  ManagedServiceHeroControllerCreateError,
+  ManagedServiceHeroControllerCreateResponse,
+  ManagedServiceHeroControllerReadData,
+  ManagedServiceHeroControllerReadError,
+  ManagedServiceHeroControllerReadResponse,
+  ManagedServiceHeroControllerUpdateData,
+  ManagedServiceHeroControllerUpdateError,
+  ManagedServiceHeroControllerUpdateResponse,
+  ManagedServiceHeroControllerReadOneData,
+  ManagedServiceHeroControllerReadOneError,
+  ManagedServiceHeroControllerReadOneResponse,
+  BarqAcademyHeroControllerCreateData,
+  BarqAcademyHeroControllerCreateError,
+  BarqAcademyHeroControllerCreateResponse,
+  BarqAcademyHeroControllerReadData,
+  BarqAcademyHeroControllerReadError,
+  BarqAcademyHeroControllerReadResponse,
+  BarqAcademyHeroControllerUpdateData,
+  BarqAcademyHeroControllerUpdateError,
+  BarqAcademyHeroControllerUpdateResponse,
+  BarqAcademyHeroControllerReadOneData,
+  BarqAcademyHeroControllerReadOneError,
+  BarqAcademyHeroControllerReadOneResponse,
+  SolutionsAndServicesHeroControllerCreateData,
+  SolutionsAndServicesHeroControllerCreateError,
+  SolutionsAndServicesHeroControllerCreateResponse,
+  SolutionsAndServicesHeroControllerReadData,
+  SolutionsAndServicesHeroControllerReadError,
+  SolutionsAndServicesHeroControllerReadResponse,
+  SolutionsAndServicesHeroControllerUpdateData,
+  SolutionsAndServicesHeroControllerUpdateError,
+  SolutionsAndServicesHeroControllerUpdateResponse,
+  SolutionsAndServicesHeroControllerReadOneData,
+  SolutionsAndServicesHeroControllerReadOneError,
+  SolutionsAndServicesHeroControllerReadOneResponse,
+  SuccessStoryHeroControllerCreateData,
+  SuccessStoryHeroControllerCreateError,
+  SuccessStoryHeroControllerCreateResponse,
+  SuccessStoryHeroControllerReadData,
+  SuccessStoryHeroControllerReadError,
+  SuccessStoryHeroControllerReadResponse,
+  SuccessStoryHeroControllerUpdateData,
+  SuccessStoryHeroControllerUpdateError,
+  SuccessStoryHeroControllerUpdateResponse,
+  SuccessStoryHeroControllerReadOneData,
+  SuccessStoryHeroControllerReadOneError,
+  SuccessStoryHeroControllerReadOneResponse,
+  EventJoinUsHeroControllerCreateData,
+  EventJoinUsHeroControllerCreateError,
+  EventJoinUsHeroControllerCreateResponse,
+  EventJoinUsHeroControllerReadData,
+  EventJoinUsHeroControllerReadError,
+  EventJoinUsHeroControllerReadResponse,
+  EventJoinUsHeroControllerUpdateData,
+  EventJoinUsHeroControllerUpdateError,
+  EventJoinUsHeroControllerUpdateResponse,
+  EventJoinUsHeroControllerReadOneData,
+  EventJoinUsHeroControllerReadOneError,
+  EventJoinUsHeroControllerReadOneResponse,
+  SuccessStoryCaseStudiesControllerCreateData,
+  SuccessStoryCaseStudiesControllerCreateError,
+  SuccessStoryCaseStudiesControllerCreateResponse,
+  SuccessStoryCaseStudiesControllerReadData,
+  SuccessStoryCaseStudiesControllerReadError,
+  SuccessStoryCaseStudiesControllerReadResponse,
+  SuccessStoryCaseStudiesControllerUpdateData,
+  SuccessStoryCaseStudiesControllerUpdateError,
+  SuccessStoryCaseStudiesControllerUpdateResponse,
+  SuccessStoryCaseStudiesControllerReadOneData,
+  SuccessStoryCaseStudiesControllerReadOneError,
+  SuccessStoryCaseStudiesControllerReadOneResponse,
+  SuccessStoryCaseStudiesControllerSoftDeleteData,
+  SuccessStoryCaseStudiesControllerSoftDeleteError,
+  SuccessStoryCaseStudiesControllerSoftDeleteResponse,
+  SuccessStoryCaseStudiesControllerMarkAsFeaturedData,
+  SuccessStoryCaseStudiesControllerMarkAsFeaturedError,
+  SuccessStoryCaseStudiesControllerMarkAsFeaturedResponse,
   IndustriesControllerCreateData,
   IndustriesControllerCreateError,
   IndustriesControllerCreateResponse,
@@ -206,6 +362,174 @@ import type {
   IndustriesControllerDeleteData,
   IndustriesControllerDeleteError,
   IndustriesControllerDeleteResponse,
+  NewsroomCardsControllerCreateData,
+  NewsroomCardsControllerCreateError,
+  NewsroomCardsControllerCreateResponse,
+  NewsroomCardsControllerReadData,
+  NewsroomCardsControllerReadError,
+  NewsroomCardsControllerReadResponse,
+  NewsroomCardsControllerUpdateData,
+  NewsroomCardsControllerUpdateError,
+  NewsroomCardsControllerUpdateResponse,
+  NewsroomCardsControllerReadOneData,
+  NewsroomCardsControllerReadOneError,
+  NewsroomCardsControllerReadOneResponse,
+  NewsroomCardsControllerDeleteData,
+  NewsroomCardsControllerDeleteError,
+  NewsroomCardsControllerDeleteResponse,
+  EventJoinusFormControllerCreateData,
+  EventJoinusFormControllerCreateError,
+  EventJoinusFormControllerCreateResponse,
+  EventJoinusFormControllerReadData,
+  EventJoinusFormControllerReadError,
+  EventJoinusFormControllerReadResponse,
+  EventJoinusFormControllerUpdateData,
+  EventJoinusFormControllerUpdateError,
+  EventJoinusFormControllerUpdateResponse,
+  EventJoinusFormControllerReadOneData,
+  EventJoinusFormControllerReadOneError,
+  EventJoinusFormControllerReadOneResponse,
+  BarqAcademyHighlightsControllerCreateData,
+  BarqAcademyHighlightsControllerCreateError,
+  BarqAcademyHighlightsControllerCreateResponse,
+  BarqAcademyHighlightsControllerReadData,
+  BarqAcademyHighlightsControllerReadError,
+  BarqAcademyHighlightsControllerReadResponse,
+  BarqAcademyHighlightsControllerReadOneData,
+  BarqAcademyHighlightsControllerReadOneError,
+  BarqAcademyHighlightsControllerReadOneResponse,
+  BarqAcademyHighlightsControllerUpdateData,
+  BarqAcademyHighlightsControllerUpdateError,
+  BarqAcademyHighlightsControllerUpdateResponse,
+  BarqAcademyProgramsOpportunitiesControllerCreateData,
+  BarqAcademyProgramsOpportunitiesControllerCreateError,
+  BarqAcademyProgramsOpportunitiesControllerCreateResponse,
+  BarqAcademyProgramsOpportunitiesControllerReadData,
+  BarqAcademyProgramsOpportunitiesControllerReadError,
+  BarqAcademyProgramsOpportunitiesControllerReadResponse,
+  BarqAcademyProgramsOpportunitiesControllerReadOneData,
+  BarqAcademyProgramsOpportunitiesControllerReadOneError,
+  BarqAcademyProgramsOpportunitiesControllerReadOneResponse,
+  BarqAcademyProgramsOpportunitiesControllerUpdateData,
+  BarqAcademyProgramsOpportunitiesControllerUpdateError,
+  BarqAcademyProgramsOpportunitiesControllerUpdateResponse,
+  BarqAcademyFoundationTracksFormDataControllerCreateData,
+  BarqAcademyFoundationTracksFormDataControllerCreateError,
+  BarqAcademyFoundationTracksFormDataControllerCreateResponse,
+  BarqAcademyFoundationTracksFormDataControllerReadData,
+  BarqAcademyFoundationTracksFormDataControllerReadError,
+  BarqAcademyFoundationTracksFormDataControllerReadResponse,
+  BarqAcademyFoundationTracksFormDataControllerUpdateData,
+  BarqAcademyFoundationTracksFormDataControllerUpdateError,
+  BarqAcademyFoundationTracksFormDataControllerUpdateResponse,
+  BarqAcademyFoundationTracksFormDataControllerReadOneData,
+  BarqAcademyFoundationTracksFormDataControllerReadOneError,
+  BarqAcademyFoundationTracksFormDataControllerReadOneResponse,
+  BarqAcademyFoundationTracksFormControllerCreateData,
+  BarqAcademyFoundationTracksFormControllerCreateError,
+  BarqAcademyFoundationTracksFormControllerCreateResponse,
+  BarqAcademyFoundationTracksFormControllerReadData,
+  BarqAcademyFoundationTracksFormControllerReadError,
+  BarqAcademyFoundationTracksFormControllerReadResponse,
+  BarqAcademyFoundationTracksFormControllerUpdateData,
+  BarqAcademyFoundationTracksFormControllerUpdateError,
+  BarqAcademyFoundationTracksFormControllerUpdateResponse,
+  BarqAcademyFoundationTracksFormControllerReadOneData,
+  BarqAcademyFoundationTracksFormControllerReadOneError,
+  BarqAcademyFoundationTracksFormControllerReadOneResponse,
+  BarqAcademyFoundationInternshipFormControllerCreateData,
+  BarqAcademyFoundationInternshipFormControllerCreateError,
+  BarqAcademyFoundationInternshipFormControllerCreateResponse,
+  BarqAcademyFoundationInternshipFormControllerReadData,
+  BarqAcademyFoundationInternshipFormControllerReadError,
+  BarqAcademyFoundationInternshipFormControllerReadResponse,
+  BarqAcademyFoundationInternshipFormControllerUpdateData,
+  BarqAcademyFoundationInternshipFormControllerUpdateError,
+  BarqAcademyFoundationInternshipFormControllerUpdateResponse,
+  BarqAcademyFoundationInternshipFormControllerReadOneData,
+  BarqAcademyFoundationInternshipFormControllerReadOneError,
+  BarqAcademyFoundationInternshipFormControllerReadOneResponse,
+  BarqAcademyProgramsOpportunitiesInternshipControllerCreateData,
+  BarqAcademyProgramsOpportunitiesInternshipControllerCreateError,
+  BarqAcademyProgramsOpportunitiesInternshipControllerCreateResponse,
+  BarqAcademyProgramsOpportunitiesInternshipControllerReadData,
+  BarqAcademyProgramsOpportunitiesInternshipControllerReadError,
+  BarqAcademyProgramsOpportunitiesInternshipControllerReadResponse,
+  BarqAcademyProgramsOpportunitiesInternshipControllerReadOneData,
+  BarqAcademyProgramsOpportunitiesInternshipControllerReadOneError,
+  BarqAcademyProgramsOpportunitiesInternshipControllerReadOneResponse,
+  BarqAcademyProgramsOpportunitiesInternshipControllerUpdateData,
+  BarqAcademyProgramsOpportunitiesInternshipControllerUpdateError,
+  BarqAcademyProgramsOpportunitiesInternshipControllerUpdateResponse,
+  BarqAcademyFoundationInternshipFormDataControllerCreateData,
+  BarqAcademyFoundationInternshipFormDataControllerCreateError,
+  BarqAcademyFoundationInternshipFormDataControllerCreateResponse,
+  BarqAcademyFoundationInternshipFormDataControllerReadData,
+  BarqAcademyFoundationInternshipFormDataControllerReadError,
+  BarqAcademyFoundationInternshipFormDataControllerReadResponse,
+  BarqAcademyFoundationInternshipFormDataControllerUpdateData,
+  BarqAcademyFoundationInternshipFormDataControllerUpdateError,
+  BarqAcademyFoundationInternshipFormDataControllerUpdateResponse,
+  BarqAcademyFoundationInternshipFormDataControllerReadOneData,
+  BarqAcademyFoundationInternshipFormDataControllerReadOneError,
+  BarqAcademyFoundationInternshipFormDataControllerReadOneResponse,
+  ManagedServiceCardsControllerCreateData,
+  ManagedServiceCardsControllerCreateError,
+  ManagedServiceCardsControllerCreateResponse,
+  ManagedServiceCardsControllerFindAllData,
+  ManagedServiceCardsControllerFindAllError,
+  ManagedServiceCardsControllerFindAllResponse,
+  ManagedServiceCardsControllerFindOneData,
+  ManagedServiceCardsControllerFindOneError,
+  ManagedServiceCardsControllerFindOneResponse,
+  ManagedServiceCardsControllerUpdateData,
+  ManagedServiceCardsControllerUpdateError,
+  ManagedServiceCardsControllerUpdateResponse,
+  ManagedServiceCardsControllerRemoveData,
+  ManagedServiceCardsControllerRemoveError,
+  ManagedServiceCardsControllerRemoveResponse,
+  AboutBarqMissionVisionControllerCreateData,
+  AboutBarqMissionVisionControllerCreateError,
+  AboutBarqMissionVisionControllerCreateResponse,
+  AboutBarqMissionVisionControllerReadData,
+  AboutBarqMissionVisionControllerReadError,
+  AboutBarqMissionVisionControllerReadResponse,
+  AboutBarqMissionVisionControllerReadOneData,
+  AboutBarqMissionVisionControllerReadOneError,
+  AboutBarqMissionVisionControllerReadOneResponse,
+  AboutBarqMissionVisionControllerUpdateData,
+  AboutBarqMissionVisionControllerUpdateError,
+  AboutBarqMissionVisionControllerUpdateResponse,
+  AboutBarqMissionVisionControllerDeleteData,
+  AboutBarqMissionVisionControllerDeleteError,
+  AboutBarqMissionVisionControllerDeleteResponse,
+  AboutBarqCoreValuesControllerCreateData,
+  AboutBarqCoreValuesControllerCreateError,
+  AboutBarqCoreValuesControllerCreateResponse,
+  AboutBarqCoreValuesControllerReadData,
+  AboutBarqCoreValuesControllerReadError,
+  AboutBarqCoreValuesControllerReadResponse,
+  AboutBarqCoreValuesControllerReadOneData,
+  AboutBarqCoreValuesControllerReadOneError,
+  AboutBarqCoreValuesControllerReadOneResponse,
+  AboutBarqCoreValuesControllerUpdateData,
+  AboutBarqCoreValuesControllerUpdateError,
+  AboutBarqCoreValuesControllerUpdateResponse,
+  AboutBarqMilestonesControllerCreateData,
+  AboutBarqMilestonesControllerCreateError,
+  AboutBarqMilestonesControllerCreateResponse,
+  AboutBarqMilestonesControllerReadData,
+  AboutBarqMilestonesControllerReadError,
+  AboutBarqMilestonesControllerReadResponse,
+  AboutBarqMilestonesControllerReadOneData,
+  AboutBarqMilestonesControllerReadOneError,
+  AboutBarqMilestonesControllerReadOneResponse,
+  AboutBarqMilestonesControllerUpdateData,
+  AboutBarqMilestonesControllerUpdateError,
+  AboutBarqMilestonesControllerUpdateResponse,
+  AboutBarqMilestonesControllerDeleteData,
+  AboutBarqMilestonesControllerDeleteError,
+  AboutBarqMilestonesControllerDeleteResponse,
   SolutionsControllerCreateData,
   SolutionsControllerCreateError,
   SolutionsControllerCreateResponse,
@@ -461,6 +785,54 @@ import type {
   MobilityControllerUpdateData,
   MobilityControllerUpdateError,
   MobilityControllerUpdateResponse,
+  EventsSpeakersControllerCreateData,
+  EventsSpeakersControllerCreateError,
+  EventsSpeakersControllerCreateResponse,
+  EventsSpeakersControllerReadData,
+  EventsSpeakersControllerReadError,
+  EventsSpeakersControllerReadResponse,
+  EventsSpeakersControllerReadOneData,
+  EventsSpeakersControllerReadOneError,
+  EventsSpeakersControllerReadOneResponse,
+  EventsSpeakersControllerUpdateData,
+  EventsSpeakersControllerUpdateError,
+  EventsSpeakersControllerUpdateResponse,
+  EventsPartnerControllerCreateData,
+  EventsPartnerControllerCreateError,
+  EventsPartnerControllerCreateResponse,
+  EventsPartnerControllerReadData,
+  EventsPartnerControllerReadError,
+  EventsPartnerControllerReadResponse,
+  EventsPartnerControllerUpdateData,
+  EventsPartnerControllerUpdateError,
+  EventsPartnerControllerUpdateResponse,
+  EventsPartnerControllerReadOneData,
+  EventsPartnerControllerReadOneError,
+  EventsPartnerControllerReadOneResponse,
+  HomeAwardsControllerCreateData,
+  HomeAwardsControllerCreateError,
+  HomeAwardsControllerCreateResponse,
+  HomeAwardsControllerReadData,
+  HomeAwardsControllerReadError,
+  HomeAwardsControllerReadResponse,
+  HomeAwardsControllerReadOneData,
+  HomeAwardsControllerReadOneError,
+  HomeAwardsControllerReadOneResponse,
+  HomeAwardsControllerUpdateData,
+  HomeAwardsControllerUpdateError,
+  HomeAwardsControllerUpdateResponse,
+  AboutBarqGroupAffiliationControllerCreateData,
+  AboutBarqGroupAffiliationControllerCreateError,
+  AboutBarqGroupAffiliationControllerCreateResponse,
+  AboutBarqGroupAffiliationControllerReadData,
+  AboutBarqGroupAffiliationControllerReadError,
+  AboutBarqGroupAffiliationControllerReadResponse,
+  AboutBarqGroupAffiliationControllerReadOneData,
+  AboutBarqGroupAffiliationControllerReadOneError,
+  AboutBarqGroupAffiliationControllerReadOneResponse,
+  AboutBarqGroupAffiliationControllerUpdateData,
+  AboutBarqGroupAffiliationControllerUpdateError,
+  AboutBarqGroupAffiliationControllerUpdateResponse,
   SoftwareDefinedNetworkControllerCreateData,
   SoftwareDefinedNetworkControllerCreateError,
   SoftwareDefinedNetworkControllerCreateResponse,
@@ -497,6 +869,18 @@ import type {
   ControlSectionControllerUpdateData,
   ControlSectionControllerUpdateError,
   ControlSectionControllerUpdateResponse,
+  AboutBarqHeroControllerCreateData,
+  AboutBarqHeroControllerCreateError,
+  AboutBarqHeroControllerCreateResponse,
+  AboutBarqHeroControllerReadData,
+  AboutBarqHeroControllerReadError,
+  AboutBarqHeroControllerReadResponse,
+  AboutBarqHeroControllerReadOneData,
+  AboutBarqHeroControllerReadOneError,
+  AboutBarqHeroControllerReadOneResponse,
+  AboutBarqHeroControllerUpdateData,
+  AboutBarqHeroControllerUpdateError,
+  AboutBarqHeroControllerUpdateResponse,
   CybersecurityHeroControllerCreateData,
   CybersecurityHeroControllerCreateError,
   CybersecurityHeroControllerCreateResponse,
@@ -557,6 +941,354 @@ import type {
   ApplicationDataControllerUpdateData,
   ApplicationDataControllerUpdateError,
   ApplicationDataControllerUpdateResponse,
+  ContactUsControllerCreateData,
+  ContactUsControllerCreateError,
+  ContactUsControllerCreateResponse,
+  ContactUsControllerReadData,
+  ContactUsControllerReadError,
+  ContactUsControllerReadResponse,
+  ContactUsControllerUpdateData,
+  ContactUsControllerUpdateError,
+  ContactUsControllerUpdateResponse,
+  ContactUsControllerReadOneData,
+  ContactUsControllerReadOneError,
+  ContactUsControllerReadOneResponse,
+  ContactUsControllerDeleteData,
+  ContactUsControllerDeleteError,
+  ContactUsControllerDeleteResponse,
+  ContactUsRequestTypeControllerCreateData,
+  ContactUsRequestTypeControllerCreateError,
+  ContactUsRequestTypeControllerCreateResponse,
+  ContactUsRequestTypeControllerReadData,
+  ContactUsRequestTypeControllerReadError,
+  ContactUsRequestTypeControllerReadResponse,
+  ContactUsRequestTypeControllerUpdateData,
+  ContactUsRequestTypeControllerUpdateError,
+  ContactUsRequestTypeControllerUpdateResponse,
+  ContactUsRequestTypeControllerReadOneData,
+  ContactUsRequestTypeControllerReadOneError,
+  ContactUsRequestTypeControllerReadOneResponse,
+  ContactUsRequestTypeControllerSoftDeleteData,
+  ContactUsRequestTypeControllerSoftDeleteError,
+  ContactUsRequestTypeControllerSoftDeleteResponse,
+  ContactUsHearAboutDropControllerCreateData,
+  ContactUsHearAboutDropControllerCreateError,
+  ContactUsHearAboutDropControllerCreateResponse,
+  ContactUsHearAboutDropControllerReadData,
+  ContactUsHearAboutDropControllerReadError,
+  ContactUsHearAboutDropControllerReadResponse,
+  ContactUsHearAboutDropControllerUpdateData,
+  ContactUsHearAboutDropControllerUpdateError,
+  ContactUsHearAboutDropControllerUpdateResponse,
+  ContactUsHearAboutDropControllerReadOneData,
+  ContactUsHearAboutDropControllerReadOneError,
+  ContactUsHearAboutDropControllerReadOneResponse,
+  ContactUsHearAboutDropControllerSoftDeleteData,
+  ContactUsHearAboutDropControllerSoftDeleteError,
+  ContactUsHearAboutDropControllerSoftDeleteResponse,
+  ContactUsOfficesControllerCreateData,
+  ContactUsOfficesControllerCreateError,
+  ContactUsOfficesControllerCreateResponse,
+  ContactUsOfficesControllerReadData,
+  ContactUsOfficesControllerReadError,
+  ContactUsOfficesControllerReadResponse,
+  ContactUsOfficesControllerUpdateData,
+  ContactUsOfficesControllerUpdateError,
+  ContactUsOfficesControllerUpdateResponse,
+  ContactUsOfficesControllerReadOneData,
+  ContactUsOfficesControllerReadOneError,
+  ContactUsOfficesControllerReadOneResponse,
+  ContactUsHeroControllerCreateData,
+  ContactUsHeroControllerCreateError,
+  ContactUsHeroControllerCreateResponse,
+  ContactUsHeroControllerReadData,
+  ContactUsHeroControllerReadError,
+  ContactUsHeroControllerReadResponse,
+  ContactUsHeroControllerUpdateData,
+  ContactUsHeroControllerUpdateError,
+  ContactUsHeroControllerUpdateResponse,
+  ContactUsHeroControllerReadOneData,
+  ContactUsHeroControllerReadOneError,
+  ContactUsHeroControllerReadOneResponse,
+  ManagedSocServicesDetailsControllerCreateData,
+  ManagedSocServicesDetailsControllerCreateError,
+  ManagedSocServicesDetailsControllerCreateResponse,
+  ManagedSocServicesDetailsControllerReadData,
+  ManagedSocServicesDetailsControllerReadError,
+  ManagedSocServicesDetailsControllerReadResponse,
+  ManagedSocServicesDetailsControllerUpdateData,
+  ManagedSocServicesDetailsControllerUpdateError,
+  ManagedSocServicesDetailsControllerUpdateResponse,
+  ManagedSocServicesDetailsControllerReadOneData,
+  ManagedSocServicesDetailsControllerReadOneError,
+  ManagedSocServicesDetailsControllerReadOneResponse,
+  ManagedCybersecurityServicesDetailsControllerCreateData,
+  ManagedCybersecurityServicesDetailsControllerCreateError,
+  ManagedCybersecurityServicesDetailsControllerCreateResponse,
+  ManagedCybersecurityServicesDetailsControllerReadData,
+  ManagedCybersecurityServicesDetailsControllerReadError,
+  ManagedCybersecurityServicesDetailsControllerReadResponse,
+  ManagedCybersecurityServicesDetailsControllerUpdateData,
+  ManagedCybersecurityServicesDetailsControllerUpdateError,
+  ManagedCybersecurityServicesDetailsControllerUpdateResponse,
+  ManagedCybersecurityServicesDetailsControllerReadOneData,
+  ManagedCybersecurityServicesDetailsControllerReadOneError,
+  ManagedCybersecurityServicesDetailsControllerReadOneResponse,
+  ManagedGrcServicesDetailsControllerCreateData,
+  ManagedGrcServicesDetailsControllerCreateError,
+  ManagedGrcServicesDetailsControllerCreateResponse,
+  ManagedGrcServicesDetailsControllerFindAllData,
+  ManagedGrcServicesDetailsControllerFindAllError,
+  ManagedGrcServicesDetailsControllerFindAllResponse,
+  ManagedGrcServicesDetailsControllerFindOneData,
+  ManagedGrcServicesDetailsControllerFindOneError,
+  ManagedGrcServicesDetailsControllerFindOneResponse,
+  ManagedGrcServicesDetailsControllerUpdateData,
+  ManagedGrcServicesDetailsControllerUpdateError,
+  ManagedGrcServicesDetailsControllerUpdateResponse,
+  ManagedGrcServicesDetailsControllerRemoveData,
+  ManagedGrcServicesDetailsControllerRemoveError,
+  ManagedGrcServicesDetailsControllerRemoveResponse,
+  CareerHeroControllerCreateData,
+  CareerHeroControllerCreateError,
+  CareerHeroControllerCreateResponse,
+  CareerHeroControllerReadData,
+  CareerHeroControllerReadError,
+  CareerHeroControllerReadResponse,
+  CareerHeroControllerUpdateData,
+  CareerHeroControllerUpdateError,
+  CareerHeroControllerUpdateResponse,
+  CareerHeroControllerReadOneData,
+  CareerHeroControllerReadOneError,
+  CareerHeroControllerReadOneResponse,
+  CareerOpenPositionHeroControllerCreateData,
+  CareerOpenPositionHeroControllerCreateError,
+  CareerOpenPositionHeroControllerCreateResponse,
+  CareerOpenPositionHeroControllerReadData,
+  CareerOpenPositionHeroControllerReadError,
+  CareerOpenPositionHeroControllerReadResponse,
+  CareerOpenPositionHeroControllerUpdateData,
+  CareerOpenPositionHeroControllerUpdateError,
+  CareerOpenPositionHeroControllerUpdateResponse,
+  CareerOpenPositionHeroControllerReadOneData,
+  CareerOpenPositionHeroControllerReadOneError,
+  CareerOpenPositionHeroControllerReadOneResponse,
+  CareerJobDetailControllerCreateData,
+  CareerJobDetailControllerCreateError,
+  CareerJobDetailControllerCreateResponse,
+  CareerJobDetailControllerReadData,
+  CareerJobDetailControllerReadError,
+  CareerJobDetailControllerReadResponse,
+  CareerJobDetailControllerUpdateData,
+  CareerJobDetailControllerUpdateError,
+  CareerJobDetailControllerUpdateResponse,
+  CareerJobDetailControllerReadOneData,
+  CareerJobDetailControllerReadOneError,
+  CareerJobDetailControllerReadOneResponse,
+  CareerApplicationFormControllerCreateData,
+  CareerApplicationFormControllerCreateError,
+  CareerApplicationFormControllerCreateResponse,
+  CareerApplicationFormControllerReadData,
+  CareerApplicationFormControllerReadError,
+  CareerApplicationFormControllerReadResponse,
+  CareerApplicationFormControllerUpdateData,
+  CareerApplicationFormControllerUpdateError,
+  CareerApplicationFormControllerUpdateResponse,
+  CareerApplicationFormControllerReadOneData,
+  CareerApplicationFormControllerReadOneError,
+  CareerApplicationFormControllerReadOneResponse,
+  ManagedServiceDownloadFormControllerCreateData,
+  ManagedServiceDownloadFormControllerCreateError,
+  ManagedServiceDownloadFormControllerCreateResponse,
+  ManagedServiceDownloadFormControllerReadData,
+  ManagedServiceDownloadFormControllerReadError,
+  ManagedServiceDownloadFormControllerReadResponse,
+  ManagedServiceDownloadFormControllerUpdateData,
+  ManagedServiceDownloadFormControllerUpdateError,
+  ManagedServiceDownloadFormControllerUpdateResponse,
+  ManagedServiceDownloadFormControllerReadOneData,
+  ManagedServiceDownloadFormControllerReadOneError,
+  ManagedServiceDownloadFormControllerReadOneResponse,
+  ResourceHeroControllerCreateData,
+  ResourceHeroControllerCreateError,
+  ResourceHeroControllerCreateResponse,
+  ResourceHeroControllerReadData,
+  ResourceHeroControllerReadError,
+  ResourceHeroControllerReadResponse,
+  ResourceHeroControllerUpdateData,
+  ResourceHeroControllerUpdateError,
+  ResourceHeroControllerUpdateResponse,
+  ResourceHeroControllerReadOneData,
+  ResourceHeroControllerReadOneError,
+  ResourceHeroControllerReadOneResponse,
+  ResourceCardsControllerCreateData,
+  ResourceCardsControllerCreateError,
+  ResourceCardsControllerCreateResponse,
+  ResourceCardsControllerReadData,
+  ResourceCardsControllerReadError,
+  ResourceCardsControllerReadResponse,
+  ResourceCardsControllerReadOneData,
+  ResourceCardsControllerReadOneError,
+  ResourceCardsControllerReadOneResponse,
+  ResourceCardsControllerUpdateData,
+  ResourceCardsControllerUpdateError,
+  ResourceCardsControllerUpdateResponse,
+  AdditionalManagedServicesOneControllerCreateData,
+  AdditionalManagedServicesOneControllerCreateError,
+  AdditionalManagedServicesOneControllerCreateResponse,
+  AdditionalManagedServicesOneControllerReadData,
+  AdditionalManagedServicesOneControllerReadError,
+  AdditionalManagedServicesOneControllerReadResponse,
+  AdditionalManagedServicesOneControllerReadOneData,
+  AdditionalManagedServicesOneControllerReadOneError,
+  AdditionalManagedServicesOneControllerReadOneResponse,
+  AdditionalManagedServicesOneControllerUpdateData,
+  AdditionalManagedServicesOneControllerUpdateError,
+  AdditionalManagedServicesOneControllerUpdateResponse,
+  AdditionalManagedServicesOneControllerDeleteData,
+  AdditionalManagedServicesOneControllerDeleteError,
+  AdditionalManagedServicesOneControllerDeleteResponse,
+  AdditionalManagedServicesTwoControllerCreateData,
+  AdditionalManagedServicesTwoControllerCreateError,
+  AdditionalManagedServicesTwoControllerCreateResponse,
+  AdditionalManagedServicesTwoControllerReadData,
+  AdditionalManagedServicesTwoControllerReadError,
+  AdditionalManagedServicesTwoControllerReadResponse,
+  AdditionalManagedServicesTwoControllerReadOneData,
+  AdditionalManagedServicesTwoControllerReadOneError,
+  AdditionalManagedServicesTwoControllerReadOneResponse,
+  AdditionalManagedServicesTwoControllerUpdateData,
+  AdditionalManagedServicesTwoControllerUpdateError,
+  AdditionalManagedServicesTwoControllerUpdateResponse,
+  AdditionalManagedServicesTwoControllerDeleteData,
+  AdditionalManagedServicesTwoControllerDeleteError,
+  AdditionalManagedServicesTwoControllerDeleteResponse,
+  LeadershipTeamControllerCreateData,
+  LeadershipTeamControllerCreateError,
+  LeadershipTeamControllerCreateResponse,
+  LeadershipTeamControllerFindAllData,
+  LeadershipTeamControllerFindAllError,
+  LeadershipTeamControllerFindAllResponse,
+  LeadershipTeamControllerFindOneData,
+  LeadershipTeamControllerFindOneError,
+  LeadershipTeamControllerFindOneResponse,
+  LeadershipTeamControllerUpdateData,
+  LeadershipTeamControllerUpdateError,
+  LeadershipTeamControllerUpdateResponse,
+  LeadershipExecutiveTeamControllerCreateData,
+  LeadershipExecutiveTeamControllerCreateError,
+  LeadershipExecutiveTeamControllerCreateResponse,
+  LeadershipExecutiveTeamControllerReadData,
+  LeadershipExecutiveTeamControllerReadError,
+  LeadershipExecutiveTeamControllerReadResponse,
+  LeadershipExecutiveTeamControllerReadOneData,
+  LeadershipExecutiveTeamControllerReadOneError,
+  LeadershipExecutiveTeamControllerReadOneResponse,
+  LeadershipExecutiveTeamControllerUpdateData,
+  LeadershipExecutiveTeamControllerUpdateError,
+  LeadershipExecutiveTeamControllerUpdateResponse,
+  NewsroomHeroControllerCreateData,
+  NewsroomHeroControllerCreateError,
+  NewsroomHeroControllerCreateResponse,
+  NewsroomHeroControllerReadData,
+  NewsroomHeroControllerReadError,
+  NewsroomHeroControllerReadResponse,
+  NewsroomHeroControllerUpdateData,
+  NewsroomHeroControllerUpdateError,
+  NewsroomHeroControllerUpdateResponse,
+  NewsroomHeroControllerReadOneData,
+  NewsroomHeroControllerReadOneError,
+  NewsroomHeroControllerReadOneResponse,
+  NewsroomCategoryControllerCreateData,
+  NewsroomCategoryControllerCreateError,
+  NewsroomCategoryControllerCreateResponse,
+  NewsroomCategoryControllerReadData,
+  NewsroomCategoryControllerReadError,
+  NewsroomCategoryControllerReadResponse,
+  NewsroomCategoryControllerUpdateData,
+  NewsroomCategoryControllerUpdateError,
+  NewsroomCategoryControllerUpdateResponse,
+  NewsroomCategoryControllerReadOneData,
+  NewsroomCategoryControllerReadOneError,
+  NewsroomCategoryControllerReadOneResponse,
+  NewsroomCategoryControllerDeleteData,
+  NewsroomCategoryControllerDeleteError,
+  NewsroomCategoryControllerDeleteResponse,
+  FooterTermsControllerCreateData,
+  FooterTermsControllerCreateError,
+  FooterTermsControllerCreateResponse,
+  FooterTermsControllerReadData,
+  FooterTermsControllerReadError,
+  FooterTermsControllerReadResponse,
+  FooterTermsControllerUpdateData,
+  FooterTermsControllerUpdateError,
+  FooterTermsControllerUpdateResponse,
+  FooterTermsControllerReadOneData,
+  FooterTermsControllerReadOneError,
+  FooterTermsControllerReadOneResponse,
+  FooterTermsControllerDeleteData,
+  FooterTermsControllerDeleteError,
+  FooterTermsControllerDeleteResponse,
+  CareerWorkingAtBarqControllerCreateData,
+  CareerWorkingAtBarqControllerCreateError,
+  CareerWorkingAtBarqControllerCreateResponse,
+  CareerWorkingAtBarqControllerReadData,
+  CareerWorkingAtBarqControllerReadError,
+  CareerWorkingAtBarqControllerReadResponse,
+  CareerWorkingAtBarqControllerUpdateData,
+  CareerWorkingAtBarqControllerUpdateError,
+  CareerWorkingAtBarqControllerUpdateResponse,
+  CareerWorkingAtBarqControllerReadOneData,
+  CareerWorkingAtBarqControllerReadOneError,
+  CareerWorkingAtBarqControllerReadOneResponse,
+  CampaignFormControllerCreateData,
+  CampaignFormControllerCreateError,
+  CampaignFormControllerCreateResponse,
+  CampaignFormControllerReadData,
+  CampaignFormControllerReadError,
+  CampaignFormControllerReadResponse,
+  CampaignFormControllerUpdateData,
+  CampaignFormControllerUpdateError,
+  CampaignFormControllerUpdateResponse,
+  CampaignFormControllerReadOneData,
+  CampaignFormControllerReadOneError,
+  CampaignFormControllerReadOneResponse,
+  CampaignLayoutOneControllerCreateData,
+  CampaignLayoutOneControllerCreateError,
+  CampaignLayoutOneControllerCreateResponse,
+  CampaignLayoutOneControllerReadData,
+  CampaignLayoutOneControllerReadError,
+  CampaignLayoutOneControllerReadResponse,
+  CampaignLayoutOneControllerUpdateData,
+  CampaignLayoutOneControllerUpdateError,
+  CampaignLayoutOneControllerUpdateResponse,
+  CampaignLayoutOneControllerReadOneData,
+  CampaignLayoutOneControllerReadOneError,
+  CampaignLayoutOneControllerReadOneResponse,
+  CampaignLayoutTwoControllerCreateData,
+  CampaignLayoutTwoControllerCreateError,
+  CampaignLayoutTwoControllerCreateResponse,
+  CampaignLayoutTwoControllerReadData,
+  CampaignLayoutTwoControllerReadError,
+  CampaignLayoutTwoControllerReadResponse,
+  CampaignLayoutTwoControllerUpdateData,
+  CampaignLayoutTwoControllerUpdateError,
+  CampaignLayoutTwoControllerUpdateResponse,
+  CampaignLayoutTwoControllerReadOneData,
+  CampaignLayoutTwoControllerReadOneError,
+  CampaignLayoutTwoControllerReadOneResponse,
+  CampaignLayoutThreeSectionTwoControllerCreateData,
+  CampaignLayoutThreeSectionTwoControllerCreateError,
+  CampaignLayoutThreeSectionTwoControllerCreateResponse,
+  CampaignLayoutThreeSectionTwoControllerReadData,
+  CampaignLayoutThreeSectionTwoControllerReadError,
+  CampaignLayoutThreeSectionTwoControllerReadResponse,
+  CampaignLayoutThreeSectionTwoControllerReadOneData,
+  CampaignLayoutThreeSectionTwoControllerReadOneError,
+  CampaignLayoutThreeSectionTwoControllerReadOneResponse,
+  CampaignLayoutThreeSectionTwoControllerUpdateData,
+  CampaignLayoutThreeSectionTwoControllerUpdateError,
+  CampaignLayoutThreeSectionTwoControllerUpdateResponse,
 } from './types.gen';
 
 export const client = createClient(createConfig(ApiConfig));
@@ -574,96 +1306,308 @@ export const appControllerEntry = <ThrowOnError extends boolean = false>(
   });
 };
 
-export const usersControllerCreate = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<UsersControllerCreateData, ThrowOnError>
-) => {
-  return (options?.client ?? client).post<
-    UsersControllerCreateResponse,
-    UsersControllerCreateError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/users',
-  });
-};
-
-export const usersControllerRead = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<UsersControllerReadData, ThrowOnError>
-) => {
-  return (options?.client ?? client).get<
-    UsersControllerReadResponse,
-    UsersControllerReadError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/users',
-  });
-};
-
-export const usersControllerUpdate = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<UsersControllerUpdateData, ThrowOnError>
-) => {
-  return (options?.client ?? client).patch<
-    UsersControllerUpdateResponse,
-    UsersControllerUpdateError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/users/{id}',
-  });
-};
-
-export const usersControllerReadOne = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<UsersControllerReadOneData, ThrowOnError>
-) => {
-  return (options?.client ?? client).get<
-    UsersControllerReadOneResponse,
-    UsersControllerReadOneError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/users/{id}',
-  });
-};
-
-export const usersControllerUpdateProfile = <
+/**
+ * Get all events from external API
+ */
+export const barqExternalApiControllerGetEvents = <
   ThrowOnError extends boolean = false,
 >(
-  options: OptionsLegacyParser<UsersControllerUpdateProfileData, ThrowOnError>
-) => {
-  return (options?.client ?? client).patch<
-    UsersControllerUpdateProfileResponse,
-    UsersControllerUpdateProfileError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/users/profile',
-  });
-};
-
-export const usersControllerReadMe = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<UsersControllerReadMeData, ThrowOnError>
+  options?: OptionsLegacyParser<any, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
-    UsersControllerReadMeResponse,
-    UsersControllerReadMeError,
+    BarqExternalApiControllerGetEventsResponse,
+    BarqExternalApiControllerGetEventsError,
     ThrowOnError
   >({
     ...options,
-    url: '/users/me',
+    url: '/barq-external-api/events/external',
   });
 };
 
-export const usersControllerSoftDelete = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<UsersControllerSoftDeleteData, ThrowOnError>
+/**
+ * Sync events from external API to database
+ */
+export const barqExternalApiControllerSyncEvents = <
+  ThrowOnError extends boolean = false,
+>(
+  options?: OptionsLegacyParser<any, ThrowOnError>
 ) => {
-  return (options?.client ?? client).delete<
-    UsersControllerSoftDeleteResponse,
-    UsersControllerSoftDeleteError,
+  return (options?.client ?? client).post<
+    BarqExternalApiControllerSyncEventsResponse,
+    BarqExternalApiControllerSyncEventsError,
     ThrowOnError
   >({
     ...options,
-    url: '/users/{id}/soft',
+    url: '/barq-external-api/events/sync',
+  });
+};
+
+/**
+ * Sync campaigns from external API to database
+ */
+export const barqExternalApiControllerSyncCampaigns = <
+  ThrowOnError extends boolean = false,
+>(
+  options?: OptionsLegacyParser<any, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    BarqExternalApiControllerSyncCampaignsResponse,
+    BarqExternalApiControllerSyncCampaignsError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-external-api/campaigns/sync',
+  });
+};
+
+/**
+ * Get one event by ID from database
+ */
+export const barqExternalApiControllerReadOneEvent = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqExternalApiControllerReadOneEventData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqExternalApiControllerReadOneEventResponse,
+    BarqExternalApiControllerReadOneEventError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-external-api/events/{id}',
+  });
+};
+
+/**
+ * Get all events from database
+ */
+export const barqExternalApiControllerReadEvents = <
+  ThrowOnError extends boolean = false,
+>(
+  options?: OptionsLegacyParser<
+    BarqExternalApiControllerReadEventsData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqExternalApiControllerReadEventsResponse,
+    BarqExternalApiControllerReadEventsError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-external-api/events',
+  });
+};
+
+export const eventControllerRead = <ThrowOnError extends boolean = false>(
+  options?: OptionsLegacyParser<EventControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    EventControllerReadResponse,
+    EventControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event',
+  });
+};
+
+export const eventControllerReadOne = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<EventControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    EventControllerReadOneResponse,
+    EventControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event/{id}',
+  });
+};
+
+export const campaignControllerRead = <ThrowOnError extends boolean = false>(
+  options?: OptionsLegacyParser<CampaignControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CampaignControllerReadResponse,
+    CampaignControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign',
+  });
+};
+
+export const campaignControllerReadOne = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CampaignControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CampaignControllerReadOneResponse,
+    CampaignControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign/{id}',
+  });
+};
+
+export const campaignControllerUpdate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CampaignControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    CampaignControllerUpdateResponse,
+    CampaignControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign/{id}',
+  });
+};
+
+export const mediaControllerUploadFile = <ThrowOnError extends boolean = false>(
+  options?: OptionsLegacyParser<any, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    MediaControllerUploadFileResponse,
+    MediaControllerUploadFileError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/media/upload',
+  });
+};
+
+export const mediaControllerUpdateFile = <ThrowOnError extends boolean = false>(
+  options?: OptionsLegacyParser<any, ThrowOnError>
+) => {
+  return (options?.client ?? client).put<
+    MediaControllerUpdateFileResponse,
+    MediaControllerUpdateFileError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/media/upload/{id}',
+  });
+};
+
+export const mediaControllerReadOne = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<MediaControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    MediaControllerReadOneResponse,
+    MediaControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/media/{id}',
+  });
+};
+
+export const mediaControllerStreamMedia = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<MediaControllerStreamMediaData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    MediaControllerStreamMediaResponse,
+    MediaControllerStreamMediaError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/media/{id}/stream',
+  });
+};
+
+export const careerOpenPositionControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    CareerOpenPositionControllerCreateResponse,
+    CareerOpenPositionControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position',
+  });
+};
+
+export const careerOpenPositionControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerOpenPositionControllerReadResponse,
+    CareerOpenPositionControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position',
+  });
+};
+
+export const careerOpenPositionControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CareerOpenPositionControllerUpdateResponse,
+    CareerOpenPositionControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position/{id}',
+  });
+};
+
+export const careerOpenPositionControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerOpenPositionControllerReadOneResponse,
+    CareerOpenPositionControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position/{id}',
+  });
+};
+
+export const careerOpenPositionControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionControllerDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    CareerOpenPositionControllerDeleteResponse,
+    CareerOpenPositionControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position/{id}',
   });
 };
 
@@ -805,46 +1749,96 @@ export const authControllerCompletePassword = <
   });
 };
 
-export const permissionsControllerUpdate = <
-  ThrowOnError extends boolean = false,
->(
-  options: OptionsLegacyParser<PermissionsControllerUpdateData, ThrowOnError>
+export const usersControllerCreate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<UsersControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    UsersControllerCreateResponse,
+    UsersControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/users',
+  });
+};
+
+export const usersControllerRead = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<UsersControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    UsersControllerReadResponse,
+    UsersControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/users',
+  });
+};
+
+export const usersControllerUpdate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<UsersControllerUpdateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).patch<
-    PermissionsControllerUpdateResponse,
-    PermissionsControllerUpdateError,
+    UsersControllerUpdateResponse,
+    UsersControllerUpdateError,
     ThrowOnError
   >({
     ...options,
-    url: '/permissions/{id}',
+    url: '/users/{id}',
   });
 };
 
-export const permissionsControllerReadOne = <
+export const usersControllerReadOne = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<UsersControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    UsersControllerReadOneResponse,
+    UsersControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/users/{id}',
+  });
+};
+
+export const usersControllerUpdateProfile = <
   ThrowOnError extends boolean = false,
 >(
-  options: OptionsLegacyParser<PermissionsControllerReadOneData, ThrowOnError>
+  options: OptionsLegacyParser<UsersControllerUpdateProfileData, ThrowOnError>
 ) => {
-  return (options?.client ?? client).get<
-    PermissionsControllerReadOneResponse,
-    PermissionsControllerReadOneError,
+  return (options?.client ?? client).patch<
+    UsersControllerUpdateProfileResponse,
+    UsersControllerUpdateProfileError,
     ThrowOnError
   >({
     ...options,
-    url: '/permissions/{id}',
+    url: '/users/profile',
   });
 };
 
-export const permissionsControllerRead = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<PermissionsControllerReadData, ThrowOnError>
+export const usersControllerReadMe = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<UsersControllerReadMeData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
-    PermissionsControllerReadResponse,
-    PermissionsControllerReadError,
+    UsersControllerReadMeResponse,
+    UsersControllerReadMeError,
     ThrowOnError
   >({
     ...options,
-    url: '/permissions',
+    url: '/users/me',
+  });
+};
+
+export const usersControllerSoftDelete = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<UsersControllerSoftDeleteData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    UsersControllerSoftDeleteResponse,
+    UsersControllerSoftDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/users/{id}/soft',
   });
 };
 
@@ -923,6 +1917,49 @@ export const rolesControllerSoftDelete = <ThrowOnError extends boolean = false>(
   >({
     ...options,
     url: '/roles/{id}/soft',
+  });
+};
+
+export const permissionsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<PermissionsControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    PermissionsControllerUpdateResponse,
+    PermissionsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/permissions/{id}',
+  });
+};
+
+export const permissionsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<PermissionsControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    PermissionsControllerReadOneResponse,
+    PermissionsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/permissions/{id}',
+  });
+};
+
+export const permissionsControllerRead = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<PermissionsControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    PermissionsControllerReadResponse,
+    PermissionsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/permissions',
   });
 };
 
@@ -1013,57 +2050,301 @@ export const rolePermissionsControllerUserPermissions = <
   });
 };
 
-export const mediaControllerUploadFile = <ThrowOnError extends boolean = false>(
-  options?: OptionsLegacyParser<any, ThrowOnError>
+export const cityControllerCreate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CityControllerCreateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
-    MediaControllerUploadFileResponse,
-    MediaControllerUploadFileError,
+    CityControllerCreateResponse,
+    CityControllerCreateError,
     ThrowOnError
   >({
     ...options,
-    url: '/media/upload',
+    url: '/city',
   });
 };
 
-export const mediaControllerUpdateFile = <ThrowOnError extends boolean = false>(
-  options?: OptionsLegacyParser<any, ThrowOnError>
-) => {
-  return (options?.client ?? client).put<
-    MediaControllerUpdateFileResponse,
-    MediaControllerUpdateFileError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/media/upload/{id}',
-  });
-};
-
-export const mediaControllerReadOne = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<MediaControllerReadOneData, ThrowOnError>
+export const cityControllerRead = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CityControllerReadData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
-    MediaControllerReadOneResponse,
-    MediaControllerReadOneError,
+    CityControllerReadResponse,
+    CityControllerReadError,
     ThrowOnError
   >({
     ...options,
-    url: '/media/{id}',
+    url: '/city',
   });
 };
 
-export const mediaControllerStreamMedia = <
+export const cityControllerUpdate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CityControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    CityControllerUpdateResponse,
+    CityControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/city/{id}',
+  });
+};
+
+export const cityControllerReadOne = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CityControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CityControllerReadOneResponse,
+    CityControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/city/{id}',
+  });
+};
+
+export const cityControllerDelete = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CityControllerDeleteData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    CityControllerDeleteResponse,
+    CityControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/city/{id}',
+  });
+};
+
+export const countryControllerCreate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CountryControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    CountryControllerCreateResponse,
+    CountryControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/country',
+  });
+};
+
+export const countryControllerRead = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CountryControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CountryControllerReadResponse,
+    CountryControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/country',
+  });
+};
+
+export const countryControllerUpdate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CountryControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    CountryControllerUpdateResponse,
+    CountryControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/country/{id}',
+  });
+};
+
+export const countryControllerReadOne = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CountryControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CountryControllerReadOneResponse,
+    CountryControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/country/{id}',
+  });
+};
+
+export const countryControllerDelete = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CountryControllerDeleteData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    CountryControllerDeleteResponse,
+    CountryControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/country/{id}',
+  });
+};
+
+export const careerOpportunityControllerCreate = <
   ThrowOnError extends boolean = false,
 >(
-  options: OptionsLegacyParser<MediaControllerStreamMediaData, ThrowOnError>
+  options: OptionsLegacyParser<
+    CareerOpportunityControllerCreateData,
+    ThrowOnError
+  >
 ) => {
-  return (options?.client ?? client).get<
-    MediaControllerStreamMediaResponse,
-    MediaControllerStreamMediaError,
+  return (options?.client ?? client).post<
+    CareerOpportunityControllerCreateResponse,
+    CareerOpportunityControllerCreateError,
     ThrowOnError
   >({
     ...options,
-    url: '/media/{id}/stream',
+    url: '/career-opportunity',
+  });
+};
+
+export const careerOpportunityControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpportunityControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerOpportunityControllerReadResponse,
+    CareerOpportunityControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-opportunity',
+  });
+};
+
+export const careerOpportunityControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpportunityControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CareerOpportunityControllerUpdateResponse,
+    CareerOpportunityControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-opportunity/{id}',
+  });
+};
+
+export const careerOpportunityControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpportunityControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerOpportunityControllerReadOneResponse,
+    CareerOpportunityControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-opportunity/{id}',
+  });
+};
+
+export const careerOpportunityControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpportunityControllerDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    CareerOpportunityControllerDeleteResponse,
+    CareerOpportunityControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-opportunity/{id}',
+  });
+};
+
+export const careerCategoryControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CareerCategoryControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    CareerCategoryControllerCreateResponse,
+    CareerCategoryControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-category',
+  });
+};
+
+export const careerCategoryControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CareerCategoryControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CareerCategoryControllerReadResponse,
+    CareerCategoryControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-category',
+  });
+};
+
+export const careerCategoryControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CareerCategoryControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    CareerCategoryControllerUpdateResponse,
+    CareerCategoryControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-category/{id}',
+  });
+};
+
+export const careerCategoryControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerCategoryControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerCategoryControllerReadOneResponse,
+    CareerCategoryControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-category/{id}',
+  });
+};
+
+export const careerCategoryControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CareerCategoryControllerDeleteData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    CareerCategoryControllerDeleteResponse,
+    CareerCategoryControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-category/{id}',
   });
 };
 
@@ -1287,6 +2568,21 @@ export const cardSocialControllerReadOne = <
   });
 };
 
+export const cardSocialControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CardSocialControllerDeleteData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    CardSocialControllerDeleteResponse,
+    CardSocialControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/card-social/{id}',
+  });
+};
+
 export const landingNumbersControllerCreate = <
   ThrowOnError extends boolean = false,
 >(
@@ -1368,126 +2664,462 @@ export const landingNumbersControllerSoftDelete = <
   });
 };
 
-export const leadershipControllerCreate = <
+export const managedServiceHeroControllerCreate = <
   ThrowOnError extends boolean = false,
 >(
-  options: OptionsLegacyParser<LeadershipControllerCreateData, ThrowOnError>
+  options: OptionsLegacyParser<
+    ManagedServiceHeroControllerCreateData,
+    ThrowOnError
+  >
 ) => {
   return (options?.client ?? client).post<
-    LeadershipControllerCreateResponse,
-    LeadershipControllerCreateError,
+    ManagedServiceHeroControllerCreateResponse,
+    ManagedServiceHeroControllerCreateError,
     ThrowOnError
   >({
     ...options,
-    url: '/leadership',
+    url: '/managed-service-hero',
   });
 };
 
-export const leadershipControllerRead = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<LeadershipControllerReadData, ThrowOnError>
-) => {
-  return (options?.client ?? client).get<
-    LeadershipControllerReadResponse,
-    LeadershipControllerReadError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/leadership',
-  });
-};
-
-export const leadershipControllerUpdate = <
+export const managedServiceHeroControllerRead = <
   ThrowOnError extends boolean = false,
 >(
-  options: OptionsLegacyParser<LeadershipControllerUpdateData, ThrowOnError>
+  options: OptionsLegacyParser<
+    ManagedServiceHeroControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedServiceHeroControllerReadResponse,
+    ManagedServiceHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-hero',
+  });
+};
+
+export const managedServiceHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceHeroControllerUpdateData,
+    ThrowOnError
+  >
 ) => {
   return (options?.client ?? client).patch<
-    LeadershipControllerUpdateResponse,
-    LeadershipControllerUpdateError,
+    ManagedServiceHeroControllerUpdateResponse,
+    ManagedServiceHeroControllerUpdateError,
     ThrowOnError
   >({
     ...options,
-    url: '/leadership/{id}',
+    url: '/managed-service-hero/{id}',
   });
 };
 
-export const leadershipControllerReadOne = <
+export const managedServiceHeroControllerReadOne = <
   ThrowOnError extends boolean = false,
 >(
-  options: OptionsLegacyParser<LeadershipControllerReadOneData, ThrowOnError>
+  options: OptionsLegacyParser<
+    ManagedServiceHeroControllerReadOneData,
+    ThrowOnError
+  >
 ) => {
   return (options?.client ?? client).get<
-    LeadershipControllerReadOneResponse,
-    LeadershipControllerReadOneError,
+    ManagedServiceHeroControllerReadOneResponse,
+    ManagedServiceHeroControllerReadOneError,
     ThrowOnError
   >({
     ...options,
-    url: '/leadership/{id}',
+    url: '/managed-service-hero/{id}',
   });
 };
 
-export const countryControllerCreate = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<CountryControllerCreateData, ThrowOnError>
+export const barqAcademyHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyHeroControllerCreateData,
+    ThrowOnError
+  >
 ) => {
   return (options?.client ?? client).post<
-    CountryControllerCreateResponse,
-    CountryControllerCreateError,
+    BarqAcademyHeroControllerCreateResponse,
+    BarqAcademyHeroControllerCreateError,
     ThrowOnError
   >({
     ...options,
-    url: '/country',
+    url: '/barq-academy-hero',
   });
 };
 
-export const countryControllerRead = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<CountryControllerReadData, ThrowOnError>
+export const barqAcademyHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<BarqAcademyHeroControllerReadData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
-    CountryControllerReadResponse,
-    CountryControllerReadError,
+    BarqAcademyHeroControllerReadResponse,
+    BarqAcademyHeroControllerReadError,
     ThrowOnError
   >({
     ...options,
-    url: '/country',
+    url: '/barq-academy-hero',
   });
 };
 
-export const countryControllerUpdate = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<CountryControllerUpdateData, ThrowOnError>
+export const barqAcademyHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyHeroControllerUpdateData,
+    ThrowOnError
+  >
 ) => {
   return (options?.client ?? client).patch<
-    CountryControllerUpdateResponse,
-    CountryControllerUpdateError,
+    BarqAcademyHeroControllerUpdateResponse,
+    BarqAcademyHeroControllerUpdateError,
     ThrowOnError
   >({
     ...options,
-    url: '/country/{id}',
+    url: '/barq-academy-hero/{id}',
   });
 };
 
-export const countryControllerReadOne = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<CountryControllerReadOneData, ThrowOnError>
+export const barqAcademyHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyHeroControllerReadOneData,
+    ThrowOnError
+  >
 ) => {
   return (options?.client ?? client).get<
-    CountryControllerReadOneResponse,
-    CountryControllerReadOneError,
+    BarqAcademyHeroControllerReadOneResponse,
+    BarqAcademyHeroControllerReadOneError,
     ThrowOnError
   >({
     ...options,
-    url: '/country/{id}',
+    url: '/barq-academy-hero/{id}',
   });
 };
 
-export const countryControllerDelete = <ThrowOnError extends boolean = false>(
-  options: OptionsLegacyParser<CountryControllerDeleteData, ThrowOnError>
+export const solutionsAndServicesHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SolutionsAndServicesHeroControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    SolutionsAndServicesHeroControllerCreateResponse,
+    SolutionsAndServicesHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/solutions-and-services-hero',
+  });
+};
+
+export const solutionsAndServicesHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SolutionsAndServicesHeroControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    SolutionsAndServicesHeroControllerReadResponse,
+    SolutionsAndServicesHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/solutions-and-services-hero',
+  });
+};
+
+export const solutionsAndServicesHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SolutionsAndServicesHeroControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    SolutionsAndServicesHeroControllerUpdateResponse,
+    SolutionsAndServicesHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/solutions-and-services-hero/{id}',
+  });
+};
+
+export const solutionsAndServicesHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SolutionsAndServicesHeroControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    SolutionsAndServicesHeroControllerReadOneResponse,
+    SolutionsAndServicesHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/solutions-and-services-hero/{id}',
+  });
+};
+
+export const successStoryHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryHeroControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    SuccessStoryHeroControllerCreateResponse,
+    SuccessStoryHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-hero',
+  });
+};
+
+export const successStoryHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<SuccessStoryHeroControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    SuccessStoryHeroControllerReadResponse,
+    SuccessStoryHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-hero',
+  });
+};
+
+export const successStoryHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryHeroControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    SuccessStoryHeroControllerUpdateResponse,
+    SuccessStoryHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-hero/{id}',
+  });
+};
+
+export const successStoryHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryHeroControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    SuccessStoryHeroControllerReadOneResponse,
+    SuccessStoryHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-hero/{id}',
+  });
+};
+
+export const eventJoinUsHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    EventJoinUsHeroControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    EventJoinUsHeroControllerCreateResponse,
+    EventJoinUsHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event-join-us-hero',
+  });
+};
+
+export const eventJoinUsHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventJoinUsHeroControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    EventJoinUsHeroControllerReadResponse,
+    EventJoinUsHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event-join-us-hero',
+  });
+};
+
+export const eventJoinUsHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    EventJoinUsHeroControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    EventJoinUsHeroControllerUpdateResponse,
+    EventJoinUsHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event-join-us-hero/{id}',
+  });
+};
+
+export const eventJoinUsHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    EventJoinUsHeroControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    EventJoinUsHeroControllerReadOneResponse,
+    EventJoinUsHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event-join-us-hero/{id}',
+  });
+};
+
+export const successStoryCaseStudiesControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryCaseStudiesControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    SuccessStoryCaseStudiesControllerCreateResponse,
+    SuccessStoryCaseStudiesControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-case-studies',
+  });
+};
+
+export const successStoryCaseStudiesControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryCaseStudiesControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    SuccessStoryCaseStudiesControllerReadResponse,
+    SuccessStoryCaseStudiesControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-case-studies',
+  });
+};
+
+export const successStoryCaseStudiesControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryCaseStudiesControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    SuccessStoryCaseStudiesControllerUpdateResponse,
+    SuccessStoryCaseStudiesControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-case-studies/{id}',
+  });
+};
+
+export const successStoryCaseStudiesControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryCaseStudiesControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    SuccessStoryCaseStudiesControllerReadOneResponse,
+    SuccessStoryCaseStudiesControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-case-studies/{id}',
+  });
+};
+
+export const successStoryCaseStudiesControllerSoftDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryCaseStudiesControllerSoftDeleteData,
+    ThrowOnError
+  >
 ) => {
   return (options?.client ?? client).delete<
-    CountryControllerDeleteResponse,
-    CountryControllerDeleteError,
+    SuccessStoryCaseStudiesControllerSoftDeleteResponse,
+    SuccessStoryCaseStudiesControllerSoftDeleteError,
     ThrowOnError
   >({
     ...options,
-    url: '/country/{id}',
+    url: '/success-story-case-studies/{id}',
+  });
+};
+
+export const successStoryCaseStudiesControllerMarkAsFeatured = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    SuccessStoryCaseStudiesControllerMarkAsFeaturedData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    SuccessStoryCaseStudiesControllerMarkAsFeaturedResponse,
+    SuccessStoryCaseStudiesControllerMarkAsFeaturedError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/success-story-case-studies/{id}/mark-as-featured',
   });
 };
 
@@ -1561,6 +3193,996 @@ export const industriesControllerDelete = <
   >({
     ...options,
     url: '/industries/{id}',
+  });
+};
+
+export const newsroomCardsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomCardsControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    NewsroomCardsControllerCreateResponse,
+    NewsroomCardsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-cards',
+  });
+};
+
+export const newsroomCardsControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomCardsControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    NewsroomCardsControllerReadResponse,
+    NewsroomCardsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-cards',
+  });
+};
+
+export const newsroomCardsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomCardsControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    NewsroomCardsControllerUpdateResponse,
+    NewsroomCardsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-cards/{id}',
+  });
+};
+
+export const newsroomCardsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomCardsControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    NewsroomCardsControllerReadOneResponse,
+    NewsroomCardsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-cards/{id}',
+  });
+};
+
+export const newsroomCardsControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomCardsControllerDeleteData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    NewsroomCardsControllerDeleteResponse,
+    NewsroomCardsControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-cards/{id}',
+  });
+};
+
+export const eventJoinusFormControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    EventJoinusFormControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    EventJoinusFormControllerCreateResponse,
+    EventJoinusFormControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event-joinus-form',
+  });
+};
+
+export const eventJoinusFormControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventJoinusFormControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    EventJoinusFormControllerReadResponse,
+    EventJoinusFormControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event-joinus-form',
+  });
+};
+
+export const eventJoinusFormControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    EventJoinusFormControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    EventJoinusFormControllerUpdateResponse,
+    EventJoinusFormControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event-joinus-form/{id}',
+  });
+};
+
+export const eventJoinusFormControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    EventJoinusFormControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    EventJoinusFormControllerReadOneResponse,
+    EventJoinusFormControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/event-joinus-form/{id}',
+  });
+};
+
+export const barqAcademyHighlightsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyHighlightsControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    BarqAcademyHighlightsControllerCreateResponse,
+    BarqAcademyHighlightsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-highlights',
+  });
+};
+
+export const barqAcademyHighlightsControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyHighlightsControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyHighlightsControllerReadResponse,
+    BarqAcademyHighlightsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-highlights',
+  });
+};
+
+export const barqAcademyHighlightsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyHighlightsControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyHighlightsControllerReadOneResponse,
+    BarqAcademyHighlightsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-highlights/{id}',
+  });
+};
+
+export const barqAcademyHighlightsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyHighlightsControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    BarqAcademyHighlightsControllerUpdateResponse,
+    BarqAcademyHighlightsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-highlights/{id}',
+  });
+};
+
+export const barqAcademyProgramsOpportunitiesControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyProgramsOpportunitiesControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    BarqAcademyProgramsOpportunitiesControllerCreateResponse,
+    BarqAcademyProgramsOpportunitiesControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-programs-opportunities',
+  });
+};
+
+export const barqAcademyProgramsOpportunitiesControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyProgramsOpportunitiesControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyProgramsOpportunitiesControllerReadResponse,
+    BarqAcademyProgramsOpportunitiesControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-programs-opportunities',
+  });
+};
+
+export const barqAcademyProgramsOpportunitiesControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyProgramsOpportunitiesControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyProgramsOpportunitiesControllerReadOneResponse,
+    BarqAcademyProgramsOpportunitiesControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-programs-opportunities/{id}',
+  });
+};
+
+export const barqAcademyProgramsOpportunitiesControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyProgramsOpportunitiesControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    BarqAcademyProgramsOpportunitiesControllerUpdateResponse,
+    BarqAcademyProgramsOpportunitiesControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-programs-opportunities/{id}',
+  });
+};
+
+export const barqAcademyFoundationTracksFormDataControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationTracksFormDataControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    BarqAcademyFoundationTracksFormDataControllerCreateResponse,
+    BarqAcademyFoundationTracksFormDataControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-tracks-form-data',
+  });
+};
+
+export const barqAcademyFoundationTracksFormDataControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationTracksFormDataControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyFoundationTracksFormDataControllerReadResponse,
+    BarqAcademyFoundationTracksFormDataControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-tracks-form-data',
+  });
+};
+
+export const barqAcademyFoundationTracksFormDataControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationTracksFormDataControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    BarqAcademyFoundationTracksFormDataControllerUpdateResponse,
+    BarqAcademyFoundationTracksFormDataControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-tracks-form-data/{id}',
+  });
+};
+
+export const barqAcademyFoundationTracksFormDataControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationTracksFormDataControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyFoundationTracksFormDataControllerReadOneResponse,
+    BarqAcademyFoundationTracksFormDataControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-tracks-form-data/{id}',
+  });
+};
+
+export const barqAcademyFoundationTracksFormControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationTracksFormControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    BarqAcademyFoundationTracksFormControllerCreateResponse,
+    BarqAcademyFoundationTracksFormControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-tracks-form',
+  });
+};
+
+export const barqAcademyFoundationTracksFormControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationTracksFormControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyFoundationTracksFormControllerReadResponse,
+    BarqAcademyFoundationTracksFormControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-tracks-form',
+  });
+};
+
+export const barqAcademyFoundationTracksFormControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationTracksFormControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    BarqAcademyFoundationTracksFormControllerUpdateResponse,
+    BarqAcademyFoundationTracksFormControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-tracks-form/{id}',
+  });
+};
+
+export const barqAcademyFoundationTracksFormControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationTracksFormControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyFoundationTracksFormControllerReadOneResponse,
+    BarqAcademyFoundationTracksFormControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-tracks-form/{id}',
+  });
+};
+
+export const barqAcademyFoundationInternshipFormControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationInternshipFormControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    BarqAcademyFoundationInternshipFormControllerCreateResponse,
+    BarqAcademyFoundationInternshipFormControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-internship-form',
+  });
+};
+
+export const barqAcademyFoundationInternshipFormControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationInternshipFormControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyFoundationInternshipFormControllerReadResponse,
+    BarqAcademyFoundationInternshipFormControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-internship-form',
+  });
+};
+
+export const barqAcademyFoundationInternshipFormControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationInternshipFormControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    BarqAcademyFoundationInternshipFormControllerUpdateResponse,
+    BarqAcademyFoundationInternshipFormControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-internship-form/{id}',
+  });
+};
+
+export const barqAcademyFoundationInternshipFormControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationInternshipFormControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyFoundationInternshipFormControllerReadOneResponse,
+    BarqAcademyFoundationInternshipFormControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-internship-form/{id}',
+  });
+};
+
+export const barqAcademyProgramsOpportunitiesInternshipControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyProgramsOpportunitiesInternshipControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    BarqAcademyProgramsOpportunitiesInternshipControllerCreateResponse,
+    BarqAcademyProgramsOpportunitiesInternshipControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-programs-opportunities-internship',
+  });
+};
+
+export const barqAcademyProgramsOpportunitiesInternshipControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyProgramsOpportunitiesInternshipControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyProgramsOpportunitiesInternshipControllerReadResponse,
+    BarqAcademyProgramsOpportunitiesInternshipControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-programs-opportunities-internship',
+  });
+};
+
+export const barqAcademyProgramsOpportunitiesInternshipControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyProgramsOpportunitiesInternshipControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyProgramsOpportunitiesInternshipControllerReadOneResponse,
+    BarqAcademyProgramsOpportunitiesInternshipControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-programs-opportunities-internship/{id}',
+  });
+};
+
+export const barqAcademyProgramsOpportunitiesInternshipControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyProgramsOpportunitiesInternshipControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    BarqAcademyProgramsOpportunitiesInternshipControllerUpdateResponse,
+    BarqAcademyProgramsOpportunitiesInternshipControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-programs-opportunities-internship/{id}',
+  });
+};
+
+export const barqAcademyFoundationInternshipFormDataControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationInternshipFormDataControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    BarqAcademyFoundationInternshipFormDataControllerCreateResponse,
+    BarqAcademyFoundationInternshipFormDataControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-internship-form-data',
+  });
+};
+
+export const barqAcademyFoundationInternshipFormDataControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationInternshipFormDataControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyFoundationInternshipFormDataControllerReadResponse,
+    BarqAcademyFoundationInternshipFormDataControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-internship-form-data',
+  });
+};
+
+export const barqAcademyFoundationInternshipFormDataControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationInternshipFormDataControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    BarqAcademyFoundationInternshipFormDataControllerUpdateResponse,
+    BarqAcademyFoundationInternshipFormDataControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-internship-form-data/{id}',
+  });
+};
+
+export const barqAcademyFoundationInternshipFormDataControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    BarqAcademyFoundationInternshipFormDataControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    BarqAcademyFoundationInternshipFormDataControllerReadOneResponse,
+    BarqAcademyFoundationInternshipFormDataControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/barq-academy-foundation-internship-form-data/{id}',
+  });
+};
+
+export const managedServiceCardsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceCardsControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    ManagedServiceCardsControllerCreateResponse,
+    ManagedServiceCardsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-cards',
+  });
+};
+
+export const managedServiceCardsControllerFindAll = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceCardsControllerFindAllData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedServiceCardsControllerFindAllResponse,
+    ManagedServiceCardsControllerFindAllError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-cards',
+  });
+};
+
+export const managedServiceCardsControllerFindOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceCardsControllerFindOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedServiceCardsControllerFindOneResponse,
+    ManagedServiceCardsControllerFindOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-cards/{id}',
+  });
+};
+
+export const managedServiceCardsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceCardsControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    ManagedServiceCardsControllerUpdateResponse,
+    ManagedServiceCardsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-cards/{id}',
+  });
+};
+
+export const managedServiceCardsControllerRemove = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceCardsControllerRemoveData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    ManagedServiceCardsControllerRemoveResponse,
+    ManagedServiceCardsControllerRemoveError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-cards/{id}',
+  });
+};
+
+export const aboutBarqMissionVisionControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMissionVisionControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    AboutBarqMissionVisionControllerCreateResponse,
+    AboutBarqMissionVisionControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-mission-vision',
+  });
+};
+
+export const aboutBarqMissionVisionControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMissionVisionControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqMissionVisionControllerReadResponse,
+    AboutBarqMissionVisionControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-mission-vision',
+  });
+};
+
+export const aboutBarqMissionVisionControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMissionVisionControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqMissionVisionControllerReadOneResponse,
+    AboutBarqMissionVisionControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-mission-vision/{id}',
+  });
+};
+
+export const aboutBarqMissionVisionControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMissionVisionControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    AboutBarqMissionVisionControllerUpdateResponse,
+    AboutBarqMissionVisionControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-mission-vision/{id}',
+  });
+};
+
+export const aboutBarqMissionVisionControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMissionVisionControllerDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    AboutBarqMissionVisionControllerDeleteResponse,
+    AboutBarqMissionVisionControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-mission-vision/{id}',
+  });
+};
+
+export const aboutBarqCoreValuesControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqCoreValuesControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    AboutBarqCoreValuesControllerCreateResponse,
+    AboutBarqCoreValuesControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-core-values',
+  });
+};
+
+export const aboutBarqCoreValuesControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqCoreValuesControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqCoreValuesControllerReadResponse,
+    AboutBarqCoreValuesControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-core-values',
+  });
+};
+
+export const aboutBarqCoreValuesControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqCoreValuesControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqCoreValuesControllerReadOneResponse,
+    AboutBarqCoreValuesControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-core-values/{id}',
+  });
+};
+
+export const aboutBarqCoreValuesControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqCoreValuesControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    AboutBarqCoreValuesControllerUpdateResponse,
+    AboutBarqCoreValuesControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-core-values/{id}',
+  });
+};
+
+export const aboutBarqMilestonesControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMilestonesControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    AboutBarqMilestonesControllerCreateResponse,
+    AboutBarqMilestonesControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-milestones',
+  });
+};
+
+export const aboutBarqMilestonesControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMilestonesControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqMilestonesControllerReadResponse,
+    AboutBarqMilestonesControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-milestones',
+  });
+};
+
+export const aboutBarqMilestonesControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMilestonesControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqMilestonesControllerReadOneResponse,
+    AboutBarqMilestonesControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-milestones/{id}',
+  });
+};
+
+export const aboutBarqMilestonesControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMilestonesControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    AboutBarqMilestonesControllerUpdateResponse,
+    AboutBarqMilestonesControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-milestones/{id}',
+  });
+};
+
+export const aboutBarqMilestonesControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqMilestonesControllerDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    AboutBarqMilestonesControllerDeleteResponse,
+    AboutBarqMilestonesControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-milestones/{id}',
   });
 };
 
@@ -2943,6 +5565,259 @@ export const mobilityControllerUpdate = <ThrowOnError extends boolean = false>(
   });
 };
 
+export const eventsSpeakersControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventsSpeakersControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    EventsSpeakersControllerCreateResponse,
+    EventsSpeakersControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/events-speakers',
+  });
+};
+
+export const eventsSpeakersControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventsSpeakersControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    EventsSpeakersControllerReadResponse,
+    EventsSpeakersControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/events-speakers',
+  });
+};
+
+export const eventsSpeakersControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    EventsSpeakersControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    EventsSpeakersControllerReadOneResponse,
+    EventsSpeakersControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/events-speakers/{id}',
+  });
+};
+
+export const eventsSpeakersControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventsSpeakersControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    EventsSpeakersControllerUpdateResponse,
+    EventsSpeakersControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/events-speakers/{id}',
+  });
+};
+
+export const eventsPartnerControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventsPartnerControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    EventsPartnerControllerCreateResponse,
+    EventsPartnerControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/events-partner',
+  });
+};
+
+export const eventsPartnerControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventsPartnerControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    EventsPartnerControllerReadResponse,
+    EventsPartnerControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/events-partner',
+  });
+};
+
+export const eventsPartnerControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventsPartnerControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    EventsPartnerControllerUpdateResponse,
+    EventsPartnerControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/events-partner/{id}',
+  });
+};
+
+export const eventsPartnerControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<EventsPartnerControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    EventsPartnerControllerReadOneResponse,
+    EventsPartnerControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/events-partner/{id}',
+  });
+};
+
+export const homeAwardsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<HomeAwardsControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    HomeAwardsControllerCreateResponse,
+    HomeAwardsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/home-awards',
+  });
+};
+
+export const homeAwardsControllerRead = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<HomeAwardsControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    HomeAwardsControllerReadResponse,
+    HomeAwardsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/home-awards',
+  });
+};
+
+export const homeAwardsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<HomeAwardsControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    HomeAwardsControllerReadOneResponse,
+    HomeAwardsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/home-awards/{id}',
+  });
+};
+
+export const homeAwardsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<HomeAwardsControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    HomeAwardsControllerUpdateResponse,
+    HomeAwardsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/home-awards/{id}',
+  });
+};
+
+export const aboutBarqGroupAffiliationControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqGroupAffiliationControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    AboutBarqGroupAffiliationControllerCreateResponse,
+    AboutBarqGroupAffiliationControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-group-affiliation',
+  });
+};
+
+export const aboutBarqGroupAffiliationControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqGroupAffiliationControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqGroupAffiliationControllerReadResponse,
+    AboutBarqGroupAffiliationControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-group-affiliation',
+  });
+};
+
+export const aboutBarqGroupAffiliationControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqGroupAffiliationControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqGroupAffiliationControllerReadOneResponse,
+    AboutBarqGroupAffiliationControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-group-affiliation/{id}',
+  });
+};
+
+export const aboutBarqGroupAffiliationControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AboutBarqGroupAffiliationControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    AboutBarqGroupAffiliationControllerUpdateResponse,
+    AboutBarqGroupAffiliationControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-group-affiliation/{id}',
+  });
+};
+
 export const softwareDefinedNetworkControllerCreate = <
   ThrowOnError extends boolean = false,
 >(
@@ -3138,6 +6013,66 @@ export const controlSectionControllerUpdate = <
   >({
     ...options,
     url: '/control-section/{id}',
+  });
+};
+
+export const aboutBarqHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<AboutBarqHeroControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    AboutBarqHeroControllerCreateResponse,
+    AboutBarqHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-hero',
+  });
+};
+
+export const aboutBarqHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<AboutBarqHeroControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqHeroControllerReadResponse,
+    AboutBarqHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-hero',
+  });
+};
+
+export const aboutBarqHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<AboutBarqHeroControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    AboutBarqHeroControllerReadOneResponse,
+    AboutBarqHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-hero/{id}',
+  });
+};
+
+export const aboutBarqHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<AboutBarqHeroControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    AboutBarqHeroControllerUpdateResponse,
+    AboutBarqHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/about-barq-hero/{id}',
   });
 };
 
@@ -3495,5 +6430,1964 @@ export const applicationDataControllerUpdate = <
   >({
     ...options,
     url: '/application-data/{id}',
+  });
+};
+
+export const contactUsControllerCreate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<ContactUsControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    ContactUsControllerCreateResponse,
+    ContactUsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us',
+  });
+};
+
+export const contactUsControllerRead = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<ContactUsControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ContactUsControllerReadResponse,
+    ContactUsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us',
+  });
+};
+
+export const contactUsControllerUpdate = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<ContactUsControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    ContactUsControllerUpdateResponse,
+    ContactUsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us/{id}',
+  });
+};
+
+export const contactUsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ContactUsControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ContactUsControllerReadOneResponse,
+    ContactUsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us/{id}',
+  });
+};
+
+export const contactUsControllerDelete = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<ContactUsControllerDeleteData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    ContactUsControllerDeleteResponse,
+    ContactUsControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us/{id}',
+  });
+};
+
+export const contactUsRequestTypeControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsRequestTypeControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    ContactUsRequestTypeControllerCreateResponse,
+    ContactUsRequestTypeControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-request-type',
+  });
+};
+
+export const contactUsRequestTypeControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsRequestTypeControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ContactUsRequestTypeControllerReadResponse,
+    ContactUsRequestTypeControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-request-type',
+  });
+};
+
+export const contactUsRequestTypeControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsRequestTypeControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    ContactUsRequestTypeControllerUpdateResponse,
+    ContactUsRequestTypeControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-request-type/{id}',
+  });
+};
+
+export const contactUsRequestTypeControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsRequestTypeControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ContactUsRequestTypeControllerReadOneResponse,
+    ContactUsRequestTypeControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-request-type/{id}',
+  });
+};
+
+export const contactUsRequestTypeControllerSoftDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsRequestTypeControllerSoftDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    ContactUsRequestTypeControllerSoftDeleteResponse,
+    ContactUsRequestTypeControllerSoftDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-request-type/{id}/soft',
+  });
+};
+
+export const contactUsHearAboutDropControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsHearAboutDropControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    ContactUsHearAboutDropControllerCreateResponse,
+    ContactUsHearAboutDropControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hear-about-drop',
+  });
+};
+
+export const contactUsHearAboutDropControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsHearAboutDropControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ContactUsHearAboutDropControllerReadResponse,
+    ContactUsHearAboutDropControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hear-about-drop',
+  });
+};
+
+export const contactUsHearAboutDropControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsHearAboutDropControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    ContactUsHearAboutDropControllerUpdateResponse,
+    ContactUsHearAboutDropControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hear-about-drop/{id}',
+  });
+};
+
+export const contactUsHearAboutDropControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsHearAboutDropControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ContactUsHearAboutDropControllerReadOneResponse,
+    ContactUsHearAboutDropControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hear-about-drop/{id}',
+  });
+};
+
+export const contactUsHearAboutDropControllerSoftDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsHearAboutDropControllerSoftDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    ContactUsHearAboutDropControllerSoftDeleteResponse,
+    ContactUsHearAboutDropControllerSoftDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hear-about-drop/{id}/soft',
+  });
+};
+
+export const contactUsOfficesControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsOfficesControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    ContactUsOfficesControllerCreateResponse,
+    ContactUsOfficesControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-offices',
+  });
+};
+
+export const contactUsOfficesControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ContactUsOfficesControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ContactUsOfficesControllerReadResponse,
+    ContactUsOfficesControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-offices',
+  });
+};
+
+export const contactUsOfficesControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsOfficesControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    ContactUsOfficesControllerUpdateResponse,
+    ContactUsOfficesControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-offices/{id}',
+  });
+};
+
+export const contactUsOfficesControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ContactUsOfficesControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ContactUsOfficesControllerReadOneResponse,
+    ContactUsOfficesControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-offices/{id}',
+  });
+};
+
+export const contactUsHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ContactUsHeroControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    ContactUsHeroControllerCreateResponse,
+    ContactUsHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hero',
+  });
+};
+
+export const contactUsHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ContactUsHeroControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ContactUsHeroControllerReadResponse,
+    ContactUsHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hero',
+  });
+};
+
+export const contactUsHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ContactUsHeroControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    ContactUsHeroControllerUpdateResponse,
+    ContactUsHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hero/{id}',
+  });
+};
+
+export const contactUsHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ContactUsHeroControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ContactUsHeroControllerReadOneResponse,
+    ContactUsHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/contact-us-hero/{id}',
+  });
+};
+
+export const managedSocServicesDetailsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedSocServicesDetailsControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    ManagedSocServicesDetailsControllerCreateResponse,
+    ManagedSocServicesDetailsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-soc-services-details',
+  });
+};
+
+export const managedSocServicesDetailsControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedSocServicesDetailsControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedSocServicesDetailsControllerReadResponse,
+    ManagedSocServicesDetailsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-soc-services-details',
+  });
+};
+
+export const managedSocServicesDetailsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedSocServicesDetailsControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    ManagedSocServicesDetailsControllerUpdateResponse,
+    ManagedSocServicesDetailsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-soc-services-details/{id}',
+  });
+};
+
+export const managedSocServicesDetailsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedSocServicesDetailsControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedSocServicesDetailsControllerReadOneResponse,
+    ManagedSocServicesDetailsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-soc-services-details/{id}',
+  });
+};
+
+export const managedCybersecurityServicesDetailsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedCybersecurityServicesDetailsControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    ManagedCybersecurityServicesDetailsControllerCreateResponse,
+    ManagedCybersecurityServicesDetailsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-cybersecurity-services-details',
+  });
+};
+
+export const managedCybersecurityServicesDetailsControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedCybersecurityServicesDetailsControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedCybersecurityServicesDetailsControllerReadResponse,
+    ManagedCybersecurityServicesDetailsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-cybersecurity-services-details',
+  });
+};
+
+export const managedCybersecurityServicesDetailsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedCybersecurityServicesDetailsControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    ManagedCybersecurityServicesDetailsControllerUpdateResponse,
+    ManagedCybersecurityServicesDetailsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-cybersecurity-services-details/{id}',
+  });
+};
+
+export const managedCybersecurityServicesDetailsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedCybersecurityServicesDetailsControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedCybersecurityServicesDetailsControllerReadOneResponse,
+    ManagedCybersecurityServicesDetailsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-cybersecurity-services-details/{id}',
+  });
+};
+
+export const managedGrcServicesDetailsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedGrcServicesDetailsControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    ManagedGrcServicesDetailsControllerCreateResponse,
+    ManagedGrcServicesDetailsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-grc-services-details',
+  });
+};
+
+export const managedGrcServicesDetailsControllerFindAll = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedGrcServicesDetailsControllerFindAllData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedGrcServicesDetailsControllerFindAllResponse,
+    ManagedGrcServicesDetailsControllerFindAllError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-grc-services-details',
+  });
+};
+
+export const managedGrcServicesDetailsControllerFindOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedGrcServicesDetailsControllerFindOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedGrcServicesDetailsControllerFindOneResponse,
+    ManagedGrcServicesDetailsControllerFindOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-grc-services-details/{id}',
+  });
+};
+
+export const managedGrcServicesDetailsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedGrcServicesDetailsControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    ManagedGrcServicesDetailsControllerUpdateResponse,
+    ManagedGrcServicesDetailsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-grc-services-details/{id}',
+  });
+};
+
+export const managedGrcServicesDetailsControllerRemove = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedGrcServicesDetailsControllerRemoveData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    ManagedGrcServicesDetailsControllerRemoveResponse,
+    ManagedGrcServicesDetailsControllerRemoveError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-grc-services-details/{id}',
+  });
+};
+
+export const careerHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CareerHeroControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    CareerHeroControllerCreateResponse,
+    CareerHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-hero',
+  });
+};
+
+export const careerHeroControllerRead = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<CareerHeroControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CareerHeroControllerReadResponse,
+    CareerHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-hero',
+  });
+};
+
+export const careerHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CareerHeroControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    CareerHeroControllerUpdateResponse,
+    CareerHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-hero/{id}',
+  });
+};
+
+export const careerHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CareerHeroControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CareerHeroControllerReadOneResponse,
+    CareerHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-hero/{id}',
+  });
+};
+
+export const careerOpenPositionHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionHeroControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    CareerOpenPositionHeroControllerCreateResponse,
+    CareerOpenPositionHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position-hero',
+  });
+};
+
+export const careerOpenPositionHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionHeroControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerOpenPositionHeroControllerReadResponse,
+    CareerOpenPositionHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position-hero',
+  });
+};
+
+export const careerOpenPositionHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionHeroControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CareerOpenPositionHeroControllerUpdateResponse,
+    CareerOpenPositionHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position-hero/{id}',
+  });
+};
+
+export const careerOpenPositionHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerOpenPositionHeroControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerOpenPositionHeroControllerReadOneResponse,
+    CareerOpenPositionHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-open-position-hero/{id}',
+  });
+};
+
+export const careerJobDetailControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerJobDetailControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    CareerJobDetailControllerCreateResponse,
+    CareerJobDetailControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-job-detail',
+  });
+};
+
+export const careerJobDetailControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CareerJobDetailControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CareerJobDetailControllerReadResponse,
+    CareerJobDetailControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-job-detail',
+  });
+};
+
+export const careerJobDetailControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerJobDetailControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CareerJobDetailControllerUpdateResponse,
+    CareerJobDetailControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-job-detail/{id}',
+  });
+};
+
+export const careerJobDetailControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerJobDetailControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerJobDetailControllerReadOneResponse,
+    CareerJobDetailControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-job-detail/{id}',
+  });
+};
+
+export const careerApplicationFormControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerApplicationFormControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    CareerApplicationFormControllerCreateResponse,
+    CareerApplicationFormControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-application-form',
+  });
+};
+
+export const careerApplicationFormControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerApplicationFormControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerApplicationFormControllerReadResponse,
+    CareerApplicationFormControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-application-form',
+  });
+};
+
+export const careerApplicationFormControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerApplicationFormControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CareerApplicationFormControllerUpdateResponse,
+    CareerApplicationFormControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-application-form/{id}',
+  });
+};
+
+export const careerApplicationFormControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerApplicationFormControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerApplicationFormControllerReadOneResponse,
+    CareerApplicationFormControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-application-form/{id}',
+  });
+};
+
+export const managedServiceDownloadFormControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceDownloadFormControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    ManagedServiceDownloadFormControllerCreateResponse,
+    ManagedServiceDownloadFormControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-download-form',
+  });
+};
+
+export const managedServiceDownloadFormControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceDownloadFormControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedServiceDownloadFormControllerReadResponse,
+    ManagedServiceDownloadFormControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-download-form',
+  });
+};
+
+export const managedServiceDownloadFormControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceDownloadFormControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    ManagedServiceDownloadFormControllerUpdateResponse,
+    ManagedServiceDownloadFormControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-download-form/{id}',
+  });
+};
+
+export const managedServiceDownloadFormControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    ManagedServiceDownloadFormControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    ManagedServiceDownloadFormControllerReadOneResponse,
+    ManagedServiceDownloadFormControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/managed-service-download-form/{id}',
+  });
+};
+
+export const resourceHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ResourceHeroControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    ResourceHeroControllerCreateResponse,
+    ResourceHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/resource-hero',
+  });
+};
+
+export const resourceHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ResourceHeroControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ResourceHeroControllerReadResponse,
+    ResourceHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/resource-hero',
+  });
+};
+
+export const resourceHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ResourceHeroControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    ResourceHeroControllerUpdateResponse,
+    ResourceHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/resource-hero/{id}',
+  });
+};
+
+export const resourceHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ResourceHeroControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ResourceHeroControllerReadOneResponse,
+    ResourceHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/resource-hero/{id}',
+  });
+};
+
+export const resourceCardsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ResourceCardsControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    ResourceCardsControllerCreateResponse,
+    ResourceCardsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/resource-cards',
+  });
+};
+
+export const resourceCardsControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ResourceCardsControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ResourceCardsControllerReadResponse,
+    ResourceCardsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/resource-cards',
+  });
+};
+
+export const resourceCardsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ResourceCardsControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    ResourceCardsControllerReadOneResponse,
+    ResourceCardsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/resource-cards/{id}',
+  });
+};
+
+export const resourceCardsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<ResourceCardsControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    ResourceCardsControllerUpdateResponse,
+    ResourceCardsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/resource-cards/{id}',
+  });
+};
+
+export const additionalManagedServicesOneControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesOneControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    AdditionalManagedServicesOneControllerCreateResponse,
+    AdditionalManagedServicesOneControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-one',
+  });
+};
+
+export const additionalManagedServicesOneControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesOneControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AdditionalManagedServicesOneControllerReadResponse,
+    AdditionalManagedServicesOneControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-one',
+  });
+};
+
+export const additionalManagedServicesOneControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesOneControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AdditionalManagedServicesOneControllerReadOneResponse,
+    AdditionalManagedServicesOneControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-one/{id}',
+  });
+};
+
+export const additionalManagedServicesOneControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesOneControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    AdditionalManagedServicesOneControllerUpdateResponse,
+    AdditionalManagedServicesOneControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-one/{id}',
+  });
+};
+
+export const additionalManagedServicesOneControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesOneControllerDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    AdditionalManagedServicesOneControllerDeleteResponse,
+    AdditionalManagedServicesOneControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-one/{id}',
+  });
+};
+
+export const additionalManagedServicesTwoControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesTwoControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    AdditionalManagedServicesTwoControllerCreateResponse,
+    AdditionalManagedServicesTwoControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-two',
+  });
+};
+
+export const additionalManagedServicesTwoControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesTwoControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AdditionalManagedServicesTwoControllerReadResponse,
+    AdditionalManagedServicesTwoControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-two',
+  });
+};
+
+export const additionalManagedServicesTwoControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesTwoControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    AdditionalManagedServicesTwoControllerReadOneResponse,
+    AdditionalManagedServicesTwoControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-two/{id}',
+  });
+};
+
+export const additionalManagedServicesTwoControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesTwoControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    AdditionalManagedServicesTwoControllerUpdateResponse,
+    AdditionalManagedServicesTwoControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-two/{id}',
+  });
+};
+
+export const additionalManagedServicesTwoControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    AdditionalManagedServicesTwoControllerDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    AdditionalManagedServicesTwoControllerDeleteResponse,
+    AdditionalManagedServicesTwoControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/additional-managed-services-two/{id}',
+  });
+};
+
+export const leadershipTeamControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<LeadershipTeamControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    LeadershipTeamControllerCreateResponse,
+    LeadershipTeamControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/leadership-team',
+  });
+};
+
+export const leadershipTeamControllerFindAll = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    LeadershipTeamControllerFindAllData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    LeadershipTeamControllerFindAllResponse,
+    LeadershipTeamControllerFindAllError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/leadership-team',
+  });
+};
+
+export const leadershipTeamControllerFindOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    LeadershipTeamControllerFindOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    LeadershipTeamControllerFindOneResponse,
+    LeadershipTeamControllerFindOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/leadership-team/{id}',
+  });
+};
+
+export const leadershipTeamControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<LeadershipTeamControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    LeadershipTeamControllerUpdateResponse,
+    LeadershipTeamControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/leadership-team/{id}',
+  });
+};
+
+export const leadershipExecutiveTeamControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    LeadershipExecutiveTeamControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    LeadershipExecutiveTeamControllerCreateResponse,
+    LeadershipExecutiveTeamControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/leadership-executive-team',
+  });
+};
+
+export const leadershipExecutiveTeamControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    LeadershipExecutiveTeamControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    LeadershipExecutiveTeamControllerReadResponse,
+    LeadershipExecutiveTeamControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/leadership-executive-team',
+  });
+};
+
+export const leadershipExecutiveTeamControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    LeadershipExecutiveTeamControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    LeadershipExecutiveTeamControllerReadOneResponse,
+    LeadershipExecutiveTeamControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/leadership-executive-team/{id}',
+  });
+};
+
+export const leadershipExecutiveTeamControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    LeadershipExecutiveTeamControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    LeadershipExecutiveTeamControllerUpdateResponse,
+    LeadershipExecutiveTeamControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/leadership-executive-team/{id}',
+  });
+};
+
+export const newsroomHeroControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomHeroControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    NewsroomHeroControllerCreateResponse,
+    NewsroomHeroControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-hero',
+  });
+};
+
+export const newsroomHeroControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomHeroControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    NewsroomHeroControllerReadResponse,
+    NewsroomHeroControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-hero',
+  });
+};
+
+export const newsroomHeroControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomHeroControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    NewsroomHeroControllerUpdateResponse,
+    NewsroomHeroControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-hero/{id}',
+  });
+};
+
+export const newsroomHeroControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomHeroControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    NewsroomHeroControllerReadOneResponse,
+    NewsroomHeroControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-hero/{id}',
+  });
+};
+
+export const newsroomCategoryControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    NewsroomCategoryControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    NewsroomCategoryControllerCreateResponse,
+    NewsroomCategoryControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-category',
+  });
+};
+
+export const newsroomCategoryControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<NewsroomCategoryControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    NewsroomCategoryControllerReadResponse,
+    NewsroomCategoryControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-category',
+  });
+};
+
+export const newsroomCategoryControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    NewsroomCategoryControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    NewsroomCategoryControllerUpdateResponse,
+    NewsroomCategoryControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-category/{id}',
+  });
+};
+
+export const newsroomCategoryControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    NewsroomCategoryControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    NewsroomCategoryControllerReadOneResponse,
+    NewsroomCategoryControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-category/{id}',
+  });
+};
+
+export const newsroomCategoryControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    NewsroomCategoryControllerDeleteData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).delete<
+    NewsroomCategoryControllerDeleteResponse,
+    NewsroomCategoryControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/newsroom-category/{id}',
+  });
+};
+
+export const footerTermsControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<FooterTermsControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    FooterTermsControllerCreateResponse,
+    FooterTermsControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/footer-terms',
+  });
+};
+
+export const footerTermsControllerRead = <ThrowOnError extends boolean = false>(
+  options: OptionsLegacyParser<FooterTermsControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    FooterTermsControllerReadResponse,
+    FooterTermsControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/footer-terms',
+  });
+};
+
+export const footerTermsControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<FooterTermsControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    FooterTermsControllerUpdateResponse,
+    FooterTermsControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/footer-terms/{id}',
+  });
+};
+
+export const footerTermsControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<FooterTermsControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    FooterTermsControllerReadOneResponse,
+    FooterTermsControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/footer-terms/{id}',
+  });
+};
+
+export const footerTermsControllerDelete = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<FooterTermsControllerDeleteData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    FooterTermsControllerDeleteResponse,
+    FooterTermsControllerDeleteError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/footer-terms/{id}',
+  });
+};
+
+export const careerWorkingAtBarqControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerWorkingAtBarqControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    CareerWorkingAtBarqControllerCreateResponse,
+    CareerWorkingAtBarqControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-working-at-barq',
+  });
+};
+
+export const careerWorkingAtBarqControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerWorkingAtBarqControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerWorkingAtBarqControllerReadResponse,
+    CareerWorkingAtBarqControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-working-at-barq',
+  });
+};
+
+export const careerWorkingAtBarqControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerWorkingAtBarqControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CareerWorkingAtBarqControllerUpdateResponse,
+    CareerWorkingAtBarqControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-working-at-barq/{id}',
+  });
+};
+
+export const careerWorkingAtBarqControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CareerWorkingAtBarqControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CareerWorkingAtBarqControllerReadOneResponse,
+    CareerWorkingAtBarqControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/career-working-at-barq/{id}',
+  });
+};
+
+export const campaignFormControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CampaignFormControllerCreateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).post<
+    CampaignFormControllerCreateResponse,
+    CampaignFormControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-form',
+  });
+};
+
+export const campaignFormControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CampaignFormControllerReadData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CampaignFormControllerReadResponse,
+    CampaignFormControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-form',
+  });
+};
+
+export const campaignFormControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CampaignFormControllerUpdateData, ThrowOnError>
+) => {
+  return (options?.client ?? client).patch<
+    CampaignFormControllerUpdateResponse,
+    CampaignFormControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-form/{id}',
+  });
+};
+
+export const campaignFormControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<CampaignFormControllerReadOneData, ThrowOnError>
+) => {
+  return (options?.client ?? client).get<
+    CampaignFormControllerReadOneResponse,
+    CampaignFormControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-form/{id}',
+  });
+};
+
+export const campaignLayoutOneControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutOneControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    CampaignLayoutOneControllerCreateResponse,
+    CampaignLayoutOneControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-one',
+  });
+};
+
+export const campaignLayoutOneControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutOneControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CampaignLayoutOneControllerReadResponse,
+    CampaignLayoutOneControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-one',
+  });
+};
+
+export const campaignLayoutOneControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutOneControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CampaignLayoutOneControllerUpdateResponse,
+    CampaignLayoutOneControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-one/{id}',
+  });
+};
+
+export const campaignLayoutOneControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutOneControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CampaignLayoutOneControllerReadOneResponse,
+    CampaignLayoutOneControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-one/{id}',
+  });
+};
+
+export const campaignLayoutTwoControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutTwoControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    CampaignLayoutTwoControllerCreateResponse,
+    CampaignLayoutTwoControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-two',
+  });
+};
+
+export const campaignLayoutTwoControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutTwoControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CampaignLayoutTwoControllerReadResponse,
+    CampaignLayoutTwoControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-two',
+  });
+};
+
+export const campaignLayoutTwoControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutTwoControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CampaignLayoutTwoControllerUpdateResponse,
+    CampaignLayoutTwoControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-two/{id}',
+  });
+};
+
+export const campaignLayoutTwoControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutTwoControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CampaignLayoutTwoControllerReadOneResponse,
+    CampaignLayoutTwoControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-two/{id}',
+  });
+};
+
+export const campaignLayoutThreeSectionTwoControllerCreate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutThreeSectionTwoControllerCreateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).post<
+    CampaignLayoutThreeSectionTwoControllerCreateResponse,
+    CampaignLayoutThreeSectionTwoControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-three-section-two',
+  });
+};
+
+export const campaignLayoutThreeSectionTwoControllerRead = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutThreeSectionTwoControllerReadData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CampaignLayoutThreeSectionTwoControllerReadResponse,
+    CampaignLayoutThreeSectionTwoControllerReadError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-three-section-two',
+  });
+};
+
+export const campaignLayoutThreeSectionTwoControllerReadOne = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutThreeSectionTwoControllerReadOneData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).get<
+    CampaignLayoutThreeSectionTwoControllerReadOneResponse,
+    CampaignLayoutThreeSectionTwoControllerReadOneError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-three-section-two/{id}',
+  });
+};
+
+export const campaignLayoutThreeSectionTwoControllerUpdate = <
+  ThrowOnError extends boolean = false,
+>(
+  options: OptionsLegacyParser<
+    CampaignLayoutThreeSectionTwoControllerUpdateData,
+    ThrowOnError
+  >
+) => {
+  return (options?.client ?? client).patch<
+    CampaignLayoutThreeSectionTwoControllerUpdateResponse,
+    CampaignLayoutThreeSectionTwoControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/campaign-layout-three-section-two/{id}',
   });
 };

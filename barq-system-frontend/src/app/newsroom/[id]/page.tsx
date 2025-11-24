@@ -2,7 +2,7 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 import Footer from '@/components/footer'
 import NewsroomDetailContent from './NewsroomDetailContent'
-import { newsroomData } from '@/data/newsroom'
+import { newsroomService } from '@/services/newsroom.service'
 
 interface NewsroomDetailPageProps {
     params: Promise<{
@@ -10,18 +10,21 @@ interface NewsroomDetailPageProps {
     }>;
 }
 
+export const dynamic = 'force-dynamic';
+
 const NewsroomDetailPage = async ({ params }: NewsroomDetailPageProps) => {
     const { id: paramId } = await params;
     const id = Number(paramId);
-    const newsItem = newsroomData.find(item => item.id === id);
+    
+    const newsItemData = await newsroomService.getNewsroomById(id);
 
-    if (!newsItem) {
+    if (!newsItemData?.data) {
         notFound();
     }
 
     return (
         <>
-            <NewsroomDetailContent newsItem={newsItem} />
+            <NewsroomDetailContent newsItemData={newsItemData} />
             <Footer />
         </>
     )

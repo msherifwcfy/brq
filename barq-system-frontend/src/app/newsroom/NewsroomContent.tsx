@@ -1,12 +1,20 @@
 'use client';
 
-import React, { useRef, useState } from 'react'
+import React, { useRef, useMemo, useState } from 'react'
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import Navbar from '@/components/home-page/navbar';
-import { newsroomData, type NewsItem } from '@/data/newsroom';
+import { newsroomData } from '@/data/newsroom';
+import { useTranslation } from 'react-i18next';
+import type {
+    NewsroomCardsControllerReadResponse,
+    NewsroomCategoryControllerReadResponse,
+    NewsroomHeroControllerReadResponse
+} from '@/sdk/types.gen';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // NewsCard Component
 const NewsCard = ({
@@ -15,16 +23,18 @@ const NewsCard = ({
     isInView,
     hoveredItem,
     setHoveredItem,
-    router
+    router,
+    isRTL
 }: {
-    item: NewsItem;
+    item: any;
     index: number;
     isInView: boolean;
     hoveredItem: number | null;
     setHoveredItem: (id: number | null) => void;
     router: AppRouterInstance;
+    isRTL: boolean;
 }) => {
-
+    const { t, i18n } = useTranslation();
     const handleCardClick = () => {
         router.push(`/newsroom/${item.id}`);
     };
@@ -48,7 +58,7 @@ const NewsCard = ({
             <div
                 className='relative h-[450px] lg:h-[536px] pb-6 lg:pb-8 gap-2 flex flex-col justify-end items-center rounded-[24px] overflow-hidden'
                 style={{
-                    background: `url(${item.image})`,
+                    background: `url(${item.home_image ?? item.image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -79,6 +89,7 @@ const NewsCard = ({
                         background: "rgba(255, 255, 255, 0.04)",
                         backdropFilter: "blur(10px)",
                     }}
+                    dir={isRTL ? 'rtl' : 'ltr'}
                 >
                     {item.category}
                 </div>
@@ -86,12 +97,14 @@ const NewsCard = ({
 
                 <div className=' flex flex-col gap-2'>
                     <motion.div
-                        className='relative px-4 lg:px-6 pt-4 pb-6 lg:pb-8 rounded-[12px] overflow-hidden min-h-[200px] lg:min-h-[216px] w-full max-w-[341.3333px]'
+                        className={`
+                            ${hoveredItem === item.id ? ' min-h-[200px] lg:min-h-[323px]' : 'min-h-[200px] lg:min-h-[216px]'}
+                            relative px-4 lg:px-6 pt-4 pb-6 lg:pb-8 rounded-[12px] overflow-hidden min-h-[200px] lg:min-h-[216px] w-full max-w-[341.3333px]`}
                         style={{
                             border: '1px solid rgba(255, 255, 255, 0.10)',
                             background: 'rgba(255, 255, 255, 0.04)',
                             backdropFilter: 'blur(10px)',
-                            height: hoveredItem === item.id ? '333px' : 'auto',
+                            // height: hoveredItem === item.id ? '323px' : 'auto',
 
                         }}
                         animate={{
@@ -122,11 +135,11 @@ const NewsCard = ({
                             }}
                         />
                         {/* Date */}
-                        <p className='text-white text-[14px] lg:text-[16px] mb-2'>
+                        <p className='text-white text-[14px] lg:text-[16px] mb-2' dir={isRTL ? 'rtl' : 'ltr'}>
                             {item.date}
                         </p>
                         {/* Title */}
-                        <h3 className='text-white text-[20px] lg:text-[24px] frutiger-lt-std-bold leading-[26px] lg:leading-[33.6px] max-w-[300px]'>
+                        <h3 className='text-white text-[20px] lg:text-[24px] frutiger-lt-std-bold leading-[26px] lg:leading-[33.6px] max-w-[300px]' dir={isRTL ? 'rtl' : 'ltr'}>
                             {item.title}
                         </h3>
                         {/* Description on hover */}
@@ -144,6 +157,7 @@ const NewsCard = ({
                                 delay: hoveredItem === item.id ? 0.01 : 0,
                             }}
                             className='overflow-hidden'
+                            dir={isRTL ? 'rtl' : 'ltr'}
                         >
                             <p className='text-[#fff] text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] max-w-[300px]'>
                                 {item.description}
@@ -177,10 +191,12 @@ const NewsCard = ({
                     >
                         <div className='flex items-center gap-2 w-full '>
                             <span className='relative z-10 text-white font-normal text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px]'>
-                                Read More
+                                {t("newsroom.readMore")}
                             </span>
                             <div
-                                className='relative z-10 mt-[1px]'
+                                className={`
+                                    ${i18n.language === "ar" ? "rotate-180" : ""}
+                                    relative z-10 mt-[1px]`}
                             >
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -207,36 +223,133 @@ const NewsCard = ({
     );
 };
 
-const NewsroomContent = () => {
+interface NewsroomContentProps {
+    newsroomData: NewsroomCardsControllerReadResponse | null;
+    newsroomHeroData: NewsroomHeroControllerReadResponse | null;
+    newsroomCategories: NewsroomCategoryControllerReadResponse | null;
+    activeCategoryId?: string | null;
+}
+
+const NewsroomContent = ({
+    newsroomData: cmsData,
+    newsroomHeroData: cmsHeroData,
+    newsroomCategories: cmsCategories,
+    activeCategoryId,
+}: NewsroomContentProps) => {
+    const { t } = useTranslation();
+    const { language, isRTL } = useLanguage();
     const containerRef = useRef<HTMLElement>(null);
     const cardsRef = useRef<HTMLElement>(null);
     const isInView = useInView(containerRef, { once: true, margin: '-100px' });
     const isCardsInView = useInView(cardsRef, { once: true, margin: '-50px' });
     const router = useRouter();
 
-    const [activeTab, setActiveTab] = useState('All');
     const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+    const categories = useMemo(() => {
+        if (!cmsCategories?.data || cmsCategories.data.length === 0) {
+            return [];
+        }
 
-    const handleTabChange = (tab: string) => {
-        console.log('Tab changed to:', tab);
-        setActiveTab(tab);
-    };
+        return cmsCategories.data.map((category) => {
+            const translation = category.newsroom_category_id_newsroom_category_translations?.find(
+                (translation) => translation.language === language
+            ) || category.newsroom_category_id_newsroom_category_translations?.[0];
 
-    // Filter news items based on active tab
-    const filteredNewsItems = activeTab === 'All'
-        ? newsroomData
-        : newsroomData.filter(item => {
-            switch (activeTab) {
-                case 'News':
-                    return item.category === 'News';
-                case 'Press Releases':
-                    return item.category === 'Press Release';
-                case 'Interviews':
-                    return item.category === 'Interviews';
-                default:
-                    return false;
-            }
+            return {
+                id: String(category.id),
+                name: translation?.name || category.name,
+            };
         });
+    }, [cmsCategories, language]);
+
+    const filterOptions = useMemo(() => {
+        const categoryOptions = categories.map((category) => ({
+            id: category.id,
+            label: category.name,
+            href: `/newsroom?category=${category.id}`,
+        }));
+
+        return [
+            {
+                id: 'all',
+                label: t('newsroom.all'),
+                href: '/newsroom',
+            },
+            ...categoryOptions,
+        ];
+    }, [categories, t]);
+
+    // Transform CMS data to newsroom items format
+    const newsItems = useMemo(() => {
+        if (!cmsData?.data || cmsData.data.length === 0) {
+            return newsroomData;
+        }
+
+        return cmsData.data.map((item) => {
+            const translation = item.newsroom_cards_id_newsroom_cards_translations?.find(
+                (t) => t.language === language
+            ) || item.newsroom_cards_id_newsroom_cards_translations?.[0];
+
+            // Use the already-processed categories array to get the correct translation
+            const categoryId = item.newsroom_category?.id ? String(item.newsroom_category.id) : null;
+            const categoryName = categoryId
+                ? categories.find(cat => cat.id === categoryId)?.name
+                : null;
+
+            // Fallback to direct translation if category not found in processed array
+            const categoryTranslation = categoryName
+                ? null
+                : item.newsroom_category?.newsroom_category_id_newsroom_category_translations?.find(
+                    (t) => t.language === language
+                ) || item.newsroom_category?.newsroom_category_id_newsroom_category_translations?.find(
+                    (t) => t.language === 'en'
+                ) || item.newsroom_category?.newsroom_category_id_newsroom_category_translations?.[0];
+
+
+            // Construct image URL from url + key
+            const imageUrl = item.image?.url && item.image?.key
+                ? `${item.image.url}${item.image.key}`
+                : '/assets/newsroom/default.png';
+
+            // Format date
+            const homepageImageUrl = item.home_image?.url && item.home_image?.key
+                ? `${item.home_image.url}${item.home_image.key}`
+                : undefined;
+
+            // Format date
+            const formattedDate = item.date_time
+                ? new Date(item.date_time).toLocaleDateString(language === 'ar' ? 'ar-EG' : 'en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                })
+                : '';
+
+            return {
+                id: item.id,
+                title: translation?.title || item.title,
+                description: translation?.description || item.description,
+                category: categoryName || categoryTranslation?.name || item.newsroom_category?.name || '',
+                date: formattedDate,
+                image: imageUrl,
+                home_image: homepageImageUrl,
+            };
+        });
+    }, [cmsData, language, categories]);
+
+    const heroContent = useMemo(() => {
+        const hero = cmsHeroData?.data?.[0];
+        if (!hero) {
+            return null;
+        }
+
+        return {
+            title: hero.title,
+            subTitle: hero.sub_title,
+        };
+    }, [cmsHeroData]);
+
+    const filteredNewsItems = newsItems;
 
     return (
         <div className="bg-black min-h-screen">
@@ -279,8 +392,9 @@ const NewsroomContent = () => {
                                 WebkitTextFillColor: 'transparent',
                                 backgroundClip: 'text',
                             }}
+                            dir={isRTL ? 'rtl' : 'ltr'}
                         >
-                            Newsroom
+                            {t("newsroom.title")}
                         </div>
                     </motion.div>
                     <motion.div
@@ -290,11 +404,11 @@ const NewsroomContent = () => {
                         className=""
                     >
                         <div className="flex items-center justify-center flex-col mt-4 lg:mt-6">
-                            <h1 className="text-white text-[32px] lg:text-[56px] frutiger-lt-std-bold leading-[38px] lg:leading-[61.6px] text-center">
-                                Stay Updated with BARQ
+                            <h1 className="text-white text-[32px] lg:text-[56px] frutiger-lt-std-bold leading-[38px] lg:leading-[61.6px] text-center" dir={isRTL ? 'rtl' : 'ltr'}>
+                                {heroContent?.title || t('newsroom.heroTitle') || 'Stay Updated with BARQ'}
                             </h1>
-                            <p className="text-[#D9DDDD] leading-[24px] lg:leading-[27px] text-[16px] lg:text-[18px] mt-4 lg:mt-6 font-normal max-w-[630px] text-center px-4 xl:px-0">
-                                Explore our latest news, press releases, and insights to stay informed about BARQ Systems&apos; innovations and impact.
+                            <p className="text-[#D9DDDD] leading-[24px] lg:leading-[27px] text-[16px] lg:text-[18px] mt-4 lg:mt-6 font-normal max-w-[630px] text-center px-4 xl:px-0" dir={isRTL ? 'rtl' : 'ltr'}>
+                                {heroContent?.subTitle || t('newsroom.heroDescription') || 'Explore our latest news, press releases, and insights to stay informed about BARQ Systems\' innovations and impact.'}
                             </p>
                             {/* Tab Buttons */}
                             <div className="flex justify-center gap-2 lg:gap-4 w-fit p-2 mt-6 lg:mt-8 relative z-50 overflow-x-auto px-6 "
@@ -306,51 +420,26 @@ const NewsroomContent = () => {
                                     pointerEvents: "auto",
 
                                 }}>
-                                <button
-                                    onClick={() => handleTabChange('All')}
-                                    className={`relative z-10 px-4 lg:px-8 py-3 lg:py-4 backdrop:blur(10px) h-[40px] lg:h-[45px] rounded-full flex items-center justify-center border-[1px] border-[#ffffff29] text-[14px] lg:text-[18px] leading-[24px] lg:leading-[27px] transition-all duration-300 cursor-pointer ${activeTab === 'All'
-                                        ? 'bg-[#25B8E4] text-white '
-                                        : ' text-white opacity-50  hover:opacity-80 bg-[#ffffff0a]'
-                                        }`}
-                                    style={{ pointerEvents: 'auto' }}
-                                >
-                                    All
-                                </button>
-                                <button
-                                    onClick={() => handleTabChange('News')}
-                                    className={`relative z-10 px-4 lg:px-8 py-3 lg:py-4 h-[40px] lg:h-[45px] backdrop:blur(10px) flex items-center justify-center rounded-full border-[1px] border-[#ffffff29] text-[14px] lg:text-[18px] leading-[24px] lg:leading-[27px] transition-all duration-300 cursor-pointer ${activeTab === 'News'
-                                        ? 'bg-[#25B8E4] text-white '
-                                        : ' text-white opacity-50   hover:opacity-80 bg-[#ffffff0a]'
-                                        }`}
-                                    style={{ pointerEvents: 'auto' }}
-                                >
-                                    News
-                                </button>
-                                <button
-                                    onClick={() => handleTabChange('Press Releases')}
-                                    className={`relative z-10 px-4 lg:px-8 py-3 min-w-fit lg:py-4 h-[40px] lg:h-[45px] backdrop:blur(10px) flex items-center justify-center rounded-full border-[1px] border-[#ffffff29] text-[14px] lg:text-[18px] leading-[24px] lg:leading-[27px] transition-all duration-300 cursor-pointer ${activeTab === 'Press Releases'
-                                        ? 'bg-[#25B8E4] text-white '
-                                        : ' text-white opacity-50   hover:opacity-80 bg-[#ffffff0a]'
-                                        }`}
-                                    style={{ pointerEvents: 'auto' }}
-                                >
-                                    Press Releases
-                                </button>
-                                <button
-                                    onClick={() => handleTabChange('Interviews')}
-                                    className={`relative z-10 px-4  lg:px-8 py-3 lg:py-4 h-[40px] lg:h-[45px] backdrop:blur(10px) flex items-center justify-center rounded-full border-[1px] border-[#ffffff29] text-[14px] lg:text-[18px] leading-[24px] lg:leading-[27px] transition-all duration-300 cursor-pointer ${activeTab === 'Interviews'
-                                        ? 'bg-[#25B8E4] text-white '
-                                        : ' text-white opacity-50   hover:opacity-80 bg-[#ffffff0a]'
-                                        }`}
-                                    style={{ pointerEvents: 'auto' }}
-                                >
-                                    Interviews
-                                </button>
+                                {filterOptions.map((option) => {
+                                    const isActive = (!activeCategoryId && option.id === 'all') || option.id === activeCategoryId;
+                                    return (
+                                        <Link
+                                            key={option.id}
+                                            href={option.href}
+                                            className={`relative z-10 px-4 lg:px-8 py-3 lg:py-4 min-w-fit h-[40px] lg:h-[45px] backdrop:blur(10px) flex items-center justify-center rounded-full border-[1px] border-[#ffffff29] text-[14px] lg:text-[18px] leading-[24px] lg:leading-[27px] transition-all duration-300 cursor-pointer ${isActive
+                                                ? 'bg-[#25B8E4] text-white'
+                                                : 'text-white opacity-50 hover:opacity-80 bg-[#ffffff0a]'
+                                                }`}
+                                            style={{ pointerEvents: 'auto' }}
+                                        >
+                                            {option.label}
+                                        </Link>
+                                    )
+                                })}
                             </div>
                         </div>
                     </motion.div>
                 </div>
-
                 {/* Cards Section */}
                 <section
                     ref={cardsRef}
@@ -359,7 +448,7 @@ const NewsroomContent = () => {
                     <div className='w-full'>
                         <motion.div
                             className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8'
-                            key={activeTab} // This will trigger re-animation when tab changes
+                            key={activeCategoryId || 'all'}
                             initial={{ opacity: 0.8, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, ease: "easeOut" }}
@@ -373,6 +462,7 @@ const NewsroomContent = () => {
                                     hoveredItem={hoveredItem}
                                     setHoveredItem={setHoveredItem}
                                     router={router}
+                                    isRTL={isRTL}
                                 />
                             ))}
                         </motion.div>

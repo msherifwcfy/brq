@@ -2,7 +2,10 @@
 
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import type { AboutBarqMilestonesControllerReadResponse } from '@/sdk/types.gen';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Milestone {
   year: string;
@@ -11,107 +14,32 @@ interface Milestone {
   image?: string;
 }
 
-const milestones: Milestone[] = [
-  {
-    year: '1993',
-    title: 'Foundation',
-    description:
-      "Founded in Jeddah as «SALEC» to address growing data and telecom networking needs from the Internet's emergence.",
-    image: '/assets/about-barq/journey/journey-1993.png',
-  },
-  {
-    year: '1998',
-    title: 'Expansion in the KSA',
-    description:
-      'Expanded operations with three offices across Saudi Arabia to serve a broader customer base.',
-    image: '/assets/about-barq/journey/journey-1998.png',
-  },
-  {
-    year: '2001',
-    title: 'Transforming the Egyptian Telecom & Internet Scene',
-    description:
-      'Launched operations in Cairo, Egypt, building the largest free dial-up infrastructure and kickstarting nationwide internet services.',
-    image: '/assets/about-barq/journey/journey-2001.png',
-  },
-  {
-    year: '2004',
-    title: 'A Bold New Entry: The Enterprise & Education Sector',
-    description:
-      'Entered the enterprise segment, constructing infrastructure for Cairo Stock Exchange and network foundations for Egyptian universities and research centers.',
-    image: '/assets/about-barq/journey/journey-2004.png',
-  },
-  {
-    year: '2006',
-    title: 'Leading the Charge: Introducing Cybersecurity',
-    description:
-      'Introduced first-generation firewalls, enhancing customer digital security.',
-    image: '/assets/about-barq/journey/journey-2006.png',
-  },
-  {
-    year: '2007',
-    title: 'Pioneering the Inaugural 3G Rollout',
-    description:
-      'Led secure deployment of 3G technology across Egyptian telecom providers, revolutionizing telecommunications.',
-    image: '/assets/about-barq/journey/journey-2007.png',
-  },
-  {
-    year: '2013',
-    title: 'Rebranding',
-    description:
-      'Rebranded to BARQ Systems, expanding offerings as a leading technology services provider.',
-    image: '/assets/about-barq/journey/journey-2013.png',
-  },
-  {
-    year: '2014',
-    title: 'Partnering with KSA Governmental Entities',
-    description:
-      'Secured major governmental contracts, delivering network infrastructure, security, and automation solutions to key entities including SIDF, MOE, and MODON.',
-    image: '/assets/about-barq/journey/journey-2014.png',
-  },
-  {
-    year: '2016',
-    title: 'Enabling the 4G Deployment',
-    description:
-      "Secured 4G deployment across Egyptian telecom providers and upgraded Telecom Egypt's Network Edge Routing Infrastructure.",
-    image: '/assets/about-barq/journey/journey-2016.png',
-  },
-  {
-    year: '2017',
-    title: 'At the Forefront of AI & Data Automation',
-    description:
-      'Revolutionized business operations by optimizing processes, enhancing decision-making, and boosting efficiency through IT services.',
-    image: '/assets/about-barq/journey/journey-2017.png',
-  },
-  {
-    year: '2020',
-    title: 'Further Expansion: UAE',
-    description:
-      'Expanded operations to Abu Dhabi, UAE, collaborating with government entities to deliver automation and infrastructure solutions.',
-    image: '/assets/about-barq/journey/journey-2020.png',
-  },
-  {
-    year: '2022',
-    title: 'Established the 1st Security Operation Center',
-    description:
-      'Launched first Security Operations Center (SOC), providing managed security monitoring and threat detection services.',
-    image: '/assets/about-barq/journey/journey-2022.png',
-  },
-  {
-    year: '2024',
-    title: 'Boosting KSA Utility Sector Infrastructure',
-    description:
-      "Secured network infrastructure projects for utility sector entities SEC & RCC, supporting Saudi Arabia's Vision 2030.",
-    image: '/assets/about-barq/journey/journey-2024.png',
-  },
-];
+interface JourneySectionProps {
+  milestonesData: AboutBarqMilestonesControllerReadResponse | null;
+}
 
-export default function JourneySection() {
+export default function JourneySection({
+  milestonesData,
+}: JourneySectionProps) {
+  const { t } = useTranslation();
+  const milestones: Milestone[] = useMemo(() => {
+    if (milestonesData?.data && milestonesData.data.length > 0) {
+      return milestonesData.data.map(milestone => ({
+        year: milestone.year.toString(),
+        title: milestone.title,
+        description: milestone.description,
+        image: milestone?.image?.url + milestone?.image?.key || '/assets/leadership/leadership.jpg',
+      }));
+    }
+
+    return [];
+  }, [milestonesData]);
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '100px' });
   const [currentMilestone, setCurrentMilestone] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [hoveredMilestone, setHoveredMilestone] = useState<number | null>(null);
-
+  const { isRTL } = useLanguage();
   const itemsPerPage = 6;
   const totalPages = Math.ceil(milestones.length / itemsPerPage);
   const nextPreviewIndex =
@@ -239,7 +167,7 @@ export default function JourneySection() {
             //   opacity: 1,
             //   transition: { duration: 0.3, delay: 0 },
             // }}
-            className='hidden lg:block absolute right-[-10px] top-[195px] w-[200px] h-[200px] xl:w-[280px] xl:h-[280px] rounded-[20px] overflow-hidden cursor-pointer '
+            className={`${isRTL ? 'left-[-10px]' : 'right-[-10px]'} hidden lg:block absolute top-[195px] w-[200px] h-[200px] xl:w-[280px] xl:h-[280px] rounded-[20px] overflow-hidden cursor-pointer `}
           >
             <Image
               src={
@@ -250,7 +178,7 @@ export default function JourneySection() {
               fill
               className='object-cover opacity-60'
             />
-            <div className='absolute inset-0 bg-gradient-to-l from-[#0b1621] to-transparent'></div>
+            <div className={`absolute inset-0 ${isRTL ? 'bg-gradient-to-r' : 'bg-gradient-to-l'} from-[#0b1621] to-transparent`}></div>
           </motion.div>
         )}
         {/* Header Section */}
@@ -271,7 +199,7 @@ export default function JourneySection() {
                   backgroundClip: 'text',
                 }}
               >
-                Milestones
+                {t('aboutBarq.journey.milestones')}
               </span>
             </motion.h2>
             <div className='flex items-center justify-between '>
@@ -283,7 +211,7 @@ export default function JourneySection() {
                 }
                 transition={{ duration: 0.8, delay: 0.9 }}
               >
-                Our Journey Through Innovation
+                {t('aboutBarq.journey.ourJourneyThroughInnovation')}
               </motion.h3>
               <div className='flex gap-3 sm:gap-4 md:gap-6 self-start mt-4 lg:self-auto '>
                 <motion.button
@@ -294,22 +222,23 @@ export default function JourneySection() {
                   animate={
                     isInView
                       ? {
-                          opacity:
-                            currentPage === 0 && currentMilestone === 0
-                              ? 0.3
-                              : 1,
-                          scale: 1,
-                        }
+                        opacity:
+                          currentPage === 0 && currentMilestone === 0
+                            ? 0.3
+                            : 1,
+                        scale: 1,
+                      }
                       : { opacity: 0, scale: 0.8 }
                   }
                   transition={{ duration: 0.6 }}
-                  // whileHover={
-                  //   currentPage === 0 && currentMilestone === 0
-                  //     ? undefined
-                  //     : { scale: 1.1 }
-                  // }
+                // whileHover={
+                //   currentPage === 0 && currentMilestone === 0
+                //     ? undefined
+                //     : { scale: 1.1 }
+                // }
                 >
                   <svg
+                    className={`${isRTL ? 'rotate-180' : ''}`}
                     width='15'
                     height='14'
                     viewBox='0 0 15 14'
@@ -333,24 +262,26 @@ export default function JourneySection() {
                   animate={
                     isInView
                       ? {
-                          opacity:
-                            currentPage === totalPages - 1 &&
+                        opacity:
+                          currentPage === totalPages - 1 &&
                             currentMilestone === milestones.length - 1
-                              ? 0.3
-                              : 1,
-                          scale: 1,
-                        }
+                            ? 0.3
+                            : 1,
+                        scale: 1,
+                      }
                       : { opacity: 0, scale: 0.8 }
                   }
                   transition={{ duration: 0.6 }}
-                  // whileHover={
-                  //   currentPage === totalPages - 1 &&
-                  //   currentMilestone === milestones.length - 1
-                  //     ? undefined
-                  //     : { scale: 1.1 }
-                  // }
+                // whileHover={
+                //   currentPage === totalPages - 1 &&
+                //   currentMilestone === milestones.length - 1
+                //     ? undefined
+                //     : { scale: 1.1 }
+                // }
                 >
                   <svg
+                    className={`${isRTL ? 'rotate-180' : ''}`}
+
                     width='15'
                     height='14'
                     viewBox='0 0 15 14'
@@ -377,16 +308,20 @@ export default function JourneySection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           className='mb-[64px] '
+          style={{
+            direction: isRTL ? 'rtl' : 'ltr',
+            textAlign: isRTL ? 'right' : 'left',
+          }}
         >
           <div className='flex flex-col lg:flex-row px-4 sm:px-6 md:px-[6%] items-center gap-6 sm:gap-8 md:gap-11 '>
             {/* Image */}
             <div className='relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] md:w-[280px] md:h-[280px] rounded-[20px] sm:rounded-[24px] overflow-hidden flex-shrink-0'>
               <Image
                 src={
-                  milestones[currentMilestone].image ||
+                  milestones[currentMilestone]?.image ||
                   '/assets/leadership/leadership.jpg'
                 }
-                alt={milestones[currentMilestone].title}
+                alt={milestones?.[currentMilestone]?.title}
                 fill
                 className='object-cover'
               />
@@ -394,16 +329,32 @@ export default function JourneySection() {
 
             {/* Content */}
             <div className='flex-1 flex flex-col gap-3 sm:gap-4 max-w-[524px] text-center lg:text-left'>
-              <div className='text-[#25B8E4] text-[20px] sm:text-[22px] md:text-[24px] font-bold'>
-                {milestones[currentMilestone].year}
+              <div className='text-[#25B8E4] text-[20px] sm:text-[22px] md:text-[24px] font-bold'
+                style={{
+                  direction: isRTL ? 'rtl' : 'ltr',
+                  textAlign: isRTL ? 'right' : 'left',
+                }}
+              >
+                {milestones?.[currentMilestone]?.year}
               </div>
               <div className='flex flex-col gap-6 sm:gap-8'>
                 <div className='flex flex-col gap-2'>
-                  <h4 className='text-white text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-bold leading-[1.2]'>
-                    {milestones[currentMilestone].title}
+                  <h4
+
+                    style={{
+                      direction: isRTL ? 'rtl' : 'ltr',
+                      textAlign: isRTL ? 'right' : 'left',
+                    }}
+                    className='text-white text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-bold leading-[1.2]'>
+                    {milestones?.[currentMilestone]?.title}
                   </h4>
-                  <p className='text-[#D9DDDD] text-[16px] sm:text-[17px] md:text-[18px] leading-[1.5]'>
-                    {milestones[currentMilestone].description}
+                  <p
+                    style={{
+                      direction: isRTL ? 'rtl' : 'ltr',
+                      textAlign: isRTL ? 'right' : 'left',
+                    }}
+                    className='text-[#D9DDDD] text-[16px] sm:text-[17px] md:text-[18px] leading-[1.5]'>
+                    {milestones?.[currentMilestone]?.description}
                   </p>
                 </div>
               </div>
@@ -416,10 +367,19 @@ export default function JourneySection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 1.3 }}
-          className='relative overflow-x-auto'
+          className='relative overflow-x-auto scrollbar-hide'
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
         >
+          <style jsx>{`
+            .scrollbar-hide::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
           {/* Years Row */}
-          <div className='relative flex flex-nowrap justify-start sm:justify-between gap-4 sm:gap-4 pr-4 sm:pr-6 md:pr-[6%]'>
+          <div className='relative flex flex-nowrap justify-start sm:justify-between gap-4 sm:gap-4 px-4 sm:px-6 md:px-[6%]'>
             {visibleMilestones.map((milestone, index) => {
               const actualIndex = currentPage * itemsPerPage + index;
               const isActive = actualIndex === currentMilestone;
@@ -440,13 +400,12 @@ export default function JourneySection() {
                   transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                 >
                   <div
-                    className={`text-[16px] sm:text-[17px] md:text-[18px] font-normal transition-all duration-300 mb-2 text-center ${
-                      isActive
-                        ? 'text-white text-[18px] sm:text-[20px] font-sans-bold md:text-[24px] font-bold'
-                        : isHovered
-                          ? 'text-white/60'
-                          : 'text-[#708294]'
-                    }`}
+                    className={`text-[16px] sm:text-[17px] md:text-[18px] font-normal transition-all duration-300 mb-2 text-center ${isActive
+                      ? 'text-white text-[18px] sm:text-[20px] font-sans-bold md:text-[24px] font-bold'
+                      : isHovered
+                        ? 'text-white/60'
+                        : 'text-[#708294]'
+                      }`}
                   >
                     {milestone.year}
                   </div>
@@ -456,7 +415,7 @@ export default function JourneySection() {
           </div>
 
           {/* Dots Row with Centered Line */}
-          <div className='relative my-1 pr-4 sm:pr-6 md:pr-[6%]'>
+          <div className='relative my-1 px-4 sm:px-6 md:px-[6%]'>
             <div className='absolute top-1/2 left-0 right-0 h-1 bg-[#7192B5] opacity-40 -translate-y-1/2'></div>
             <div className='relative flex flex-nowrap items-center justify-start sm:justify-between gap-4 sm:gap-4 h-10'>
               {visibleMilestones.map((milestone, index) => {
@@ -479,13 +438,12 @@ export default function JourneySection() {
                     transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                   >
                     <div
-                      className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-all duration-300 border ${
-                        isActive
-                          ? 'bg-[#25B8E4] scale-110 border-white border-4'
-                          : isHovered
-                            ? 'bg-white  border-8 border-[#708294]'
-                            : 'bg-[#708294] border-transparent'
-                      }`}
+                      className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-all duration-300 border ${isActive
+                        ? 'bg-[#25B8E4] scale-110 border-white border-4'
+                        : isHovered
+                          ? 'bg-white  border-8 border-[#708294]'
+                          : 'bg-[#708294] border-transparent'
+                        }`}
                     >
                       {isActive && (
                         <div className='w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#25B8E4] rounded-full'></div>
@@ -498,7 +456,7 @@ export default function JourneySection() {
           </div>
 
           {/* Titles Row */}
-          <div className='relative flex flex-nowrap justify-start sm:justify-between gap-4 sm:gap-4 pr-4 sm:pr-6 md:pr-[6%]'>
+          <div className='relative flex flex-nowrap justify-start sm:justify-between gap-4 sm:gap-4 px-4 sm:px-6 md:px-[6%]'>
             {visibleMilestones.map((milestone, index) => {
               const actualIndex = currentPage * itemsPerPage + index;
               const isActive = actualIndex === currentMilestone;
@@ -519,13 +477,12 @@ export default function JourneySection() {
                   transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                 >
                   <div
-                    className={`text-[14px] sm:text-[16px] md:text-[18px] text-center mt-2 transition-all duration-300 max-w-[120px] sm:max-w-[160px] md:max-w-[214px] leading-[1.5] font-normal ${
-                      isActive
-                        ? 'text-white'
-                        : isHovered
-                          ? 'text-white/60'
-                          : 'text-[#708294]'
-                    }`}
+                    className={`text-[14px] sm:text-[16px] md:text-[18px] text-center mt-2 transition-all duration-300 max-w-[120px] sm:max-w-[160px] md:max-w-[214px] leading-[1.5] font-normal ${isActive
+                      ? 'text-white'
+                      : isHovered
+                        ? 'text-white/60'
+                        : 'text-[#708294]'
+                      }`}
                   >
                     {milestone.title}
                   </div>

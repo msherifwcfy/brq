@@ -2,27 +2,24 @@ import Image from 'next/image';
 import React from 'react';
 import type {
   NetworkSectionEntity,
-  CybersecurityDataCenterEntity,
 } from '@/sdk/types.gen';
 
 interface NetworksAndDataProps {
   networkData: NetworkSectionEntity | null;
-  dataCenterData: CybersecurityDataCenterEntity | null;
 }
 
 const NetworksAndData: React.FC<NetworksAndDataProps> = ({
   networkData,
-  dataCenterData,
 }) => {
   const networkCards =
     networkData?.network_section_cards_id_network_section_cards || [];
 
   return (
     <div className='max-w-7xl mx-auto mt-10 relative z-50 px-[5%] xl:px-0'>
+      <div id='cybersecurity-service-1' className='absolute top-[-100px]'></div>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-4 lg:gap-x-6 gap-y-8 lg:gap-y-12'>
         {networkCards.map((card, index) => (
           <div
-            id='network-data-center'
             key={index}
             className='pt-6 px-6 pb-8'
             style={{

@@ -6,10 +6,12 @@ import {
   identityManagementControllerRead,
   applicationDataControllerRead,
 } from '@/sdk/sdk.gen';
+import { getLanguageHeaders } from '@/lib/language-utils';
 
 export const getCybersecurityHero = async () => {
   const response = await cybersecurityHeroControllerRead({
     query: { query: { relations: { image: true, logos: true } } },
+    headers: await getLanguageHeaders(),
   });
   return response.data?.data?.[0] || null;
 };
@@ -26,6 +28,7 @@ export const getNetworkSection = async () => {
         },
       },
     },
+    headers: await getLanguageHeaders(),
   });
   return response.data?.data?.[0] || null;
 };
@@ -42,6 +45,7 @@ export const getCybersecurityDataCenter = async () => {
         },
       },
     },
+    headers: await getLanguageHeaders(),
   });
   return response.data?.data?.[0] || null;
 };
@@ -58,6 +62,7 @@ export const getOperationIntelligence = async () => {
         },
       },
     },
+    headers: await getLanguageHeaders(),
   });
   return response.data?.data?.[0] || null;
 };
@@ -74,6 +79,7 @@ export const getIdentityManagement = async () => {
         },
       },
     },
+    headers: await getLanguageHeaders(),
   });
   return response.data?.data?.[0] || null;
 };
@@ -89,6 +95,7 @@ export const getApplicationData = async () => {
         },
       },
     },
+    headers: await getLanguageHeaders(),
   });
   console.log(response.data?.data?.[0], 'response');
   return response.data?.data?.[0] || null;

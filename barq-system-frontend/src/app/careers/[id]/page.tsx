@@ -1,9 +1,11 @@
 import React from 'react'
 import { notFound } from 'next/navigation'
-import { careersData } from '@/data/careers'
 import Navbar from '@/components/home-page/navbar'
 import Footer from '@/components/footer'
 import CareerDetailsClient from '@/components/careers/CareerDetailsClient'
+import { careersService } from '@/services/careers.service'
+
+export const dynamic = 'force-dynamic';
 
 interface CareerDetailsPageProps {
     params: Promise<{
@@ -12,9 +14,9 @@ interface CareerDetailsPageProps {
 }
 
 const CareerDetailsPage = async ({ params }: CareerDetailsPageProps) => {
-    const { id: paramId } = await params;
-    const id = Number(paramId);
-    const job = careersData.find(career => career.id === id);
+    const { id } = await params;
+    const jobResponse = await careersService.getJobDetailById(id);
+    const job = jobResponse?.data;
 
     if (!job) {
         notFound();

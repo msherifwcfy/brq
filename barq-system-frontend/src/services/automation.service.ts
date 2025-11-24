@@ -12,12 +12,14 @@ import type {
   DataManagementControllerReadResponse,
   CloudSectionControllerReadResponse,
 } from '@/sdk/types.gen';
+import { getLanguageHeaders } from '@/lib/language-utils';
 
 export const automationService = {
   async getAutomationHeroData(): Promise<AutomationHeroControllerReadResponse | null> {
     try {
       const response = await automationHeroControllerRead({
         query: { query: { relations: { hero: true, logos: true } } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -39,6 +41,7 @@ export const automationService = {
             },
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -61,6 +64,7 @@ export const automationService = {
             },
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -83,6 +87,7 @@ export const automationService = {
             },
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -97,12 +102,12 @@ export const automationService = {
         query: {
           query: {
             relations: {
-              image: true,
               logo: true,
               cloud_bullets_id_cloud_bullets: { icon: true },
             },
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {

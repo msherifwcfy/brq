@@ -41,7 +41,7 @@ export default function ResourceSuccessModal({ isOpen, onClose }: ResourceSucces
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogOverlay
-                className="bg-black/10 "
+                className="bg-black/01 "
                 style={{
                     // background: "rgba(0, 0, 0, 0.32)",
                     // backdropFilter: "blur(10px)"
@@ -78,7 +78,7 @@ export default function ResourceSuccessModal({ isOpen, onClose }: ResourceSucces
                         }}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
-                            <path d="M14.8333 20.1667L22.8333 28.1667L44.1667 6.83333M44.1667 22.8333V38.8333C44.1667 40.2478 43.6048 41.6044 42.6046 42.6046C41.6044 43.6048 40.2478 44.1667 38.8333 44.1667H6.83333C5.41885 44.1667 4.06229 43.6048 3.0621 42.6046C2.0619 41.6044 1.5 40.2478 1.5 38.8333V6.83333C1.5 5.41885 2.0619 4.06229 3.0621 3.0621C4.06229 2.0619 5.41885 1.5 6.83333 1.5H30.8333" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M14.8333 20.1667L22.8333 28.1667L44.1667 6.83333M44.1667 22.8333V38.8333C44.1667 40.2478 43.6048 41.6044 42.6046 42.6046C41.6044 43.6048 40.2478 44.1667 38.8333 44.1667H6.83333C5.41885 44.1667 4.06229 43.6048 3.0621 42.6046C2.0619 41.6044 1.5 40.2478 1.5 38.8333V6.83333C1.5 5.41885 2.0619 4.06229 3.0621 3.0621C4.06229 2.0619 5.41885 1.5 6.83333 1.5H30.8333" stroke="white" strokeWidth="3" strokeLinecap="round" stroke-linejoin="round" />
                         </svg>
                     </motion.div>
 

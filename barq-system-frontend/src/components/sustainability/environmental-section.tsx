@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
 import type { EnvironmentalSustainabilityControllerReadResponse } from '@/sdk/types.gen';
+import { useTranslation } from 'react-i18next';
 
 interface EnvironmentalSectionProps {
   environmentalData: EnvironmentalSustainabilityControllerReadResponse | null;
@@ -14,7 +15,7 @@ export default function EnvironmentalSection({
 }: EnvironmentalSectionProps) {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
-
+  const { t, i18n } = useTranslation()
   const environmentalContent = environmentalData?.data?.[0];
   const environmentalPoints =
     environmentalContent?.environmental_sustainability_points_id_environmental_sustainability_points ||
@@ -31,7 +32,7 @@ export default function EnvironmentalSection({
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <div className='relative w-full h-full bg-gradient-to-b from-black/100 to-black/0'>
-          <div className='absolute bottom-0 top-[77.5%] left-[52%] right-[0%]  z-20 '>
+          <div className={`absolute bottom-0 ${i18n.language === "ar" ? "left-[-118%] right-auto rotate-270  top-[100%]" : "left-[52%] right-[0%]  top-[77.5%]"}  z-20 `}>
             <Image
               src='assets/insights/insights_right_background_v2.svg'
               height={514}
@@ -64,7 +65,7 @@ export default function EnvironmentalSection({
                 backgroundClip: 'text',
               }}
             >
-              Environmental
+              {t('sustainability.environmental')}
             </span>
           </motion.div>
 
@@ -89,18 +90,17 @@ export default function EnvironmentalSection({
               'Environmental responsibility is at the core of how we operate and innovate. At BARQ, we focus on reducing carbon impact, minimizing e-waste, and embedding sustainability into every stage of our operations to support a more sustainable future.'}
           </motion.p>
 
-          {/* Emissions & Waste Management Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             <h3 className='text-white text-[24px] frutiger-lt-std-bold  mb-2'>
-              Emissions & Waste Management
+              {t('sustainability.emissionsAndWasteManagement')}
             </h3>
 
             <p className='text-[#ECEEEE] text-[18px] font-normal leading-[27px] mb-6'>
-              We address the environmental impact of e-waste and emissions by:
+              {t('sustainability.emissionsAndWasteDescription')}
             </p>
 
             {/* Bullet Points with Icons */}

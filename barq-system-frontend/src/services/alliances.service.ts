@@ -14,12 +14,14 @@ import type {
   IndustriesControllerReadResponse,
   SolutionsControllerReadResponse,
 } from '@/sdk/types.gen';
+import { getLanguageHeaders } from '@/lib/language-utils';
 
 export const alliancesService = {
   async getHeadData(): Promise<AlliancesHeadControllerReadResponse | null> {
     try {
       const response = await alliancesHeadControllerRead({
         query: { query: { relations: {} } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -55,7 +57,7 @@ export const alliancesService = {
       const response = await alliancesClientsControllerRead({
         query: {
           query: {
-            relations: { media: true, country: true, industries: true },
+            relations: { media: true, countries: true, industries: true },
             pagination: {
               skip,
               take: limit,
@@ -63,6 +65,7 @@ export const alliancesService = {
             ...(Object.keys(filters).length > 0 && { filters }),
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -98,7 +101,7 @@ export const alliancesService = {
       const response = await alliancesVendorsControllerRead({
         query: {
           query: {
-            relations: { media: true, country: true, solutions: true },
+            relations: { media: true, countries: true, solutions: true },
             pagination: {
               skip,
               take: limit,
@@ -106,6 +109,7 @@ export const alliancesService = {
             ...(Object.keys(filters).length > 0 && { filters }),
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -122,6 +126,7 @@ export const alliancesService = {
             relations: { country_id_country_translations: true },
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -138,6 +143,7 @@ export const alliancesService = {
             relations: { industries_id_industries_translations: true },
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -154,6 +160,7 @@ export const alliancesService = {
             relations: { solutions_id_solutions_translations: true },
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {

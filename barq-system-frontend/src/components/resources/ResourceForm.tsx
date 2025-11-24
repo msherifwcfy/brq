@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { CircleX } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Dialog, DialogContent, DialogOverlay } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -9,6 +11,13 @@ import { useState } from 'react';
 import { countries } from '@/utils/contants';
 import { Button } from '../ui/button';
 import ResourceSuccessModal from './ResourceSuccessModal';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
 interface ResourceFormProps {
     isOpen: boolean;
@@ -21,6 +30,8 @@ export default function ResourceForm({
     isOpen,
     onClose,
 }: ResourceFormProps) {
+    const { t, i18n } = useTranslation()
+    const { isRTL } = useLanguage()
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -64,7 +75,7 @@ export default function ResourceForm({
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogOverlay className="bg-black/10" />
+            <DialogOverlay className="bg-black/01" />
             <DialogContent
                 className={cn(
                     "max-w-[95vw] lg:max-w-[897px] p-0 max-h-[90vh] overflow-y-auto",
@@ -102,20 +113,20 @@ export default function ResourceForm({
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.4, delay: 0.1 }}
                                 >
-                                    Apply Now
+                                    {t('resources.applyNow')}
                                 </motion.h2>
                                 <motion.p
                                     className="text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] text-center mb-4 max-w-full lg:max-w-[650px]"
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.4, delay: 0.2 }}
-                                >Fill out the form below to gain access to BARQ Systems&apos; latest campaigns, resources, and exclusive content tailored to your business needs.
+                                >{t('resources.formDescription')}
                                 </motion.p>
                             </div>
                             <div>
                                 <button
                                     onClick={onClose}
-                                    className="w-[32px] h-[32px] lg:w-[40px] lg:h-[40px] flex items-center justify-center"
+                                    className={`w-[32px] h-[32px] lg:w-[40px] lg:h-[40px] flex items-center justify-center ${i18n.language === "ar" ? "left-4" : "right-4"}`}
                                 >
                                     <CircleX size={24} className='text-white min-w-[24px] min-h-[24px] lg:min-w-[30px] lg:min-h-[30px]' />
                                 </button>
@@ -153,7 +164,7 @@ export default function ResourceForm({
                                                     borderRadius: "8px",
                                                 }}
                                                 className="py-4 lg:py-5 px-6 h-[48px] lg:h-[56px] w-full lg:w-[303px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                                placeholder="First Name"
+                                                placeholder={t('academyApplication.firstName')}
                                             />
                                         </div>
                                         <div className="flex-1">
@@ -167,7 +178,7 @@ export default function ResourceForm({
                                                     borderRadius: "8px",
                                                 }}
                                                 className="py-4 lg:py-5 px-6 h-[48px] lg:h-[56px] w-full lg:w-[303px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                                placeholder="Last Name"
+                                                placeholder={t('academyApplication.lastName')}
                                             />
                                         </div>
                                     </div>
@@ -184,7 +195,7 @@ export default function ResourceForm({
                                                 borderRadius: "8px",
                                             }}
                                             className="py-4 lg:py-5 px-6 h-[48px] lg:h-[56px] w-full lg:w-[622px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white placeholder:opacity-80 text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                            placeholder="Email"
+                                            placeholder={t('academyApplication.email')}
                                         />
                                     </div>
 
@@ -200,7 +211,7 @@ export default function ResourceForm({
                                                 borderRadius: "8px",
                                             }}
                                             className="py-4 lg:py-5 px-6 h-[48px] lg:h-[56px] w-full lg:w-[622px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                            placeholder="Position"
+                                            placeholder={t('resources.position')}
                                         />
                                     </div>
 
@@ -216,36 +227,67 @@ export default function ResourceForm({
                                                 borderRadius: "8px",
                                             }}
                                             className="py-4 lg:py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[622px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                            placeholder="Organization Name"
+                                            placeholder={t('resources.organizationName')}
                                         />
                                     </div>
 
                                     {/* Phone Number with Country Selector */}
                                     <div className="flex gap-0 w-full">
                                         <div className="relative">
-                                            <select
-                                                name="countryCode"
+                                            <Select
                                                 value={formData.countryCode}
-                                                onChange={e => handleSelectChange(e.target.value)}
-                                                style={{
-                                                    borderRadius: "8px 0 0 8px",
-                                                    minWidth: '131px',
-                                                    color: "rgba(51, 51, 51, 0.80)",
-                                                    fontSize: "16px"
-                                                }}
-                                                className="appearance-none py-4 lg:py-5 px-6 border-r-[1px] placeholder:text-[14px] lg:placeholder:text-[16px] border-[#D6D6D6] h-[48px] lg:h-[64px] border text-[14px] lg:text-[16px] bg-white focus:outline-none transition-colors cursor-pointer"
+                                                onValueChange={(value) => handleSelectChange(value)}
                                             >
-                                                {countries.map((country) => (
-                                                    <option key={country.code} value={country.code} >
-                                                        {country.code}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            <div className="absolute right-6 top-[55%] transform -translate-y-1/2 pointer-events-none">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
-                                                    <path d="M1.5 1L7.5 7L13.5 1" stroke="#313B49" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
+                                                <SelectTrigger
+                                                    style={{
+                                                        borderRadius: isRTL ? "0 8px 8px 0" : "8px 0 0 8px",
+                                                        minWidth: '131px',
+                                                        padding: '16px 24px',
+                                                        background: '#FFF',
+                                                        color: '#333',
+                                                        fontSize: '16px',
+                                                        fontStyle: 'normal',
+                                                        fontWeight: 400,
+                                                        lineHeight: '150%',
+                                                        border: 'none',
+                                                        height: '64px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'space-between',
+                                                    }}
+                                                    className="focus:outline-none transition-colors cursor-pointer"
+                                                >
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent
+                                                    style={{
+                                                        background: '#FFF',
+                                                        borderRadius: '8px',
+                                                        border: '1px solid #D6D6D6',
+                                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                                    }}
+                                                >
+                                                    {countries.map((country) => (
+                                                        <SelectItem
+                                                            key={country.code}
+                                                            value={country.code}
+                                                            style={{
+                                                                color: '#333',
+                                                                fontSize: '16px',
+                                                                fontStyle: 'normal',
+                                                                fontWeight: 400,
+                                                                lineHeight: '150%',
+                                                                opacity: 0.8,
+                                                                padding: '8px 24px',
+                                                                cursor: 'pointer',
+                                                                borderRadius: '4px',
+                                                            }}
+                                                        >
+                                                            {country.code}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
                                         </div>
                                         <div className="flex-1">
                                             <input
@@ -255,10 +297,10 @@ export default function ResourceForm({
                                                 value={formData.mobileNumber}
                                                 onChange={handleChange}
                                                 style={{
-                                                    borderRadius: "0 8px 8px 0",
+                                                    borderRadius: isRTL ? "8px 0 0 8px" : "0 8px 8px 0",
                                                 }}
                                                 className="py-4 lg:py-5 px-6 h-[48px] lg:h-[64px] w-full lg:w-[491px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors"
-                                                placeholder={`${selectedCountry?.dialCode} Mobile Number`}
+                                                placeholder={`${selectedCountry?.dialCode} ${t('academyApplication.mobileNumber')}`}
                                             />
                                         </div>
                                     </div>
@@ -273,9 +315,9 @@ export default function ResourceForm({
                                                 padding: '16px 24px',
                                             }}
                                         >
-                                            Submit
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" className="lg:w-6 lg:h-6">
-                                                <path d="M9.5 6L15.5 12L9.5 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            {t('resources.submit')}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" className="lg:w-6 lg:h-6" style={{ transform: isRTL ? 'scaleX(-1)' : 'none' }}>
+                                                <path d="M9.5 6L15.5 12L9.5 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </Button>
                                     </div>

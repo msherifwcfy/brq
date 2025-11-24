@@ -2,7 +2,11 @@
 
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { type SuccessStoryCaseStudiesEntity } from '@/sdk/types.gen';
+import { getImageUrl } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 interface SuccessStory {
   id: number;
@@ -11,9 +15,14 @@ interface SuccessStory {
   logo: string;
   description: string;
   caseStudyLink: string;
+  home_image: string | undefined;
 }
 
-const successStories: SuccessStory[] = [
+type SuccessStoriesSectionProps = {
+  stories?: Array<SuccessStoryCaseStudiesEntity> | null;
+};
+
+const fallbackStories: SuccessStory[] = [
   {
     id: 1,
     title: 'MNT-Halan Partners with BARQ Systems',
@@ -22,6 +31,7 @@ const successStories: SuccessStory[] = [
     description:
       "MNT-Halan, a leading fintech innovator, selected BARQ Systems to implement a next-gen cybersecurity framework. Through strategic development and implementation, BARQ Systems delivered a robust, scalable, and future-proof security architecture that meets MNT-Halan's evolving needs. The solution includes advanced threat detection, incident response capabilities, and a centralized security operations center, ensuring continuous protection against evolving cyber threats.",
     caseStudyLink: '#',
+    home_image: undefined,
   },
   {
     id: 2,
@@ -31,6 +41,7 @@ const successStories: SuccessStory[] = [
     description:
       'EMKAN, a subsidiary of AlRajhi Group , partnered with BARQ Systems for a groundbre....',
     caseStudyLink: '#',
+    home_image: undefined,
   },
   {
     id: 3,
@@ -40,43 +51,83 @@ const successStories: SuccessStory[] = [
     description:
       'BARQ Systems Collaborate with King Saud University to modernize their IT infrastructure and implement a next-gen cybersecurity framework. The solution includes advanced threat detection, incident response capabilities, and a centralized security operations center, ensuring continuous protection against evolving cyber threats.',
     caseStudyLink: '#',
+    home_image: undefined,
   },
 ];
 
-export default function SuccessStoriesSection() {
+export default function SuccessStoriesSection({
+  stories,
+}: SuccessStoriesSectionProps) {
+  const router = useRouter();
+  const { t, i18n } = useTranslation();
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-20%', amount: 0.1 });
   const [isMounted, setIsMounted] = useState(false);
   const [hoveredStory, setHoveredStory] = useState<number | null>(null);
-  const [activeStory, setActiveStory] = useState<number>(2); // Default to middle card (id: 2)
+  const storiesToRender = useMemo<SuccessStory[]>(() => {
+    if (stories && stories.length > 0) {
+      return stories.slice(0, 3).map((story, index) => ({
+        id: story.id,
+        title: story.title,
+        description: story.description,
+        home_image: story.home_image ? getImageUrl(story.home_image) : undefined,
+        image:
+          getImageUrl(story.image) ||
+          fallbackStories[index]?.image ||
+          fallbackStories[0].image,
+        logo: '',
+        caseStudyLink: `/case-studies/${story.id}`,
+      }));
+    }
+
+    return fallbackStories.slice(0, 3);
+  }, [stories]);
+  const [activeStory, setActiveStory] = useState<number | null>(() => storiesToRender[1]?.id ?? storiesToRender[0]?.id ?? null);
+
+  useEffect(() => {
+    if (!storiesToRender.length) {
+      setActiveStory(null);
+      return;
+    }
+
+    setActiveStory((prev) => {
+      if (prev && storiesToRender.some((story) => story.id === prev)) {
+        return prev;
+      }
+
+      return storiesToRender[1]?.id ?? storiesToRender[0]?.id ?? null;
+    });
+  }, [storiesToRender]);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Use isInView for desktop, isMounted for mobile to ensure visibility
   const shouldAnimate = typeof window !== 'undefined' && window.innerWidth < 1024 ? isMounted : isInView;
+  const orderClasses = ['lg:order-1', 'lg:order-2', 'lg:order-3'];
+  const widthClasses = ['w-[350px] lg:w-[410px]', 'w-[350px] lg:w-[411px]', 'w-[350px] lg:w-[410px]'];
+  const buttonClassVariants = [
+    'inline-flex items-center gap-4 text-[16px] text-[#25B8E4] font-normal transition-all duration-300',
+    'inline-flex items-center gap-4 text-[16px] text-[#25B8E4] font-normal transition-all duration-300',
+    'inline-flex items-center gap-4 text-[16px] text-[#25B8E4] font-semibold hover:gap-3 transition-all duration-300',
+  ];
+  const descriptionClamp = ['line-clamp-2', '', 'line-clamp-2'];
+  const hideLogoWhenActive = [true, false, true];
 
-  // Preload all images when component mounts
   useEffect(() => {
-    successStories.forEach((story) => {
+    storiesToRender.forEach((story) => {
+      if (!story.image) return;
       const img = new window.Image();
       img.src = story.image;
-      // Preload for hover effect - this ensures the image is cached
-      img.onload = () => {
-        // Image is now preloaded and cached
-      };
     });
-  }, []);
+  }, [storiesToRender]);
 
   return (
     <section
       ref={containerRef}
       className='relative pt-[120px] pb-[72px] z-[99999] overflow-hidden'
     >
-      {/* Content Layer */}
       <div className='relative z-20  max-w-[1280px] mx-auto '>
-        {/* Header Section */}
         <div className='text-center mb-6'>
           <motion.div
             className='inline-block mb-6'
@@ -87,7 +138,7 @@ export default function SuccessStoriesSection() {
               damping: 30,
               stiffness: 120,
               duration: 0.3,
-              delay: 0.1
+              delay: 0.2
             }}
           >
             <span
@@ -100,7 +151,7 @@ export default function SuccessStoriesSection() {
                 backgroundClip: 'text',
               }}
             >
-              Real Results, Real Clients
+              {t('common.realResultsRealClients')}
             </span>
           </motion.div>
 
@@ -116,7 +167,7 @@ export default function SuccessStoriesSection() {
               delay: 0.2
             }}
           >
-            Our Success Stories
+            {t('common.ourSuccessStories')}
           </motion.h2>
 
           <motion.div
@@ -128,20 +179,20 @@ export default function SuccessStoriesSection() {
               damping: 30,
               stiffness: 120,
               duration: 0.3,
-              delay: 0.3
+              delay: 0.2
             }}
           >
-            <button className=' frutiger-lt-std inline-flex w-[141px] h-[51px] items-center justify-center leading-normal gap-4 px-6 py-4 border-[2px] border-[#25B8E4] text-[#25B8E4]  rounded-[8px]  text-[16px] font-bold transition-all duration-300 group'>
-              <div className='max-h-[19px] min-w-[64px]  frutiger-lt-std-bold mt-[-2px]'>View All</div>
-
-              <div className='flex items-center justify-center h-[16px] mt-[4px]'>
-                <Image src="/assets/arrow-right.svg" alt="arrow-right" width={13} height={16} className=' hover:fill-white min-w-[13px] min-h-[16px] object-contain' />
+            <button
+              onClick={() => router.push('/case-studies')}
+              className={`frutiger-lt-std inline-flex cursor-pointer ${i18n.language === "ar" ? "w-fit" : "flex-row w-[141px]"} h-[51px] items-center justify-center leading-normal gap-4 px-6 py-4 border-[2px] border-[#25B8E4] text-[#25B8E4]  rounded-[8px]  text-[16px] font-bold transition-all duration-300 group`}>
+              <div className='max-h-[19px] min-w-[64px]  frutiger-lt-std-bold mt-[-2px]'>{t('common.viewAll')}</div>
+              <div className={`flex items-center justify-center h-[16px] mt-[4px] ${i18n.language === "ar" ? "rotate-180" : ""}`}>
+                <Image src='/assets/arrow-right.svg' alt='arrow-right' width={13} height={16} className='hover:fill-white min-w-[13px] min-h-[16px] object-contain' />
               </div>
             </button>
           </motion.div>
         </div>
 
-        {/* Success Stories Grid */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -150,463 +201,119 @@ export default function SuccessStoriesSection() {
             damping: 30,
             stiffness: 120,
             duration: 0.3,
-            delay: 0.4
+            delay: 0.2
           }}
           className='flex flex-col lg:flex-row items-center justify-center gap-8 px-[5%]'
         >
           <div className='relative flex flex-col xl:flex-row lg:items-center xl:items-end xl:justify-center gap-8 px-[5%]'>
-            {/* Left Card */}
-            <motion.div
-              key={successStories.find(story => story.id === 1)?.id}
-              className={`relative group lg:order-1 flex flex-col ${activeStory === 1 ? 'cursor-default' : 'cursor-pointer'}`}
-              initial={{ opacity: 0, y: 50, scale: 0.8 }}
-              animate={shouldAnimate ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.8 }}
-              transition={{
-                type: "spring",
-                damping: 30,
-                stiffness: 120,
-                duration: 0.3,
-                delay: 0.5
-              }}
-              onHoverStart={() => activeStory !== 1 && setHoveredStory(1)}
-              onHoverEnd={() => activeStory !== 1 && setHoveredStory(null)}
-              onClick={() => setActiveStory(1)}
-            >
-              <div
-                className={`relative overflow-hidden w-[350px] lg:w-[410px] h-[400px] ${activeStory === 1 ? '' : 'bg-gradient-to-br from-gray-800 to-gray-900'} `}
-                style={{ borderRadius: '24px' }}
-              >
-                <motion.div
-                  className='absolute inset-0'
-                  animate={
-                    {
-                      // scale: (hoveredStory === 1 && activeStory !== 1) ? 1.05 : 1,
-                    }
-                  }
-                  transition={{ duration: 1.2, ease: 'easeOut' }}
-                >
-                  <Image
-                    src={
-                      successStories.find(story => story.id === 1)?.image ||
-                      '/placeholder.jpg'
-                    }
-                    alt={
-                      successStories.find(story => story.id === 1)?.title ||
-                      'Success Story'
-                    }
-                    fill
-                    className={`object-cover ${activeStory === 1 ? '' : 'grayscale'}`}
-                  />
-                </motion.div>
+            {storiesToRender.map((story, index) => {
+              const isActive = story.id === activeStory;
+              const isHovered = hoveredStory === story.id;
+              const orderClass = orderClasses[index] ?? '';
+              const widthClass = widthClasses[index] ?? widthClasses[0];
+              const buttonClass = buttonClassVariants[index] ?? buttonClassVariants[0];
+              const descriptionClass = descriptionClamp[index] ?? '';
+              const hideLogo = hideLogoWhenActive[index] ?? true;
+              const delay = 0.3 + index * 0.1;
+              const imageSrc = story.home_image ?? story.image ?? '/assets/success_stories_section/image-1.jpg';
 
-                {/* Non-active story overlay */}
-                {activeStory !== 1 && (
+              return (
+                <motion.div
+                  key={`${story.id}-${index}`}
+                  className={`relative group flex flex-col ${orderClass} ${isActive ? 'cursor-default' : 'cursor-pointer'}`}
+                  initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                  animate={shouldAnimate ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.8 }}
+                  transition={{
+                    type: 'spring',
+                    damping: 30,
+                    stiffness: 120,
+                    duration: 0.3,
+                    delay,
+                  }}
+                  onHoverStart={() => !isActive && setHoveredStory(story.id)}
+                  onHoverEnd={() => !isActive && setHoveredStory(null)}
+                  onClick={() => setActiveStory(story.id)}
+                >
                   <div
-                    className='absolute inset-0 z-5'
-                    style={{
-                      borderRadius: '24px',
-                      background: `#333, url(${successStories.find(story => story.id === 1)?.image})`,
-                      backgroundBlendMode: 'hue',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat',
-                    }}
-                  />
-                )}
-
-                {/* Hover overlay for non-active stories */}
-                {activeStory !== 1 && hoveredStory === 1 && (
-                  <>
+                    className={`relative overflow-hidden ${widthClass} h-[400px] ${isActive ? '' : 'bg-gradient-to-br from-gray-800 to-gray-900'} `}
+                    style={{ borderRadius: '24px' }}
+                  >
                     <motion.div
-                      className='absolute inset-0 z-6'
-                      style={{
-                        background: `linear-gradient(0deg, #25B8E4, #25B8E4), url(${successStories.find(story => story.id === 1)?.image})`,
-                        backgroundBlendMode: 'hue, normal',
-                        backgroundSize: 'cover, cover',
-                        backgroundPosition: 'center, center',
-                        backgroundRepeat: 'no-repeat, no-repeat',
-                      }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.8 }}
-                    />
-                  </>
-                )}
-
-                <div className='absolute inset-0 flex items-center justify-center z-10'>
-                  {(() => {
-                    const story = successStories.find(story => story.id === 1);
-                    return story?.logo && story.logo.trim() !== '' ? (
+                      className='absolute inset-0'
+                      transition={{ duration: 1.2, ease: 'easeOut' }}
+                    >
+                      <Image
+                        src={imageSrc}
+                        alt={story.title}
+                        fill
+                        className={`object-fill ${isActive ? '' : 'grayscale'}`}
+                      />
+                    </motion.div>
+                    {!isActive && (
+                      <div
+                        className='absolute inset-0 z-5'
+                        style={{
+                          borderRadius: '24px',
+                          background: `#333, url(${imageSrc})`,
+                          backgroundBlendMode: 'hue',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                        }}
+                      />
+                    )}
+                    {!isActive && isHovered && (
                       <motion.div
-                        className='relative w-[256px] h-[186px]'
-                        animate={{
-                          scale: hoveredStory === 1 ? 1.2 : 1,
+                        className='absolute inset-0 z-6'
+                        style={{
+                          background: `linear-gradient(0deg, #25B8E4, #25B8E4), url(${imageSrc})`,
+                          backgroundBlendMode: 'hue, normal',
+                          backgroundSize: 'cover, cover',
+                          backgroundPosition: 'center, center',
+                          backgroundRepeat: 'no-repeat, no-repeat',
                         }}
-                        transition={{
-                          type: "spring",
-                          damping: 20,
-                          stiffness: 300
-                        }}
-                      >
-                        {activeStory !== 1 && (
-                          <Image
-                            src={story.logo}
-                            alt={`${story.title} logo`}
-                            fill
-                            className='object-contain'
-                          />
-                        )}
-                      </motion.div>
-                    ) : (
-                      <div className='text-white text-[24px] font-bold text-center px-4'>
-                        {story?.title}
-                      </div>
-                    );
-                  })()}
-                </div>
-              </div>
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                    )}
+                  </div>
 
-              {/* Left Card Description Box */}
-              {activeStory === 1 && (
-                <motion.div
-                  className='mt-4 px-6 py-8 bg-[#FFFFFF0A] rounded-[16px] backdrop-blur-[10px]  w-[350px] lg:w-[410px]'
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.0 }}
-                >
-                  <h3 className='text-white text-[24px] leading-[33.6px] lg:text-[36px] frutiger-lt-std-bold mb-2 lg:leading-[43.2px]'>
-                    {successStories.find(story => story.id === 1)?.title ||
-                      'Success Story'}
-                  </h3>
-                  <p className='text-[#ECEEEE] text-[15.9px] mb-4 leading-[24px] line-clamp-2'>
-                    {successStories.find(story => story.id === 1)
-                      ?.description || 'Description not available'}
-                  </p>
-                  <button className='inline-flex items-center gap-4 text-[16px] text-[#25B8E4] font-normal  transition-all duration-300'>
-                    View Full Case Study
-                    <Image
-                      src='/assets/chevron-right-2.svg'
-                      alt='arrow-right'
-                      width={24}
-                      height={24}
-                      className='  w-[24px] h-[24px] object-contain mt-[4px]'
-                    />
-                  </button>
-                </motion.div>
-              )}
-            </motion.div>
-
-            {/* Center Card */}
-            <motion.div
-              key={successStories.find(story => story.id === 2)?.id}
-              className={`relative group lg:order-2 flex flex-col ${activeStory === 2 ? 'cursor-default' : 'cursor-pointer'}`}
-              initial={{ opacity: 0, y: 50, scale: 0.8 }}
-              animate={shouldAnimate ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.8 }}
-              transition={{
-                type: "spring",
-                damping: 30,
-                stiffness: 120,
-                duration: 0.3,
-                delay: 0.6
-              }}
-              onHoverStart={() => activeStory !== 2 && setHoveredStory(2)}
-              onHoverEnd={() => activeStory !== 2 && setHoveredStory(null)}
-              onClick={() => setActiveStory(2)}
-            >
-              <div
-                className={`relative overflow-hidden w-[350px] lg:w-[410px] h-[400px] ${activeStory === 2 ? '' : 'bg-gradient-to-br from-gray-800 to-gray-900'} `}
-                style={{ borderRadius: '24px' }}
-              >
-                <motion.div
-                  className='absolute inset-0'
-                  animate={
-                    {
-                      // scale: (hoveredStory === 2 && activeStory !== 2) ? 1.05 : 1,
-                    }
-                  }
-                  transition={{ duration: 1.2, ease: 'easeOut' }}
-                >
-                  <Image
-                    src={
-                      successStories.find(story => story.id === 2)?.image ||
-                      '/placeholder.jpg'
-                    }
-                    alt={
-                      successStories.find(story => story.id === 2)?.title ||
-                      'Success Story'
-                    }
-                    fill
-                    className={`object-cover ${activeStory === 2 ? '' : 'grayscale'}`}
-                  />
-                </motion.div>
-
-                {/* Non-active story overlay */}
-                {activeStory !== 2 && (
-                  <div
-                    className='absolute inset-0 z-5'
-                    style={{
-                      borderRadius: '24px',
-                      background: `#333, url(${successStories.find(story => story.id === 2)?.image})`,
-                      backgroundBlendMode: 'hue',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat',
-                    }}
-                  />
-                )}
-
-                {/* Hover overlay for non-active stories */}
-                {activeStory !== 2 && hoveredStory === 2 && (
-                  <>
+                  {isActive && (
                     <motion.div
-                      className='absolute inset-0 z-6'
-                      style={{
-                        background: `linear-gradient(0deg, #25B8E4, #25B8E4), url(${successStories.find(story => story.id === 2)?.image})`,
-                        backgroundBlendMode: 'hue, normal',
-                        backgroundSize: 'cover, cover',
-                        backgroundPosition: 'center, center',
-                        backgroundRepeat: 'no-repeat, no-repeat',
-                      }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.8 }}
-                    />
-                    {/* <motion.div
-                                            className="absolute inset-0 z-6"
-                                            style={{
-                                                background: `linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1))`,
-                                                backgroundBlendMode: 'hue',
-                                                backgroundSize: 'cover, cover',
-                                                backgroundPosition: 'center, center',
-                                                backgroundRepeat: 'no-repeat, no-repeat'
-                                            }}
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 0.8 }}
-                                            exit={{ opacity: 0 }}
-                                            transition={{ duration: 0.8 }}
-                                        /> */}
-                  </>
-                )}
-
-                <div className='absolute inset-0 flex items-center justify-center z-10'>
-                  {(() => {
-                    const story = successStories.find(story => story.id === 2);
-                    return story?.logo && story.logo.trim() !== '' ? (
-                      <motion.div
-                        className='relative w-[256px] h-[186px]'
-                        animate={{
-                          scale: hoveredStory === 2 ? 1.2 : 1,
-                        }}
-                        transition={{
-                          type: "spring",
-                          damping: 20,
-                          stiffness: 300
-                        }}
-                      >
+                      className={`mt-4 px-6 py-8 bg-[#FFFFFF0A] rounded-[16px] backdrop-blur-[10px]  ${widthClass}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1.0 }}
+                    >
+                      <h3 className='text-white text-[24px] leading-[33.6px] lg:text-[36px] frutiger-lt-std-bold mb-2 lg:leading-[43.2px]'>
+                        {story.title || 'Success Story'}
+                      </h3>
+                      <p className={`text-[#ECEEEE] text-[15.9px] mb-4 leading-[24px] ${descriptionClass}`}>
+                        {story.description || 'Description not available'}
+                      </p>
+                      <button
+                        onClick={() => router.push(story.caseStudyLink)}
+                        className={`${buttonClass} cursor-pointer`}>
+                        {t('common.viewFullCaseStudy')}
                         <Image
-                          src={story.logo}
-                          alt={`${story.title} logo`}
-                          fill
-                          className='object-contain'
+                          src='/assets/chevron-right-2.svg'
+                          alt='arrow-right'
+                          width={24}
+                          height={24}
+                          className={`w-[24px] h-[24px] object-contain mt-[4px] ${i18n.language === 'ar' ? 'rotate-180' : ''}`}
                         />
-                      </motion.div>
-                    ) : (
-                      <div className='text-white text-[24px] font-bold text-center px-4'></div>
-                    );
-                  })()}
-                </div>
-              </div>
-
-              {/* Center Card Description Box */}
-              {activeStory === 2 && (
-                <motion.div
-                  className='mt-4 px-6 py-8 bg-[#FFFFFF0A] rounded-[16px] backdrop-blur-[10px]  w-[350px] lg:w-[411px]'
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.0 }}
-                >
-                  <h3 className='text-white text-[24px] leading-[33.6px] lg:text-[36px] frutiger-lt-std-bold mb-2 lg:leading-[43.2px]'>
-                    {successStories.find(story => story.id === 2)?.title ||
-                      'Success Story'}
-                  </h3>
-                  <p className='text-[#ECEEEE] text-[15.9px] leading-[24px] lg:text-[15.6px] mb-4 lg:leading-[24px]  '>
-                    {successStories.find(story => story.id === 2)
-                      ?.description || 'Description not available'}
-                  </p>
-                  <button className='inline-flex items-center gap-4 text-[16px] text-[#25B8E4] font-normal  transition-all duration-300'>
-                    View Full Case Study
-                    <Image
-                      src='/assets/chevron-right-2.svg'
-                      alt='arrow-right'
-                      width={24}
-                      height={24}
-                      className='  w-[24px] h-[24px] object-contain mt-[4px]'
-                    />
-                  </button>
+                      </button>
+                    </motion.div>
+                  )}
                 </motion.div>
-              )}
-            </motion.div>
-
-            {/* Right Card */}
-            <motion.div
-              key={successStories.find(story => story.id === 3)?.id}
-              className={`relative group lg:order-3 flex flex-col ${activeStory === 3 ? 'cursor-default' : 'cursor-pointer'}`}
-              initial={{ opacity: 0, y: 50, scale: 0.8 }}
-              animate={shouldAnimate ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.8 }}
-              transition={{
-                type: "spring",
-                damping: 30,
-                stiffness: 120,
-                duration: 0.3,
-                delay: 0.7
-              }}
-              onHoverStart={() => activeStory !== 3 && setHoveredStory(3)}
-              onHoverEnd={() => activeStory !== 3 && setHoveredStory(null)}
-              onClick={() => setActiveStory(3)}
-            >
-              <div
-                className={`relative overflow-hidden w-[350px] lg:w-[410px] h-[400px] ${activeStory === 3 ? '' : 'bg-gradient-to-br from-gray-800 to-gray-900'} `}
-                style={{ borderRadius: '24px' }}
-              >
-                <motion.div
-                  className='absolute inset-0'
-                  animate={
-                    {
-                      // scale: (hoveredStory === 3 && activeStory !== 3) ? 1.05 : 1,
-                    }
-                  }
-                  transition={{ duration: 1.2, ease: 'easeOut' }}
-                >
-                  <Image
-                    src={
-                      successStories.find(story => story.id === 3)?.image ||
-                      '/placeholder.jpg'
-                    }
-                    alt={
-                      successStories.find(story => story.id === 3)?.title ||
-                      'Success Story'
-                    }
-                    fill
-                    className={`object-cover ${activeStory === 3 ? '' : 'grayscale'}`}
-                  />
-                </motion.div>
-
-                {/* Non-active story overlay */}
-                {activeStory !== 3 && (
-                  <div
-                    className='absolute inset-0 z-5'
-                    style={{
-                      borderRadius: '24px',
-                      background: `#333, url(${successStories.find(story => story.id === 3)?.image})`,
-                      backgroundBlendMode: 'hue',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat',
-                    }}
-                  />
-                )}
-
-                {/* Hover overlay for non-active stories */}
-                {activeStory !== 3 && hoveredStory === 3 && (
-                  <>
-                    <motion.div
-                      className='absolute inset-0 z-6'
-                      style={{
-                        background: `linear-gradient(0deg, #25B8E4, #25B8E4), url(${successStories.find(story => story.id === 3)?.image})`,
-                        backgroundBlendMode: 'hue',
-                        backgroundSize: 'cover, cover',
-                        backgroundPosition: 'center, center',
-                        backgroundRepeat: 'no-repeat, no-repeat',
-                      }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.8 }}
-                    />
-                    {/* <motion.div
-                                            className="absolute inset-0 z-6"
-                                            style={{
-                                                background: `linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1))`,
-                                                backgroundBlendMode: 'hue',
-                                                backgroundSize: 'cover, cover',
-                                                backgroundPosition: 'center, center',
-                                                backgroundRepeat: 'no-repeat, no-repeat'
-                                            }}
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 0.8 }}
-                                            exit={{ opacity: 0 }}
-                                            transition={{ duration: 0.8 }}
-                                        /> */}
-                  </>
-                )}
-
-                <div className='absolute inset-0 flex items-center justify-center z-10'>
-                  {(() => {
-                    const story = successStories.find(story => story.id === 3);
-                    return story?.logo && story.logo.trim() !== '' ? (
-                      <motion.div
-                        className='relative w-[256px] h-[186px]'
-                        animate={{
-                          scale: hoveredStory === 3 ? 1.2 : 1,
-                        }}
-                        transition={{
-                          type: "spring",
-                          damping: 20,
-                          stiffness: 300
-                        }}
-                      >
-                        {activeStory !== 3 && (
-                          <Image
-                            src={story.logo}
-                            alt={`${story.title} logo`}
-                            fill
-                            className='object-contain'
-                          />
-                        )}
-                      </motion.div>
-                    ) : (
-                      <div className='text-white text-[24px] font-bold text-center px-4'>
-                        {story?.title}
-                      </div>
-                    );
-                  })()}
-                </div>
-              </div>
-
-              {/* Right Card Description Box */}
-              {activeStory === 3 && (
-                <motion.div
-                  className='mt-4 px-6 py-8 bg-[#FFFFFF0A] rounded-[16px] backdrop-blur-[10px]  w-[350px] lg:w-[410px]'
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.0 }}
-                >
-                  <h3 className='text-white text-[24px] leading-[33.6px] lg:text-[36px] frutiger-lt-std-bold  mb-2 lg:leading-[43.2px]'>
-                    {successStories.find(story => story.id === 3)?.title ||
-                      'Success Story'}
-                  </h3>
-                  <p className='text-[#ECEEEE] text-[15.9px] leading-[24px] lg:text-[16px] mb-4 lg:leading-[24px] line-clamp-2'>
-                    {successStories.find(story => story.id === 3)
-                      ?.description || 'Description not available'}
-                  </p>
-                  <button className='inline-flex items-center gap-4 text-[16px] text-[#25B8E4] font-semibold hover:gap-3 transition-all duration-300'>
-                    View Full Case Study
-                    <Image
-                      src='/assets/chevron-right-2.svg'
-                      alt='arrow-right'
-                      width={24}
-                      height={24}
-                      className=' hover:fill-white w-[24px] h-[24px] object-contain mt-[4px]'
-                    />
-                  </button>
-                </motion.div>
-              )}
-            </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </div>
     </section>
   );
 }
+

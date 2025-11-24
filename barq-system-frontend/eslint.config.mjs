@@ -14,6 +14,11 @@ const eslintConfig = [
   {
     ignores: ['src/sdk/**/*'],
   },
+  {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
 ];
 
 export default eslintConfig;

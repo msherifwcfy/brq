@@ -27,7 +27,7 @@ const Application: React.FC<ApplicationProps> = ({ data }) => {
   }) => (
     <div className={`flex-1 ${className}`}>
       {services.map((card: ApplicationDataCardsEntity, index: number) => (
-        <div key={index} id={index === 1 ? 'Application' : ''}>
+        <div key={index}>
           <div className='flex items-center gap-4'>
             <div
               style={{
@@ -81,12 +81,11 @@ const Application: React.FC<ApplicationProps> = ({ data }) => {
     </div>
   );
 
-  console.log(data, 'data');
   return (
     <div className='max-w-7xl mx-auto relative z-50 lg:mt-[120px] mt-40 w-full lg:pb-[200px] pb-[100px] px-[5%] xl:px-0'>
+      <div id='cybersecurity-service-4' className='absolute top-[-100px]'></div>
       {/* Section Header */}
       <div className='flex lg:justify-center justify-start flex-col lg:items-center items-start lg:mb-12 mb-8'>
-        {JSON.stringify(data?.logo)}
         {data?.logo && (
           <div className=''>
             <Image

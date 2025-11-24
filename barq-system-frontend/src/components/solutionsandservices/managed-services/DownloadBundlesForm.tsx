@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { XIcon } from 'lucide-react';
 import { Dialog, DialogContent, DialogOverlay } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -8,16 +10,30 @@ import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { countries } from '@/utils/contants';
 import { Button } from '@/components/ui/button';
+import { useManagedServiceDownloadFormControllerCreate } from '@/sdk/modules/managedservicedownloadform.gen';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
 interface DownloadBundlesFormProps {
     isOpen: boolean;
     onClose: () => void;
+    file?: string | null;
+    serviceId?: number | undefined;
 }
 
 export default function DownloadBundlesForm({
     isOpen,
-    onClose
+    onClose,
+    file,
+    serviceId
 }: DownloadBundlesFormProps) {
+    const { t, i18n } = useTranslation()
+    const { isRTL } = useLanguage()
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -28,12 +44,73 @@ export default function DownloadBundlesForm({
         mobileNumber: ''
     });
 
+    const selectedCountry = countries.find(country => country.code === formData.countryCode);
+
+    const { mutate: submitForm, isPending, isError } = useManagedServiceDownloadFormControllerCreate(
+        undefined,
+        {
+            onSuccess: async () => {
+                if (file) {
+                    try {
+                        const response = await fetch(file);
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+
+                        const fileName = file.split('/').pop() || 'download';
+                        link.download = fileName;
+                        link.setAttribute('download', fileName);
+
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+
+                        window.URL.revokeObjectURL(url);
+                    } catch (error) {
+                        console.error('Error downloading file:', error);
+                        const link = document.createElement('a');
+                        link.href = file;
+                        link.download = file.split('/').pop() || 'download';
+                        link.target = '_blank';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                }
+                setFormData({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    position: '',
+                    organizationName: '',
+                    countryCode: 'KSA',
+                    mobileNumber: ''
+                });
+                onClose();
+            },
+            onError: (error) => {
+                console.error('Form submission error:', error);
+            },
+        }
+    );
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form submitted:', formData);
-        // You can add download logic here
-        onClose();
+        submitForm({
+            body: {
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                email: formData.email,
+                position: formData.position,
+                phone_number: formData.mobileNumber,
+                phone_number_key: selectedCountry?.dialCode || '',
+                managed_soc_services_details_id: serviceId,
+            },
+            headers: {
+                'Accept-Language': i18n.language === 'en' ? 'en' : 'ar',
+            },
+        });
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,11 +127,9 @@ export default function DownloadBundlesForm({
         });
     };
 
-    const selectedCountry = countries.find(country => country.code === formData.countryCode);
-
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogOverlay className="bg-black/10" />
+            <DialogOverlay className="bg-black/01" />
             <DialogContent
                 className={cn(
                     "lg:max-w-[897px]  p-0  lg:min-h-[651px] ",
@@ -89,12 +164,12 @@ export default function DownloadBundlesForm({
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.4, delay: 0.1 }}
                                 >
-                                    Apply Now
+                                    {t('resources.applyNow')}
                                 </motion.h2>
                             </div>
                             <button
                                 onClick={onClose}
-                                className="border-[2px] border-[#fff] w-[30px] h-[30px] flex items-center justify-center z-50 p-2 text-white/70 hover:text-white transition-colors rounded-full hover:bg-white/10"
+                                className={`border-[2px] border-[#fff] w-[30px] h-[30px] flex items-center justify-center z-50 p-2 text-white/70 hover:text-white transition-colors rounded-full hover:bg-white/10 ${i18n.language === "ar" ? "left-4" : "right-4"}`}
                             >
                                 <XIcon size={30} className='text-white min-w-[20px] min-h-[20px]' />
                             </button>
@@ -127,8 +202,8 @@ export default function DownloadBundlesForm({
                                             style={{
                                                 borderRadius: "8px",
                                             }}
-                                            className="py-5 px-6 h-[56px] lg:w-[303px] w-full text-[16px] border  border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
-                                            placeholder="First Name"
+                                            className="py-5 px-6 h-[56px] lg:w-[303px] w-full text-[16px] border   placeholder:text-[16px] border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
+                                            placeholder={t('academyApplication.firstName')}
                                         />
                                     </div>
                                     <div className="flex-1">
@@ -141,8 +216,8 @@ export default function DownloadBundlesForm({
                                             style={{
                                                 borderRadius: "8px",
                                             }}
-                                            className="py-5 px-6 h-[56px] lg:w-[303px] w-full text-[16px] border border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
-                                            placeholder="Last Name"
+                                            className="py-5 px-6 h-[56px] lg:w-[303px] w-full text-[16px] placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
+                                            placeholder={t('academyApplication.lastName')}
                                         />
                                     </div>
                                 </div>
@@ -158,8 +233,8 @@ export default function DownloadBundlesForm({
                                         style={{
                                             borderRadius: "8px",
                                         }}
-                                        className="py-5 px-6 h-[56px] lg:w-[622px] w-full text-[16px] border border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
-                                        placeholder="Email"
+                                        className="py-5 px-6 h-[56px] lg:w-[622px] w-full text-[16px] border placeholder:text-[16px] border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
+                                        placeholder={t('academyApplication.email')}
                                     />
                                 </div>
 
@@ -174,8 +249,8 @@ export default function DownloadBundlesForm({
                                         style={{
                                             borderRadius: "8px",
                                         }}
-                                        className="py-5 px-6 h-[56px] lg:w-[622px] w-full text-[16px] border border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
-                                        placeholder="Position"
+                                        className="py-5 px-6 h-[56px] lg:w-[622px] w-full text-[16px] bordr placeholder:text-[16px] border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
+                                        placeholder={t('resources.position')}
                                     />
                                 </div>
 
@@ -190,37 +265,68 @@ export default function DownloadBundlesForm({
                                         style={{
                                             borderRadius: "8px",
                                         }}
-                                        className="py-4 px-6 h-[56px] lg:w-[622px] w-full text-[16px] border border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
-                                        placeholder="Organization Name"
+                                        className="py-4 px-6 h-[56px] lg:w-[622px] w-full text-[16px] border placeholder:text-[16px] border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none focus:border-blue-500 transition-colors"
+                                        placeholder={t('resources.organizationName')}
                                     />
                                 </div>
 
                                 {/* Phone Number with Country Selector */}
                                 <div className="flex gap-0 w-full lg:w-auto">
                                     <div className="relative">
-                                        <select
-                                            name="countryCode"
+                                        <Select
                                             value={formData.countryCode}
-                                            onChange={e => handleSelectChange(e.target.value)}
-                                            style={{
-                                                borderRadius: "8px 0 0 8px",
-                                                minWidth: '131px',
-                                                color: "rgba(51, 51, 51, 0.80)",
-                                                fontSize: "16px"
-                                            }}
-                                            className="appearance-none py-5 lg:px-6 px-4 border-r-[1px] border-[#D6D6D6] h-[64px] border text-[16px] bg-white focus:outline-none transition-colors cursor-pointer"
+                                            onValueChange={(value) => handleSelectChange(value)}
                                         >
-                                            {countries.map((country) => (
-                                                <option key={country.code} value={country.code}>
-                                                    {country.code}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        <div className="absolute right-4 top-[55%] transform -translate-y-1/2 pointer-events-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
-                                                <path d="M1.5 1L7.5 7L13.5 1" stroke="#313B49" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </div>
+                                            <SelectTrigger
+                                                style={{
+                                                    borderRadius: isRTL ? "0 8px 8px 0" : "8px 0 0 8px",
+                                                    minWidth: '131px',
+                                                    padding: '16px 24px',
+                                                    background: '#FFF',
+                                                    color: '#333',
+                                                    fontSize: '16px',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 400,
+                                                    lineHeight: '150%',
+                                                    border: 'none',
+                                                    height: '64px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'space-between',
+                                                }}
+                                                className="focus:outline-none transition-colors cursor-pointer"
+                                            >
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent
+                                                style={{
+                                                    background: '#FFF',
+                                                    borderRadius: '8px',
+                                                    border: '1px solid #D6D6D6',
+                                                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                                }}
+                                            >
+                                                {countries.map((country) => (
+                                                    <SelectItem
+                                                        key={country.code}
+                                                        value={country.code}
+                                                        style={{
+                                                            color: '#333',
+                                                            fontSize: '16px',
+                                                            fontStyle: 'normal',
+                                                            fontWeight: 400,
+                                                            lineHeight: '150%',
+                                                            opacity: 0.8,
+                                                            padding: '8px 24px',
+                                                            cursor: 'pointer',
+                                                            borderRadius: '4px',
+                                                        }}
+                                                    >
+                                                        {country.code}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
                                     </div>
                                     <div className="flex-1">
                                         <input
@@ -230,29 +336,38 @@ export default function DownloadBundlesForm({
                                             value={formData.mobileNumber}
                                             onChange={handleChange}
                                             style={{
-                                                borderRadius: "0 8px 8px 0",
+                                                borderRadius: isRTL ? "8px 0 0 8px" : "0 8px 8px 0",
                                             }}
                                             className="py-5 px-6 h-[64px] lg:w-[491px] w-full text-[16px] border border-[#FFF] bg-white text-black placeholder:text-[#333]/[0.8] focus:outline-none transition-colors"
-                                            placeholder={`${selectedCountry?.dialCode} Mobile Number`}
+                                            placeholder={`${selectedCountry?.dialCode} ${t('academyApplication.mobileNumber')}`}
                                         />
                                     </div>
                                 </div>
+
+                                {isError && (
+                                    <div className='w-full lg:w-auto text-red-400 text-sm'>
+                                        {t('resources.errorSubmittingForm') || 'Error submitting form. Please try again.'}
+                                    </div>
+                                )}
 
                                 {/* Submit Button */}
                                 <div className='w-full lg:w-auto'>
                                     <Button
                                         type="submit"
-                                        className='h-[48px] lg:w-[622px]  lg:h-[56px]  mt-2   text-white flex items-center justify-center gap-[8px] lg:gap-[10px] hover:gap-[4px] text-[16px] lg:text-[18px] font-normal transition-all duration-300 rounded-[12px]'
+                                        disabled={isPending}
+                                        className='h-[48px] lg:w-[622px]  lg:h-[56px]  mt-2   text-white flex items-center justify-center gap-[8px] lg:gap-[10px] hover:gap-[4px] text-[16px] lg:text-[18px] font-normal transition-all duration-300 rounded-[12px] disabled:opacity-50 disabled:cursor-not-allowed'
                                         style={{
                                             background: 'linear-gradient(95deg, #318CCC 13.23%, #0040C3 81.63%)',
                                             boxShadow: '4px 8px 24px 0 rgba(36, 107, 253, 0.25)',
                                             padding: '12px 20px',
                                         }}
                                     >
-                                        Download Now
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='lg:w-6 lg:h-6 w-5 h-5 mt-[2px]'>
-                                            <path d="M9.5 6L15.5 12L9.5 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
+                                        {isPending ? (t('resources.submitting') || 'Submitting...') : t('resources.downloadNow')}
+                                        {!isPending && (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='lg:w-6 lg:h-6 w-5 h-5 mt-[2px]' style={{ transform: isRTL ? 'scaleX(-1)' : 'none' }}>
+                                                <path d="M9.5 6L15.5 12L9.5 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        )}
                                     </Button>
                                 </div>
                             </div>

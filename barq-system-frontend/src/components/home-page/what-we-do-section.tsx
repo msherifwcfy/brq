@@ -9,56 +9,69 @@ import {
     CarouselItem,
     type CarouselApi,
 } from "@/components/ui/carousel";
+import { useTranslation } from 'react-i18next';
+import { type SuccessStoryCaseStudiesEntity } from '@/sdk/types.gen';
 import SuccessStoriesSection from './success-stories-section';
+import { useRouter } from 'next/navigation';
 
 interface ServiceItem {
     id: number;
     title: string;
     image: string;
+    link: string;
     description: string;
 }
 
 const services: ServiceItem[] = [
     {
         id: 1,
+        link: '/solutionsandservices/managed-services',
         title: 'Managed Services',
         image: '/assets/what_we_do_section/managed_services.jpg',
         description: 'Full-stack delivery, monitoring, and AI-driven control to optimize your IT operations.'
     },
     {
         id: 2,
+        link: '/solutionsandservices/cybersecurity',
         title: 'Cybersecurity',
         image: '/assets/what_we_do_section/cybersecurity.jpg',
         description: 'End-to-end protection frameworks that secure your systems and ensure compliance.'
     },
     {
         id: 3,
+        link: '/solutionsandservices/automation',
         title: 'AI & Automation',
         image: '/assets/what_we_do_section/ai.jpg',
         description: 'Intelligent process automation and decision frameworks that scale your business.'
     },
     {
         id: 4,
+        link: '/solutionsandservices/infrastructure',
         title: 'IT Infrastructure',
         image: '/assets/what_we_do_section/ai.jpg',
         description: 'Enterprise-grade System and architecture built for high-performance and resilience.'
     }
 ];
 
-export default function WhatWeDoSection() {
+type WhatWeDoSectionProps = {
+    successStories?: Array<SuccessStoryCaseStudiesEntity>;
+};
+
+export default function WhatWeDoSection({ successStories }: WhatWeDoSectionProps) {
+    const { t, i18n } = useTranslation();
     const containerRef = useRef<HTMLElement>(null);
     const carouselRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(containerRef, { once: true, margin: '-20%', amount: 0.1 });
     const [isMounted, setIsMounted] = useState(false);
     const [hoveredItem, setHoveredItem] = useState<number | null>(null);
     const [api, setApi] = useState<CarouselApi>();
-
+    const router = useRouter()
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
     // Use isInView for desktop, isMounted for mobile to ensure visibility
-    const shouldAnimate = window.innerWidth < 1024 ? isMounted : isInView;
+    const shouldAnimate = window?.innerWidth < 1024 ? isMounted : isInView;
 
     useEffect(() => {
         const carousel = carouselRef.current;
@@ -194,7 +207,7 @@ export default function WhatWeDoSection() {
                         damping: 30,
                         stiffness: 120,
                         duration: 0.3,
-                        delay: 0.1
+                        delay: 0.3
                     }}
                     className=" absolute top-[12%] right-0  w-full h-full bottom-0 left-0 z-10 pointer-events-none">
                     <div className="relative w-full h-full ">
@@ -215,7 +228,7 @@ export default function WhatWeDoSection() {
                         damping: 30,
                         stiffness: 120,
                         duration: 0.3,
-                        delay: 0.1
+                        delay: 0.3
                     }}
                     className=" hidden lg:block absolute top-[7%] right-[-8%]   w-[72%] bottom-[-0%] left-[36%] z-5 pointer-events-none">
                     <div className="relative w-full h-full ">
@@ -236,7 +249,7 @@ export default function WhatWeDoSection() {
                         damping: 25,
                         stiffness: 100,
                         duration: 0.8,
-                        delay: 0.3
+                        delay: 0.2
                     }}
                     className="absolute top-[37%] right-[35%] rotate-180  bottom-[-10%] left-0 z-5 pointer-events-none">
                     <div className="relative w-full h-full">
@@ -262,7 +275,7 @@ export default function WhatWeDoSection() {
                                 damping: 30,
                                 stiffness: 120,
                                 duration: 0.4,
-                                delay: 0.3
+                                delay: 0.2
                             }}
                         >
                             <span
@@ -274,7 +287,7 @@ export default function WhatWeDoSection() {
                                     backgroundClip: 'text'
                                 }}
                             >
-                                What We Do Best
+                                {t('common.whatWeDoBest')}
                             </span>
                         </motion.div>
 
@@ -287,11 +300,13 @@ export default function WhatWeDoSection() {
                                 damping: 30,
                                 stiffness: 120,
                                 duration: 0.4,
-                                delay: 0.4
+                                delay: 0.2
                             }}
                         >
-                            Our Core Solutions &<br />
-                            Services
+                            {t('common.outCoreServices')} <br />
+                            {t('common.solutions')}
+
+
                         </motion.h2>
 
                         <motion.div
@@ -302,13 +317,17 @@ export default function WhatWeDoSection() {
                                 type: 'spring',
                                 damping: 30,
                                 stiffness: 120,
-                                duration: 0.4,
-                                delay: 0.5
+                                duration: 0.2,
+                                delay: 0.2
                             }}
                         >
-                            <button className=' frutiger-lt-std inline-flex w-[141px] h-[51px] items-center justify-center leading-normal gap-4 px-6 py-4 border-[2px] border-[#25B8E4] text-[#25B8E4]  rounded-[8px]  text-[16px] font-bold transition-all duration-300 group'>
-                                <div className='max-h-[19px] min-w-[64px]  frutiger-lt-std-bold mt-[-2px]'>View All</div>
-                                <div className='flex items-center justify-center h-[16px] mt-[4px]'>
+                            <button
+                                onClick={() => router.push('/solutionsandservices')}
+                                className={`
+                                ${i18n.language === "ar" ? " w-fit" : "flex-row w-[141px]"}
+                                frutiger-lt-std inline-flex cursor-pointer h-[51px] items-center justify-center leading-normal gap-4 px-6 py-4 border-[2px] border-[#25B8E4] text-[#25B8E4]  rounded-[8px]  text-[16px] font-bold transition-all duration-300 group`}>
+                                <div className='max-h-[19px] min-w-[64px]  frutiger-lt-std-bold mt-[-2px]'>{t('common.viewAll')}</div>
+                                <div className={`flex items-center justify-center h-[16px] mt-[4px] ${i18n.language === "ar" ? "rotate-180" : ""}`}>
                                     <Image src="/assets/arrow-right.svg" alt="arrow-right" width={13} height={16} className=' hover:fill-white min-w-[13px] min-h-[16px] object-contain' />
                                 </div>
                             </button>
@@ -324,10 +343,10 @@ export default function WhatWeDoSection() {
                             type: 'spring',
                             damping: 30,
                             stiffness: 120,
-                            duration: 0.4,
-                            delay: 0.6
+                            duration: 0.2,
+                            delay: 0.2
                         }}
-                        className="relative pl-[5%] lg:pl-[10%] md:pl-[4%] sm:pl-[3%] z-30"
+                        className="relative   md:pl-[8%] sm:pl-[3%] z-30"
                     >
                         <Carousel
                             opts={{
@@ -357,7 +376,7 @@ export default function WhatWeDoSection() {
                                                 damping: 30,
                                                 stiffness: 120,
                                                 duration: 0.3,
-                                                delay: 0.7 + index * 0.1
+                                                delay: 0.5 + index * 0.1
                                             }}
                                             onMouseEnter={() => setHoveredItem(service.id)}
                                             onMouseLeave={() => setHoveredItem(null)}
@@ -378,7 +397,7 @@ export default function WhatWeDoSection() {
                                                     <div
                                                         className="absolute inset-0 pointer-events-none w-full h-full"
                                                         style={{
-                                                            background: `linear-gradient(180deg, rgba(0, 0, 0, 0.80) 10.1%, rgba(0, 0, 0, 0.00) 100%), url(${service.image})`,
+                                                            background: `linear-gradient(180deg, rgba(0, 0, 0, 0.85) 10.1%, rgba(0, 0, 0, 0.25) 100%), url(${service.image})`,
                                                             backgroundSize: service.id === 3 ? "100%" : '100%',
                                                             backgroundPositionX: service.id === 1 ? '5%' : 'center',
                                                             backgroundPositionY: service.id === 1 ? '8%' : service.id === 3 ? '5%' : 'center',
@@ -394,7 +413,7 @@ export default function WhatWeDoSection() {
                                                     animate={{
                                                         opacity: hoveredItem === service.id ? 1 : 0
                                                     }}
-                                                    transition={{ duration: 1.2 }}
+                                                    transition={{ duration: .8 }}
                                                     style={{
                                                         backgroundImage: 'url(/assets/solution-background-image.jpg)',
                                                         backgroundSize: 'cover',
@@ -413,7 +432,7 @@ export default function WhatWeDoSection() {
                                                             y: 0,
                                                             opacity: 1
                                                         }}
-                                                        transition={{ duration: 1.2 }}
+                                                        transition={{ duration: .8 }}
                                                     >
                                                         {service.title}
                                                     </motion.h3>
@@ -425,15 +444,18 @@ export default function WhatWeDoSection() {
                                                             y: hoveredItem === service.id ? 0 : -30,
                                                             opacity: hoveredItem === service.id ? 1 : 0
                                                         }}
-                                                        transition={{ duration: 1.2, delay: 0.3 }}
+                                                        transition={{ duration: .8, delay: 0.3 }}
                                                         className="space-y-4 sm:space-y-6 max-w-[390px]"
                                                     >
                                                         <p className={`text-[#D9DDDD] text-[14px] sm:text-[15px] md:text-[16px] leading-[1.5] max-w-[360px] ${(service.id === 1) ? 'max-w-[330px]' : ''}`}>
                                                             {service.description}
                                                         </p>
-                                                        <button className="inline-flex items-center gap-4 text-white font-semibold hover:gap-3 transition-all duration-300 pointer-events-auto z-50 relative text-[14px] sm:text-[15px] md:text-[16px]">
-                                                            View Details
-                                                            <div className='w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] flex items-center justify-center mt-[2px] sm:mt-[4px]'>
+                                                        <button
+                                                            onClick={() => router.push(service.link)}
+                                                            className={`
+                                                            inline-flex cursor-pointer items-center gap-4 text-white font-semibold hover:gap-3 transition-all duration-300 pointer-events-auto z-50 relative text-[14px] sm:text-[15px] md:text-[16px]`}>
+                                                            {t('common.viewDetails')}
+                                                            <div className={` ${i18n.language === "ar" ? "rotate-180" : ""} w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] flex items-center justify-center mt-[2px] sm:mt-[4px] `}>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
                                                                     <path d="M1 1L7 7L1 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                                 </svg>
@@ -453,10 +475,8 @@ export default function WhatWeDoSection() {
 
                 {/* Navigation Buttons - Outside content layer for better z-index control */}
                 {/* Left Navigation Button with Gradient - Hidden on mobile */}
-                <div className="hidden lg:flex absolute z-[999999999] top-[18.53%] left-0 h-[625px] items-center justify-start pl-[5%] pointer-events-none">
-                    {/* Gradient overlay - visual only */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/20 to-black/0 w-[512px] pointer-events-none" />
-                    {/* Button with pointer events enabled */}
+                {/* <div className="hidden lg:flex absolute z-[999999999] top-[19.53%] left-0 h-[625px] items-center justify-start pl-[5%] pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/20 to-black/0 w-[412px] pointer-events-none" />
                     <button
                         onClick={() => api?.scrollPrev()}
                         className="relative z-50 w-[58px] h-14 flex items-center justify-center rounded-full border-[3px] bg-transparent border-[#5DADE2] text-[#5DADE2] hover:bg-[#5DADE2]/10 transition-all duration-300 pointer-events-auto"
@@ -464,13 +484,11 @@ export default function WhatWeDoSection() {
                     >
                         <Image src="/assets/arrow-left.png" alt="arrow-left" width={14} height={18} />
                     </button>
-                </div>
+                </div> */}
 
                 {/* Right Navigation Button with Gradient - Hidden on mobile */}
-                <div className="hidden lg:flex absolute z-[999999999] top-[18.53%] right-0 h-[625px] items-center justify-end pr-[5%] pointer-events-none">
-                    {/* Gradient overlay - visual only */}
-                    <div className="absolute inset-0 right-0 bg-gradient-to-r from-black/0 via-black/15  to-black/100 w-[512px] ml-auto pointer-events-none" />
-                    {/* Button with pointer events enabled */}
+                {/* <div className="hidden lg:flex absolute z-[999999999] top-[19.53%] right-0 h-[625px] items-center justify-end pr-[5%] pointer-events-none">
+                    <div className="absolute inset-0 right-0 bg-gradient-to-r from-black/0 via-black/15  to-black/100 w-[412px] ml-auto pointer-events-none" />
                     <button
                         onClick={() => api?.scrollNext()}
                         className="relative   z-[999999999] w-[58px] h-14 flex items-center justify-center rounded-full border-[3px] bg-transparent border-[#5DADE2] text-[#5DADE2] hover:bg-[#5DADE2]/10 transition-all duration-300 pointer-events-auto"
@@ -478,7 +496,7 @@ export default function WhatWeDoSection() {
                     >
                         <Image src="/assets/arrow-right.png" alt="arrow-right" width={14} height={18} />
                     </button>
-                </div>
+                </div> */}
 
                 {/* Mobile Navigation Buttons - Visible only on mobile/tablet */}
                 <div className="lg:hidden  z-40 bottom-[10%] left-0 right-0 flex items-center justify-center gap-4">
@@ -498,7 +516,7 @@ export default function WhatWeDoSection() {
                     </button>
                 </div>
             </div>
-            <SuccessStoriesSection />
+            <SuccessStoriesSection stories={successStories} />
         </section >
     );
 }

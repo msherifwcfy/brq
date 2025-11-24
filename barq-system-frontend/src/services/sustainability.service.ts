@@ -14,12 +14,14 @@ import type {
   EconomicSustainabilityControllerReadResponse,
   EnvironmentalSustainabilityControllerReadResponse,
 } from '@/sdk/types.gen';
+import { getLanguageHeaders } from '@/lib/language-utils';
 
 export const sustainabilityService = {
   async getEcosystemSustainabilityData(): Promise<EcosystemSustainabilityControllerReadResponse | null> {
     try {
       const response = await ecosystemSustainabilityControllerRead({
         query: { query: { relations: { media: true } } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -32,6 +34,7 @@ export const sustainabilityService = {
     try {
       const response = await globalCommitmentControllerRead({
         query: { query: { relations: { icons: true } } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -44,6 +47,7 @@ export const sustainabilityService = {
     try {
       const response = await mainSocialControllerRead({
         query: { query: { relations: {} } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -56,6 +60,7 @@ export const sustainabilityService = {
     try {
       const response = await cardSocialControllerRead({
         query: { query: { relations: { media: true } } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -68,6 +73,7 @@ export const sustainabilityService = {
     try {
       const response = await economicSustainabilityControllerRead({
         query: { query: { relations: { media: true } } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -87,6 +93,7 @@ export const sustainabilityService = {
             },
           },
         },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {

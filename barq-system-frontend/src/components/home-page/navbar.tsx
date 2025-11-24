@@ -4,8 +4,12 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
+    const { language } = useLanguage();
+    const { t } = useTranslation();
     const [isWhoWeAreOpen, setIsWhoWeAreOpen] = useState(false);
     const [isWhatWeDoOpen, setIsWhatWeDoOpen] = useState(false);
     const [isInsightsOpen, setIsInsightsOpen] = useState(false);
@@ -68,52 +72,52 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
 
     const whoWeAreItems = [
         {
-            label: 'About BARQ Systems',
-            description: "Discover our journey, mission, and vision as the region's technology backbone.",
+            label: t('navbar.whoWeAre.aboutBarq.label'),
+            description: t('navbar.whoWeAre.aboutBarq.description'),
             href: '/about-barq',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M3 21H21M7 21V3M7 4C12.675 4.908 17 9.613 17 15.28C16.9998 17.2978 16.4445 19.2766 15.395 21M5 9H17M7 13H11M7 17H11" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3 21H21M7 21V3M7 4C12.675 4.908 17 9.613 17 15.28C16.9998 17.2978 16.4445 19.2766 15.395 21M5 9H17M7 13H11M7 17H11" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
         {
-            label: 'Awards & Accolades',
-            description: "Recognitions that highlight our excellence and industry leadership.",
+            label: t('navbar.whoWeAre.awards.label'),
+            description: t('navbar.whoWeAre.awards.description'),
             href: '/awards',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 3H15L18 10L12 12M9 3L6 10L12 12M9 3L12 12M12 12L10.5 15L7.5 15.5L9.5 17.5L9 21L12 19.5L15 21L14.5 17.5L16.5 15.5L13.5 15L12 12ZM15 11L12 3" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M9 3H15L18 10L12 12M9 3L6 10L12 12M9 3L12 12M12 12L10.5 15L7.5 15.5L9.5 17.5L9 21L12 19.5L15 21L14.5 17.5L16.5 15.5L13.5 15L12 12ZM15 11L12 3" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
         {
-            label: 'Alliances',
-            description: "Trusted partnerships with leading vendors and clients worldwide.",
+            label: t('navbar.whoWeAre.alliances.label'),
+            description: t('navbar.whoWeAre.alliances.description'),
             href: '/alliances',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M19.4998 12.5721L11.9998 20.0001L4.49981 12.5721C4.00512 12.0907 3.61546 11.5121 3.35536 10.8727C3.09527 10.2333 2.97037 9.54701 2.98855 8.85699C3.00673 8.16697 3.16758 7.48819 3.46097 6.86339C3.75436 6.23859 4.17395 5.68131 4.6933 5.22663C5.21265 4.77196 5.82052 4.42974 6.47862 4.22154C7.13673 4.01333 7.83082 3.94364 8.51718 4.01686C9.20354 4.09007 9.86731 4.30461 10.4667 4.64696C11.0661 4.98931 11.5881 5.45205 11.9998 6.00605C12.4133 5.45608 12.9359 4.99738 13.5349 4.65866C14.1339 4.31994 14.7963 4.1085 15.4807 4.03757C16.1652 3.96665 16.8569 4.03775 17.5126 4.24645C18.1683 4.45514 18.7738 4.79693 19.2914 5.25042C19.8089 5.70391 20.2272 6.25934 20.5202 6.88195C20.8132 7.50456 20.9746 8.18094 20.9941 8.86876C21.0137 9.55659 20.8911 10.241 20.6339 10.8793C20.3768 11.5176 19.9907 12.0959 19.4998 12.5781M11.9998 6.00005L8.70681 9.29305C8.51934 9.48058 8.41403 9.73489 8.41403 10.0001C8.41403 10.2652 8.51934 10.5195 8.70681 10.7071L9.24981 11.2501C9.93981 11.9401 11.0598 11.9401 11.7498 11.2501L12.7498 10.2501C13.3466 9.65332 14.1559 9.31808 14.9998 9.31808C15.8437 9.31808 16.6531 9.65332 17.2498 10.2501L19.4998 12.5001M12.4998 15.5001L14.4998 17.5001M14.9998 13.0001L16.9998 15.0001" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19.4998 12.5721L11.9998 20.0001L4.49981 12.5721C4.00512 12.0907 3.61546 11.5121 3.35536 10.8727C3.09527 10.2333 2.97037 9.54701 2.98855 8.85699C3.00673 8.16697 3.16758 7.48819 3.46097 6.86339C3.75436 6.23859 4.17395 5.68131 4.6933 5.22663C5.21265 4.77196 5.82052 4.42974 6.47862 4.22154C7.13673 4.01333 7.83082 3.94364 8.51718 4.01686C9.20354 4.09007 9.86731 4.30461 10.4667 4.64696C11.0661 4.98931 11.5881 5.45205 11.9998 6.00605C12.4133 5.45608 12.9359 4.99738 13.5349 4.65866C14.1339 4.31994 14.7963 4.1085 15.4807 4.03757C16.1652 3.96665 16.8569 4.03775 17.5126 4.24645C18.1683 4.45514 18.7738 4.79693 19.2914 5.25042C19.8089 5.70391 20.2272 6.25934 20.5202 6.88195C20.8132 7.50456 20.9746 8.18094 20.9941 8.86876C21.0137 9.55659 20.8911 10.241 20.6339 10.8793C20.3768 11.5176 19.9907 12.0959 19.4998 12.5781M11.9998 6.00005L8.70681 9.29305C8.51934 9.48058 8.41403 9.73489 8.41403 10.0001C8.41403 10.2652 8.51934 10.5195 8.70681 10.7071L9.24981 11.2501C9.93981 11.9401 11.0598 11.9401 11.7498 11.2501L12.7498 10.2501C13.3466 9.65332 14.1559 9.31808 14.9998 9.31808C15.8437 9.31808 16.6531 9.65332 17.2498 10.2501L19.4998 12.5001M12.4998 15.5001L14.4998 17.5001M14.9998 13.0001L16.9998 15.0001" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
         {
-            label: 'Leadership',
-            description: "Meet the executive team driving innovation and trust at BARQ Systems.",
+            label: t('navbar.whoWeAre.leadership.label'),
+            description: t('navbar.whoWeAre.leadership.description'),
             href: '/leadership',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M6 19V18C6 17.4696 6.21071 16.9609 6.58579 16.5858C6.96086 16.2107 7.46957 16 8 16H12C12.5304 16 13.0391 16.2107 13.4142 16.5858C13.7893 16.9609 14 17.4696 14 18V19M15 8H17C17.5304 8 18.0391 8.21071 18.4142 8.58579C18.7893 8.96086 19 9.46957 19 10V11M1 11V10C1 9.46957 1.21071 8.96086 1.58579 8.58579C1.96086 8.21071 2.46957 8 3 8H5M8 11C8 11.5304 8.21071 12.0391 8.58579 12.4142C8.96086 12.7893 9.46957 13 10 13C10.5304 13 11.0391 12.7893 11.4142 12.4142C11.7893 12.0391 12 11.5304 12 11C12 10.4696 11.7893 9.96086 11.4142 9.58579C11.0391 9.21071 10.5304 9 10 9C9.46957 9 8.96086 9.21071 8.58579 9.58579C8.21071 9.96086 8 10.4696 8 11ZM13 3C13 3.53043 13.2107 4.03914 13.5858 4.41421C13.9609 4.78929 14.4696 5 15 5C15.5304 5 16.0391 4.78929 16.4142 4.41421C16.7893 4.03914 17 3.53043 17 3C17 2.46957 16.7893 1.96086 16.4142 1.58579C16.0391 1.21071 15.5304 1 15 1C14.4696 1 13.9609 1.21071 13.5858 1.58579C13.2107 1.96086 13 2.46957 13 3ZM3 3C3 3.53043 3.21071 4.03914 3.58579 4.41421C3.96086 4.78929 4.46957 5 5 5C5.53043 5 6.03914 4.78929 6.41421 4.41421C6.78929 4.03914 7 3.53043 7 3C7 2.46957 6.78929 1.96086 6.41421 1.58579C6.03914 1.21071 5.53043 1 5 1C4.46957 1 3.96086 1.21071 3.58579 1.58579C3.21071 1.96086 3 2.46957 3 3Z" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6 19V18C6 17.4696 6.21071 16.9609 6.58579 16.5858C6.96086 16.2107 7.46957 16 8 16H12C12.5304 16 13.0391 16.2107 13.4142 16.5858C13.7893 16.9609 14 17.4696 14 18V19M15 8H17C17.5304 8 18.0391 8.21071 18.4142 8.58579C18.7893 8.96086 19 9.46957 19 10V11M1 11V10C1 9.46957 1.21071 8.96086 1.58579 8.58579C1.96086 8.21071 2.46957 8 3 8H5M8 11C8 11.5304 8.21071 12.0391 8.58579 12.4142C8.96086 12.7893 9.46957 13 10 13C10.5304 13 11.0391 12.7893 11.4142 12.4142C11.7893 12.0391 12 11.5304 12 11C12 10.4696 11.7893 9.96086 11.4142 9.58579C11.0391 9.21071 10.5304 9 10 9C9.46957 9 8.96086 9.21071 8.58579 9.58579C8.21071 9.96086 8 10.4696 8 11ZM13 3C13 3.53043 13.2107 4.03914 13.5858 4.41421C13.9609 4.78929 14.4696 5 15 5C15.5304 5 16.0391 4.78929 16.4142 4.41421C16.7893 4.03914 17 3.53043 17 3C17 2.46957 16.7893 1.96086 16.4142 1.58579C16.0391 1.21071 15.5304 1 15 1C14.4696 1 13.9609 1.21071 13.5858 1.58579C13.2107 1.96086 13 2.46957 13 3ZM3 3C3 3.53043 3.21071 4.03914 3.58579 4.41421C3.96086 4.78929 4.46957 5 5 5C5.53043 5 6.03914 4.78929 6.41421 4.41421C6.78929 4.03914 7 3.53043 7 3C7 2.46957 6.78929 1.96086 6.41421 1.58579C6.03914 1.21071 5.53043 1 5 1C4.46957 1 3.96086 1.21071 3.58579 1.58579C3.21071 1.96086 3 2.46957 3 3Z" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
         {
-            label: 'Sustainability',
-            description: "Our commitment to creating positive environmental, social, and economic impact.",
+            label: t('navbar.whoWeAre.sustainability.label'),
+            description: t('navbar.whoWeAre.sustainability.description'),
             href: '/sustainability',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M3.6 9H20.4M3.6 15H20.4M11.5 3C9.81534 5.69961 8.9222 8.81787 8.9222 12C8.9222 15.1821 9.81534 18.3004 11.5 21M12.5 3C14.1847 5.69961 15.0778 8.81787 15.0778 12C15.0778 15.1821 14.1847 18.3004 12.5 21M3 12C3 13.1819 3.23279 14.3522 3.68508 15.4442C4.13738 16.5361 4.80031 17.5282 5.63604 18.364C6.47177 19.1997 7.46392 19.8626 8.55585 20.3149C9.64778 20.7672 10.8181 21 12 21C13.1819 21 14.3522 20.7672 15.4442 20.3149C16.5361 19.8626 17.5282 19.1997 18.364 18.364C19.1997 17.5282 19.8626 16.5361 20.3149 15.4442C20.7672 14.3522 21 13.1819 21 12C21 9.61305 20.0518 7.32387 18.364 5.63604C16.6761 3.94821 14.3869 3 12 3C9.61305 3 7.32387 3.94821 5.63604 5.63604C3.94821 7.32387 3 9.61305 3 12Z" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3.6 9H20.4M3.6 15H20.4M11.5 3C9.81534 5.69961 8.9222 8.81787 8.9222 12C8.9222 15.1821 9.81534 18.3004 11.5 21M12.5 3C14.1847 5.69961 15.0778 8.81787 15.0778 12C15.0778 15.1821 14.1847 18.3004 12.5 21M3 12C3 13.1819 3.23279 14.3522 3.68508 15.4442C4.13738 16.5361 4.80031 17.5282 5.63604 18.364C6.47177 19.1997 7.46392 19.8626 8.55585 20.3149C9.64778 20.7672 10.8181 21 12 21C13.1819 21 14.3522 20.7672 15.4442 20.3149C16.5361 19.8626 17.5282 19.1997 18.364 18.364C19.1997 17.5282 19.8626 16.5361 20.3149 15.4442C20.7672 14.3522 21 13.1819 21 12C21 9.61305 20.0518 7.32387 18.364 5.63604C16.6761 3.94821 14.3869 3 12 3C9.61305 3 7.32387 3.94821 5.63604 5.63604C3.94821 7.32387 3 9.61305 3 12Z" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
@@ -121,8 +125,8 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
 
     const whatWeDoItems = [
         {
-            label: 'Services & Solutions',
-            description: "Comprehensive IT services driving business transformation.",
+            label: t('navbar.whatWeDo.servicesSolutions.label'),
+            description: t('navbar.whatWeDo.servicesSolutions.description'),
             href: '/solutionsandservices',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -132,75 +136,76 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
             hasSubmenu: true
         },
         {
-            label: 'BARQ Academy',
-            description: "Empowering talents through training, internships, and learning programs.",
+            label: t('navbar.whatWeDo.barqAcademy.label'),
+            description: t('navbar.whatWeDo.barqAcademy.description'),
             href: '/academy',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                    <path d="M5 18.5232C5 19.0536 5.21071 19.5623 5.58579 19.9374C5.96086 20.3125 6.46957 20.5232 7 20.5232H19V4.52319H7C6.46957 4.52319 5.96086 4.73391 5.58579 5.10898C5.21071 5.48405 5 5.99276 5 6.52319V18.5232ZM5 18.5232C5 17.9928 5.21071 17.4841 5.58579 17.109C5.96086 16.7339 6.46957 16.5232 7 16.5232H19M9 8.52319H15" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5 18.5232C5 19.0536 5.21071 19.5623 5.58579 19.9374C5.96086 20.3125 6.46957 20.5232 7 20.5232H19V4.52319H7C6.46957 4.52319 5.96086 4.73391 5.58579 5.10898C5.21071 5.48405 5 5.99276 5 6.52319V18.5232ZM5 18.5232C5 17.9928 5.21071 17.4841 5.58579 17.109C5.96086 16.7339 6.46957 16.5232 7 16.5232H19M9 8.52319H15" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
     ];
 
     const servicesSubmenuItems = [
-        { label: 'Automation, Data & AI', href: '/solutionsandservices/automation' },
-        { label: 'Cybersecurity', href: '/solutionsandservices/cybersecurity' },
-        { label: 'Infrastructure', href: '/solutionsandservices/infrastructure' },
-        { label: 'Managed Services', href: '/solutionsandservices/managed-services' },
+        { label: t('navbar.whatWeDo.submenu.automation'), href: '/solutionsandservices/automation' },
+        { label: t('navbar.whatWeDo.submenu.cybersecurity'), href: '/solutionsandservices/cybersecurity' },
+        { label: t('navbar.whatWeDo.submenu.infrastructure'), href: '/solutionsandservices/infrastructure' },
+        { label: t('navbar.whatWeDo.submenu.managedServices'), href: '/solutionsandservices/managed-services' },
     ];
 
     const newsroomItems = [
         {
-            label: 'Case Studies / Success Stories',
-            description: "Real-world examples of client success.",
+            label: t('navbar.insightsResources.caseStudies.label'),
+            description: t('navbar.insightsResources.caseStudies.description'),
             href: "/case-studies",
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                    <path d="M14 3.47681V7.47681C14 7.74202 14.1054 7.99638 14.2929 8.18391C14.4804 8.37145 14.7348 8.47681 15 8.47681H19M14 3.47681H7C6.46957 3.47681 5.96086 3.68752 5.58579 4.06259C5.21071 4.43767 5 4.94637 5 5.47681V19.4768C5 20.0072 5.21071 20.5159 5.58579 20.891C5.96086 21.2661 6.46957 21.4768 7 21.4768H17C17.5304 21.4768 18.0391 21.2661 18.4142 20.891C18.7893 20.5159 19 20.0072 19 19.4768V8.47681M14 3.47681L19 8.47681M9 15.4768L11 17.4768L15 13.4768" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M14 3.47681V7.47681C14 7.74202 14.1054 7.99638 14.2929 8.18391C14.4804 8.37145 14.7348 8.47681 15 8.47681H19M14 3.47681H7C6.46957 3.47681 5.96086 3.68752 5.58579 4.06259C5.21071 4.43767 5 4.94637 5 5.47681V19.4768C5 20.0072 5.21071 20.5159 5.58579 20.891C5.96086 21.2661 6.46957 21.4768 7 21.4768H17C17.5304 21.4768 18.0391 21.2661 18.4142 20.891C18.7893 20.5159 19 20.0072 19 19.4768V8.47681M14 3.47681L19 8.47681M9 15.4768L11 17.4768L15 13.4768" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
+        // {
+        //     label: t('navbar.insightsResources.events.label'),
+        //     description: t('navbar.insightsResources.events.description'),
+        //     href: '/events',
+        //     icon: (
+        //         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+        //             <path d="M16 3.47681V7.47681M8 3.47681V7.47681M4 11.4768H20M7 14.4768H7.013M10.01 14.4768H10.015M13.01 14.4768H13.015M16.015 14.4768H16.02M13.015 17.4768H13.02M7.01 17.4768H7.015M10.01 17.4768H10.015M4 7.47681C4 6.94637 4.21071 6.43767 4.58579 6.06259C4.96086 5.68752 5.46957 5.47681 6 5.47681H18C18.5304 5.47681 19.0391 5.68752 19.4142 6.06259C19.7893 6.43767 20 6.94637 20 7.47681V19.4768C20 20.0072 19.7893 20.5159 19.4142 20.891C19.0391 21.2661 18.5304 21.4768 18 21.4768H6C5.46957 21.4768 4.96086 21.2661 4.58579 20.891C4.21071 20.5159 4 20.0072 4 19.4768V7.47681Z" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
+        //         </svg>
+        //     )
+        // },
         {
-            label: 'Events',
-            description: "Upcoming and past industry events.",
-            href: '/events',
-            icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                    <path d="M16 3.47681V7.47681M8 3.47681V7.47681M4 11.4768H20M7 14.4768H7.013M10.01 14.4768H10.015M13.01 14.4768H13.015M16.015 14.4768H16.02M13.015 17.4768H13.02M7.01 17.4768H7.015M10.01 17.4768H10.015M4 7.47681C4 6.94637 4.21071 6.43767 4.58579 6.06259C4.96086 5.68752 5.46957 5.47681 6 5.47681H18C18.5304 5.47681 19.0391 5.68752 19.4142 6.06259C19.7893 6.43767 20 6.94637 20 7.47681V19.4768C20 20.0072 19.7893 20.5159 19.4142 20.891C19.0391 21.2661 18.5304 21.4768 18 21.4768H6C5.46957 21.4768 4.96086 21.2661 4.58579 20.891C4.21071 20.5159 4 20.0072 4 19.4768V7.47681Z" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            )
-        },
-        {
-            label: 'Newsroom',
-            description: "Latest updates and press releases.",
+            label: t('navbar.insightsResources.newsroom.label'),
+            description: t('navbar.insightsResources.newsroom.description'),
             href: '/newsroom',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                    <path d="M16 6.47681H19C19.2652 6.47681 19.5196 6.58216 19.7071 6.7697C19.8946 6.95724 20 7.21159 20 7.47681V18.4768C20 19.0072 19.7893 19.5159 19.4142 19.891C19.0391 20.2661 18.5304 20.4768 18 20.4768M18 20.4768C17.4696 20.4768 16.9609 20.2661 16.5858 19.891C16.2107 19.5159 16 19.0072 16 18.4768V5.47681C16 5.21159 15.8946 4.95724 15.7071 4.7697C15.5196 4.58216 15.2652 4.47681 15 4.47681H5C4.73478 4.47681 4.48043 4.58216 4.29289 4.7697C4.10536 4.95724 4 5.21159 4 5.47681V17.4768C4 18.2725 4.31607 19.0355 4.87868 19.5981C5.44129 20.1607 6.20435 20.4768 7 20.4768H18ZM8 8.47681H12M8 12.4768H12M8 16.4768H12" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16 6.47681H19C19.2652 6.47681 19.5196 6.58216 19.7071 6.7697C19.8946 6.95724 20 7.21159 20 7.47681V18.4768C20 19.0072 19.7893 19.5159 19.4142 19.891C19.0391 20.2661 18.5304 20.4768 18 20.4768M18 20.4768C17.4696 20.4768 16.9609 20.2661 16.5858 19.891C16.2107 19.5159 16 19.0072 16 18.4768V5.47681C16 5.21159 15.8946 4.95724 15.7071 4.7697C15.5196 4.58216 15.2652 4.47681 15 4.47681H5C4.73478 4.47681 4.48043 4.58216 4.29289 4.7697C4.10536 4.95724 4 5.21159 4 5.47681V17.4768C4 18.2725 4.31607 19.0355 4.87868 19.5981C5.44129 20.1607 6.20435 20.4768 7 20.4768H18ZM8 8.47681H12M8 12.4768H12M8 16.4768H12" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
         {
-            label: 'Resources',
-            description: "Downloadable guides, reports, and campaigns.",
+            label: t('navbar.insightsResources.resources.label'),
+            description: t('navbar.insightsResources.resources.description'),
             href: '/resources',
             icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                    <path d="M12 19.4768H5C4.46957 19.4768 3.96086 19.2661 3.58579 18.891C3.21071 18.5159 3 18.0072 3 17.4768V6.47681C3 5.94637 3.21071 5.43767 3.58579 5.06259C3.96086 4.68752 4.46957 4.47681 5 4.47681H9L12 7.47681H19C19.5304 7.47681 20.0391 7.68752 20.4142 8.06259C20.7893 8.43767 21 8.94637 21 9.47681V12.9768M19 16.4768V22.4768M19 22.4768L22 19.4768M19 22.4768L16 19.4768" stroke="#D9DDDD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 19.4768H5C4.46957 19.4768 3.96086 19.2661 3.58579 18.891C3.21071 18.5159 3 18.0072 3 17.4768V6.47681C3 5.94637 3.21071 5.43767 3.58579 5.06259C3.96086 4.68752 4.46957 4.47681 5 4.47681H9L12 7.47681H19C19.5304 7.47681 20.0391 7.68752 20.4142 8.06259C20.7893 8.43767 21 8.94637 21 9.47681V12.9768M19 16.4768V22.4768M19 22.4768L22 19.4768M19 22.4768L16 19.4768" stroke="#D9DDDD" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                 </svg>
             )
         },
     ];
 
     const languageOptions = [
-        { label: 'English', code: 'EN', flag: '🇺🇸' },
-        { label: 'العربية', code: 'AR', flag: '🇸🇦' },
+        { label: 'English', code: 'en', flag: '🇺🇸' },
+        { label: 'العربية', code: 'ar', flag: '🇸🇦' },
     ];
+    const { i18n } = useTranslation()
 
     return (
         <motion.header
-            className={`relative z-[99999999] h-[104.5px] w-full max-w-7xl mx-auto flex items-center justify-between py-[30px] lg:py-[30px] md:py-[20px] sm:py-[15px] px-4 ${isHomePage ? 'mb-[100px] lg:mb-[100px] md:mb-[80px] sm:mb-[60px]' : ''}`}
+            className={`relative z-[99999999] h-[104.5px] w-full max-w-7xl mx-auto flex items-center justify-between py-[30px] lg:py-[30px] md:py-[20px] sm:py-[15px] ${isHomePage ? 'mb-[100px] lg:mb-[100px] md:mb-[80px] sm:mb-[60px]' : ''}`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -230,6 +235,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                 {/* Who We Are Dropdown */}
                 <div className={`
                     ${isWhoWeAreOpen ? 'bg-[#FFFFFF14] border-[#FFFFFF1A]' : ''}
+                    ${i18n.language === "ar" ? "min-w-fit" : "min-w-[145px]"}
                     relative hover:bg-[#FFFFFF14] group/who-we-are py-2 rounded-[4px] min-w-[145px] border-[1px] border-transparent hover:border-[#FFFFFF1A]`} ref={whoWeAreRef}>
                     <div
                         className='flex items-center space-x-[2px] cursor-pointer transition-colors px-5 text-[14px] leading-[19.6px] tracking-[-0.112px]  '
@@ -240,7 +246,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                             setIsServicesSubmenuOpen(false);
                         }}
                     >
-                        <span>Who We Are</span>
+                        <span>{t('navbar.whoWeAre.title')}</span>
                         <div className='flex items-center justify-center w-[20px] h-[20px]'>
                             {
                                 isWhoWeAreOpen ?
@@ -268,7 +274,9 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                                className='absolute top-full left-[-82%] mt-[12.22px] w-[832px] max-h-[358px] bg-[#000000A3] border  border-[#FFFFFF1A] rounded-[8px] backdrop-[blur(10px)]  overflow-hidden z-[9999]'
+                                className={`absolute top-full 
+                                    ${i18n.language === "ar" ? "right-[-100%]" : "left-[-82%]"}
+                                     mt-[12.22px] w-[832px] max-h-[358px] bg-[#000000A3] border  border-[#FFFFFF1A] rounded-[8px] backdrop-[blur(10px)]  overflow-hidden z-[9999]`}
                                 style={{
                                     borderRadius: '8px',
                                     border: '1px solid rgba(255, 255, 255, 0.10)',
@@ -279,9 +287,9 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                 onClick={e => e.stopPropagation()}
                             >
                                 <div className='p-8 w-[832px] h-[358px]'>
-                                    <div className='grid grid-cols-2 '>
+                                    <div className='flex  gap-3'>
                                         {/* Left Column */}
-                                        <div className='space-y-3'>
+                                        <div className='space-y-3 '>
                                             {whoWeAreItems.slice(0, 3).map((item, index) => {
                                                 const handleItemClick = (e: React.MouseEvent) => {
                                                     e.preventDefault();
@@ -300,10 +308,10 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                         initial={{ opacity: 0, x: -10 }}
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ duration: 0.2, delay: index * 0.05 }}
-                                                        className='relative w-[370px] max-h-[90px] border-[#FFFFFF1A] border-[1px] rounded-[4px] bg-[#0000003D] hover:bg-[#FFFFFF14] group/card'
+                                                        className='relative w-[370px] h-[90px] border-[#FFFFFF1A] border-[1px] rounded-[4px] bg-[#0000003D] hover:bg-[#FFFFFF14] group/card'
                                                     >
                                                         <div
-                                                            className='flex items-start space-x-[6px] p-3 rounded-  transition-all duration-200 cursor-pointer'
+                                                            className='flex items-start space-x-[6px] p-3 rounded-  transition-all duration-200 cursor-pointer w-[370px] h-[90px] '
                                                             onClick={handleItemClick}
                                                             onMouseDown={e => e.stopPropagation()}
                                                         >
@@ -313,7 +321,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                             <div className='flex-1'>
                                                                 <h3 className='text-white text-[16px] leading-[22.4px]  tracking-[-0.128px] font-normal mb-1 flex items-center justify-between'>
                                                                     <span>{item.label}</span>
-                                                                    <svg className='opacity-0 group-hover/card:opacity-100 transition-opacity duration-200' xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                                    <svg className={`${i18n.language === "ar" ? "rotate-270" : "rotate-0"} opacity-0 group-hover/card:opacity-100 transition-opacity duration-200`} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                                                                         <path d="M11.625 1V9.125C11.625 9.29076 11.5591 9.44973 11.4419 9.56694C11.3247 9.68415 11.1657 9.75 11 9.75C10.8342 9.75 10.6753 9.68415 10.558 9.56694C10.4408 9.44973 10.375 9.29076 10.375 9.125V2.50859L1.44217 11.4422C1.32489 11.5595 1.16583 11.6253 0.999981 11.6253C0.834129 11.6253 0.675069 11.5595 0.557794 11.4422C0.440518 11.3249 0.374634 11.1659 0.374634 11C0.374634 10.8341 0.440518 10.6751 0.557794 10.5578L9.49139 1.625H2.87498C2.70922 1.625 2.55025 1.55915 2.43304 1.44194C2.31583 1.32473 2.24998 1.16576 2.24998 1C2.24998 0.83424 2.31583 0.675269 2.43304 0.558058C2.55025 0.440848 2.70922 0.375 2.87498 0.375H11C11.1657 0.375 11.3247 0.440848 11.4419 0.558058C11.5591 0.675269 11.625 0.83424 11.625 1Z" fill="#25B8E4" />
                                                                     </svg>
                                                                 </h3>
@@ -347,10 +355,10 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                         initial={{ opacity: 0, x: -10 }}
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ duration: 0.2, delay: (index + 3) * 0.05 }}
-                                                        className='relative w-[370px] max-h-[90px] min-h-[90px] border-[#FFFFFF1A] border-[1px] rounded-[4px] bg-[#0000003D] hover:bg-[#FFFFFF14] group/card'
+                                                        className='relative w-[370px] max-h-[90px] h-[90px] border-[#FFFFFF1A] border-[1px] rounded-[4px] bg-[#0000003D] hover:bg-[#FFFFFF14] group/card'
                                                     >
                                                         <div
-                                                            className='flex items-start space-x-[6px] p-3 rounded-  transition-all duration-200 cursor-pointer'
+                                                            className='flex items-start space-x-[6px] p-3 rounded-  transition-all duration-200 cursor-pointer w-[370px] h-[90px] '
                                                             onClick={handleItemClick}
                                                             onMouseDown={e => e.stopPropagation()}
                                                         >
@@ -360,7 +368,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                             <div className='flex-1'>
                                                                 <h3 className='text-white text-[16px] leading-[22.4px]  tracking-[-0.128px] font-normal mb-1 flex items-center justify-between'>
                                                                     <span>{item.label}</span>
-                                                                    <svg className='opacity-0 group-hover/card:opacity-100 transition-opacity duration-200' xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                                    <svg className={`${i18n.language === "ar" ? "rotate-270" : "rotate-0"} opacity-0 group-hover/card:opacity-100 transition-opacity duration-200`} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                                                                         <path d="M11.625 1V9.125C11.625 9.29076 11.5591 9.44973 11.4419 9.56694C11.3247 9.68415 11.1657 9.75 11 9.75C10.8342 9.75 10.6753 9.68415 10.558 9.56694C10.4408 9.44973 10.375 9.29076 10.375 9.125V2.50859L1.44217 11.4422C1.32489 11.5595 1.16583 11.6253 0.999981 11.6253C0.834129 11.6253 0.675069 11.5595 0.557794 11.4422C0.440518 11.3249 0.374634 11.1659 0.374634 11C0.374634 10.8341 0.440518 10.6751 0.557794 10.5578L9.49139 1.625H2.87498C2.70922 1.625 2.55025 1.55915 2.43304 1.44194C2.31583 1.32473 2.24998 1.16576 2.24998 1C2.24998 0.83424 2.31583 0.675269 2.43304 0.558058C2.55025 0.440848 2.70922 0.375 2.87498 0.375H11C11.1657 0.375 11.3247 0.440848 11.4419 0.558058C11.5591 0.675269 11.625 0.83424 11.625 1Z" fill="#25B8E4" />
                                                                     </svg>
                                                                 </h3>
@@ -383,7 +391,8 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                 {/* What We Do Dropdown */}
                 <div className={`
                       ${isWhatWeDoOpen ? 'bg-[#FFFFFF14] border-[#FFFFFF1A]' : ''}
-                    relative hover:bg-[#FFFFFF14] py-2 group/what-we-do rounded-[4px] min-w-[145px]  border-[1px]  border-transparent hover:border-[1px] hover:border-[#FFFFFF1A]`}
+                      ${i18n.language === "ar" ? "min-w-fit" : "min-w-[145px]"}
+                    relative hover:bg-[#FFFFFF14] py-2 group/what-we-do rounded-[4px]  border-[1px]  border-transparent hover:border-[1px] hover:border-[#FFFFFF1A]`}
                     ref={whatWeDoRef}>
                     <div
                         className='flex items-center space-x-[2px] cursor-pointer transition-colors px-5 text-[14px] leading-[19.6px] tracking-[-0.112px]  '
@@ -394,7 +403,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                             setIsServicesSubmenuOpen(false);
                         }}
                     >
-                        <span>What We Do</span>
+                        <span>{t('navbar.whatWeDo.title')}</span>
                         <div className='flex items-center justify-center w-[20px] h-[20px]'>
                             {
                                 isWhatWeDoOpen ?
@@ -428,7 +437,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                     background: 'rgba(0, 0, 0, 0.64)',
                                     backdropFilter: 'blur(10px)',
                                 }}
-                                className={`absolute top-full left-[-70%] mt-[13.22px]  ${isServicesSubmenuOpen ? 'min-w-[816px]  max-h-[356px]' : 'min-w-[434px] max-h-[256px]'}  border  border-[#FFFFFF1A] rounded-[8px] backdrop-[blur(10px)]  overflow-hidden z-[9999]`}
+                                className={`absolute top-full ${i18n.language === "ar" ? "right-[-100%]" : "left-[-70%]"} mt-[13.22px]  ${isServicesSubmenuOpen ? 'min-w-[816px]  max-h-[356px]' : 'min-w-[434px] max-h-[256px]'}  border  border-[#FFFFFF1A] rounded-[8px] backdrop-[blur(10px)]  overflow-hidden z-[9999]`}
                                 onMouseDown={e => e.stopPropagation()}
                                 onClick={e => e.stopPropagation()}
                                 onMouseLeave={() => setIsServicesSubmenuOpen(false)}
@@ -485,7 +494,11 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                                     </h3>
                                                                     {
                                                                         !item.hasSubmenu && (
-                                                                            <svg className='opacity-0 group-hover/card:opacity-100 transition-opacity duration-200' xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                                            <svg
+                                                                                style={{
+                                                                                    transform: i18n.language === "ar" ? "rotate(270deg)" : "none",
+                                                                                }}
+                                                                                className='opacity-0 group-hover/card:opacity-100 transition-opacity duration-200' xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                                                                                 <path d="M11.625 1V9.125C11.625 9.29076 11.5591 9.44973 11.4419 9.56694C11.3247 9.68415 11.1657 9.75 11 9.75C10.8342 9.75 10.6753 9.68415 10.558 9.56694C10.4408 9.44973 10.375 9.29076 10.375 9.125V2.50859L1.44217 11.4422C1.32489 11.5595 1.16583 11.6253 0.999981 11.6253C0.834129 11.6253 0.675069 11.5595 0.557794 11.4422C0.440518 11.3249 0.374634 11.1659 0.374634 11C0.374634 10.8341 0.440518 10.6751 0.557794 10.5578L9.49139 1.625H2.87498C2.70922 1.625 2.55025 1.55915 2.43304 1.44194C2.31583 1.32473 2.24998 1.16576 2.24998 1C2.24998 0.83424 2.31583 0.675269 2.43304 0.558058C2.55025 0.440848 2.70922 0.375 2.87498 0.375H11C11.1657 0.375 11.3247 0.440848 11.4419 0.558058C11.5591 0.675269 11.625 0.83424 11.625 1Z" fill="#25B8E4" />
                                                                             </svg>
 
@@ -496,12 +509,12 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                                         <div className='w-[24px] h-[24px] transition-transform duration-200'>
                                                                             {
                                                                                 isServicesSubmenuOpen ?
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                                        <path d="M5 12H19M19 12L13 18M19 12L13 6" stroke="#25B8E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                    <svg className={`${i18n.language === "ar" ? "rotate-180" : "rotate-0"}`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                        <path d="M5 12H19M19 12L13 18M19 12L13 6" stroke="#25B8E4" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                                                                                     </svg>
                                                                                     :
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                                        <path d="M5 12H19M19 12L13 18M19 12L13 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                    <svg className={`${i18n.language === "ar" ? "rotate-180" : "rotate-0"}`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                        <path d="M5 12H19M19 12L13 18M19 12L13 6" stroke="white" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                                                                                     </svg>
                                                                             }
 
@@ -572,7 +585,8 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                 {/* insights & resources */}
                 <div className={`
                     ${isInsightsOpen ? 'bg-[#FFFFFF14] border-[#FFFFFF1A]' : ''}
-                    relative hover:bg-[#FFFFFF14] py-2 group/insights rounded-[4px] min-w-[187px] border-[1px] border-transparent hover:border-[#FFFFFF1A]`} ref={insightsRef}>
+                    ${i18n.language === "ar" ? "min-w-fit" : "min-w-[187px]"}
+                    relative hover:bg-[#FFFFFF14] py-2 group/insights rounded-[4px] border-[1px] border-transparent hover:border-[#FFFFFF1A]`} ref={insightsRef}>
                     <div
                         className='flex items-center space-x-[2px] cursor-pointer transition-colors px-5 text-[14px] leading-[19.6px] tracking-[-0.112px]  '
                         onClick={() => {
@@ -582,7 +596,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                             setIsServicesSubmenuOpen(false);
                         }}
                     >
-                        <span>Insights &  Resources</span>
+                        <span>{t('navbar.insightsResources.title')}</span>
                         <div className='flex items-center justify-center w-[20px] h-[20px]'>
                             {
                                 isInsightsOpen ?
@@ -610,8 +624,11 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                                className='absolute top-full left-[-160%] mt-[13.22px] h-[216px] w-[832px] border  border-[#FFFFFF1A] rounded-[8px] backdrop-[blur(10px)]  overflow-hidden z-[9999]'
+                                className={`absolute top-full
+                                    
+                                    ${i18n.language === "ar" ? "right-[-160%]" : "left-[-160%]"} mt-[13.22px] h-[216px] w-[832px] border  border-[#FFFFFF1A] rounded-[8px] backdrop-[blur(10px)]  overflow-hidden z-[9999]`}
                                 style={{
+                                    width: '832px',
                                     borderRadius: '8px',
                                     border: '1px solid rgba(255, 255, 255, 0.10)',
                                     background: 'rgba(0, 0, 0, 0.64)',
@@ -620,7 +637,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                 onMouseDown={e => e.stopPropagation()}
                                 onClick={e => e.stopPropagation()}
                             >
-                                <div className='p-8 w-[830px] h-[216px]'>
+                                <div className='p-8 w-[832px] h-[216px]'>
                                     <div className='grid grid-cols-2 '>
                                         {/* Left Column */}
                                         <div className='space-y-4'>
@@ -655,7 +672,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                                 {item.icon}
                                                             </div>
                                                             <div className=''>
-                                                                <h3 className='text-white text-[16px] leading-[22.4px]  tracking-[-0.128px] font-normal mb-[4px] h-[20px]'>
+                                                                <h3 className='text-white text-[16px] leading-[22.4px]  tracking-[-0.128px] font-normal mb-[3px] h-[20px]'>
                                                                     {item.label}
                                                                 </h3>
                                                                 <p className='text-[#C5CBCC] text-[14px] leading-[19.6px]  font-normal transition-colors h-[20px]' >
@@ -663,7 +680,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        <svg className='opacity-0 absolute top-3 right-3 group-hover/card:opacity-100 transition-opacity duration-200' xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <svg className={`${i18n.language === "ar" ? "rotate-270 left-3" : "rotate-0 right-3"} opacity-0 absolute top-3  group-hover/card:opacity-100 transition-opacity duration-200`} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                                                             <path d="M11.625 1V9.125C11.625 9.29076 11.5591 9.44973 11.4419 9.56694C11.3247 9.68415 11.1657 9.75 11 9.75C10.8342 9.75 10.6753 9.68415 10.558 9.56694C10.4408 9.44973 10.375 9.29076 10.375 9.125V2.50859L1.44217 11.4422C1.32489 11.5595 1.16583 11.6253 0.999981 11.6253C0.834129 11.6253 0.675069 11.5595 0.557794 11.4422C0.440518 11.3249 0.374634 11.1659 0.374634 11C0.374634 10.8341 0.440518 10.6751 0.557794 10.5578L9.49139 1.625H2.87498C2.70922 1.625 2.55025 1.55915 2.43304 1.44194C2.31583 1.32473 2.24998 1.16576 2.24998 1C2.24998 0.83424 2.31583 0.675269 2.43304 0.558058C2.55025 0.440848 2.70922 0.375 2.87498 0.375H11C11.1657 0.375 11.3247 0.440848 11.4419 0.558058C11.5591 0.675269 11.625 0.83424 11.625 1Z" fill="#25B8E4" />
                                                         </svg>
                                                     </motion.div>
@@ -686,7 +703,6 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                         window.location.href = item.href;
                                                     }
                                                 };
-
                                                 return (
                                                     <motion.div
                                                         key={item.label}
@@ -704,7 +720,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                                 {item.icon}
                                                             </div>
                                                             <div className='flex-1'>
-                                                                <h3 className='text-white text-[16px] leading-[22.4px]  tracking-[-0.128px] font-normal mb-1'>
+                                                                <h3 className='text-white text-[16px] leading-[22.4px]  tracking-[-0.128px] font-normal mb-[3px]'>
                                                                     {item.label}
                                                                 </h3>
                                                                 <p className='text-[#C5CBCC] text-[14px] leading-[140%]  font-normal transition-colors'>
@@ -713,7 +729,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                             </div>
 
                                                         </div>
-                                                        <svg className='opacity-0 absolute top-3 right-3 group-hover/card:opacity-100 transition-opacity duration-200' xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <svg className={`${i18n.language === "ar" ? "rotate-270 left-3" : "rotate-0 right-3"} opacity-0 absolute top-3  group-hover/card:opacity-100 transition-opacity duration-200`} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                                                             <path d="M11.625 1V9.125C11.625 9.29076 11.5591 9.44973 11.4419 9.56694C11.3247 9.68415 11.1657 9.75 11 9.75C10.8342 9.75 10.6753 9.68415 10.558 9.56694C10.4408 9.44973 10.375 9.29076 10.375 9.125V2.50859L1.44217 11.4422C1.32489 11.5595 1.16583 11.6253 0.999981 11.6253C0.834129 11.6253 0.675069 11.5595 0.557794 11.4422C0.440518 11.3249 0.374634 11.1659 0.374634 11C0.374634 10.8341 0.440518 10.6751 0.557794 10.5578L9.49139 1.625H2.87498C2.70922 1.625 2.55025 1.55915 2.43304 1.44194C2.31583 1.32473 2.24998 1.16576 2.24998 1C2.24998 0.83424 2.31583 0.675269 2.43304 0.558058C2.55025 0.440848 2.70922 0.375 2.87498 0.375H11C11.1657 0.375 11.3247 0.440848 11.4419 0.558058C11.5591 0.675269 11.625 0.83424 11.625 1Z" fill="#25B8E4" />
                                                         </svg>
                                                     </motion.div>
@@ -727,10 +743,10 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                     </AnimatePresence>
                 </div>
                 <Link href='/careers' className='text-[14px] leading-[19.6px] tracking-[-0.112px] text-white  relative hover:bg-[#FFFFFF14] py-2 px-5 rounded-[4px]  border-[1px] border-transparent hover:border-[#FFFFFF1A]'>
-                    Careers
+                    {t('navbar.careers')}
                 </Link>
                 <a href='/contact-us' className='text-[14px] leading-[19.6px] tracking-[-0.112px] text-white  relative hover:bg-[#FFFFFF14] py-2 px-5 rounded-[4px]  border-[1px] border-transparent hover:border-[#FFFFFF1A]'>
-                    Contact Us
+                    {t('navbar.contactUs')}
                 </a>
             </motion.nav>
 
@@ -756,7 +772,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                             <path d="M3.6 9.26147H20.4M3.6 15.2615H20.4M11.5 3.26147C9.81534 5.96109 8.9222 9.07934 8.9222 12.2615C8.9222 15.4436 9.81534 18.5619 11.5 21.2615M12.5 3.26147C14.1847 5.96109 15.0778 9.07934 15.0778 12.2615C15.0778 15.4436 14.1847 18.5619 12.5 21.2615M3 12.2615C3 13.4434 3.23279 14.6137 3.68508 15.7056C4.13738 16.7976 4.80031 17.7897 5.63604 18.6254C6.47177 19.4612 7.46392 20.1241 8.55585 20.5764C9.64778 21.0287 10.8181 21.2615 12 21.2615C13.1819 21.2615 14.3522 21.0287 15.4442 20.5764C16.5361 20.1241 17.5282 19.4612 18.364 18.6254C19.1997 17.7897 19.8626 16.7976 20.3149 15.7056C20.7672 14.6137 21 13.4434 21 12.2615C21 9.87453 20.0518 7.58534 18.364 5.89751C16.6761 4.20969 14.3869 3.26147 12 3.26147C9.61305 3.26147 7.32387 4.20969 5.63604 5.89751C3.94821 7.58534 3 9.87453 3 12.2615Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span>EN</span>
+                        <span className='text-[18px]'>{language === 'en' ? 'EN' : 'AR'}</span>
                         <motion.svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -777,24 +793,34 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                                className='absolute  min-w-[163px] min-h-[84px] top-full left-0 mt-2  rounded-[4px] backdrop-[blur(10px)] overflow-hidden z-[9999]'
+                                className={`absolute  
+                                    
+                                    ${i18n.language === "ar" ? "right-0" : "left-0"}
+                                    min-w-[163px]  top-full left-0 mt-2  rounded-[4px] backdrop-[blur(10px)]  z-[9999]`}
                                 onMouseDown={e => e.stopPropagation()}
                                 onClick={e => e.stopPropagation()}
                                 style={{
-                                    borderRadius: '8px',
+                                    borderRadius: '4px',
                                     border: '1px solid rgba(255, 255, 255, 0.10)',
-                                    background: 'rgba(0, 0, 0, 0.64)',
+                                    background: "rgba(255, 255, 255, 0.08)",
                                     backdropFilter: 'blur(10px)',
                                 }}
                             >
-                                <div className='py-3 space-y-4 min-w-[163px] min-h-[84px]'>
+                                <div className='py-3 px-4 space-y-[6px] min-w-[163px] '>
                                     {languageOptions.map((option, index) => {
                                         const handleLanguageClick = (e: React.MouseEvent) => {
                                             e.preventDefault();
                                             e.stopPropagation();
                                             setIsLanguageOpen(false);
-                                            // Handle language change logic here
-                                            console.log('Selected language:', option.code);
+                                            const langCode = option.code.toLowerCase() as 'en' | 'ar';
+
+                                            // Save language to localStorage and cookie without changing DOM
+                                            // This prevents layout glitch before reload
+                                            localStorage.setItem('language', langCode);
+                                            document.cookie = `language=${langCode}; path=/; max-age=31536000; SameSite=Lax`;
+
+                                            // Reload immediately - LanguageContext will handle direction change on next load
+                                            window.location.reload();
                                         };
 
                                         return (
@@ -803,14 +829,16 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                                 initial={{ opacity: 0, x: -10 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.2, delay: index * 0.05 }}
-                                                className='relative'
+                                                className='relative '
                                             >
                                                 <div
-                                                    className='flex items-center space-x-3 px-4  text-white   rounded-[4px] border-[1px] border-transparent   transition-all duration-200 cursor-pointer'
+                                                    className={`flex  hover:bg-[#FFFFFF14] px-5 py-2   items-center space-x-3   text-white   
+                                                        rounded-[4px] border-[1px] border-transparent   transition-all duration-200 cursor-pointer
+                                                    ${language === option.code ? 'bg-[#FFFFFF14]' : ''}`}
                                                     onClick={handleLanguageClick}
                                                     onMouseDown={e => e.stopPropagation()}
                                                 >
-                                                    <span className='text-[16px] leading-[22.4px]  tracking-[-0.128px] font-normal text-white'>{option.label}</span>
+                                                    <span className='text-[16px]  leading-[22.4px]  tracking-[-0.128px] font-normal text-white'>{option.label}</span>
                                                 </div>
                                             </motion.div>
                                         );
@@ -864,7 +892,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                     className='flex items-center justify-between w-full text-white text-[16px] font-medium'
                                     onClick={() => setMobileWhoWeAreOpen(!mobileWhoWeAreOpen)}
                                 >
-                                    <span>Who We Are</span>
+                                    <span>{t('navbar.whoWeAre.title')}</span>
                                     <motion.svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="20"
@@ -915,7 +943,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                     className='flex items-center justify-between w-full text-white text-[16px] font-medium'
                                     onClick={() => setMobileWhatWeDoOpen(!mobileWhatWeDoOpen)}
                                 >
-                                    <span>What We Do</span>
+                                    <span>{t('navbar.whatWeDo.title')}</span>
                                     <motion.svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="20"
@@ -1009,7 +1037,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                     className='flex items-center justify-between w-full text-white text-[16px] font-medium'
                                     onClick={() => setMobileInsightsOpen(!mobileInsightsOpen)}
                                 >
-                                    <span>Insights & Resources</span>
+                                    <span>{t('navbar.insightsResources.title')}</span>
                                     <motion.svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="20"
@@ -1060,7 +1088,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                 className='text-white text-[16px] font-medium border-b border-[#FFFFFF1A] pb-4'
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                Careers
+                                {t('navbar.careers')}
                             </Link>
 
                             {/* Mobile Contact Us */}
@@ -1069,7 +1097,7 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                 className='text-white text-[16px] font-medium border-b border-[#FFFFFF1A] pb-4'
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                Contact Us
+                                {t('navbar.contactUs')}
                             </Link>
 
                             {/* Mobile Language Selector */}
@@ -1089,6 +1117,18 @@ export default function Navbar({ isHomePage }: { isHomePage?: boolean }) {
                                 </svg>
                                 <span className='text-white text-[16px]'>Search</span>
                             </button> */}
+                        </div>
+                        {/* language selector */}
+                        <div className='pl-5 flex items-center space-x-2 text-white cursor-pointer transition-colors'>
+                            <select onChange={(e) => {
+                                localStorage.setItem('language', e.target.value);
+                                document.cookie = `language=${e.target.value}; path=/; max-age=31536000; SameSite=Lax`;
+                                window.location.reload();
+                            }}>
+                                <option value="en">English</option>
+                                <option value="ar">العربية</option>
+                            </select>
+                            {/* <span>{language === 'en' ? 'EN' : 'العربية'}</span> */}
                         </div>
                     </motion.div>
                 )}

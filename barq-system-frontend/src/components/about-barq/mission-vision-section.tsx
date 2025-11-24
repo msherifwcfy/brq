@@ -3,8 +3,17 @@
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import type { AboutBarqMissionVisionControllerReadResponse } from '@/sdk/types.gen';
 
-export default function MissionVisionSection() {
+interface MissionVisionSectionProps {
+  missionVisionData: AboutBarqMissionVisionControllerReadResponse | null;
+}
+
+export default function MissionVisionSection({
+  missionVisionData,
+}: MissionVisionSectionProps) {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '100px' });
 
@@ -64,7 +73,7 @@ export default function MissionVisionSection() {
                   backgroundClip: 'text',
                 }}
               >
-                Mission & Vision
+                {t('aboutBarq.missionVision.missionAndVision')}
               </span>
             </motion.h2>
             <motion.h3
@@ -73,62 +82,82 @@ export default function MissionVisionSection() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.9 }}
             >
-              Our Mission & Vision
+              {t('aboutBarq.missionVision.ourMissionAndVision')}
             </motion.h3>
 
             <div className='grid grid-cols-1 lg:grid-cols-2 lg:gap-[40px] gap-6'>
-              {/* Mission Card */}
-              <motion.div
-                className='bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[16px] lg:rounded-[24px] border border-[#FFFFFF20] lg:px-6 px-4 lg:py-10 py-6 hover:shadow-xl hover:shadow-white/5  transition-all group'
-                initial={{ opacity: 0, y: 40 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
-                }
-                transition={{ duration: 0.8, delay: 1.1 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className='flex flex-col lg:gap-4 gap-3 lg:mb-2 mb-1 items-start '>
-                  <div className='lg:w-16 lg:h-16 w-12 h-12'>
-                    <TargetIcon />
-                  </div>
-                  <h4 className='text-white lg:text-[36px] text-[28px] leading-[1.2] font-bold'>
-                    Mission
-                  </h4>
-                </div>
-                <p className='text-[#D9DDDD] text-start lg:text-[18px] text-[16px] lg:leading-[27px] leading-[24px] '>
-                  We deliver innovative, reliable, and secure technology
-                  solutions through deep expertise and customer commitment. By
-                  transforming vendors and customers into &apos;partners in
-                  captivity,&apos; we provide quality-driven services that
-                  exceed expectations and establish long-term success for all
-                  stakeholders.
-                </p>
-              </motion.div>
+              {missionVisionData?.data && missionVisionData.data.length > 0 ? (
+                missionVisionData.data.map((item, index) => (
+                  <motion.div
+                    key={item.id}
+                    className='bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[16px] lg:rounded-[24px] border border-[#FFFFFF20] lg:px-6 px-4 lg:py-10 py-6 hover:shadow-xl hover:shadow-white/5  transition-all group'
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={
+                      isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
+                    }
+                    transition={{ duration: 0.8, delay: 1.1 + index * 0.2 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className='flex flex-col lg:gap-4 gap-3 lg:mb-2 mb-2 items-start '>
+                      <div className='lg:w-16 lg:h-16 w-12 h-12'>
+                        {index === 0 ? <TargetIcon /> : <EyeIcon />}
+                      </div>
+                      <h4 className='text-white lg:text-[36px] text-[28px] leading-[1.2] font-bold mt-4 lg:mt-0 '>
+                        {item.title}
+                      </h4>
+                    </div>
+                    <p className='text-[#D9DDDD] text-start lg:text-[18px] text-[16px] lg:leading-[27px] leading-[24px] '>
+                      {item.description}
+                    </p>
+                  </motion.div>
+                ))
+              ) : (
+                <>
+                  <motion.div
+                    className='bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[16px] lg:rounded-[24px] border border-[#FFFFFF20] lg:px-6 px-4 lg:py-10 py-6 hover:shadow-xl hover:shadow-white/5  transition-all group'
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={
+                      isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
+                    }
+                    transition={{ duration: 0.8, delay: 1.1 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className='flex flex-col lg:gap-4 gap-3 lg:mb-2 mb-1 items-start '>
+                      <div className='lg:w-16 lg:h-16 w-12 h-12'>
+                        <TargetIcon />
+                      </div>
+                      <h4 className='text-white lg:text-[36px] text-[28px] leading-[1.2] font-bold'>
+                        {t('aboutBarq.missionVision.mission')}
+                      </h4>
+                    </div>
+                    <p className='text-[#D9DDDD] text-start lg:text-[18px] text-[16px] lg:leading-[27px] leading-[24px] '>
+                      {t('aboutBarq.missionVision.missionDescription')}
+                    </p>
+                  </motion.div>
 
-              {/* Vision Card */}
-              <motion.div
-                className='bg-[#FFFFFF08] text-start   backdrop-blur-[5px] hover:shadow-xl hover:shadow-white/5 transition-all rounded-[16px] lg:rounded-[24px] border border-[#FFFFFF20] lg:px-6 px-4 lg:py-10 py-6 group'
-                initial={{ opacity: 0, y: 40 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
-                }
-                transition={{ duration: 0.8, delay: 1.3 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className='flex flex-col lg:gap-4 gap-3 lg:mb-2 mb-1 items-start '>
-                  <div className='lg:w-16 lg:h-16 w-12 h-12'>
-                    <EyeIcon />
-                  </div>
-                  <h4 className='text-white lg:text-[36px] text-[28px] leading-[1.2] font-bold'>
-                    Vision
-                  </h4>
-                </div>
-                <p className='text-[#D9DDDD] text-start lg:text-[18px] text-[16px] lg:leading-[27px] leading-[24px]'>
-                  Be the Middle East & North Africa’s technology partner that
-                  transforms mission-critical IT projects into lasting
-                  achievements that drive business excellence.
-                </p>
-              </motion.div>
+                  <motion.div
+                    className='bg-[#FFFFFF08] text-start   backdrop-blur-[5px] hover:shadow-xl hover:shadow-white/5 transition-all rounded-[16px] lg:rounded-[24px] border border-[#FFFFFF20] lg:px-6 px-4 lg:py-10 py-6 group'
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={
+                      isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
+                    }
+                    transition={{ duration: 0.8, delay: 1.3 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className='flex flex-col lg:gap-4 gap-3 lg:mb-2 mb-1 items-start '>
+                      <div className='lg:w-16 lg:h-16 w-12 h-12'>
+                        <EyeIcon />
+                      </div>
+                      <h4 className='text-white lg:text-[36px] text-[28px] leading-[1.2] font-bold'>
+                        {t('aboutBarq.missionVision.vision')}
+                      </h4>
+                    </div>
+                    <p className='text-[#D9DDDD] text-start lg:text-[18px] text-[16px] lg:leading-[27px] leading-[24px]'>
+                      {t('aboutBarq.missionVision.visionDescription')}
+                    </p>
+                  </motion.div>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -146,7 +175,7 @@ const TargetIcon = () => {
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
-      <g clip-path='url(#clip0_3349_929)'>
+      <g clipPath='url(#clip0_3349_929)'>
         <path
           d='M39.5043 34.6254C39.5043 39.798 35.2961 44.0063 30.1235 44.0063C24.9508 44.0063 20.7426 39.798 20.7426 34.6254C20.7426 29.4527 24.9508 25.2443 30.1235 25.2443C32.0331 25.2443 33.8103 25.8193 35.294 26.8032L40.7342 21.3629C40.6113 21.2726 40.4874 21.1837 40.3626 21.096C36.6732 18.5179 32.9775 17.2149 29.3623 17.2149C29.0312 17.2149 28.701 17.2258 28.3712 17.2477C24.0092 17.5445 19.9455 19.4864 16.9313 22.7153C13.9097 25.947 12.2462 30.1763 12.2462 34.6254C12.2462 39.3989 14.1062 43.8879 17.4835 47.2652C20.861 50.6427 25.3498 52.5025 30.1233 52.5025C34.8968 52.5025 39.3858 50.6425 42.7632 47.2652C46.1405 43.8878 48.0003 39.3989 48.0003 34.6254C48.0003 30.6962 46.4136 26.9239 43.5488 23.8513L37.9452 29.4548C38.9295 30.9384 39.5043 32.7158 39.5043 34.6254Z'
           fill='white'
@@ -161,8 +190,8 @@ const TargetIcon = () => {
           r='12.5'
           fill='none'
           stroke='url(#paint_ring_linear_target)'
-          stroke-width='8'
-          stroke-linecap='round'
+          strokeWidth='8'
+          strokeLinecap='round'
           className='opacity-0 transition-opacity duration-300 group-hover:opacity-100'
         />
         <path
@@ -183,8 +212,8 @@ const TargetIcon = () => {
           y2='47.1254'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='white' />
-          <stop offset='1' stop-color='#80CDD5' />
+          <stop stopColor='white' />
+          <stop offset='1' stopColor='#80CDD5' />
         </linearGradient>
         <clipPath id='clip0_3349_929'>
           <rect
@@ -208,7 +237,7 @@ const EyeIcon = () => {
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
-      <g clip-path='url(#clip0_3349_750)'>
+      <g clipPath='url(#clip0_3349_750)'>
         <path
           d='M32.1116 23.2502C26.8609 23.2502 22.6078 27.5033 22.6078 32.754C22.6078 38.0048 26.8609 42.2579 32.1116 42.2579C37.3624 42.2579 41.6155 38.0048 41.6155 32.754C41.6024 27.5033 37.3492 23.2502 32.1116 23.2502ZM32.1116 29.6561C30.4051 29.6561 29.0137 31.0475 29.0137 32.754C29.0137 33.5416 28.3836 34.1717 27.596 34.1717C26.8084 34.1717 26.1783 33.5416 26.1783 32.754C26.1783 29.4854 28.843 26.8207 32.1116 26.8207C32.8992 26.8207 33.5293 27.4508 33.5293 28.2384C33.5293 29.026 32.8861 29.6561 32.1116 29.6561Z'
           className='fill-white transition-opacity duration-300 group-hover:opacity-0'
@@ -232,8 +261,8 @@ const EyeIcon = () => {
           y2='42.2579'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='white' />
-          <stop offset='1' stop-color='#80CDD5' />
+          <stop stopColor='white' />
+          <stop offset='1' stopColor='#80CDD5' />
         </linearGradient>
         <clipPath id='clip0_3349_750'>
           <rect

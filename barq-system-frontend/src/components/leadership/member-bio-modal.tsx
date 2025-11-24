@@ -1,11 +1,12 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { XIcon } from 'lucide-react';
 import { Dialog, DialogContent, DialogOverlay } from '@/components/ui/dialog';
-import { TeamMember, allTeamMembers } from '@/data/leadership';
+import { TeamMember } from '@/data/leadership';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 interface MemberBioModalProps {
     isOpen: boolean;
@@ -25,16 +26,15 @@ export default function MemberBioModal({
     member,
     onNext,
     onPrevious,
-    onSelectMember,
     currentIndex,
     totalMembers,
-    teamMembers = allTeamMembers
 }: MemberBioModalProps) {
+    const { i18n } = useTranslation();
+
     if (!member) return null;
 
     const isFirstMember = currentIndex === 0;
     const isLastMember = currentIndex === totalMembers - 1;
-
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogOverlay className="bg-black/50" />
@@ -57,7 +57,7 @@ export default function MemberBioModal({
                     {/* Close Button */}
                     <button
                         onClick={onClose}
-                        className="absolute border-[2px] border-[#fff] w-[28px] h-[28px] sm:w-[30px] sm:h-[30px] flex items-center justify-center top-4 right-4 sm:top-6 sm:right-6 lg:top-6 lg:right-6 z-50 p-2 text-white/70 hover:text-white transition-colors rounded-full hover:bg-white/10"
+                        className={`absolute border-[2px] border-[#fff] w-[28px] h-[28px] sm:w-[30px] sm:h-[30px] flex items-center justify-center top-4 ${i18n.language === "ar" ? "left-4" : "right-4"} sm:top-6 sm:${i18n.language === "ar" ? "left-6" : "right-6"} lg:top-6 lg:${i18n.language === "ar" ? "left-6" : "right-6"} z-50 p-2 text-white/70 hover:text-white transition-colors rounded-full hover:bg-white/10 cursor-pointer`}
                     >
                         <XIcon size={30} className='text-white min-w-[18px] min-h-[18px] sm:min-w-[20px] sm:min-h-[20px]' />
                     </button>
@@ -154,7 +154,8 @@ export default function MemberBioModal({
                                                 height={18}
                                                 className={cn(
                                                     'min-h-[16px] sm:min-h-[18px]',
-                                                    !isFirstMember && 'hover:fill-white'
+                                                    !isFirstMember && 'hover:fill-white',
+                                                    i18n.language === "ar" ? "rotate-180" : ""
                                                 )}
                                             />
                                         </button>
@@ -175,7 +176,9 @@ export default function MemberBioModal({
                                                 height={18}
                                                 className={cn(
                                                     'min-h-[16px] sm:min-h-[18px]',
-                                                    !isLastMember && 'hover:fill-white'
+                                                    !isLastMember && 'hover:fill-white',
+                                                    i18n.language === "ar" ? "rotate-180" : ""
+
                                                 )}
                                             />
                                         </button>

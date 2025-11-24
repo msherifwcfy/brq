@@ -6,8 +6,32 @@ import { Button } from '@/components/ui/button'
 import { countries } from '@/utils/contants'
 import { motion } from 'framer-motion'
 import SuccessModal from './SuccessModal'
+import { contactUsService } from '@/services/contact-us.service'
+import type {
+    ContactUsHeroEntity,
+    ContactUsRequestTypeEntity,
+    ContactUsHearAboutDropEntity,
+} from '@/sdk/types.gen'
+import { useTranslation } from 'react-i18next'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
 
-const ContactUsClient = () => {
+interface ContactUsClientProps {
+    heroData: ContactUsHeroEntity | null
+    requestTypes: ContactUsRequestTypeEntity[]
+    hearAboutOptions: ContactUsHearAboutDropEntity[]
+}
+
+const ContactUsClient = ({
+    heroData,
+    requestTypes,
+    hearAboutOptions,
+}: ContactUsClientProps) => {
     const [formData, setFormData] = useState({
         requestType: '',
         fullName: '',
@@ -19,6 +43,8 @@ const ContactUsClient = () => {
     })
 
     const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitError, setSubmitError] = useState<string | null>(null)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
@@ -26,29 +52,67 @@ const ContactUsClient = () => {
             ...prev,
             [name]: value
         }))
+        // Clear error when user starts typing
+        if (submitError) {
+            setSubmitError(null)
+        }
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        setSubmitError(null)
 
         // Validate required fields
         if (!formData.fullName || !formData.email || !formData.mobileNumber) {
+            setSubmitError('Please fill in all required fields')
             return
         }
 
-        // Show success modal
-        setShowSuccessModal(true)
+        setIsSubmitting(true)
 
-        // Reset form after successful submission
-        // setFormData({
-        //     requestType: '',
-        //     fullName: '',
-        //     email: '',
-        //     countryCode: 'KSA',
-        //     mobileNumber: '',
-        //     knowAboutBarq: '',
-        //     requestDescription: ''
-        // })
+        try {
+            // Get dial code from country code
+            const selectedCountry = countries.find(c => c.code === formData.countryCode)
+            const dialCode = selectedCountry?.dialCode || '+966'
+
+            // Prepare the data according to CreateContactUs type
+            const submitData = {
+                name: formData.fullName,
+                email: formData.email,
+                phone_number: formData.mobileNumber,
+                phone_number_key: dialCode,
+                message: formData.requestDescription || undefined,
+                request_type_id: formData.requestType ? parseInt(formData.requestType) : undefined,
+                hear_about_drop_id: formData.knowAboutBarq ? parseInt(formData.knowAboutBarq) : undefined,
+            }
+
+            const response = await contactUsService.submitContactUsForm(submitData)
+
+            // Only show success modal if response is valid and has data
+            if (response && response.data) {
+                // Show success modal
+                setShowSuccessModal(true)
+
+                // Reset form after successful submission
+                setFormData({
+                    requestType: '',
+                    fullName: '',
+                    email: '',
+                    countryCode: 'KSA',
+                    mobileNumber: '',
+                    knowAboutBarq: '',
+                    requestDescription: ''
+                })
+            } else {
+                // Response was null or had no data
+                setSubmitError('Failed to submit form. Please try again.')
+            }
+        } catch (error) {
+            console.error('Form submission error:', error)
+            setSubmitError('Failed to submit form. Please try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     const closeModal = () => {
@@ -184,7 +248,7 @@ const ContactUsClient = () => {
             }
         }
     }
-
+    const { t, i18n } = useTranslation()
 
     return (
         <motion.div
@@ -210,7 +274,7 @@ const ContactUsClient = () => {
                             }}
                             variants={titleVariants}
                         >
-                            Contact Us
+                            {t("contactUs.title")}
                         </motion.div>
                         <motion.h1
                             className='text-white text-[32px] lg:text-[56px] leading-[38px] lg:leading-[61.6px] frutiger-lt-std-bold mb-6 lg:mb-8'
@@ -222,20 +286,20 @@ const ContactUsClient = () => {
                             }}
                             variants={headingVariants}
                         >
-                            Get in Touch with Us
+                            {heroData?.title || 'Get in Touch with Us'}
                         </motion.h1>
                     </div>
                     <motion.p
-                        className='text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] frutiger-lt-std-roman tracking-[0.0205em]'
+                        className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] frutiger-lt-std-roman tracking-[0.0205em]'
                         variants={paragraphVariants}
                     >
-                        We&apos;d love to hear from you. Whether you&apos;re requesting a demo, scheduling a meeting, or simply reaching out, fill out the form below and our team will get back to you shortly.
+                        {heroData?.sub_title || "We'd love to hear from you. Whether you're requesting a demo, scheduling a meeting, or simply reaching out, fill out the form below and our team will get back to you shortly."}
                     </motion.p>
                 </motion.div>
 
                 {/* Right side - Form */}
                 <motion.div
-                    className='px-6 lg:px-10 py-8 lg:py-12 w-full lg:w-[693px] h-auto lg:h-[728px]'
+                    className='px-6 lg:px-10 py-8 lg:py-12 w-full lg:w-[693px] h-auto lg:min-h-[728px]'
                     style={{
                         borderRadius: "24px",
                         border: "1px solid rgba(255, 255, 255, 0.16)",
@@ -252,13 +316,13 @@ const ContactUsClient = () => {
                             className='text-white text-[28px] lg:text-[36px] frutiger-lt-std-bold leading-[34px] lg:leading-[43.2px] mb-3 lg:mb-4'
                             variants={headingVariants}
                         >
-                            Fill the form below
+                            {t("contactUs.formTitle")}
                         </motion.h2>
                         <motion.p
                             className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] frutiger-lt-std-roman tracking-[0.0205em]'
                             variants={paragraphVariants}
                         >
-                            We&apos;re here to help you connect with the right team at BARQ Systems.
+                            {t("contactUs.formSubTitle")}
                         </motion.p>
                     </motion.div>
 
@@ -272,29 +336,60 @@ const ContactUsClient = () => {
                             className='relative'
                             variants={formFieldVariants}
                         >
-                            <select
-                                name="requestType"
+                            <Select
                                 value={formData.requestType}
-                                onChange={handleChange}
-                                style={{
-                                    borderRadius: "8px",
-                                    minWidth: '100%',
-                                    color: formData.requestType ? "rgba(51, 51, 51, 1)" : "rgba(51, 51, 51, 0.80)",
-                                }}
-                                className="appearance-none w-full py-3 lg:py-4 px-4 lg:px-6 border-r-[1px] placeholder:text-[16px] lg:placeholder:text-[16px] border-[#D6D6D6] h-[48px] lg:h-[56px] border text-[14px] lg:text-[16px] bg-white focus:outline-none transition-colors cursor-pointer lg:min-w-[131px] text-[#333] placeholder:opacity-80 placeholder:text-[#333]"
+                                onValueChange={(value) => handleChange({ target: { name: 'requestType', value } } as any)}
                             >
-                                <option value="" disabled >Request Type</option>
-                                <option value="demo" >Request a Demo</option>
-                                <option value="meeting">Schedule a Meeting</option>
-                                <option value="support">Technical Support</option>
-                                <option value="partnership">Partnership Inquiry</option>
-                                <option value="general">General Inquiry</option>
-                            </select>
-                            <div className='absolute right-[20px] lg:right-[24px] top-[30%] lg:top-[27%] h-5 w-5 lg:h-6 lg:w-6 flex justify-center items-center'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" viewBox="0 0 14 8" fill="none" className="lg:w-[14px] lg:h-[8px]">
-                                    <path d="M1 1L7 7L13 1" stroke="#313B49" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
+                                <SelectTrigger
+                                    style={{
+                                        borderRadius: "8px",
+                                        width: '100%',
+                                        padding: '16px 24px',
+                                        background: '#FFF',
+                                        color: formData.requestType ? "#333" : "rgba(51, 51, 51, 0.80)",
+                                        fontSize: '16px',
+                                        fontStyle: 'normal',
+                                        fontWeight: 400,
+                                        lineHeight: '150%',
+                                        border: '1px solid #D6D6D6',
+                                        height: '56px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                    }}
+                                    className="focus:outline-none transition-colors cursor-pointer"
+                                >
+                                    <SelectValue placeholder={t("contactUs.requestType")} />
+                                </SelectTrigger>
+                                <SelectContent
+                                    style={{
+                                        background: '#FFF',
+                                        borderRadius: '8px',
+                                        border: '1px solid #D6D6D6',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                    }}
+                                >
+                                    {requestTypes.map((type) => (
+                                        <SelectItem
+                                            key={type.id}
+                                            value={String(type.id)}
+                                            style={{
+                                                color: '#333',
+                                                fontSize: '16px',
+                                                fontStyle: 'normal',
+                                                fontWeight: 400,
+                                                lineHeight: '150%',
+                                                opacity: 0.8,
+                                                padding: "8px 24px",
+                                                cursor: 'pointer',
+                                                borderRadius: '4px',
+                                            }}
+                                        >
+                                            {type.title}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
                         </motion.div>
 
                         {/* Full Name */}
@@ -309,7 +404,7 @@ const ContactUsClient = () => {
                                     borderRadius: "8px",
                                 }}
                                 className="w-full py-3 lg:py-4 px-4 lg:px-6 h-[48px] lg:h-[56px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="Full Name"
+                                placeholder={t("contactUs.fullName")}
                             />
                         </motion.div>
 
@@ -325,40 +420,71 @@ const ContactUsClient = () => {
                                     borderRadius: "8px",
                                 }}
                                 className="w-full py-3 lg:py-4 px-4 lg:px-6 h-[48px] lg:h-[56px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="Email"
+                                placeholder={t("contactUs.email")}
                             />
                         </motion.div>
 
                         {/* Mobile Number with Country Code */}
                         <motion.div
-                            className="flex gap-0 rtl:flex-row-reverse"
+                            className="flex gap-0"
                             variants={formFieldVariants}
                         >
                             <div className="relative">
-                                <select
-                                    name="countryCode"
+                                <Select
                                     value={formData.countryCode}
-                                    onChange={handleChange}
-                                    style={{
-                                        borderRadius: "8px 0 0 8px",
-                                        minWidth: '100px',
-                                        color: "rgba(51, 51, 51, 0.80)",
-                                        background: "#ECEEEE",
-                                        fontSize: "16px",
-                                    }}
-                                    className="appearance-none py-3 lg:py-5 px-3 lg:px-6 border-r-[1px] rtl:border-r-0 rtl:border-l-[1px] placeholder:text-[14px] lg:placeholder:text-[16px] border-none h-[48px] lg:h-[64px] border text-[14px] lg:text-[16px] bg-white text-[#333] focus:outline-none transition-colors cursor-pointer lg:min-w-[131px] rtl:rounded-r-[8px] rtl:rounded-l-[0px] ltr:rounded-l-[8px] ltr:rounded-r-[0px]"
+                                    onValueChange={(value) => handleChange({ target: { name: 'countryCode', value } } as any)}
                                 >
-                                    {countries.map((country) => (
-                                        <option key={country.code} value={country.code} >
-                                            {country.code}
-                                        </option>
-                                    ))}
-                                </select>
-                                <div className="absolute ltr:right-4 ltr:lg:right-6 rtl:left-4 rtl:lg:left-6 top-[55%] lg:top-1/2 transform -translate-y-1/2 pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" viewBox="0 0 15 8" fill="none" className="lg:w-[15px] lg:h-[8px]">
-                                        <path d="M1.5 1L7.5 7L13.5 1" stroke="#313B49" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </div>
+                                    <SelectTrigger
+                                        style={{
+                                            borderRadius: `${i18n.language === 'ar' ? '0px 8px 8px 0px' : ' 8px 0 0  8px '}`,
+                                            minWidth: '131px',
+                                            padding: '16px 24px',
+                                            background: '#FFF',
+                                            color: '#333',
+                                            fontSize: '16px',
+                                            fontStyle: 'normal',
+                                            fontWeight: 400,
+                                            lineHeight: '150%',
+                                            border: 'none',
+                                            height: '64px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                        }}
+                                        className="focus:outline-none transition-colors cursor-pointer"
+                                    >
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent
+                                        style={{
+                                            background: '#FFF',
+                                            borderRadius: '8px',
+                                            padding: '8px',
+                                            border: '1px solid #D6D6D6',
+                                            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                        }}
+                                    >
+                                        {countries.map((country) => (
+                                            <SelectItem
+                                                key={country.code}
+                                                value={country.code}
+                                                style={{
+                                                    color: '#333',
+                                                    fontSize: '16px',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 400,
+                                                    lineHeight: '150%',
+                                                    opacity: 0.8,
+                                                    padding: '4px 24px',
+                                                    cursor: 'pointer',
+                                                    borderRadius: '4px',
+                                                }}
+                                            >
+                                                {country.code}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
                             </div>
                             <div className="flex-1">
                                 <input
@@ -368,27 +494,74 @@ const ContactUsClient = () => {
                                     value={formData.mobileNumber}
                                     onChange={handleChange}
                                     style={{
-                                        borderRadius: "0 8px 8px 0",
+                                        borderRadius: i18n.language === "en" ? "0 8px 8px 0" : "8px 0 0 8px",
                                     }}
-                                    className="py-3 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[64px] w-full lg:w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors rtl:rounded-l-[8px] rtl:rounded-r-[0px] ltr:rounded-r-[8px] ltr:rounded-l-[0px] rtl:text-right ltr:text-left"
-                                    placeholder={`${formData.countryCode === 'KSA' ? '+966' : formData.countryCode === 'UAE' ? '+971' : '+20'} Mobile Number`}
+                                    className="py-3 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[64px] w-full lg:w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors"
+                                    placeholder={`${formData.countryCode === 'KSA' ? '+966' : formData.countryCode === 'UAE' ? '+971' : '+20'} ${t("contactUs.mobileNumber")}`}
                                 />
                             </div>
                         </motion.div>
 
                         {/* How did you know about BARQ Systems */}
-                        <motion.div variants={formFieldVariants}>
-                            <Input
-                                type="text"
-                                name="knowAboutBarq"
+                        <motion.div
+                            className='relative'
+                            variants={formFieldVariants}
+                        >
+                            <Select
                                 value={formData.knowAboutBarq}
-                                onChange={handleChange}
-                                style={{
-                                    borderRadius: "8px",
-                                }}
-                                className="w-full py-3 lg:py-4 px-4 lg:px-6 h-[48px] lg:h-[56px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="How did you know about BARQ Systems?"
-                            />
+                                onValueChange={(value) => handleChange({ target: { name: 'knowAboutBarq', value } } as any)}
+                            >
+                                <SelectTrigger
+                                    style={{
+                                        borderRadius: "8px",
+                                        width: '100%',
+                                        padding: '16px 24px',
+                                        background: '#FFF',
+                                        color: formData.knowAboutBarq ? "#333" : "rgba(51, 51, 51, 0.80)",
+                                        fontSize: '16px',
+                                        fontStyle: 'normal',
+                                        fontWeight: 400,
+                                        lineHeight: '150%',
+                                        border: '1px solid #D6D6D6',
+                                        height: '56px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                    }}
+                                    className="focus:outline-none transition-colors cursor-pointer"
+                                >
+                                    <SelectValue placeholder={t("contactUs.knowAboutBarq")} />
+                                </SelectTrigger>
+                                <SelectContent
+                                    style={{
+                                        background: '#FFF',
+                                        borderRadius: '8px',
+                                        padding: '8px',
+                                        border: '1px solid #D6D6D6',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                    }}
+                                >
+                                    {hearAboutOptions.map((option) => (
+                                        <SelectItem
+                                            key={option.id}
+                                            value={String(option.id)}
+                                            style={{
+                                                color: '#333',
+                                                fontSize: '16px',
+                                                fontStyle: 'normal',
+                                                fontWeight: 400,
+                                                lineHeight: '150%',
+                                                opacity: 0.8,
+                                                padding: '8px 24px',
+                                                cursor: 'pointer',
+                                                borderRadius: '4px',
+                                            }}
+                                        >
+                                            {option.title}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
                         </motion.div>
 
                         {/* Request Description */}
@@ -402,9 +575,20 @@ const ContactUsClient = () => {
                                     borderRadius: "8px",
                                 }}
                                 className="w-full py-3 lg:py-4 px-4 lg:px-6 h-[48px] lg:h-[56px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="Request Description"
+                                placeholder={t("contactUs.requestDescription")}
                             />
                         </motion.div>
+
+                        {/* Error Message */}
+                        {submitError && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-red-400 text-sm"
+                            >
+                                {submitError}
+                            </motion.div>
+                        )}
 
                         {/* Submit Button */}
                         <motion.div variants={buttonVariants}>
@@ -414,7 +598,9 @@ const ContactUsClient = () => {
                                 whileTap="tap"
                             >
                                 <Button
-                                    className='z-[3000] h-[48px] lg:h-[56px] w-full text-white flex items-center justify-center gap-[8px] lg:gap-[10px] hover:gap-[4px] text-[16px] lg:text-[18px] font-normal transition-all duration-300 rounded-[12px] academy-button'
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className='z-[3000] h-[48px] lg:h-[56px] w-full text-white flex items-center justify-center gap-[8px] lg:gap-[10px] hover:gap-[4px] text-[16px] lg:text-[18px] font-normal transition-all duration-300 rounded-[12px] academy-button disabled:opacity-50 disabled:cursor-not-allowed'
                                     style={{
                                         background:
                                             'linear-gradient(95deg, var(--Secondary-Blue-100, #318CCC) 13.23%, #0040C3 81.63%)',
@@ -422,10 +608,22 @@ const ContactUsClient = () => {
                                         padding: '12px 20px',
                                     }}
                                 >
-                                    Submit
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" className="lg:w-6 lg:h-6">
-                                        <path d="M9.5 6L15.5 12L9.5 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                                    {isSubmitting ? t("contactUs.submitting") : t("contactUs.submit")}
+                                    {!isSubmitting && (
+                                        // <svg className={`${i18n.language === 'ar' ? 'rotate-180' : ''} lg:w-6 lg:h-6`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" >
+                                        //     <path d="M9.5 6L15.5 12L9.5 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        // </svg>
+                                        <svg
+                                            style={{
+                                                transform: i18n.language === 'ar' ? 'rotate(180deg)' : 'none',
+                                                width: '8px',
+                                                height: '14px',
+                                                marginTop: '4px',
+                                            }}
+                                            xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
+                                            <path d="M1 1L7 7L1 13" stroke="white" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    )}
                                 </Button>
                             </motion.div>
                         </motion.div>

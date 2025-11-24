@@ -10,6 +10,7 @@ import type {
   EconomicSustainabilityControllerReadResponse,
   EnvironmentalSustainabilityControllerReadResponse,
 } from '@/sdk/types.gen';
+import { useTranslation } from 'react-i18next';
 
 interface SocialImpactSectionProps {
   mainSocialData: MainSocialControllerReadResponse | null;
@@ -26,7 +27,7 @@ export default function SocialImpactSection({
 }: SocialImpactSectionProps) {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
-
+  const { t } = useTranslation()
   const mainSocialContent = mainSocialData?.data?.[0];
   const cardSocialItems = cardSocialData?.data || [];
 
@@ -74,7 +75,7 @@ export default function SocialImpactSection({
                   backgroundClip: 'text',
                 }}
               >
-                Social
+                {t("sustainability.social")}
               </span>
             </motion.div>
             <motion.h2
@@ -97,11 +98,11 @@ export default function SocialImpactSection({
           </div>
 
           {/* Impact Areas Grid */}
-          <div className='flex items-stretch gap-10 justify-center flex-wrap '>
+          <div className='flex items-stretch gap-10 justify-start flex-wrap '>
             {cardSocialItems.map((area, index: number) => (
               <motion.div
                 key={area.id}
-                className='group cursor-pointer transition-all duration-300 flex'
+                className='group cursor-pointer transition-all duration-300 flex overflow-x-hidden'
                 initial={{ opacity: 0, y: 50 }}
                 animate={
                   isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }

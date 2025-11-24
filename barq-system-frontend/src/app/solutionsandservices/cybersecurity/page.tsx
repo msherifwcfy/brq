@@ -4,24 +4,23 @@ import React from 'react';
 import {
   getCybersecurityHero,
   getNetworkSection,
-  getCybersecurityDataCenter,
   getOperationIntelligence,
   getIdentityManagement,
   getApplicationData,
 } from '@/services/cybersecurity.service';
 
+export const dynamic = 'force-dynamic';
+
 const Cybersecurity = async () => {
   const [
     heroData,
     networkData,
-    dataCenterData,
     operationIntelligenceData,
     identityManagementData,
     applicationData,
   ] = await Promise.all([
     getCybersecurityHero(),
     getNetworkSection(),
-    getCybersecurityDataCenter(),
     getOperationIntelligence(),
     getIdentityManagement(),
     getApplicationData(),
@@ -33,7 +32,6 @@ const Cybersecurity = async () => {
       <CybersecurityHeroSection
         heroData={heroData}
         networkData={networkData}
-        dataCenterData={dataCenterData}
         operationIntelligenceData={operationIntelligenceData}
         identityManagementData={identityManagementData}
         applicationData={applicationData}

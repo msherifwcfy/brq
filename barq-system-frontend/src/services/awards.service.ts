@@ -6,12 +6,14 @@ import type {
   AwardsHeadControllerReadResponse,
   AwardsCardsControllerReadResponse,
 } from '@/sdk/types.gen';
+import { getLanguageHeaders } from '@/lib/language-utils';
 
 export const awardsService = {
   async getAwardsHeadData(): Promise<AwardsHeadControllerReadResponse | null> {
     try {
       const response = await awardsHeadControllerRead({
         query: { query: { relations: {} } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -24,6 +26,7 @@ export const awardsService = {
     try {
       const response = await awardsCardsControllerRead({
         query: { query: { relations: { media: true } } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {

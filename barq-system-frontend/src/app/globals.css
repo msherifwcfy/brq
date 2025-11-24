@@ -196,27 +196,3 @@ html {
   font-family:
     'Frutiger LT Std Bold extra', ui-sans-serif, system-ui, sans-serif !important;
 }
-
-.frutiger-lt-std-roman {
-  font-family:
-    'Frutiger LT Std Roman', ui-sans-serif, system-ui, sans-serif !important;
-}
-
-/* RTL Support for Arabic */
-[dir="rtl"] {
-  direction: rtl;
-}
-
-[dir="rtl"] input,
-[dir="rtl"] select,
-[dir="rtl"] textarea {
-  text-align: right;
-}
-
-[dir="rtl"] .rtl-flip {
-  transform: scaleX(-1);
-}
-
-[dir="rtl"] .rtl-reverse {
-  flex-direction: row-reverse;
-}

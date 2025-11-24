@@ -1,8 +1,8 @@
 import React from 'react'
 import { notFound } from 'next/navigation'
-import { caseStudiesData } from '@/data/caseStudies'
 import Footer from '@/components/footer'
 import CaseStudyDetailsContent from './CaseStudyDetailsContent';
+import { caseStudiesService } from '@/services/case-studies.service';
 
 interface CaseStudyDetailsPageProps {
     params: Promise<{
@@ -13,15 +13,16 @@ interface CaseStudyDetailsPageProps {
 const CaseStudyDetailsPage = async ({ params }: CaseStudyDetailsPageProps) => {
     const { id: paramId } = await params;
     const id = Number(paramId);
-    const item = caseStudiesData.find(cs => cs.id === id);
+    
+    const caseStudyData = await caseStudiesService.getCaseStudyById(id);
 
-    if (!item) {
+    if (!caseStudyData?.data) {
         notFound();
     }
 
     return (
         <>
-            <CaseStudyDetailsContent item={item} />
+            <CaseStudyDetailsContent caseStudyData={caseStudyData} />
             <Footer />
         </>
     )

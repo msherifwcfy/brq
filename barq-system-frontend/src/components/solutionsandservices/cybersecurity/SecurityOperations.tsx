@@ -12,6 +12,7 @@ const SecurityOperations: React.FC<SecurityOperationsProps> = ({ data }) => {
 
   return (
     <div className='max-w-7xl mx-auto relative z-50 lg:mt-[120px] mt-40 px-[5%] xl:px-0'>
+      <div id='cybersecurity-service-2' className='absolute top-[-100px]'></div>
       {/* Section Header */}
       <div className='lg:mb-12 mb-8'>
         {data?.logo && (
@@ -31,7 +32,7 @@ const SecurityOperations: React.FC<SecurityOperationsProps> = ({ data }) => {
         </p>
       </div>
       {/* Main Content - Image Left, Services Right */}
-      <div className='flex flex-col lg:flex-row gap-8 lg:gap-12 items-start'>
+      <div className='flex flex-col lg:flex-row gap-8 lg:gap-12 items-center'>
         {/* Left Side - Image Container */}
         <div
           className='relative w-full  rounded-[24px] overflow-hidden  lg:max-w-[616px] max-w-full lg:h-[397px] h-[280px]'
@@ -50,10 +51,6 @@ const SecurityOperations: React.FC<SecurityOperationsProps> = ({ data }) => {
               className='rounded-[16px] lg:min-h-[349px] min-h-[232px] object-cover w-full'
             />
           </div>
-          <div
-            id='securityOperations'
-            className=' absolute top-[35%] left-0  '
-          ></div>
         </div>
         {/* Right Side - Services List */}
         <div className='flex-1 w-full'>

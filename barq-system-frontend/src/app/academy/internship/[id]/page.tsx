@@ -2,7 +2,9 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 import Footer from '@/components/footer'
 import InternshipApplicationContent from './InternshipApplicationContent'
-import { internshipPrograms } from '@/data/internshipPrograms'
+import { academyService } from '@/services/academy.service'
+
+export const dynamic = 'force-dynamic';
 
 interface InternshipApplicationPageProps {
     params: Promise<{
@@ -13,15 +15,24 @@ interface InternshipApplicationPageProps {
 const InternshipApplicationPage = async ({ params }: InternshipApplicationPageProps) => {
     const { id: paramId } = await params;
     const id = Number(paramId);
-    const program = internshipPrograms.find(p => p.id === id);
 
-    if (!program) {
+    // Fetch all internship programs from CMS
+    const internshipProgramsData = await academyService.getInternshipProgramsData();
+    const allCards = internshipProgramsData?.data?.[0]?.barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards || [];
+    
+    // Find the specific card by ID
+    const programCard = allCards.find(card => card.id === id);
+
+    if (!programCard) {
         notFound();
     }
 
     return (
         <>
-            <InternshipApplicationContent program={program} />
+            <InternshipApplicationContent 
+                programCard={programCard}
+                programType="internship"
+            />
             <Footer />
         </>
     )

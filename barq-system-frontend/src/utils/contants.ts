@@ -204,3 +204,5 @@ export const countries = [
   { code: 'ZM', name: 'Zambia', dialCode: '+260' },
   { code: 'ZW', name: 'Zimbabwe', dialCode: '+263' },
 ];
+
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;

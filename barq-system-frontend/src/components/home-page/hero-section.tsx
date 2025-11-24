@@ -12,6 +12,8 @@ import type {
   WhoAreWeControllerReadResponse,
   LandingNumbersControllerReadResponse,
 } from '@/sdk/types.gen';
+import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/navigation';
 
 interface HeroSectionProps {
   heroData: HeroControllerReadResponse | null;
@@ -28,7 +30,8 @@ export default function HeroSection({
   const [isLoading, setIsLoading] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [showContent, setShowContent] = useState(false);
-
+  const { i18n, t } = useTranslation();
+  const router = useRouter();
   const mediaUrl = heroContent?.media
     ? `${heroContent.media.url}${heroContent.media.key}`
     : null;
@@ -94,7 +97,7 @@ export default function HeroSection({
                 className='text-center'
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2, delay: 1.3 }}
+                transition={{ duration: 1.2, delay: 1.1 }}
               >
                 <Image
                   src='/assets/logo.svg'
@@ -185,7 +188,7 @@ export default function HeroSection({
         {/* Gradient overlay on top of video */}
 
         <div
-          className='absolute inset-0 z-2 min-h-[855px] overflow-hidden '
+          className='absolute inset-0 z-2 max-h-[855px] overflow-hidden '
           style={{
             backgroundImage:
               "url('/assets/solutionsandservices/hero-background.svg')",
@@ -219,7 +222,7 @@ export default function HeroSection({
                   damping: 30,
                   stiffness: 120,
                   duration: 0.4,
-                  delay: 0.3
+                  delay: 0.2
                 }}
               >
                 <div className='max-w-[608px] lg:max-w-[608px] md:max-w-[500px] sm:max-w-full text-left relative z-[250]'>
@@ -232,18 +235,22 @@ export default function HeroSection({
                       damping: 30,
                       stiffness: 120,
                       duration: 0.4,
-                      delay: 0.5
+                      delay: 0.3
                     }}
                   >
                     <div className='p-2 w-10 h-9 rounded-full flex items-center justify-center bg-[#ffffff1a] border-[#ffffff1a] border-[1px]'>
                       <Shield className='w-[18px] h-[18px] text-white' />
                     </div>
                     <span className='text-white text-[12px]  capitalize'>
-                      Pioneer in Enterprise Security
+
+                      {t('home.pioneerInEnterpriseSecurity')}
                     </span>
                   </motion.div>
                   <motion.h1
-                    className='text-white  xl:text-[56px] lg:text-[48px] md:text-[40px] text-[36px]  font-normal lg:leading-[61.6px] leading-[44px] mb-4'
+                    className={`text-white  
+                      
+                      ${i18n.language === "ar" ? "text-right" : "text-left"}
+                      xl:text-[56px] lg:text-[48px] md:text-[40px] text-[36px]  font-normal lg:leading-[61.6px] leading-[44px] mb-4`}
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -251,14 +258,14 @@ export default function HeroSection({
                       damping: 30,
                       stiffness: 120,
                       duration: 0.4,
-                      delay: 0.7
+                      delay: 0.5
                     }}
                   >
                     {heroContent?.headline ||
                       'Your Technology Backbone for a Secure Digital Future'}
                   </motion.h1>
                   <motion.p
-                    className='text-white  lg:text-[18px] md:text-[16px] sm:text-[14px] mb-10 leading-[27px] font-normal pr-4 lg:pr-4 md:pr-2 sm:pr-0'
+                    className={`text-white  lg:text-[18px] md:text-[16px] sm:text-[14px] mb-10 leading-[27px] font-normal  ${i18n.language === "ar" ? "text-right" : "text-left"}`}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -285,7 +292,8 @@ export default function HeroSection({
                     }}
                   >
                     <Button
-                      className='z-[3000] text-white flex items-center justify-start gap-[10px] hover:gap-[4px] lg:text-[18px] text-[16px] lg:h-[56px] h-[48px] font-normal transition-all duration-300   rounded-[12px] academy-button min-w-[265px]'
+                      onClick={() => router.push('/solutionsandservices')}
+                      className='z-[3000] cursor-pointer text-white flex items-center justify-start gap-[10px] hover:gap-[4px] lg:text-[18px] text-[16px] lg:h-[56px] h-[48px] font-normal transition-all duration-300   rounded-[12px] academy-button min-w-[265px]'
                       style={{
                         background:
                           'linear-gradient(95deg, var(--Secondary-Blue-100, #318CCC) 13.23%, #0040C3 81.63%)',
@@ -301,7 +309,7 @@ export default function HeroSection({
                         alt='arrow-right'
                         width={24}
                         height={24}
-                        className=' mt-[3px] w-[24px] h-[24px] object-contain'
+                        className={`${i18n.language === "ar" ? "rotate-180" : "rotate-0"} mt-[3px] w-[24px] h-[24px] object-contain`}
                       />
                     </Button>
                   </motion.div>

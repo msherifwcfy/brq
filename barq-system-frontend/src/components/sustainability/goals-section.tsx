@@ -4,80 +4,18 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
 import type { GlobalCommitmentControllerReadResponse } from '@/sdk/types.gen';
+import { useTranslation } from 'react-i18next';
 
 interface GoalsSectionProps {
   globalCommitmentData: GlobalCommitmentControllerReadResponse | null;
 }
-
-const sustainabilityGoals = [
-  {
-    id: 1,
-    icon: '/assets/sustainability/sustainability-1.svg',
-    title: 'Carbon Neutral Operations',
-    description:
-      'Achieving net-zero emissions across all our operations by 2030',
-  },
-  {
-    id: 2,
-    icon: '/assets/sustainability/sustainability-2.svg',
-    title: 'Green Technology Solutions',
-    description:
-      'Developing eco-friendly technologies that reduce environmental impact',
-  },
-  {
-    id: 3,
-    icon: '/assets/sustainability/sustainability-3.svg',
-    title: 'Sustainable Partnerships',
-    description:
-      'Collaborating with like-minded organizations for greater impact',
-  },
-  {
-    id: 4,
-    icon: '/assets/sustainability/sustainability-4.svg',
-    title: 'Renewable Energy',
-    description:
-      'Transitioning to 100% renewable energy sources in our facilities',
-  },
-  {
-    id: 5,
-    icon: '/assets/sustainability/sustainability-5.svg',
-    title: 'Waste Reduction',
-    description: 'Implementing circular economy principles to minimize waste',
-  },
-  {
-    id: 6,
-    icon: '/assets/sustainability/sustainability-6.svg',
-    title: 'Digital Transformation',
-    description:
-      'Helping clients reduce their carbon footprint through digitalization',
-  },
-  {
-    id: 7,
-    icon: '/assets/sustainability/sustainability-7.svg',
-    title: 'Employee Engagement',
-    description: 'Empowering our team to drive sustainability initiatives',
-  },
-  {
-    id: 8,
-    icon: '/assets/sustainability/sustainability-8.svg',
-    title: 'Community Impact',
-    description: 'Supporting local communities through sustainable development',
-  },
-  {
-    id: 9,
-    icon: '/assets/sustainability/sustainability-9.svg',
-    title: 'Innovation Focus',
-    description:
-      'Investing in research for breakthrough sustainable technologies',
-  },
-];
 
 export default function SustainabilityGoalsSection({
   globalCommitmentData,
 }: GoalsSectionProps) {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
-
+  const { t } = useTranslation();
   const goalsContent = globalCommitmentData?.data?.[0];
   const goals = goalsContent?.icons || [];
   return (
@@ -105,7 +43,7 @@ export default function SustainabilityGoalsSection({
                 backgroundClip: 'text',
               }}
             >
-              Global Commitment
+              {t('sustainability.globalCommitment')}
             </span>
           </motion.div>
           <motion.h2

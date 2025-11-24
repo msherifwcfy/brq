@@ -1,14 +1,30 @@
 "use client";
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { motion } from 'framer-motion';
 import { countries } from '@/utils/contants';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import EventSuccessModal from './EventSuccessModal';
+import type { EventEntity } from '@/sdk/types.gen';
+import { eventJoinusFormControllerCreate } from '@/sdk/sdk.gen';
+import { useEventJoinUsHeroControllerReadQuery } from '@/sdk/modules/eventjoinushero.gen';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
-const EventOverview = () => {
+interface EventOverviewProps {
+    event: EventEntity
+}
 
-
+const EventOverview = ({ event }: EventOverviewProps) => {
+    const { t } = useTranslation()
+    const { isRTL } = useLanguage()
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -20,12 +36,47 @@ const EventOverview = () => {
     });
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const { data: eventJoinUsHeroData } = useEventJoinUsHeroControllerReadQuery();
+    const eventData = eventJoinUsHeroData?.data?.[0];
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Here you can add form validation and API call logic
-        // For now, we'll just show the success modal
-        setIsModalOpen(true);
+        setIsSubmitting(true);
+
+        try {
+            const selectedCountry = countries.find(country => country.code === formData.countryCode);
+
+            await eventJoinusFormControllerCreate({
+                body: {
+                    first_name: formData.firstName,
+                    last_name: formData.lastName,
+                    email: formData.email,
+                    phone_number: formData.mobileNumber,
+                    phone_number_key: selectedCountry?.dialCode || '+966',
+                    position: formData.position,
+                    company_name: formData.organizationName,
+                    event_id: event.id,
+                },
+            });
+
+            setFormData({
+                firstName: '',
+                lastName: '',
+                email: '',
+                position: '',
+                organizationName: '',
+                countryCode: 'KSA',
+                mobileNumber: ''
+            });
+
+            setIsModalOpen(true);
+        } catch (error) {
+            console.error('Error submitting event registration:', error);
+            alert('Failed to submit registration. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleCloseModal = () => {
@@ -46,6 +97,7 @@ const EventOverview = () => {
         });
     };
 
+    console.log({ event })
     const selectedCountry = countries.find(country => country.code === formData.countryCode);
     return (
         <div className='flex flex-col lg:flex-row gap-6 lg:gap-8'>
@@ -59,14 +111,16 @@ const EventOverview = () => {
                     Overview
                 </h3>
                 <h1 className='text-white text-[28px] lg:text-[40px] leading-[32px] lg:leading-[44px] font-normal mb-4 lg:mb-6'>
-                    Event Overview
+                    {eventData?.title}
                 </h1>
                 <p className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] tracking-[0.0205em] mb-6 lg:mb-8'>
-                    You&apos;ll learn how you can build user-friendly automations right in your <br className='hidden lg:block' /> browser and harness the power of the web to unite your enterprise <br className='hidden lg:block' /> software stack, processes, and people. We&apos;ll explore how web automation <br className='hidden lg:block' />can drive faster business value, greater efficiency, and higher employee <br className='hidden lg:block' /> satisfaction
+                    {eventData?.sub_title}
                 </p>
-                <span className='text-[#EDEDED] text-[18px] lg:text-[24px] frutiger-lt-std-bold leading-[26px] lg:leading-[44.8px]'>
-                    Our AI-powered platform brings the workplace of the future into your business today.
-                </span>
+{eventData?.quote && (
+                    <div className='text-[#EDEDED] text-[18px] lg:text-[24px] frutiger-lt-std-bold leading-[26px] lg:leading-[44.8px]'>
+                        &quot;{eventData?.quote}&quot;
+                    </div>
+                )}
             </div>
             <div className='w-full lg:w-auto'>
                 <motion.form
@@ -89,7 +143,7 @@ const EventOverview = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.1 }}
                         >
-                            Join Us at the Event
+                            {t('events.joinUsAtTheEvent')}
                         </motion.h2>
                         <motion.p
                             className="text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[27px] text-center mb-4 max-w-full lg:max-w-[650px] lg:h-[20px]"
@@ -97,7 +151,7 @@ const EventOverview = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.2 }}
                         >
-                            Fill out this form
+                            {t('events.fillOutThisForm')}
                         </motion.p>
                     </div>
                     <div className='flex flex-col gap-4 items-center'>
@@ -114,7 +168,7 @@ const EventOverview = () => {
                                         borderRadius: "8px",
                                     }}
                                     className="py-4 px-6  h-[48px] lg:h-[56px] w-full lg:w-[264px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                    placeholder="First Name"
+                                    placeholder={t('academyApplication.firstName')}
                                 />
                             </div>
                             <div className="flex-1">
@@ -128,7 +182,7 @@ const EventOverview = () => {
                                         borderRadius: "8px",
                                     }}
                                     className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[264px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                    placeholder="Last Name"
+                                    placeholder={t('academyApplication.lastName')}
                                 />
                             </div>
                         </div>
@@ -144,35 +198,66 @@ const EventOverview = () => {
                                     borderRadius: "8px",
                                 }}
                                 className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[544px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white placeholder:opacity-80 text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="Email"
+                                placeholder={t('academyApplication.email')}
                             />
                         </div>
                         {/* Phone Number with Country Selector */}
                         <div className="flex gap-0 w-full">
                             <div className="relative">
-                                <select
-                                    name="countryCode"
+                                <Select
                                     value={formData.countryCode}
-                                    onChange={e => handleSelectChange(e.target.value)}
-                                    style={{
-                                        borderRadius: "8px 0 0 8px",
-                                        minWidth: '131px',
-                                        color: "rgba(51, 51, 51, 0.80)",
-                                        fontSize: "16px"
-                                    }}
-                                    className="appearance-none py-4 px-6 border-r-[1px] border-[#D6D6D6] h-[48px] lg:h-[56px] border text-[14px] lg:text-[16px] bg-white focus:outline-none transition-colors cursor-pointer"
+                                    onValueChange={(value) => handleSelectChange(value)}
                                 >
-                                    {countries.map((country) => (
-                                        <option key={country.code} value={country.code} className='text-[14px] lg:text-[16px]' >
-                                            {country.code}
-                                        </option>
-                                    ))}
-                                </select>
-                                <div className="absolute right-6 top-[55%]  transform -translate-y-1/2 pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                                        <path d="M1 1L7 7L13 1" stroke="#313B49" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
+                                    <SelectTrigger
+                                        style={{
+                                            borderRadius: isRTL ? "0 8px 8px 0" : "8px 0 0 8px",
+                                            minWidth: '131px',
+                                            padding: '16px 24px',
+                                            background: '#FFF',
+                                            color: '#333',
+                                            fontSize: '16px',
+                                            fontStyle: 'normal',
+                                            fontWeight: 400,
+                                            lineHeight: '150%',
+                                            border: 'none',
+                                            height: '64px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                        }}
+                                        className="focus:outline-none transition-colors cursor-pointer"
+                                    >
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent
+                                        style={{
+                                            background: '#FFF',
+                                            borderRadius: '8px',
+                                            border: '1px solid #D6D6D6',
+                                            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                        }}
+                                    >
+                                        {countries.map((country) => (
+                                            <SelectItem
+                                                key={country.code}
+                                                value={country.code}
+                                                style={{
+                                                    color: '#333',
+                                                    fontSize: '16px',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 400,
+                                                    lineHeight: '150%',
+                                                    opacity: 0.8,
+                                                    padding: '8px 24px',
+                                                    cursor: 'pointer',
+                                                    borderRadius: '4px',
+                                                }}
+                                            >
+                                                {country.code}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
                             </div>
                             <div className="flex-1">
                                 <input
@@ -182,10 +267,10 @@ const EventOverview = () => {
                                     value={formData.mobileNumber}
                                     onChange={handleChange}
                                     style={{
-                                        borderRadius: "0 8px 8px 0",
+                                        borderRadius: isRTL ? "8px 0 0 8px" : "0 8px 8px 0",
                                     }}
-                                    className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[413px] placeholder:text-[14px] lg:placeholder:text-[16px] text-[14px] lg:text-[16px] border border-[#FFF] bg-white text-[#333] placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors"
-                                    placeholder={`${selectedCountry?.dialCode} Mobile Number`}
+                                    className="py-4 px-6 h-[48px] lg:h-[64px] w-full lg:w-[413px] placeholder:text-[14px] lg:placeholder:text-[16px] text-[14px] lg:text-[16px] border border-[#FFF] bg-white text-[#333] placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors"
+                                    placeholder={`${selectedCountry?.dialCode} ${t('academyApplication.mobileNumber')}`}
                                 />
                             </div>
                         </div>
@@ -201,7 +286,7 @@ const EventOverview = () => {
                                     borderRadius: "8px",
                                 }}
                                 className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[544px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-[#333] placeholder:opacity-80 placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="Company / Organization Name"
+                                placeholder={t('events.companyOrganizationName')}
                             />
                         </div>
                         {/* Position */}
@@ -216,13 +301,15 @@ const EventOverview = () => {
                                     borderRadius: "8px",
                                 }}
                                 className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[544px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-[#333] placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="Position"
+                                placeholder={t('resources.position')}
                             />
                         </div>
                         {/* Submit Button */}
                         <div className="w-full">
                             <Button
-                                className='z-[3000] h-[48px] lg:h-[56px] w-full text-white flex items-center justify-center gap-[8px] lg:gap-[10px] hover:gap-[4px] text-[16px] lg:text-[18px] font-normal transition-all duration-300 rounded-[12px] academy-button lg:py-4 lg:px-6'
+                                type="submit"
+                                disabled={isSubmitting}
+                                className='z-[3000] h-[48px] lg:h-[56px] w-full text-white flex items-center justify-center gap-[8px] lg:gap-[10px] hover:gap-[4px] text-[16px] lg:text-[18px] font-normal transition-all duration-300 rounded-[12px] academy-button lg:py-4 lg:px-6 disabled:opacity-50 disabled:cursor-not-allowed'
                                 style={{
                                     background:
                                         'linear-gradient(95deg, var(--Secondary-Blue-100, #318CCC) 13.23%, #0040C3 81.63%)',
@@ -230,10 +317,19 @@ const EventOverview = () => {
                                     padding: '12px 20px',
                                 }}
                             >
-                                Submit Registration
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" className="lg:w-6 lg:h-6">
-                                    <path d="M9.5 6L15.5 12L9.5 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
+                                {isSubmitting ? 'Submitting...' : t('events.submitRegistration')}
+                                {!isSubmitting && (
+                                    <svg
+                                        style={{
+                                            transform: isRTL ? 'scaleX(-1)' : 'none',
+                                            width: '8px',
+                                            height: '12px',
+                                            marginTop: '4px',
+                                        }}
+                                        xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
+                                        <path d="M1 1L7 7L1 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                )}
                             </Button>
                         </div>
                     </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import SustainabilityHeroSection from '@/components/sustainability/hero-section';
 import SocialImpactSection from '@/components/sustainability/social-impact-section';
-import GoalsSection from '@/components/sustainability/goals-section';
 import Footer from '@/components/footer';
 import { sustainabilityService } from '@/services/sustainability.service';
 

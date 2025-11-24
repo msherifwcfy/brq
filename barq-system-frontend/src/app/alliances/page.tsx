@@ -19,19 +19,11 @@ interface PageProps {
 export default async function AlliancesPage({ searchParams }: PageProps) {
   const params = await searchParams;
   const activeTab = (params.tab as 'clients' | 'vendors') || 'vendors';
-  const currentPage = parseInt(params.page || '1', 10);
-  const selectedCountry = params.country || 'All';
-  const selectedIndustry = params.industry || 'All';
-  const selectedSolution = params.solution || 'All';
-  const itemsPerPage = 24;
+  const selectedCountry = params.country || '';
+  const selectedIndustry = params.industry || '';
+  const selectedSolution = params.solution || '';
 
-  const countryId =
-    selectedCountry !== 'All' ? parseInt(selectedCountry, 10) : undefined;
-  const industryId =
-    selectedIndustry !== 'All' ? parseInt(selectedIndustry, 10) : undefined;
-  const solutionId =
-    selectedSolution !== 'All' ? parseInt(selectedSolution, 10) : undefined;
-
+  // Fetch all data for client-side filtering (no pagination, no filters)
   const [
     headData,
     clientsResponse,
@@ -41,18 +33,10 @@ export default async function AlliancesPage({ searchParams }: PageProps) {
     solutionsResponse,
   ] = await Promise.all([
     alliancesService.getHeadData(),
-    alliancesService.getClientsData(
-      activeTab === 'clients' ? currentPage : 1,
-      itemsPerPage,
-      activeTab === 'clients' ? countryId : undefined,
-      activeTab === 'clients' ? industryId : undefined
-    ),
-    alliancesService.getVendorsData(
-      activeTab === 'vendors' ? currentPage : 1,
-      itemsPerPage,
-      activeTab === 'vendors' ? countryId : undefined,
-      activeTab === 'vendors' ? solutionId : undefined
-    ),
+    // Fetch all clients data (use a large limit to get all data)
+    alliancesService.getClientsData(1, 1000),
+    // Fetch all vendors data (use a large limit to get all data)
+    alliancesService.getVendorsData(1, 1000),
     alliancesService.getCountries(),
     alliancesService.getIndustries(),
     alliancesService.getSolutions(),
@@ -65,16 +49,9 @@ export default async function AlliancesPage({ searchParams }: PageProps) {
   const industries = industriesResponse?.data || [];
   const solutions = solutionsResponse?.data || [];
 
-  const totalItems =
-    activeTab === 'clients'
-      ? clientsResponse?.meta?.total || 0
-      : vendorsResponse?.meta?.total || 0;
-
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-
   return (
     <div className='bg-black min-h-screen'>
-      <section className='relative bg-black 2lx:px-[5%] min-h-[1820px]'>
+      <section className='relative bg-black 2lx:px-[5%] min-h-[1400px] lg:min-h-[1820px]'>
         <div className='absolute top-0 left-0 right-0 bottom-0 z-5'>
           <Image
             src='/assets/alliances/alliance-background.svg'
@@ -98,8 +75,6 @@ export default async function AlliancesPage({ searchParams }: PageProps) {
             industries={industries}
             solutions={solutions}
             initialTab={activeTab}
-            currentPage={currentPage}
-            totalPages={totalPages}
             selectedCountry={selectedCountry}
             selectedIndustry={selectedIndustry}
             selectedSolution={selectedSolution}

@@ -7,6 +7,8 @@ import AiSection from './AiSection';
 import Business from './Business';
 import DataManagement from './DataManagement';
 import Cloud from './Cloud';
+import { motion } from 'framer-motion';
+import RevealOnScroll from '@/components/ui/RevealOnScroll';
 import type {
   AutomationHeroControllerReadResponse,
   ArtificialIntelligenceControllerReadResponse,
@@ -14,6 +16,7 @@ import type {
   DataManagementControllerReadResponse,
   CloudSectionControllerReadResponse,
 } from '@/sdk/types.gen';
+import { useTranslation } from 'react-i18next';
 
 interface AutomationHeroSectionProps {
   heroData: AutomationHeroControllerReadResponse | null;
@@ -40,9 +43,10 @@ const AutomationHeroSection = ({
   dataManagementData,
   cloudData,
 }: AutomationHeroSectionProps) => {
+  const { t } = useTranslation()
   const heroContent = heroData?.data?.[0];
   return (
-    <div className='bg-black  relative  '>
+    <div className='bg-black  relative  overflow-hidden '>
       {/* <div className='absolute bottom-0 right-0 top-[15%] left-[35%]   '> */}
       <div className='overflow-hidden hidden lg:block'>
         <Image
@@ -88,8 +92,13 @@ const AutomationHeroSection = ({
         {/* Hero content with higher z-index */}
         <div className='relative z-40 max-w-7xl mx-auto  px-[5%] xl:px-0'>
           <Navbar isHomePage={false} />
-          <div className='lg:mt-[91.48px] mt-[70px]'>
-            <h3
+          <motion.div className='lg:mt-[91.48px] mt-[70px]'
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeInOut', staggerChildren: 0.12, delayChildren: 0.1 } } }}
+          >
+            <motion.h3
               className='text-[18px] lg:text-[24px] frutiger-lt-std-bold leading-[21.6px] lg:leading-[28.8px] mb-4 lg:mb-6'
               style={{
                 background:
@@ -98,10 +107,11 @@ const AutomationHeroSection = ({
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}
+              variants={{ hidden: { opacity: 0, x: -100 }, show: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeInOut' } } }}
             >
-              Automation, Data & AI
-            </h3>
-            <h1
+              {t("solutionsandservices.automationDataAi")}
+            </motion.h3>
+            <motion.h1
               className='lg:w-[909px] lg:h-[124px] text-[32px] lg:text-[56px] frutiger-lt-std-bold leading-[38px] lg:leading-[61.6px]'
               style={{
                 background:
@@ -110,6 +120,7 @@ const AutomationHeroSection = ({
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}
+              variants={{ hidden: { opacity: 0, x: -100 }, show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeInOut' } } }}
             >
               {heroContent?.title ? (
                 <span
@@ -122,11 +133,14 @@ const AutomationHeroSection = ({
                   Redefining Tomorrow Through <br /> Automation, Data & AI
                 </>
               )}
-            </h1>
-          </div>
+            </motion.h1>
+          </motion.div>
 
           <div className='flex lg:flex-row  flex-col-reverse  lg:mt-[48px] mt-[24px] lg:gap-[30px] gap-0'>
-            <div className=''>
+            <motion.div className=''
+              initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.5 }}
+              variants={{ hidden: { opacity: 0, x: -100 }, show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeInOut' } } }}
+            >
               <p className='text-[#ECEEEE] text-[16px] mt-10 lg:mt-0 lg:text-[18px] font-normal lg:h-[121px] h-auto leading-[24px] lg:leading-[27px] lg:w-[707px] w-full'>
                 {heroContent?.description ? (
                   <span
@@ -151,7 +165,7 @@ const AutomationHeroSection = ({
                   className='flex min-w-[180px] lg:min-w-[251px] cursor-pointer transition-opacity'
                 >
                   <Image
-                    src='/assets/automation/AI-WHITE 1.svg'
+                    src={heroContent?.logos?.[0] ? `${heroContent.logos[0].url}${heroContent.logos[0].key}` : '/assets/automation/AI-WHITE 1.svg'}
                     alt='ai icon'
                     width={172}
                     height={56}
@@ -163,7 +177,7 @@ const AutomationHeroSection = ({
                   className='cursor-pointer transition-opacity'
                 >
                   <Image
-                    src='/assets/automation/BUSINESS AUTOMATION-WHITE 1.svg'
+                    src={heroContent?.logos?.[1] ? `${heroContent.logos[1].url}${heroContent.logos[1].key}` : '/assets/automation/BUSINESS AUTOMATION-WHITE 1.svg'}
                     alt='business automation icon'
                     width={246}
                     height={56}
@@ -177,7 +191,7 @@ const AutomationHeroSection = ({
                   className='cursor-pointer transition-opacity'
                 >
                   <Image
-                    src='/assets/automation/DATA MANGEMENT WHITE 1.svg'
+                    src={heroContent?.logos?.[2] ? `${heroContent.logos[2].url}${heroContent.logos[2].key}` : '/assets/automation/DATA MANGEMENT WHITE 1.svg'}
                     alt='data management icon'
                     width={251}
                     height={56}
@@ -189,7 +203,7 @@ const AutomationHeroSection = ({
                   className='cursor-pointer transition-opacity'
                 >
                   <Image
-                    src='/assets/automation/CLOUD.svg'
+                    src={heroContent?.logos?.[3] ? `${heroContent.logos[3].url}${heroContent.logos[3].key}` : '/assets/automation/CLOUD.svg'}
                     alt='cloud & devops icon'
                     width={175}
                     height={56}
@@ -197,13 +211,15 @@ const AutomationHeroSection = ({
                   />
                 </button>
               </div>
-            </div>
+            </motion.div>
             {/* hero image  */}
-            <div
+            <motion.div
               className='relative lg:w-[455px] w-full lg:h-[388px] h-[300px] lg:top-[-60px] top-0 mt-8 lg:mt-0'
               style={{
                 borderRadius: '16px',
               }}
+              initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.5 }}
+              variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } }}
             >
               <div
                 className='rounded-[16px] lg:w-[481px] w-full lg:h-[411px] h-[320px]'
@@ -234,15 +250,23 @@ const AutomationHeroSection = ({
                   />
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      <AiSection aiData={aiData} />
-      <Business businessAutomationData={businessAutomationData} />
-      <DataManagement dataManagementData={dataManagementData} />
-      <Cloud cloudData={cloudData} />
+      <RevealOnScroll>
+        <AiSection aiData={aiData} />
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <Business businessAutomationData={businessAutomationData} />
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <DataManagement dataManagementData={dataManagementData} />
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <Cloud cloudData={cloudData} />
+      </RevealOnScroll>
     </div>
   );
 };

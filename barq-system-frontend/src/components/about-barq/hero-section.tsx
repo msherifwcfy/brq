@@ -3,12 +3,30 @@
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/home-page/navbar';
 import GroupSection from './group-section';
+import type {
+  AboutBarqHeroControllerReadResponse,
+  AboutBarqGroupAffiliationControllerReadResponse,
+} from '@/sdk/types.gen';
 
-export default function AboutBarqHeroSection() {
+interface AboutBarqHeroSectionProps {
+  heroData: AboutBarqHeroControllerReadResponse | null;
+  groupAffiliationData: AboutBarqGroupAffiliationControllerReadResponse | null;
+}
+
+export default function AboutBarqHeroSection({
+  heroData,
+  groupAffiliationData,
+}: AboutBarqHeroSectionProps) {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
+  const heroContent = heroData?.data?.[0];
+  const mediaUrl = heroContent?.media ? `${heroContent.media.url}${heroContent.media.key}` : null;
+  const isVideo = heroContent?.media?.mime_type?.startsWith('video/');
+  const hasMedia = !!mediaUrl;
 
   return (
     <section ref={containerRef} className='relative  overflow-hidden'>
@@ -73,19 +91,39 @@ export default function AboutBarqHeroSection() {
           </div>
         </motion.div> */}
 
-        {/* Background Images Layering - Same as What We Do Section */}
-        {/* Top background overlay */}
-        <motion.div className='absolute top-0 right-0  bottom-0 left-0  z-10'>
-          <div className='relative w-full  min-h-[135vh]'>
-            <Image
-              src='/assets/about-barq/about-barq-hero.png'
-              alt='Background pattern'
-              fill
-              className=' object-cover w-full h-full '
-            />
-            {/* <div className='absolute top-0 right-0  bottom-0 left-0  z-5 bg-gradient-to-r from-black via-[#00214890]/50 to-[#004CA400]/10'></div> */}
+        {/* Background media from API (image/video) with fallback */}
+        <div className='absolute top-0 right-0 bottom-0 left-0 z-10'>
+          <div className='relative w-full min-h-[135vh]'>
+            {hasMedia && isVideo ? (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className='absolute inset-0 w-full h-full object-cover'
+                preload='auto'
+              >
+                <source src={mediaUrl as string} type={heroContent?.media?.mime_type} />
+              </video>
+            ) : hasMedia && !isVideo ? (
+              <Image
+                src={mediaUrl as string}
+                alt='Background pattern'
+                fill
+                className='object-cover w-full h-full'
+                priority
+              />
+            ) : (
+              <Image
+                src='/assets/about-barq/about-barq-hero.png'
+                alt='Background pattern'
+                fill
+                className='object-cover w-full h-full'
+                priority
+              />
+            )}
           </div>
-        </motion.div>
+        </div>
 
         {/* Content Layer */}
         <div className='relative z-20 md:mt-[77px] mt-24 flex items-center max-w-7xl mx-auto gap-6'>
@@ -107,7 +145,7 @@ export default function AboutBarqHeroSection() {
                   backgroundClip: 'text',
                 }}
               >
-                Who We Are
+                {t('aboutBarq.hero.whoWeAre')}
               </span>
             </motion.div>
             <motion.h1
@@ -116,7 +154,7 @@ export default function AboutBarqHeroSection() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 1.0 }}
             >
-              We Strive to Be the Technology Backbone of the Region
+              {heroData?.data?.[0]?.title || t('aboutBarq.hero.title')}
             </motion.h1>
             <motion.p
               className='text-[#ECEEEE] text-[16px] md:text-[18px] font-normal lg:mt-6 mt-4 leading-[24px] md:leading-[27px]'
@@ -124,27 +162,12 @@ export default function AboutBarqHeroSection() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 1.2 }}
             >
-              More than a service provider, we aim to be the trusted backbone
-              that powers businesses across the region keeping them connected,
-              secure, and future-ready. Our solutions are built to scale, adapt,
-              and protect from mission-critical IT projects to fully managed
-              security services.
-            </motion.p>
-            <motion.p
-              className='text-[#ECEEEE] text-[16px] md:text-[18px] font-normal leading-[24px] lg:mt-[32px] mt-4 md:leading-[27px]'
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 1.35 }}
-            >
-              With deep technical expertise and an unwavering commitment to
-              excellence, we empower thousands of customers through seamless
-              connectivity, intelligent digital transformation, and
-              future-ready.
+              {heroData?.data?.[0]?.sub_title || t('aboutBarq.hero.description')}
             </motion.p>
           </div>
         </div>
       </div>
-      <GroupSection />
+      <GroupSection groupAffiliationData={groupAffiliationData} />
     </section>
   );
 }

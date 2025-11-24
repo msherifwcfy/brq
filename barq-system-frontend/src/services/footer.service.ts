@@ -1,17 +1,21 @@
 import {
   footerContactsControllerRead,
   footerLocationsControllerRead,
+  footerTermsControllerRead,
 } from '@/sdk/sdk.gen';
 import type {
   FooterContactsControllerReadResponse,
   FooterLocationsControllerReadResponse,
+  FooterTermsControllerReadResponse,
 } from '@/sdk/types.gen';
+import { getLanguageHeaders } from '@/lib/language-utils';
 
 export const footerService = {
   async getContactData(): Promise<FooterContactsControllerReadResponse | null> {
     try {
       const response = await footerContactsControllerRead({
         query: { query: { relations: {} } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -24,6 +28,7 @@ export const footerService = {
     try {
       const response = await footerLocationsControllerRead({
         query: { query: { relations: {} } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -32,15 +37,36 @@ export const footerService = {
     }
   },
 
+  async getFooterTermsData(): Promise<FooterTermsControllerReadResponse | null> {
+    try {
+      const response = await footerTermsControllerRead({
+        query: {
+          query: {
+            relations: {
+              file: true,
+            },
+          },
+        },
+        headers: await getLanguageHeaders(),
+      });
+      return response.data ?? null;
+    } catch (error) {
+      console.error('Error fetching footer terms data:', error);
+      return null;
+    }
+  },
+
   async getAllFooterData() {
-    const [contact, locations] = await Promise.all([
+    const [contact, locations, terms] = await Promise.all([
       this.getContactData(),
       this.getLocationsData(),
+      this.getFooterTermsData(),
     ]);
 
     return {
       contact,
       locations,
+      terms,
     };
   },
 };

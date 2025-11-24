@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type {
   AlliancesClientsEntity,
@@ -18,6 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AlliancesGridProps {
   data: Array<AlliancesClientsEntity | AlliancesVendorsEntity>;
@@ -52,44 +54,49 @@ export default function AlliancesGrid({
   });
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { t } = useTranslation();
+  const { isRTL } = useLanguage();
 
   const handleCountryChange = (countryId: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (countryId === 'All') {
+    // Handle clear option
+    if (!countryId || countryId === '' || countryId === '__clear__') {
       params.delete('country');
     } else {
       params.set('country', countryId);
     }
     params.set('page', '1');
-    router.push(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   const handleIndustryChange = (industryId: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (industryId === 'All') {
+    // Handle clear option
+    if (!industryId || industryId === '' || industryId === '__clear__') {
       params.delete('industry');
     } else {
       params.set('industry', industryId);
     }
     params.set('page', '1');
-    router.push(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   const handleSolutionChange = (solutionId: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (solutionId === 'All') {
+    // Handle clear option
+    if (!solutionId || solutionId === '' || solutionId === '__clear__') {
       params.delete('solution');
     } else {
       params.set('solution', solutionId);
     }
     params.set('page', '1');
-    router.push(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', page.toString());
-    router.push(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
 
     if (gridRef.current) {
       gridRef.current.scrollIntoView({
@@ -129,14 +136,14 @@ export default function AlliancesGrid({
             }}
           >
             {activeTab === 'clients'
-              ? 'Trusted by Leading Organizations'
-              : 'Trusted by Leading Global Vendors'}
+              ? t('alliances.trustedByLeadingOrganizations')
+              : t('alliances.trustedByLeadingGlobalVendors')}
           </h2>
           <div className='flex flex-col sm:flex-row items-center gap-4 justify-between mt-4'>
             <p className='text-white text-[36px] lg:text-[48px] frutiger-lt-std-bold leading-[57.6px] '>
               {activeTab === 'clients'
-                ? 'Our Clients'
-                : 'Our Technology Partners'}
+                ? t("alliances.ourClients")
+                : t("alliances.ourTechnologyPartners")}
             </p>
             <div className='flex items-center flex-wrap  gap-4'>
               <label className='text-white text-[18px] '>
@@ -156,100 +163,196 @@ export default function AlliancesGrid({
                       strokeLinejoin='round'
                     />
                   </svg>
-                  Filter by
+                  {t('alliances.filterBy')}
                 </div>
               </label>
               <div className='flex items-center gap-4'>
                 <Select
-                  value={selectedCountry}
+                  value={selectedCountry || undefined}
                   onValueChange={handleCountryChange}
                 >
                   <SelectTrigger
-                    className='text-white text-[18px] w-[172px] p-4 min-h-[56px]'
+                    className='text-white text-[16px] lg:text-[18px] min-w-[120px] lg:min-w-[172px] p-3 lg:p-4 min-h-[48px] lg:min-h-[56px] data-[placeholder]:text-white'
                     style={{
                       borderRadius: '16px',
                       border: '1px solid rgba(255, 255, 255, 0.16)',
                       background: 'rgba(255, 255, 255, 0.04)',
                       backdropFilter: 'blur(10px)',
                     }}
+                    dir={isRTL ? 'rtl' : 'ltr'}
                   >
-                    <SelectValue placeholder='Country' />
+                    <SelectValue placeholder={t('alliances.country')} className="text-white placeholder:text-white" />
                   </SelectTrigger>
-                  <SelectContent className='bg-white max-h-[200px] overflow-y-auto rounded-lg shadow-lg'>
-                    <SelectItem value='All' className='cursor-pointer'>
-                      All Countries
-                    </SelectItem>
+                  <SelectContent
+                    className='h-fit overflow-y-auto shadow-lg px-5 py-3 w-full'
+                    style={{
+                      borderRadius: '16px',
+                      border: '1px solid rgba(255, 255, 255, 0.16)',
+                      background: 'rgba(0, 0, 0, 0.48)',
+                      backdropFilter: 'blur(10px)',
+                    }}
+                  >
+                    {/* {selectedCountry && (
+                      <SelectItem
+                        value='__clear__'
+                        className='cursor-pointer text-white font-normal opacity-70 py-2 px-4'
+                        style={{
+                          color: '#fff',
+                          fontSize: '18px',
+                          fontStyle: 'normal',
+                          fontWeight: 400,
+                          lineHeight: '150%',
+                        }}
+                        dir={isRTL ? 'rtl' : 'ltr'}
+                      >
+                        {t('alliances.clear') || 'Clear'}
+                      </SelectItem>
+                    )} */}
                     {countries.map(country => (
                       <SelectItem
                         key={country.id}
                         value={country.id.toString()}
-                        className='cursor-pointer'
+                        className='cursor-pointer w-full text-white font-normal hover:text-white'
+                        style={{
+                          color: '#FFF',
+                          fontSize: '18px',
+                          fontStyle: 'normal',
+                          fontWeight: 400,
+                          lineHeight: '150%',
+                        }}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                       >
-                        {country?.name || `Country ${country?.id}`}
+                        <div className={`py-2 px-4 hover:bg-[#FFFFFF14] min-w-max w-full rounded-[4px] ${isRTL ? 'text-right' : 'text-left'}`}>
+                          {country?.name || `Country ${country?.id}`}
+                        </div>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
                 {activeTab === 'clients' ? (
                   <Select
-                    value={selectedIndustry}
+                    value={selectedIndustry || undefined}
                     onValueChange={handleIndustryChange}
                   >
                     <SelectTrigger
-                      className='text-white text-[18px] w-[172px] p-4 min-h-[56px]'
+                      className='text-white text-[16px] lg:text-[18px] min-w-[120px] lg:min-w-[172px] p-3 lg:p-4 min-h-[48px] lg:min-h-[56px] data-[placeholder]:text-white'
                       style={{
                         borderRadius: '16px',
                         border: '1px solid rgba(255, 255, 255, 0.16)',
                         background: 'rgba(255, 255, 255, 0.04)',
                         backdropFilter: 'blur(10px)',
                       }}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
-                      <SelectValue placeholder='Industry' />
+                      <SelectValue placeholder={t('alliances.industry')} className="text-white placeholder:text-white" />
                     </SelectTrigger>
-                    <SelectContent className='bg-white max-h-[200px] overflow-y-auto rounded-lg shadow-lg'>
-                      <SelectItem value='All' className='cursor-pointer'>
-                        All Industries
-                      </SelectItem>
+                    <SelectContent
+                      className='h-fit overflow-y-auto shadow-lg px-5 py-3 w-full'
+                      style={{
+                        borderRadius: '16px',
+                        border: '1px solid rgba(255, 255, 255, 0.16)',
+                        background: 'rgba(0, 0, 0, 0.48)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    >
+                      {/* {selectedIndustry && (
+                        <SelectItem
+                          value='__clear__'
+                          className='cursor-pointer text-white font-normal opacity-70 py-2 px-4'
+                          style={{
+                            color: '#fff',
+                            fontSize: '18px',
+                            fontStyle: 'normal',
+                            fontWeight: 400,
+                            lineHeight: '150%',
+                          }}
+                          dir={isRTL ? 'rtl' : 'ltr'}
+                        >
+                          {t('alliances.clear') || 'Clear'}
+                        </SelectItem>
+                      )} */}
                       {industries.map(industry => (
                         <SelectItem
                           key={industry.id}
                           value={industry.id.toString()}
-                          className='cursor-pointer'
+                          className='cursor-pointer w-full text-white font-normal hover:text-white'
+                          style={{
+                            color: '#FFF',
+                            fontSize: '18px',
+                            fontStyle: 'normal',
+                            fontWeight: 400,
+                            lineHeight: '150%',
+                          }}
+                          dir={isRTL ? 'rtl' : 'ltr'}
                         >
-                          {industry.industries_id_industries_translations?.[0]
-                            ?.name || industry.name}
+                          <div className={`py-2 px-4 hover:bg-[#FFFFFF14] min-w-max w-full rounded-[4px] ${isRTL ? 'text-right' : 'text-left'}`}>
+                            {industry.industries_id_industries_translations?.[0]
+                              ?.name || industry.name}
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 ) : (
                   <Select
-                    value={selectedSolution}
+                    value={selectedSolution || undefined}
                     onValueChange={handleSolutionChange}
                   >
                     <SelectTrigger
-                      className='text-white text-[18px] w-[172px] p-4 min-h-[56px]'
+                      className='text-white text-[16px] lg:text-[18px] min-w-[120px] lg:min-w-[172px] p-3 lg:p-4 min-h-[48px] lg:min-h-[56px] data-[placeholder]:text-white'
                       style={{
                         borderRadius: '16px',
                         border: '1px solid rgba(255, 255, 255, 0.16)',
                         background: 'rgba(255, 255, 255, 0.04)',
                         backdropFilter: 'blur(10px)',
                       }}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
-                      <SelectValue placeholder='Solution' />
+                      <SelectValue placeholder={t('alliances.solution')} className="text-white placeholder:text-white" />
                     </SelectTrigger>
-                    <SelectContent className='bg-white max-h-[200px] overflow-y-auto rounded-lg shadow-lg'>
-                      <SelectItem value='All' className='cursor-pointer'>
-                        All Solutions
-                      </SelectItem>
+                    <SelectContent
+                      className='h-fit overflow-y-auto shadow-lg px-5 py-3 w-full'
+                      style={{
+                        borderRadius: '16px',
+                        border: '1px solid rgba(255, 255, 255, 0.16)',
+                        background: 'rgba(0, 0, 0, 0.48)',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    >
+                      {/* {selectedSolution && (
+                        <SelectItem
+                          value='__clear__'
+                          className='cursor-pointer text-white font-normal opacity-70 py-2 px-4'
+                          style={{
+                            color: '#fff',
+                            fontSize: '18px',
+                            fontStyle: 'normal',
+                            fontWeight: 400,
+                            lineHeight: '150%',
+                          }}
+                          dir={isRTL ? 'rtl' : 'ltr'}
+                        >
+                          {t('alliances.clear') || 'Clear'}
+                        </SelectItem>
+                      )} */}
                       {solutions.map(solution => (
                         <SelectItem
                           key={solution.id}
                           value={solution.id.toString()}
-                          className='cursor-pointer'
+                          className='cursor-pointer w-full text-white font-normal hover:text-white'
+                          style={{
+                            color: '#FFF',
+                            fontSize: '18px',
+                            fontStyle: 'normal',
+                            fontWeight: 400,
+                            lineHeight: '150%',
+                          }}
+                          dir={isRTL ? 'rtl' : 'ltr'}
                         >
-                          {solution.solutions_id_solutions_translations?.[0]
-                            ?.name || solution.name}
+                          <div className={`py-2 px-4 hover:bg-[#FFFFFF14] min-w-max w-full rounded-[4px] ${isRTL ? 'text-right' : 'text-left'}`}>
+                            {solution.solutions_id_solutions_translations?.[0]
+                              ?.name || solution.name}
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -283,7 +386,7 @@ export default function AlliancesGrid({
                   <Image
                     src={getMediaUrl(item)}
                     alt={
-                      item.country?.country_id_country_translations?.[0]
+                      item.countries?.[0]?.country_id_country_translations?.[0]
                         ?.name || 'Alliance'
                     }
                     width={180}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import AlliancesHero from './alliances-hero';
 import AlliancesGrid from './alliances-grid';
@@ -12,6 +12,7 @@ import type {
   IndustriesEntity,
   SolutionsEntity,
 } from '@/sdk/types.gen';
+import { getLanguageHeaders } from '@/lib/language-utils';
 
 interface AlliancesContentProps {
   headData: AlliancesHeadEntity | null;
@@ -21,12 +22,12 @@ interface AlliancesContentProps {
   industries: IndustriesEntity[];
   solutions: SolutionsEntity[];
   initialTab: 'clients' | 'vendors';
-  currentPage: number;
-  totalPages: number;
   selectedCountry: string;
   selectedIndustry: string;
   selectedSolution: string;
 }
+
+const ITEMS_PER_PAGE = 24;
 
 export default function AlliancesContent({
   headData,
@@ -36,8 +37,6 @@ export default function AlliancesContent({
   industries,
   solutions,
   initialTab,
-  currentPage,
-  totalPages,
   selectedCountry,
   selectedIndustry,
   selectedSolution,
@@ -45,10 +44,58 @@ export default function AlliancesContent({
   const [activeTab, setActiveTab] = useState<'clients' | 'vendors'>(initialTab);
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  console.log(getLanguageHeaders());
+  
   useEffect(() => {
     setActiveTab(initialTab);
   }, [initialTab]);
+
+  // Client-side filtering
+  const filteredData = useMemo(() => {
+    const data = activeTab === 'clients' ? clientsData : vendorsData;
+    
+    return data.filter((item) => {
+      // Filter by country
+      if (selectedCountry && selectedCountry !== '') {
+        const countryId = parseInt(selectedCountry, 10);
+        const hasCountry = item.countries?.some(
+          (country) => country.id === countryId
+        );
+        if (!hasCountry) return false;
+      }
+
+      // Filter by industry (for clients)
+      if (activeTab === 'clients' && selectedIndustry && selectedIndustry !== '') {
+        const industryId = parseInt(selectedIndustry, 10);
+        const clientItem = item as AlliancesClientsEntity;
+        const hasIndustry = clientItem.industries?.some(
+          (industry) => industry.id === industryId
+        );
+        if (!hasIndustry) return false;
+      }
+
+      // Filter by solution (for vendors)
+      if (activeTab === 'vendors' && selectedSolution && selectedSolution !== '') {
+        const solutionId = parseInt(selectedSolution, 10);
+        const vendorItem = item as AlliancesVendorsEntity;
+        const hasSolution = vendorItem.solutions?.some(
+          (solution) => solution.id === solutionId
+        );
+        if (!hasSolution) return false;
+      }
+
+      return true;
+    });
+  }, [activeTab, clientsData, vendorsData, selectedCountry, selectedIndustry, selectedSolution]);
+
+  // Client-side pagination
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  const paginatedData = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return filteredData.slice(startIndex, endIndex);
+  }, [filteredData, currentPage]);
 
   const handleTabChange = (tab: 'clients' | 'vendors') => {
     setActiveTab(tab);
@@ -61,8 +108,6 @@ export default function AlliancesContent({
     router.push(`?${params.toString()}`);
   };
 
-  const currentData = activeTab === 'clients' ? clientsData : vendorsData;
-
   return (
     <>
       <AlliancesHero
@@ -71,7 +116,7 @@ export default function AlliancesContent({
         onTabChange={handleTabChange}
       />
       <AlliancesGrid
-        data={currentData}
+        data={paginatedData}
         countries={countries}
         industries={industries}
         solutions={solutions}

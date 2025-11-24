@@ -27,7 +27,7 @@ const CaseStudyDetailsPage = async ({ params }: PageProps) => {
     if (id === 1) {
         CampaignContent = <Campaign1 />
     } else if (id === 2) {
-        CampaignContent = <Campaign2 resourceTitle={item.title} />
+        CampaignContent = <Campaign2 />
     } else {
         CampaignContent = <Campaign3 />
     }

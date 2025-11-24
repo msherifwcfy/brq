@@ -2,19 +2,46 @@
 
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useRef } from 'react';
-import type { LeadershipControllerReadResponse } from '@/sdk/types.gen';
+import { useMemo, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import type { LeadershipTeamEntity } from '@/sdk/types.gen';
+import { getImageUrl } from '@/lib/utils';
 
-interface LeadershipSectionProps {
-  leadershipData?: LeadershipControllerReadResponse | null;
-}
+type LeadershipSectionProps = {
+  leadershipTeamData?: LeadershipTeamEntity[];
+};
 
 export default function LeadershipSection({
-  leadershipData,
+  leadershipTeamData = [],
 }: LeadershipSectionProps) {
-  const leadershipContent = leadershipData?.data?.[0];
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px', amount: 0.2 });
+  const { t, i18n } = useTranslation();
+  const language = i18n.language || 'en';
+  const featuredLeader = useMemo(() => {
+    const cards =
+      leadershipTeamData?.[0]?.leadership_team_cards_id_leadership_team_cards ?? [];
+    if (!cards.length) {
+      return null;
+    }
+    const primaryCard = cards[0];
+
+    return {
+      quote: primaryCard.bio,
+      name: primaryCard.name,
+      position: primaryCard.role,
+      image: getImageUrl(primaryCard.image) || '/assets/leadership.png',
+    };
+  }, [leadershipTeamData, language]);
+
+  const leadershipContent =
+    featuredLeader ?? {
+      quote:
+        '"We partner with our customers to enable them to digitally transform their business. That keeps them ahead of the competition and improves their bottom lines."',
+      name: 'Mahmoud Soliman',
+      position: 'President & CEO',
+      image: '/assets/leadership.png',
+    };
 
   return (
     <section
@@ -22,7 +49,7 @@ export default function LeadershipSection({
       className='relative bg-black px-[5%] lg:px-[5%] md:px-[4%] sm:px-[3%] z-5 pt-[64px]'
     >
       <motion.div
-        className='absolute top-[12%] left-0 z-10'
+        className={`absolute top-[12%] ${i18n.language === "ar" ? "right-0  " : "left-0"} z-10`}
         initial={{ opacity: 0, x: -50 }}
         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
         transition={{
@@ -30,7 +57,7 @@ export default function LeadershipSection({
           damping: 30,
           stiffness: 120,
           duration: 0.3,
-          delay: 0.1
+          delay: 0.2
         }}
       >
         <div className='hidden lg:block relative w-[152px] h-[479px] lg:w-[152px] lg:h-[479px] md:w-[120px] md:h-[380px] sm:w-[100px] sm:h-[320px]'>
@@ -80,7 +107,7 @@ export default function LeadershipSection({
                 backgroundClip: 'text',
               }}
             >
-              Leadership Insight
+              {t('common.leadershipInsight')}
             </span>
           </motion.div>
           <motion.h2
@@ -92,10 +119,10 @@ export default function LeadershipSection({
               damping: 30,
               stiffness: 120,
               duration: 0.3,
-              delay: 0.3
+              delay: 0.2
             }}
           >
-            From Our Leadership
+            {t('common.fromOurLeadership')}
           </motion.h2>
         </div>
         <div className='relative z-20  pb-14 pt-[49px]   flex items-center '>
@@ -112,7 +139,7 @@ export default function LeadershipSection({
                   damping: 25,
                   stiffness: 100,
                   duration: 1.0,
-                  delay: 1.2
+                  delay: 1.0
                 }}
               >
                 <div
@@ -125,10 +152,7 @@ export default function LeadershipSection({
                   <div className='absolute inset-0 bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[24px] border border-[#FFFFFF20]'></div>
                   <div className='relative px-6 py-8 '>
                     <Image
-                      src={
-                        `${leadershipContent?.media?.url}${leadershipContent?.media?.key}` ||
-                        '/assets/leadership.png'
-                      }
+                      src={leadershipContent.image}
                       alt='Leadership'
                       width={434}
                       height={620}
@@ -148,7 +172,7 @@ export default function LeadershipSection({
                   damping: 25,
                   stiffness: 100,
                   duration: 1.0,
-                  delay: 1.2
+                  delay: 1.0
                 }}
               >
                 <motion.div
@@ -162,7 +186,7 @@ export default function LeadershipSection({
                     damping: 30,
                     stiffness: 120,
                     duration: 0.3,
-                    delay: 0.5
+                    delay: 0.3
                   }}
                 >
                   <Image
@@ -173,25 +197,11 @@ export default function LeadershipSection({
                     className='h-[24px] w-[24px]  '
                   />
 
-                  <p className='text-[#FFF] mt-[-2px] max-w-[618px] text-[18px] xl:text-[32px] font-light leading-[28px] xl:leading-[48px] max-h-[174px] leadership-quote'>
+                  <p className='text-[#FFF] mt-[-2px] max-w-[618px] text-[18px] xl:text-[32px] font-light leading-[28px] xl:leading-[48px] leadership-quote'>
                     {leadershipContent?.quote ||
                       '"We partner with our customers to enable them to digitally transform their business. That keeps them ahead of the competition and improves their bottom lines."'}
                   </p>
-                </motion.div>
-                <motion.div
-                  className=' pt-6 lg:pt-16 pb-10'
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={
-                    isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                  }
-                  transition={{
-                    type: 'spring',
-                    damping: 30,
-                    stiffness: 120,
-                    duration: 0.3,
-                    delay: 0.6
-                  }}
-                >
+
                   <div className='text-white text-[18px] mb-3  frutiger-lt-std-bold h-[13px] lg:h-[13px]'>
                     {leadershipContent?.name || 'Mahmoud Soliman'},
                   </div>

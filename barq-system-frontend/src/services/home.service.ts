@@ -2,20 +2,20 @@ import {
   heroControllerRead,
   whoAreWeControllerRead,
   landingNumbersControllerRead,
-  leadershipControllerRead,
 } from '@/sdk/sdk.gen';
 import type {
   HeroControllerReadResponse,
   WhoAreWeControllerReadResponse,
   LandingNumbersControllerReadResponse,
-  LeadershipControllerReadResponse,
 } from '@/sdk/types.gen';
+import { getLanguageHeaders } from '@/lib/language-utils';
 
 export const homeService = {
   async getHeroData(): Promise<HeroControllerReadResponse | null> {
     try {
       const response = await heroControllerRead({
         query: { query: { relations: { media: true } } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -28,6 +28,7 @@ export const homeService = {
     try {
       const response = await whoAreWeControllerRead({
         query: { query: { relations: {} } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -40,6 +41,7 @@ export const homeService = {
     try {
       const response = await landingNumbersControllerRead({
         query: { query: { relations: {} } },
+        headers: await getLanguageHeaders(),
       });
       return response.data ?? null;
     } catch (error) {
@@ -48,31 +50,17 @@ export const homeService = {
     }
   },
 
-  async getLeadershipData(): Promise<LeadershipControllerReadResponse | null> {
-    try {
-      const response = await leadershipControllerRead({
-        query: { query: { relations: { media: true } } },
-      });
-      return response.data ?? null;
-    } catch (error) {
-      console.error('Error fetching leadership data:', error);
-      return null;
-    }
-  },
-
   async getAllHomeData() {
-    const [hero, whoAreWe, landingNumbers, leadership] = await Promise.all([
+    const [hero, whoAreWe, landingNumbers] = await Promise.all([
       this.getHeroData(),
       this.getWhoAreWeData(),
       this.getLandingNumbersData(),
-      this.getLeadershipData(),
     ]);
 
     return {
       hero,
       whoAreWe,
       landingNumbers,
-      leadership,
     };
   },
 };

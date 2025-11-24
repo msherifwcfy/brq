@@ -9,6 +9,7 @@ import type {
   EcosystemSustainabilityControllerReadResponse,
   GlobalCommitmentControllerReadResponse,
 } from '@/sdk/types.gen';
+import { useTranslation } from 'react-i18next';
 
 interface SustainabilityHeroSectionProps {
   ecosystemData: EcosystemSustainabilityControllerReadResponse | null;
@@ -21,7 +22,7 @@ export default function SustainabilityHeroSection({
 }: SustainabilityHeroSectionProps) {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
-
+  const { t, i18n } = useTranslation();
   const heroContent = ecosystemData?.data?.[0];
   const mediaUrl = heroContent?.media
     ? `${heroContent.media.url}${heroContent.media.key}`
@@ -35,7 +36,7 @@ export default function SustainabilityHeroSection({
       <div className='relative z-30 max-w-7xl mx-auto'>
         <Navbar isHomePage={false} />
       </div>
-      <div className='absolute top-[-51%] right-[0%]  bottom-0 lg:left-[23.5%] w-[100%] z-5'>
+      <div className={`absolute top-[-51%] right-[0%]  bottom-0 lg:left-[23.5%] w-[100%] z-5 ${i18n.language === "ar" ? "left-0 right-auto" : ""}`}>
         <div className='relative w-full h-full '>
           <Image
             src='/assets/sustainability/Group 1171274898.svg'
@@ -66,7 +67,7 @@ export default function SustainabilityHeroSection({
                 backgroundClip: 'text',
               }}
             >
-              Ecosystem Sustainability
+              {t('sustainability.ecosystemSustainability')}
             </span>
           </motion.div>
           <motion.h1

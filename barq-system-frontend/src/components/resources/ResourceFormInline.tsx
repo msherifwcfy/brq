@@ -1,19 +1,24 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { countries } from '@/utils/contants';
 import { Button } from '../ui/button';
 import ResourceSuccessModal from './ResourceSuccessModal';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
-interface ResourceFormInlineProps {
-    resourceTitle?: string;
-}
-
-export default function ResourceFormInline({
-    resourceTitle = "Resource"
-}: ResourceFormInlineProps) {
+export default function ResourceFormInline() {
+    const { t } = useTranslation()
+    const { isRTL } = useLanguage()
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -70,7 +75,7 @@ export default function ResourceFormInline({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.1 }}
                 >
-                    Get the Full Brochure
+                    {t('resources.getTheFullBrochure')}
                 </motion.h2>
                 <motion.p
                     className="text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[22px] lg:leading-[24px] text-center max-w-full lg:max-w-[516px]"
@@ -78,7 +83,8 @@ export default function ResourceFormInline({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.2 }}
                 >
-                    Discover how BARQ Systems&apos; Managed Services can reduce costs, improve resilience, and free up your IT team to focus on growth.                </motion.p>
+                    {t('resources.brochureDescription')}
+                </motion.p>
             </div>
 
             {/* Form */}
@@ -110,7 +116,7 @@ export default function ResourceFormInline({
                                     borderRadius: "8px",
                                 }}
                                 className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[210px] text-[14px] lg:text-[16px] border placeholder:text-[14px] lg:placeholder:text-[16px] border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="First Name"
+                                placeholder={t('academyApplication.firstName')}
                             />
                         </div>
                         <div className="flex-1">
@@ -124,7 +130,7 @@ export default function ResourceFormInline({
                                     borderRadius: "8px",
                                 }}
                                 className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[210px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="Last Name"
+                                placeholder={t('academyApplication.lastName')}
                             />
                         </div>
                     </div>
@@ -141,7 +147,7 @@ export default function ResourceFormInline({
                                 borderRadius: "8px",
                             }}
                             className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[436px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white placeholder:opacity-80 text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                            placeholder="Email"
+                            placeholder={t('academyApplication.email')}
                         />
                     </div>
 
@@ -157,7 +163,7 @@ export default function ResourceFormInline({
                                 borderRadius: "8px",
                             }}
                             className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[436px] placeholder:text-[14px] lg:placeholder:text-[16px] text-[14px] lg:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                            placeholder="Position"
+                            placeholder={t('resources.position')}
                         />
                     </div>
 
@@ -173,36 +179,67 @@ export default function ResourceFormInline({
                                 borderRadius: "8px",
                             }}
                             className="py-4 px-6 h-[48px] lg:h-[56px] w-full lg:w-[436px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                            placeholder="Organization Name"
+                            placeholder={t('resources.organizationName')}
                         />
                     </div>
 
                     {/* Phone Number with Country Selector */}
                     <div className="flex gap-0 w-full">
                         <div className="relative">
-                            <select
-                                name="countryCode"
+                            <Select
                                 value={formData.countryCode}
-                                onChange={handleChange}
-                                style={{
-                                    borderRadius: "8px 0 0 8px",
-                                    minWidth: '131px',
-                                    color: "rgba(51, 51, 51, 0.80)",
-                                    fontSize: "16px"
-                                }}
-                                className="appearance-none py-4 lg:py-5 px-6 border-r-[1px] border-[#D6D6D6] placeholder:text-[14px] lg:placeholder:text-[16px] h-[48px] lg:h-[64px] border text-[14px] lg:text-[16px] bg-white focus:outline-none transition-colors cursor-pointer"
+                                onValueChange={(value) => handleChange({ target: { name: 'countryCode', value } } as any)}
                             >
-                                {countries.map((country) => (
-                                    <option key={country.code} value={country.code} >
-                                        {country.code}
-                                    </option>
-                                ))}
-                            </select>
-                            <div className="absolute right-6 top-[55%] transform -translate-y-1/2 pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
-                                    <path d="M1.5 1L7.5 7L13.5 1" stroke="#313B49" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
+                                <SelectTrigger
+                                    style={{
+                                        borderRadius: isRTL ? "0 8px 8px 0" : "8px 0 0 8px",
+                                        minWidth: '131px',
+                                        padding: '16px 24px',
+                                        background: '#FFF',
+                                        color: '#333',
+                                        fontSize: '16px',
+                                        fontStyle: 'normal',
+                                        fontWeight: 400,
+                                        lineHeight: '150%',
+                                        border: 'none',
+                                        height: '64px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                    }}
+                                    className="focus:outline-none transition-colors cursor-pointer"
+                                >
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent
+                                    style={{
+                                        background: '#FFF',
+                                        borderRadius: '8px',
+                                        border: '1px solid #D6D6D6',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                    }}
+                                >
+                                    {countries.map((country) => (
+                                        <SelectItem
+                                            key={country.code}
+                                            value={country.code}
+                                            style={{
+                                                color: '#333',
+                                                fontSize: '16px',
+                                                fontStyle: 'normal',
+                                                fontWeight: 400,
+                                                lineHeight: '150%',
+                                                opacity: 0.8,
+                                                padding: '8px 24px',
+                                                cursor: 'pointer',
+                                                borderRadius: '4px',
+                                            }}
+                                        >
+                                            {country.code}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div className="flex-1">
                             <input
@@ -212,10 +249,10 @@ export default function ResourceFormInline({
                                 value={formData.mobileNumber}
                                 onChange={handleChange}
                                 style={{
-                                    borderRadius: "0 8px 8px 0",
+                                    borderRadius: isRTL ? "8px 0 0 8px" : "0 8px 8px 0",
                                 }}
                                 className="py-4 lg:py-5 px-6 h-[48px] lg:h-[64px] w-full lg:w-[305px] text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] bg-white text-black placeholder:opacity-80 placeholder:text-[#333] focus:outline-none transition-colors"
-                                placeholder={`${selectedCountry?.dialCode} Mobile Number`}
+                                placeholder={`${selectedCountry?.dialCode} ${t('academyApplication.mobileNumber')}`}
                             />
                         </div>
                     </div>
@@ -230,15 +267,21 @@ export default function ResourceFormInline({
                                 padding: '16px 24px',
                             }}
                         >
-                            Download Now
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" className="lg:w-6 lg:h-6">
-                                <path d="M9.5 6L15.5 12L9.5 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            {t('resources.downloadNow')}
+                            <svg
+                                style={{
+                                    transform: isRTL ? 'scaleX(-1)' : 'none',
+                                    width: '6px',
+                                    height: '12px',
+                                    marginTop: '3px',
+                                }}
+                                xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
+                                <path d="M1 1L7 7L1 13" stroke="white" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round" />
                             </svg>
                         </Button>
                     </div>
                 </div>
             </motion.form>
-
             {/* Success Modal */}
             <ResourceSuccessModal
                 isOpen={isSuccessModalOpen}

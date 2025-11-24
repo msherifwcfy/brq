@@ -1,33 +1,33 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useState, useMemo } from 'react';
 import Navbar from '@/components/home-page/navbar';
 import MemberBioModal from '@/components/leadership/member-bio-modal';
-import Footer from '@/components/footer';
 import {
-  leadershipTeam,
-  executiveTeam,
-  allTeamMembers,
+  leadershipTeam as fallbackLeadershipTeam,
+  executiveTeam as fallbackExecutiveTeam,
   TeamMember,
 } from '@/data/leadership';
+import RevealOnScroll from '@/components/ui/RevealOnScroll';
+import { useTranslation } from 'react-i18next';
+import type {
+  LeadershipTeamEntity,
+  LeadershipExecutiveTeamEntity,
+} from '@/sdk/types.gen';
+import { useLanguage } from '@/contexts/LanguageContext';
 
-export default function LeadershipPageContent() {
-  const containerRef = useRef<HTMLElement>(null);
-  const leadershipRef = useRef<HTMLElement>(null);
-  const executiveRef = useRef<HTMLElement>(null);
+interface LeadershipPageContentProps {
+  leadershipTeamData: LeadershipTeamEntity[];
+  executiveTeamData: LeadershipExecutiveTeamEntity[];
+}
 
-  const isInView = useInView(containerRef, { once: true, margin: '-100px' });
-  const isLeadershipInView = useInView(leadershipRef, {
-    once: true,
-    margin: '-100px',
-  });
-  const isExecutiveInView = useInView(executiveRef, {
-    once: true,
-    margin: '-100px',
-  });
-
+export default function LeadershipPageContent({
+  leadershipTeamData,
+  executiveTeamData,
+}: LeadershipPageContentProps) {
+  const { t } = useTranslation();
+  const { language } = useLanguage();
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
@@ -36,12 +36,96 @@ export default function LeadershipPageContent() {
   >('leadership');
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
+  // Transform CMS data to TeamMember format
+  const leadershipTeam = useMemo(() => {
+    if (!leadershipTeamData[0]?.leadership_team_cards_id_leadership_team_cards?.length) {
+      return fallbackLeadershipTeam;
+    }
+    console.log('leadershipTeamData', leadershipTeamData);
+    return leadershipTeamData[0].leadership_team_cards_id_leadership_team_cards.map((card) => {
+      const translation = card.leadership_team_cards_id_leadership_team_cards_translations?.find(
+        (t) => t.language === language
+      );
+
+      // Construct image URL from url + key
+      const imageUrl = card.image?.url && card.image?.key
+        ? `${card.image.url}${card.image.key}`
+        : '/assets/leadership/default.png';
+
+      return {
+        id: card.id.toString(),
+        name: translation?.name || card.name,
+        position: translation?.role || card.role,
+        image: imageUrl,
+        bio: translation?.bio || card.bio,
+      };
+    });
+  }, [leadershipTeamData, language]);
+
+  const executiveTeam = useMemo(() => {
+    if (!executiveTeamData[0]?.leadership_executive_team_cards_id_leadership_executive_team_cards?.length) {
+      return fallbackExecutiveTeam;
+    }
+
+    return executiveTeamData[0].leadership_executive_team_cards_id_leadership_executive_team_cards.map((card) => {
+      const translation = card.leadership_executive_team_cards_id_leadership_executive_team_cards_translations?.find(
+        (t) => t.language === language
+      );
+
+      // Construct image URL from url + key
+      const imageUrl = card.image?.url && card.image?.key
+        ? `${card.image.url}${card.image.key}`
+        : '/assets/leadership/default.png';
+
+      return {
+        id: card.id.toString(),
+        name: translation?.name || card.name,
+        position: translation?.role || card.role,
+        image: imageUrl,
+        bio: translation?.bio || card.bio,
+      };
+    });
+  }, [executiveTeamData, language]);
+
+  // Get title and description for leadership section
+  const leadershipTitle = useMemo(() => {
+    if (!leadershipTeamData[0]) return t('leadership.leadershipTitle');
+    const translation = leadershipTeamData[0].leadership_team_id_leadership_team_translations?.find(
+      (t) => t.language === language
+    );
+    return translation?.title || leadershipTeamData[0].title || t('leadership.leadershipTitle');
+  }, [leadershipTeamData, language, t]);
+
+  const leadershipDescription = useMemo(() => {
+    if (!leadershipTeamData[0]) return t('leadership.description');
+    const translation = leadershipTeamData[0].leadership_team_id_leadership_team_translations?.find(
+      (t) => t.language === language
+    );
+    return translation?.description || leadershipTeamData[0].description || t('leadership.description');
+  }, [leadershipTeamData, language, t]);
+
+  // Get title and description for executive section
+  const executiveTitle = useMemo(() => {
+    if (!executiveTeamData[0]) return t('executive.executiveTitle');
+    const translation = executiveTeamData[0].leadership_executive_team_id_leadership_executive_team_translations?.find(
+      (t) => t.language === language
+    );
+    return translation?.title || executiveTeamData[0].title || t('executive.executiveTitle');
+  }, [executiveTeamData, language, t]);
+
+  const executiveDescription = useMemo(() => {
+    if (!executiveTeamData[0]) return t('executive.description');
+    const translation = executiveTeamData[0].leadership_executive_team_id_leadership_executive_team_translations?.find(
+      (t) => t.language === language
+    );
+    return translation?.description || executiveTeamData[0].description || t('executive.description');
+  }, [executiveTeamData, language, t]);
+
   const openModal = (member: TeamMember) => {
     // Determine which team this member belongs to
     const isLeadershipMember = leadershipTeam.some(m => m.id === member.id);
     const currentTeam = isLeadershipMember ? leadershipTeam : executiveTeam;
     const teamType = isLeadershipMember ? 'leadership' : 'executive';
-
     const memberIndex = currentTeam.findIndex(m => m.id === member.id);
     setCurrentMemberIndex(memberIndex);
     setSelectedMember(member);
@@ -84,8 +168,14 @@ export default function LeadershipPageContent() {
     <>
       {/* Hero Section */}
       <section
-        ref={containerRef}
         className='relative bg-black 2xl:px-[8%]  overflow-hidden pb-[236px] md:h-auto sm:h-auto'
+        style={{
+          backgroundImage: "url('/assets/leadership/leadership-background.svg ')",
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+
       >
         {/* Navbar */}
         <div className=' relative z-30 max-w-7xl mx-auto '>
@@ -93,248 +183,197 @@ export default function LeadershipPageContent() {
         </div>
 
         {/* Background Images - Same as Sustainability */}
-        <div className='  absolute   inset-0 top-[-1%] left-0  h-[1605px]  sz-10'>
+        {/* <div className={` absolute   inset-0 top-[-1%] left-0  h-[1605px]  z-10 `}>
           <Image
             src='/assets/leadership/Mask group.png'
             alt='Background pattern'
             fill
-            className=' object-cover '
+            className=' object-cover  '
           />
-        </div>
+        </div> */}
         {/* Content Layer */}
         <div className='relative z-20 mt-[135px] max-w-7xl mx-auto px-[5%] xl:px-0'>
           {/* Leadership Team Section */}
           <div
-            ref={leadershipRef as React.RefObject<HTMLDivElement>}
             className='relative '
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isLeadershipInView
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 20 }
-              }
-              transition={{ duration: 0.6 }}
-              className=''
-            >
+            <RevealOnScroll>
               <h2 className='text-white text-[38px] leading-[47.6px] lg:text-[48px] md:text-[40px] sm:text-[32px] frutiger-lt-std-bold mb-6 max-w-[450px] lg:max-w-[450px] md:max-w-[400px] sm:max-w-full'>
-                Meet Our Leadership Team
+                {leadershipTitle}
               </h2>
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isLeadershipInView
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 20 }
-              }
-              transition={{ duration: 0.6 }}
-              className='text-[#D9DDDD] text-[16px] lg:text-[16px] md:text-[14px] sm:text-[12px] font-normal max-w-[520px] lg:max-w-[520px] md:max-w-[450px] sm:max-w-full mb-8'
-            >
-              Our leadership team brings together diverse experience and a
-              shared commitment to delivering world-class solutions, building
-              strong partnerships, and empowering our people
-            </motion.p>
-
+            </RevealOnScroll>
+            <RevealOnScroll>
+              <p className='text-[#D9DDDD] text-[16px] lg:text-[16px] md:text-[14px] sm:text-[12px] font-normal max-w-[520px] lg:max-w-[520px] md:max-w-[450px] sm:max-w-full mb-8'>
+                {leadershipDescription}
+              </p>
+            </RevealOnScroll>
             <div className='flex justify-center gap-6 lg:gap-6 md:gap-4 sm:gap-2  flex-wrap lg:flex-nowrap md:flex-wrap sm:flex-wrap'>
-              {leadershipTeam.map((member, index) => (
-                <motion.div
-                  key={member.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={
-                    isLeadershipInView
-                      ? { opacity: 1, y: 0 }
-                      : { opacity: 0, y: 50 }
-                  }
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  className='cursor-pointer group w-full '
-                  onClick={() => openModal(member)}
-                  onMouseEnter={() => setHoveredCard(member.id)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                >
+              {leadershipTeam.map((member) => (
+                <RevealOnScroll key={member.id}>
                   <div
-                    className=' w-full lg:w-[410.666px]  h-[468px] lg:h-[492px]  py-8 px-4 flex flex-col relative overflow-hidden transition-all duration-300'
-                    style={{
-                      borderRadius: '12px',
-                      border: '1px solid rgba(255, 255, 255, 0.10)',
-                      backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, #000 100%), url("${encodeURI(member.image)}")`,
-                      backgroundPosition: `${member.id === 'ahmed-alyamani'
-                        ? '60% 25%'
-                        : member.id === 'mohamed-jazeel'
-                          ? 'center 15%'
-                          : member.id === 'ghadah-aldabbagh'
-                            ? '150% 20%'
-                            : 'center center'
-                        }`,
-                      backgroundSize: `100% 100%, ${member.id === 'ahmed-alyamani'
-                        ? '80%'
-                        : member.id === 'mohamed-jazeel'
-                          ? '60%'
-                          : member.id === 'ghadah-aldabbagh'
-                            ? '108%'
-                            : 'cover'
-                        }`,
-                      backgroundRepeat: 'no-repeat, no-repeat',
-                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                      backdropFilter: 'blur(10px)',
-                      // ...(hoveredCard === member.id && {boxShadow: "4px 8px 16px 0 rgba(189, 189, 189, 0.16)" })
-                    }}
+                    className='cursor-pointer group w-full '
+                    onClick={() => openModal(member)}
+                    onMouseEnter={() => setHoveredCard(member.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
                   >
-                    {/* Image Container - Now handled by CSS background */}
-                    <div className='flex-1 flex items-end justify-center w-full h-[300px] relative'>
-                      {/* Background image is now handled by the parent div's CSS */}
-                    </div>
-                    {/* Text Container - Fixed at bottom */}
                     <div
-                      className='h-[126px] py-8 px-4 flex flex-col justify-center'
+                      className=' w-full lg:w-[410.666px]  h-[468px] lg:h-[492px]  py-8 px-4 flex flex-col relative overflow-hidden transition-all duration-300'
                       style={{
                         borderRadius: '12px',
-                        border: '1px solid rgba(255, 255, 255, 0.10)',
-                        background:
-                          'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.24) 100%)',
+                        border: '0px solid rgba(255, 255, 255, 0.10)',
+                        backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, #000 100%), url("${encodeURI(member.image)}")`,
+                        backgroundPosition: `${member.id === 'ahmed-alyamani'
+                          ? '60% 25%'
+                          : member.id === 'mohamed-jazeel'
+                            ? 'center 15%'
+                            : member.id === 'ghadah-aldabbagh'
+                              ? '150% 20%'
+                              : 'center center'
+                          }`,
+                        backgroundSize: `100% 100%, ${member.id === 'ahmed-alyamani'
+                          ? '80%'
+                          : member.id === 'mohamed-jazeel'
+                            ? '60%'
+                            : member.id === 'ghadah-aldabbagh'
+                              ? '108%'
+                              : 'cover'
+                          }`,
+                        backgroundRepeat: 'no-repeat, no-repeat',
+                        backgroundColor: 'rgba(255, 255, 255, 0.04)',
                         backdropFilter: 'blur(10px)',
+                        // ...(hoveredCard === member.id && {boxShadow: "4px 8px 16px 0 rgba(189, 189, 189, 0.16)" })
                       }}
                     >
-                      <h3
+                      {/* Image Container - Now handled by CSS background */}
+                      <div className='flex-1 flex items-end justify-center w-full h-[300px] relative'>
+                        {/* Background image is now handled by the parent div's CSS */}
+                      </div>
+                      {/* Text Container - Fixed at bottom */}
+                      <div
+                        className='h-[126px] py-8 px-4 flex flex-col justify-center'
                         style={{
-                          textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)',
-                          fontStyle: 'normal',
-                          lineHeight: '140%',
-                        }}
-                        className='text-white frutiger-lt-std-bold text-[24px] mb-1'
-                      >
-                        {member.name}
-                      </h3>
-                      <p
-                        className='text-[16px] font-medium leading-tight'
-                        style={{
-                          color: '#ECEEEE',
-                          fontSize: '16px',
-                          fontStyle: 'normal',
-                          fontWeight: '400',
-                          lineHeight: '150%',
+                          borderRadius: '12px',
+                          border: '1px solid rgba(255, 255, 255, 0.10)',
+                          background:
+                            'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.24) 100%)',
+                          backdropFilter: 'blur(10px)',
                         }}
                       >
-                        {member.position}
-                      </p>
+                        <h3
+                          style={{
+                            textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)',
+                            fontStyle: 'normal',
+                            lineHeight: '140%',
+                          }}
+                          className='text-white frutiger-lt-std-bold text-[24px] mb-1'
+                        >
+                          {member.name}
+                        </h3>
+                        <p
+                          className='text-[16px] font-medium leading-tight'
+                          style={{
+                            color: '#ECEEEE',
+                            fontSize: '16px',
+                            fontStyle: 'normal',
+                            fontWeight: '400',
+                            lineHeight: '150%',
+                          }}
+                        >
+                          {member.position}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </motion.div>
+                </RevealOnScroll>
               ))}
             </div>
           </div>
 
           {/* Executive Team Section */}
           <div
-            ref={executiveRef as React.RefObject<HTMLDivElement>}
             className='relative mt-[88px]'
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isExecutiveInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
-              transition={{ duration: 0.6 }}
-              className=' '
-            >
+            <RevealOnScroll>
               <h2 className='text-white text-[38px] leading-[47.6px]  lg:text-[48px] md:text-[40px] sm:text-[32px] frutiger-lt-std-bold mb-6 max-w-[420px] lg:max-w-[420px] md:max-w-[380px] sm:max-w-full lg:leading-[57.6px]'>
-                Meet Our Executive Team
+                {executiveTitle}
               </h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isLeadershipInView
-                    ? { opacity: 1, y: 0 }
-                    : { opacity: 0, y: 20 }
-                }
-                transition={{ duration: 0.6 }}
-                className='text-[#D9DDDD] text-[16px] font-normal max-w-[520px] mb-8'
-              >
-                Guiding BARQ Systems with vision, expertise, and innovation—our
-                executive leaders drive growth, inspire excellence, and shape
-                the <br /> future of technology in the region.
-              </motion.p>
-            </motion.div>
+              <p className='text-[#D9DDDD] text-[16px] font-normal max-w-[520px] mb-8'>
+                {executiveDescription}
+              </p>
+            </RevealOnScroll>
 
             <div className='grid grid-cols-2  lg:grid-cols-4 xl:grid-cols-6 lg:gap-6 gap-4   w-full '>
               {executiveTeam.map((member, index) => (
-                <motion.div
-                  key={member.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={
-                    isExecutiveInView
-                      ? { opacity: 1, y: 0 }
-                      : { opacity: 0, y: 50 }
-                  }
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  className='cursor-pointer group'
-                  onClick={() => openModal(member)}
-                  onMouseEnter={() => setHoveredCard(member.id)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                >
+                <RevealOnScroll key={member.id}>
                   <div
-                    className='lg:min-w-[193.333px] lg:w-[193.33333px] md:w-[180px] sm:w-[160px] min-h-[492px] lg:h-[492px] md:h-[420px] sm:h-[380px] py-8 relative flex flex-col transition-all duration-300'
-                    style={{
-                      borderRadius: '12px',
-                      border: '1px solid rgba(255, 255, 255, 0.20)',
-                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                      backdropFilter: 'blur(10px)',
-                      overflow: 'hidden',
-                      ...(hoveredCard === member.id && {
-                        boxShadow: '4px 8px 16px 0 rgba(189, 189, 189, 0.16)',
-                      }),
-                    }}
+                    className='cursor-pointer group'
+                    onClick={() => openModal(member)}
+                    onMouseEnter={() => setHoveredCard(member.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
                   >
-                    {/* Background Image Container */}
                     <div
-                      className='absolute inset-0'
+                      className='lg:min-w-[193.333px] lg:w-[193.33333px] md:w-[180px] sm:w-[160px] min-h-[492px] lg:h-[492px] md:h-[420px] sm:h-[380px] py-8 relative flex flex-col transition-all duration-300'
                       style={{
                         borderRadius: '12px',
-                        backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, #000 100%), url("${encodeURI(member.image)}")`,
-                        backgroundPosition:
-                          index === 5
-                            ? 'center center, 60% 47%'
-                            : index === 4
-                              ? 'center center, 38% 62%'
-                              : 'center center, center 48%',
-                        backgroundSize:
-                          index === 5
-                            ? '100% 100%, 140%'
-                            : index === 4
-                              ? '100% 100%, 182%'
-                              : '100% 100%, 190%',
-                        backgroundRepeat: 'no-repeat, no-repeat',
+                        border: '1px solid rgba(255, 255, 255, 0.20)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                        backdropFilter: 'blur(10px)',
                         overflow: 'hidden',
+                        ...(hoveredCard === member.id && {
+                          boxShadow: '4px 8px 16px 0 rgba(189, 189, 189, 0.16)',
+                        }),
                       }}
-                    />
-                    <div className='relative flex-1'>
-                      {/* Background image is now handled by the parent div's CSS */}
-                      <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent' />
-                    </div>
-
-                    <div
-                      style={{
-                        borderRadius: '12px',
-                        border: '1px solid rgba(255, 255, 255, 0.10)',
-                        background:
-                          'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.24) 100%)',
-                        backdropFilter: 'blur(15px)',
-                        // width: '161.33333px',
-                      }}
-                      className='absolute lg:w-[161.33333px]  p-3 lg:p-4 bottom-6 left-4 right-4  h-[173px] z-20 '
                     >
-                      <h3 className='text-white text-[24px] frutiger-lt-std-bold mb-1 leading-[33.6px] min-h-[68px]'>
-                        {member.name}
-                      </h3>
-                      <p
-                        className={`text-[14px] font-normal ${index === 2 || index === 4 || index === 5 ? 'w-[129.33333px]' : index === 1 ? 'w-[121.33333px]' : 'w-[110.33333px]'}  text-[#ECEEEE] leading-[21px] opacity-90`}
+                      {/* Background Image Container */}
+                      <div
+                        className='absolute inset-0'
+                        style={{
+                          borderRadius: '12px',
+                          backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60%, #000 100%), url("${encodeURI(member.image)}")`,
+                          backgroundPosition:
+                            index === 5
+                              ? 'center center, 60% 47%'
+                              : index === 4
+                                ? 'center center, 38% 62%'
+                                : 'center center, center 48%',
+                          backgroundSize:
+                            index === 5
+                              ? '100% 100%, 140%'
+                              : index === 4
+                                ? '100% 100%, 182%'
+                                : '100% 100%, 190%',
+                          backgroundRepeat: 'no-repeat, no-repeat',
+                          overflow: 'hidden',
+                        }}
+                      />
+                      <div className='relative flex-1'>
+                        {/* Background image is now handled by the parent div's CSS */}
+                        <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent' />
+                      </div>
+
+                      <div
+                        style={{
+                          borderRadius: '12px',
+                          border: '1px solid rgba(255, 255, 255, 0.10)',
+                          background:
+                            'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.24) 100%)',
+                          backdropFilter: 'blur(15px)',
+                          // width: '161.33333px',
+                        }}
+                        className='absolute lg:w-[161.33333px]  p-3 lg:p-4 bottom-6 left-4 right-4  h-[173px] z-20 '
                       >
-                        {member.position}
-                      </p>
+                        <h3 className='text-white text-[24px] frutiger-lt-std-bold mb-1 leading-[33.6px] min-h-[68px]'>
+                          {member.name}
+                        </h3>
+                        <p
+                          className={`text-[14px] font-normal ${index === 2 || index === 4 || index === 5 ? 'w-[129.33333px]' : index === 1 ? 'w-[121.33333px]' : 'w-[110.33333px]'}  text-[#ECEEEE] leading-[21px] opacity-90`}
+                        >
+                          {member.position}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </motion.div>
+                </RevealOnScroll>
               ))}
             </div>
           </div>

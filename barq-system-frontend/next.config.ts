@@ -3,7 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    remotePatterns: [{ hostname: 'api.barq.wecodeforyou.io' }],
+    remotePatterns: [{ hostname: 'api.barq.wecodeforyou.io' }, { hostname: 'apistg.barqsystems.com' }],
   },
   async headers() {
     return [

@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import type { AlliancesHeadEntity } from '@/sdk/types.gen';
-import { alliancesHeadControllerRead } from '@/sdk';
+import { useTranslation } from 'react-i18next';
 
 interface AlliancesHeroProps {
   headData: AlliancesHeadEntity | null;
@@ -18,7 +18,7 @@ export default function AlliancesHero({
 }: AlliancesHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
-
+  const { t } = useTranslation()
   const title = headData?.title || 'Our Alliances';
   const subTitle =
     headData?.sub_title ||
@@ -32,7 +32,7 @@ export default function AlliancesHero({
         transition={{ duration: 1.6 }}
       >
         <div className='flex items-center justify-center flex-col gap-6 mb-10'>
-          <h1 className='text-white text-[36px] lg:text-[54px] md:text-[40px] sm:text-[32px] font-normal leading-[61.6px]'>
+          <h1 className='text-white text-[36px] lg:text-[54px] md:text-[40px] sm:text-[32px] font-normal text-center leading-[61.6px]'>
             {title}
           </h1>
           <p className='text-[#D9DDDD] text-[14px] sm:text-[15px] lg:text -[16px] font-normal leading-[1.5] lg:leading-[24px] max-w-[90vw] sm:max-w-[500px] lg:max-w-[408px] text-center break-words overflow-wrap-anywhere'>
@@ -54,7 +54,7 @@ export default function AlliancesHero({
                 : ' text-white opacity-50 hover:opacity-80 bg-[#ffffff0a]'
                 }`}
             >
-              Vendors
+              {t('alliances.vendors')}
             </button>
             <button
               onClick={() => onTabChange('clients')}
@@ -63,7 +63,7 @@ export default function AlliancesHero({
                 : ' text-white opacity-50 hover:opacity-80 bg-[#ffffff0a]'
                 }`}
             >
-              Clients
+              {t('alliances.clients')}
             </button>
           </div>
         </div>

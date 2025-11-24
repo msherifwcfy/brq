@@ -13,6 +13,7 @@ const Endpoint: React.FC<EndpointProps> = ({ data }) => {
 
   return (
     <div className='max-w-7xl mx-auto relative z-50 lg:mt-[120px] mt-40 w-full px-[5%] xl:px-0'>
+      <div id='cybersecurity-service-3' className='absolute top-[-100px]'></div>
       {/* Section Header */}
       <div className='flex flex-col lg:flex-row lg:justify-between w-full relative gap-8 lg:gap-0'>
         <div className='lg:sticky lg:top-4 z-50 lg:self-start h-full'>
@@ -31,7 +32,6 @@ const Endpoint: React.FC<EndpointProps> = ({ data }) => {
             {data?.text ||
               'Empowering organizations with real-time threat detection, automated responses, and actionable security intelligence.'}
           </p>
-          <div id='Endpoint' className='absolute top-[200%]'></div>
         </div>
 
         {/* Right Side - Services Cards Grid */}

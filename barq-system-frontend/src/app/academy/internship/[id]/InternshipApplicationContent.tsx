@@ -1,15 +1,53 @@
 "use client"
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useLanguage } from '@/contexts/LanguageContext'
 import Navbar from '@/components/home-page/navbar'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { InternshipProgram } from '@/data/internshipPrograms'
+import type { BarqAcademyProgramsOpportunitiesCardsEntity, BarqAcademyProgramsOpportunitiesInternshipCardsEntity } from '@/sdk/types.gen'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
 
 interface InternshipApplicationContentProps {
-    program: InternshipProgram;
+    programCard: BarqAcademyProgramsOpportunitiesCardsEntity | BarqAcademyProgramsOpportunitiesInternshipCardsEntity;
+    programType: 'foundation' | 'internship';
 }
 
-const InternshipApplicationContent = ({ program }: InternshipApplicationContentProps) => {
+const InternshipApplicationContent = ({ programCard, programType }: InternshipApplicationContentProps) => {
+    const { t } = useTranslation()
+    const { isRTL, language } = useLanguage()
+
+    // Extract translated data from CMS
+    const programData = useMemo(() => {
+        let title = '';
+        let description = '';
+        let ctaLabel = '';
+
+        if ('barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards_translations' in programCard) {
+            const translation = programCard.barq_academy_programs_opportunities_cards_id_barq_academy_programs_opportunities_cards_translations?.find(
+                (t) => t.language === language
+            );
+            title = translation?.title || programCard.title || '';
+            description = translation?.description || programCard.description || '';
+            ctaLabel = translation?.cta_label || programCard.cta_label || '';
+        } else if ('barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards_translations' in programCard) {
+            const translation = programCard.barq_academy_programs_opportunities_internship_cards_id_barq_academy_programs_opportunities_internship_cards_translations?.find(
+                (t) => t.language === language
+            );
+            title = translation?.title || programCard.title || '';
+            description = translation?.description || programCard.description || '';
+            ctaLabel = translation?.cta_label || programCard.cta_label || '';
+        }
+
+        return { title, description, ctaLabel };
+    }, [programCard, language]);
+
     return (
         <div className='bg-black relative overflow-hidden min-h-screen'>
             {/* Background SVG */}
@@ -31,10 +69,10 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                     <div className='flex flex-col items-center justify-center mb-8 lg:mb-12'>
                         <div className="max-w-[592px]  text-center gap-[20px] lg:gap-[31px] ">
                             <h1 className='text-white text-[32px] lg:text-[56px] frutiger-lt-std-bold leading-[38px] lg:leading-[61.6px] mb-[20px] lg:mb-[31px]'>
-                                Apply Now
+                                {t('academyApplication.applyNow')}
                             </h1>
                             <p className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[24px] lg:leading-[27px] tracking-[0.02em]'>
-                                Fill out the form below to apply for your chosen track. Our team will review your application and get back to you.
+                                {t('academyApplication.formDescription')}
                             </p>
                         </div>
                     </div>
@@ -52,28 +90,15 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                 backgroundClip: "text",
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent"
-                            }}>
-                                {program.subtitle}
+                            }} dir={isRTL ? 'rtl' : 'ltr'}>
+                                {programType === 'foundation' ? t('academy.foundationTracks.label') : t('academy.internshipPrograms.label')}
                             </h3>
-                            <h2 className='text-white text-[24px] lg:text-[36px] frutiger-lt-std-bold leading-[32px] lg:leading-[43.2px] mb-3 lg:mb-4'>
-                                {program.title}
+                            <h2 className='text-white text-[24px] lg:text-[36px] frutiger-lt-std-bold leading-[32px] lg:leading-[43.2px] mb-3 lg:mb-4' dir={isRTL ? 'rtl' : 'ltr'}>
+                                {programData.title}
                             </h2>
-                            <p className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[24px] lg:leading-[27px] tracking-[0.02em] mb-6 lg:mb-8'>
-                                {program.jobDesc}
+                            <p className='text-[#ECEEEE] text-[16px] lg:text-[18px] leading-[24px] lg:leading-[27px] tracking-[0.02em] mb-6 lg:mb-8' dir={isRTL ? 'rtl' : 'ltr'}>
+                                {programData.description}
                             </p>
-                            <div className=''>
-                                <h3 className='text-white text-[20px] lg:text-[24px] frutiger-lt-std-bold leading-[28px] lg:leading-[33.6px] mb-3 lg:mb-4'>
-                                    Gain practical skills in
-                                </h3>
-                                <ul className=' '>
-                                    {program.skills.map((skill, index) => (
-                                        <li key={index} className='flex gap-2 text-[#ECEEEE] text-[16px] lg:text-[18px]  tracking-[0.02em] items-center leading-[200%]'>
-                                            <span className='text-[#ECEEEE] text-[28px] lg:text-[32px] mt-[-6px]'>•</span>
-                                            <span>{skill}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
                         </div>
 
                         {/* Right side */}
@@ -81,7 +106,7 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                             <form className='w-full '>
                                 {/* Personal Information Section */}
                                 <div className='text-[14px] lg:text-[16px] text-white frutiger-lt-std-bold mb-3 lg:mb-4 leading-[20px] lg:leading-[24px]'>
-                                    Personal Information
+                                    {t('academyApplication.personalInformation')}
                                 </div>
                                 <div className='grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 w-full mb-3 lg:mb-4 '>
                                     <Input
@@ -92,7 +117,7 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                             borderRadius: "8px",
                                         }}
                                         className="py-4 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[56px] w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                        placeholder="First Name"
+                                        placeholder={t('academyApplication.firstName')}
                                     />
                                     <Input
                                         type="text"
@@ -102,7 +127,7 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                             borderRadius: "8px",
                                         }}
                                         className="py-4 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[56px] w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                        placeholder="Last Name"
+                                        placeholder={t('academyApplication.lastName')}
                                     />
                                 </div>
 
@@ -114,7 +139,7 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                         borderRadius: "8px",
                                     }}
                                     className="py-4 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[56px] mb-3 lg:mb-4 w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                    placeholder="Mobile Number"
+                                    placeholder={t('academyApplication.mobileNumber')}
                                 />
 
                                 <Input
@@ -125,7 +150,7 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                         borderRadius: "8px",
                                     }}
                                     className="py-4 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[56px] mb-3 lg:mb-4 w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                    placeholder="Email"
+                                    placeholder={t('academyApplication.email')}
                                 />
                                 <Input
                                     type="text"
@@ -134,11 +159,11 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                         borderRadius: "8px",
                                     }}
                                     className="py-4 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[56px] mb-3 lg:mb-4 w-full text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                    placeholder="LinkedIn Profile"
+                                    placeholder={t('academyApplication.linkedInProfile')}
                                 />
 
                                 <div className='text-[14px] lg:text-[16px] mt-2 text-white frutiger-lt-std-bold mb-3 lg:mb-4 leading-[20px] lg:leading-[24px]'>
-                                    Education Details
+                                    {t('academyApplication.educationDetails')}
                                 </div>
 
                                 <Input
@@ -149,37 +174,127 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                         borderRadius: "8px",
                                     }}
                                     className="py-4 lg:py-5 px-4 lg:px-6 h-[48px] lg:h-[56px] w-full mb-3 lg:mb-4 text-[14px] lg:text-[16px] placeholder:text-[14px] lg:placeholder:text-[16px] border border-[#FFF] placeholder:opacity-80 bg-white text-black placeholder:text-[#333] focus:outline-none focus:border-blue-500 transition-colors"
-                                    placeholder="University Name"
+                                    placeholder={t('academyApplication.universityName')}
                                 />
 
                                 <div className='relative'>
-                                    <select
-                                        name="currentAcademicYear"
-                                        style={{
-                                            borderRadius: "8px",
-                                            color: "rgba(51, 51, 51, 0.80)",
-                                        }}
-                                        className="appearance-none w-full py-3 lg:py-4 px-4 lg:px-6 border placeholder:text-[14px] lg:placeholder:text-[16px] border-[#FFF] h-[48px] lg:h-[56px] text-[14px] lg:text-[16px] bg-white focus:outline-none transition-colors cursor-pointer"
-                                    >
-                                        <option value=''>
-                                            Current Academic Year
-                                        </option>
-                                        <option value='1'>First Year</option>
-                                        <option value='2'>Second Year</option>
-                                        <option value='3'>Third Year</option>
-                                        <option value='4'>Fourth Year</option>
-                                        <option value='graduate'>Graduate</option>
-                                    </select>
-                                    <div className='absolute right-[16px] lg:right-[24px] top-[35%] h-5 lg:h-6 w-5 lg:w-6 flex justify-center items-center pointer-events-none'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M6 9L12 15L18 9" stroke="#313B49" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                    </div>
+                                    <Select name="currentAcademicYear">
+                                        <SelectTrigger
+                                            style={{
+                                                borderRadius: "8px",
+                                                width: '100%',
+                                                padding: '16px 24px',
+                                                background: '#FFF',
+                                                color: "rgba(51, 51, 51, 0.80)",
+                                                fontSize: '16px',
+                                                fontStyle: 'normal',
+                                                fontWeight: 400,
+                                                lineHeight: '150%',
+                                                border: '1px solid #D6D6D6',
+                                                height: '56px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'space-between',
+                                            }}
+                                            className="focus:outline-none transition-colors cursor-pointer"
+                                        >
+                                            <SelectValue placeholder={t('academyApplication.currentAcademicYear')} />
+                                        </SelectTrigger>
+                                        <SelectContent
+                                            style={{
+                                                background: '#FFF',
+                                                borderRadius: '8px',
+                                                border: '1px solid #D6D6D6',
+                                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                            }}
+                                        >
+                                            <SelectItem 
+                                                value='1'
+                                                style={{
+                                                    color: '#333',
+                                                    fontSize: '16px',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 400,
+                                                    lineHeight: '150%',
+                                                    opacity: 0.8,
+                                                    padding: '8px 24px',
+                                                    cursor: 'pointer',
+                                                    borderRadius: '4px',
+                                                }}
+                                            >
+                                                {t('academyApplication.firstYear')}
+                                            </SelectItem>
+                                            <SelectItem 
+                                                value='2'
+                                                style={{
+                                                    color: '#333',
+                                                    fontSize: '16px',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 400,
+                                                    lineHeight: '150%',
+                                                    opacity: 0.8,
+                                                    padding: '8px 24px',
+                                                    cursor: 'pointer',
+                                                    borderRadius: '4px',
+                                                }}
+                                            >
+                                                {t('academyApplication.secondYear')}
+                                            </SelectItem>
+                                            <SelectItem 
+                                                value='3'
+                                                style={{
+                                                    color: '#333',
+                                                    fontSize: '16px',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 400,
+                                                    lineHeight: '150%',
+                                                    opacity: 0.8,
+                                                    padding: '8px 24px',
+                                                    cursor: 'pointer',
+                                                    borderRadius: '4px',
+                                                }}
+                                            >
+                                                {t('academyApplication.thirdYear')}
+                                            </SelectItem>
+                                            <SelectItem 
+                                                value='4'
+                                                style={{
+                                                    color: '#333',
+                                                    fontSize: '16px',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 400,
+                                                    lineHeight: '150%',
+                                                    opacity: 0.8,
+                                                    padding: '8px 24px',
+                                                    cursor: 'pointer',
+                                                    borderRadius: '4px',
+                                                }}
+                                            >
+                                                {t('academyApplication.fourthYear')}
+                                            </SelectItem>
+                                            <SelectItem 
+                                                value='graduate'
+                                                style={{
+                                                    color: '#333',
+                                                    fontSize: '16px',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 400,
+                                                    lineHeight: '150%',
+                                                    opacity: 0.8,
+                                                    padding: '8px 24px',
+                                                    cursor: 'pointer',
+                                                    borderRadius: '4px',
+                                                }}
+                                            >
+                                                {t('academyApplication.graduate')}
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </div>
 
                                 {/* Document Upload Section */}
                                 <div className='text-[14px] lg:text-[16px] mt-2 text-white frutiger-lt-std-bold mb-3 lg:mb-4 leading-[20px] lg:leading-[24px]'>
-                                    Document Upload
+                                    {t('academyApplication.documentUpload')}
                                 </div>
                                 <div className='relative'>
                                     <input
@@ -198,11 +313,11 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                     >
                                         <span className='text-[#333] opacity-80 bg-[#ECEEEE] w-[110px] lg:w-[131px] py-4 lg:py-5 px-4 lg:px-6 h-full text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] flex items-center justify-center'
                                             style={{
-                                                borderRadius: "8px 0 0 8px"
+                                                borderRadius: isRTL ? "0 8px 8px 0" : "8px 0 0 8px"
                                             }}
-                                        >Choose file</span>
+                                        >{t('academyApplication.chooseFile')}</span>
                                         <span className='text-[#333] opacity-80 py-4 lg:py-5 px-4 lg:px-6 h-full text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] flex items-center'
-                                        >Please select your CV</span>
+                                        >{t('academyApplication.pleaseSelectYourCV')}</span>
                                     </label>
                                 </div>
 
@@ -215,8 +330,8 @@ const InternshipApplicationContent = ({ program }: InternshipApplicationContentP
                                         padding: '12px 20px',
                                     }}
                                 >
-                                    Submit Application
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" className='lg:w-[24px] lg:h-[24px]'>
+                                    {t('academyApplication.submitApplication')}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" className='lg:w-[24px] lg:h-[24px]' style={{ transform: isRTL ? 'scaleX(-1)' : 'none' }}>
                                         <path d="M9.5 6L15.5 12L9.5 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </Button>

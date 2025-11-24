@@ -6,7 +6,7 @@ const config = defineConfig({
     name: '@ts-sdk-gen/client-fetch',
   },
   input: {
-    path: 'https://api.barq.wecodeforyou.io/docs-json',
+    path:'https://api.barq.wecodeforyou.io/docs-json' , // env doesnt work here
   },
   output: {
     format: 'prettier',

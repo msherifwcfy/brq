@@ -1,22 +1,64 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Navbar from '@/components/home-page/navbar';
-import { type NewsItem } from '@/data/newsroom';
+import type { NewsroomCardsControllerReadOneResponse } from '@/sdk/types.gen';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface NewsroomDetailContentProps {
-    newsItem: NewsItem;
+    newsItemData: NewsroomCardsControllerReadOneResponse;
 }
 
-const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
+const NewsroomDetailContent = ({ newsItemData }: NewsroomDetailContentProps) => {
+    const { language } = useLanguage();
     const containerRef = useRef<HTMLElement>(null);
     const isInView = useInView(containerRef, { once: true, margin: '-100px' });
     const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
 
+    // Transform CMS data
+    const newsItem = useMemo(() => {
+        if (!newsItemData?.data) return null;
+
+        const item = newsItemData.data;
+        const translation = item.newsroom_cards_id_newsroom_cards_translations?.find(
+            (t) => t.language === language
+        ) || item.newsroom_cards_id_newsroom_cards_translations?.[0];
+
+        const categoryTranslation = item.newsroom_category?.newsroom_category_id_newsroom_category_translations?.find(
+            (t) => t.language === language
+        ) || item.newsroom_category?.newsroom_category_id_newsroom_category_translations?.[0];
+
+        // Construct image URL from url + key
+        const imageUrl = item.image?.url && item.image?.key
+            ? `${item.image.url}${item.image.key}`
+            : '/assets/newsroom/default.png';
+
+        // Format date
+        const formattedDate = item.date_time
+            ? new Date(item.date_time).toLocaleDateString(language === 'ar' ? 'ar-EG' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            })
+            : '';
+
+        return {
+            id: item.id,
+            title: translation?.title || item.title,
+            description: translation?.description || item.description,
+            category: categoryTranslation?.name || item.newsroom_category?.name || '',
+            date: formattedDate,
+            image: imageUrl,
+            mimeType: item.image?.mime_type,
+        };
+    }, [newsItemData, language]);
+
+    if (!newsItem) return null;
+
     // Extended content for the article (you can move this to your data file later)
-    const getArticleContent = (item: NewsItem) => {
+    const getArticleContent = (item: any) => {
         switch (item.id) {
             case 1:
                 return {
@@ -73,7 +115,7 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
 
     // Render different layouts based on media type
     const renderMediaSection = () => {
-        const mediaType = newsItem.mediaType || 'image';
+        const mediaType = (newsItem as any)?.mediaType || 'image';
         switch (mediaType) {
             case 'vertical-video':
                 return (
@@ -100,7 +142,7 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
                                 >
                                     <div className='absolute inset-0 bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[24px] border border-[#FFFFFF20]'></div>
                                     <div className='relative p-4 lg:p-6'>
-                                        {newsItem.videoUrl ? (
+                                        {(newsItem as any)?.videoUrl ? (
                                             <div className="relative">
                                                 <video
                                                     className="w-full h-full object-cover rounded-[16px] min-h-[400px] lg:min-h-[639px] lg:min-w-[391px] cursor-pointer"
@@ -116,7 +158,7 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
                                                         }
                                                     }}
                                                 >
-                                                    <source src={newsItem.videoUrl} type="video/mp4" />
+                                                    <source src={(newsItem as any)?.videoUrl} type="video/mp4" />
                                                     Your browser does not support the video tag.
                                                 </video>
                                                 {/* Dimming overlay when not playing */}
@@ -126,7 +168,7 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
                                             </div>
                                         ) : (
                                             <Image
-                                                src={newsItem.mainImage || newsItem.image}
+                                                src={(newsItem as any)?.mainImage || (newsItem as any)?.image}
                                                 alt={newsItem.title}
                                                 fill
                                                 className="object-cover"
@@ -235,7 +277,7 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
                                     className='relative rounded-[24px] overflow-hidden w-full lg:w-[974px] h-auto lg:h-[468px]'>
                                     <div className='absolute inset-0 bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[24px] border border-[#FFFFFF20]'></div>
                                     <div className='relative p-4 lg:p-6'>
-                                        {newsItem.videoUrl ? (
+                                        {(newsItem as any)?.videoUrl ? (
                                             <div className='relative '>
                                                 <video
                                                     className="w-full h-full object-cover z-50 rounded-[16px] max-h-[300px] lg:max-h-[420px] lg:max-w-[926px] cursor-pointer"
@@ -251,7 +293,7 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
                                                         }
                                                     }}
                                                 >
-                                                    <source src={newsItem.videoUrl} type="video/mp4" />
+                                                    <source src={(newsItem as any)?.videoUrl} type="video/mp4" />
                                                     Your browser does not support the video tag.
                                                 </video>
                                                 {!isVideoPlaying && (
@@ -260,7 +302,7 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
                                             </div>
                                         ) : (
                                             <Image
-                                                src={newsItem.mainImage || newsItem.image}
+                                                src={(newsItem as any)?.mainImage || (newsItem as any)?.image}
                                                 alt={newsItem.title}
                                                 fill
                                                 className="object-cover"
@@ -342,16 +384,30 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
                                 >
                                     <div className='absolute inset-0 bg-[#FFFFFF08] backdrop-blur-[5px] rounded-[24px] border border-[#FFFFFF20]'></div>
                                     <div className='relative p-4 lg:p-6'>
-                                        <Image
-                                            src={newsItem.mainImage ? newsItem.mainImage : newsItem.image}
-                                            alt={newsItem.title}
-                                            width={926}
-                                            height={420}
-                                            className='rounded-[16px] object-contain h-auto lg:h-[420px] w-full'
-                                            style={{
-                                                aspectRatio: '1926 / 420',
-                                            }}
-                                        />
+                                        {newsItem.mimeType?.startsWith('video/') ? (
+                                            <video
+                                                className='rounded-[16px] object-contain h-auto lg:h-[420px] w-full'
+                                                style={{
+                                                    aspectRatio: '1926 / 420',
+                                                }}
+                                                controls
+                                                preload="metadata"
+                                            >
+                                                <source src={newsItem.image} type={newsItem.mimeType} />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        ) : (
+                                            <Image
+                                                src={(newsItem as any)?.mainImage ? (newsItem as any)?.mainImage : newsItem.image}
+                                                alt={newsItem.title}
+                                                width={926}
+                                                height={420}
+                                                className='rounded-[16px] object-contain h-auto lg:h-[420px] w-full'
+                                                style={{
+                                                    aspectRatio: '1926 / 420',
+                                                }}
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             </motion.div>
@@ -372,14 +428,20 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
         }
     };
 
+
     return (
         <div className="bg-black min-h-screen">
             <section
                 ref={containerRef}
-                className={`relative bg-black overflow-hidden ${newsItem.mediaType === 'vertical-video' ? 'pb-[150px] lg:pb-[364px]' : newsItem.mediaType === 'horizontal-video' ? 'pb-[100px] lg:pb-[139px]' : 'pb-[100px] lg:pb-[188px]'}`}
+                className={`relative bg-black overflow-hidden ${(newsItem as any)?.mediaType === 'vertical-video'
+                    ? 'pb-[150px] lg:pb-[364px]'
+                    : (newsItem as any)?.mediaType === 'horizontal-video'
+                        ? 'pb-[100px] lg:pb-[139px]'
+                        : 'pb-[100px] lg:pb-[188px]'
+                    }`}
             >
                 <div className='absolute top-0 left-0 right-0 bottom-0 z-5 h-full w-full hidden lg:block'>
-                    {newsItem.mediaType === 'vertical-video' ?
+                    {(newsItem as any)?.mediaType === 'vertical-video' ?
                         <Image
                             src="/assets/newsroom/news-background-2.svg"
                             alt="Alliances background"
@@ -388,7 +450,7 @@ const NewsroomDetailContent = ({ newsItem }: NewsroomDetailContentProps) => {
                             className="object-cover z-5 h-full w-full min-h-[1276]"
                         />
                         :
-                        newsItem.mediaType === 'horizontal-video' ?
+                        (newsItem as any)?.mediaType === 'horizontal-video' ?
                             <Image
                                 src="/assets/newsroom/news-background-3.svg"
                                 alt="Alliances background"

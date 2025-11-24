@@ -3,8 +3,35 @@
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import type { AboutBarqGroupAffiliationControllerReadResponse } from '@/sdk/types.gen';
 
-export default function GroupSection() {
+interface GroupSectionProps {
+  groupAffiliationData: AboutBarqGroupAffiliationControllerReadResponse | null;
+}
+
+function formatNumber(value: number | string | null | undefined): string {
+  if (value === null || value === undefined) return '';
+
+  const num = typeof value === 'string' ? parseFloat(value.replace(/[^0-9.]/g, '')) : value;
+
+  if (isNaN(num)) return String(value);
+
+  if (num >= 1000) {
+    const thousands = num / 1000;
+    if (thousands % 1 === 0) {
+      return `${thousands}K`;
+    }
+    return `${thousands.toFixed(1)}K`;
+  }
+
+  return String(num);
+}
+
+export default function GroupSection({
+  groupAffiliationData,
+}: GroupSectionProps) {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
 
@@ -34,7 +61,7 @@ export default function GroupSection() {
                 backgroundClip: 'text',
               }}
             >
-              Our Group
+              {t('aboutBarq.group.ourGroup')}
             </span>
           </motion.div>
           <motion.h2
@@ -43,7 +70,8 @@ export default function GroupSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Part of Aldabbagh Group
+            {groupAffiliationData?.data?.[0]?.title ||
+              t('aboutBarq.group.title')}
           </motion.h2>
 
           <motion.p
@@ -52,76 +80,106 @@ export default function GroupSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Since 2013, BARQ SYSTEMS has proudly served as the IT services
-            backbone of the Aldabbagh Group, a diverse conglomerate dedicated to
-            creating sustainable value.
+            {groupAffiliationData?.data?.[0]?.description ||
+              t('aboutBarq.group.description')}
           </motion.p>
           <motion.div
-            className='grid grid-cols-2  sm:grid-cols-4  lg:gap-[92px] gap-8 lg:pr-8 pr-0 justify-center text-center  lg:mt-12 mt-8'
+            className='grid grid-cols-2  sm:grid-cols-4  lg:gap-[92px] gap-8 lg:pr-8 pr-0 justify-center text-center  lg:mt-12 mt-8 items-start'
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-              }
-              transition={{ duration: 0.5, delay: 1.0 }}
-            >
-              <div className='text-white font-outfit text-center lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
-                22
-              </div>
-              <div className='text-[#C9C9C9]  text-center lg:text-[16px] text-[14px] mt-2'>
-                Countries
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-              }
-              transition={{ duration: 0.5, delay: 1.1 }}
-              className='w-fit'
-            >
-              <div className='text-white font-outfit text-center w-fit lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
-                25.5k
-              </div>
-              <div className='text-[#C9C9C9] text-center lg:text-[16px] text-[14px] mt-2'>
-                Employees
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-              }
-              transition={{ duration: 0.5, delay: 1.2 }}
-            >
-              <div className='text-white font-outfit text-center lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
-                84
-              </div>
-              <div className='text-[#C9C9C9] text-center lg:text-[16px] text-[14px] mt-2'>
-                Companies
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-              }
-              transition={{ duration: 0.5, delay: 1.3 }}
-              className='w-fit'
-            >
-              <div className='text-white font-outfit text-center lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
-                8
-              </div>
-              <div className='text-[#C9C9C9]  text-center lg:text-[16px] text-[14px] mt-2'>
-                <span className='whitespace-nowrap'>Strategic Business</span>
-                <br />
-                Portfolios
-              </div>
-            </motion.div>
+            {groupAffiliationData?.data?.[0]
+              ?.about_barq_group_affiliation_cards_id_about_barq_group_affiliation_cards
+              ?.map((card, index) => (
+                <motion.div
+                  key={card.id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={
+                    isInView
+                      ? { opacity: 1, scale: 1 }
+                      : { opacity: 0, scale: 0.8 }
+                  }
+                  transition={{ duration: 0.5, delay: 1.0 + index * 0.1 }}
+                  className='w-fit flex flex-col items-center justify-center'
+                >
+                  <div className='text-white font-outfit text-center lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
+                    {formatNumber(card.number)}
+                  </div>
+                  <div className='text-[#C9C9C9] text-center lg:text-[16px] text-[14px] mt-2'>
+                    {card.label}
+                  </div>
+                </motion.div>
+              )) || (
+                <>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={
+                      isInView
+                        ? { opacity: 1, scale: 1 }
+                        : { opacity: 0, scale: 0.8 }
+                    }
+                    transition={{ duration: 0.5, delay: 1.0 }}
+                  >
+                    <div className='text-white font-outfit text-center lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
+                      {formatNumber(22)}
+                    </div>
+                    <div className='text-[#C9C9C9]  text-center lg:text-[16px] text-[14px] mt-2'>
+                      {t('aboutBarq.group.countries')}
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={
+                      isInView
+                        ? { opacity: 1, scale: 1 }
+                        : { opacity: 0, scale: 0.8 }
+                    }
+                    transition={{ duration: 0.5, delay: 1.1 }}
+                    className='w-fit'
+                  >
+                    <div className='text-white font-outfit text-center w-fit lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
+                      {formatNumber(25500)}
+                    </div>
+                    <div className='text-[#C9C9C9] text-center lg:text-[16px] text-[14px] mt-2'>
+                      {t('aboutBarq.group.employees')}
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={
+                      isInView
+                        ? { opacity: 1, scale: 1 }
+                        : { opacity: 0, scale: 0.8 }
+                    }
+                    transition={{ duration: 0.5, delay: 1.2 }}
+                  >
+                    <div className='text-white font-outfit text-center lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
+                      {formatNumber(84)}
+                    </div>
+                    <div className='text-[#C9C9C9] text-center lg:text-[16px] text-[14px] mt-2'>
+                      {t('aboutBarq.group.companies')}
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={
+                      isInView
+                        ? { opacity: 1, scale: 1 }
+                        : { opacity: 0, scale: 0.8 }
+                    }
+                    transition={{ duration: 0.5, delay: 1.3 }}
+                    className='w-fit'
+                  >
+                    <div className='text-white font-outfit text-center lg:text-[48px] text-[36px] font-normal tracking-[-0.96px] lg:leading-[57.6px] leading-[43.2px]'>
+                      {formatNumber(8)}
+                    </div>
+                    <div className='text-[#C9C9C9]  text-center lg:text-[16px] text-[14px] mt-2'>
+                      {t('aboutBarq.group.strategicBusinessPortfolios')}
+                    </div>
+                  </motion.div>
+                </>
+              )}
           </motion.div>
         </div>
 
@@ -135,7 +193,11 @@ export default function GroupSection() {
             <div className='absolute inset-0 bg-[#FFFFFF08] backdrop-blur-[20px] lg:rounded-[24px] rounded-[16px] border border-[#FFFFFF20]' />
             <div className='relative w-full flex items-center justify-center lg:h-[320px] h-[240px] lg:p-8 p-4'>
               <Image
-                src='/assets/about-barq/dabbagh_img.png'
+                src={
+                  groupAffiliationData?.data?.[0]?.images?.[0]?.url && groupAffiliationData?.data?.[0]?.images?.[0]?.key ?
+                    groupAffiliationData?.data?.[0]?.images?.[0]?.url + groupAffiliationData?.data?.[0]?.images?.[0]?.key :
+                    '/assets/about-barq/dabbagh_img.png'
+                }
                 alt='Group logo'
                 width={386}
                 height={147}
