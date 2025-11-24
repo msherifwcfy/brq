@@ -219,7 +219,7 @@ const InteractiveMap = ({ officesData }: InteractiveMapProps) => {
       <div className='relative w-full h-[330px] lg:h-[877px] max-w-full lg:max-w-[1440px] mx-auto pb-[120px] lg:pb-[156px]'>
         {/* content section */}
         <div
-          className="max-w-full lg:max-w-7xl mx-auto absolute left-0 lg:left-[80px] w-full lg:w-[547px] px-[5%] lg:px-0 z-[99999]"
+          className="max-w-full lg:max-w-7xl mx-auto absolute left-0 lg:left-[48px] w-full lg:w-[547px] px-[5%] lg:px-0 z-[99999]"
           dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
         >
           <motion.div
